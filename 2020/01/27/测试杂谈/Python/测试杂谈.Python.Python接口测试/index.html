@@ -1,0 +1,1029 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/image.png">
+  <link rel="icon" href="/img/image.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="接口测试是测试系统组件间接口的一种测试，主要用于检测外部系统与系统之间，以及内部各个子系统之间的交互点，测试重点是要检查数据的交换，传递和控制管理过程，以及系统间的相互逻辑依赖关系等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python接口测试">
+<meta property="og:url" content="https://stitch-top.github.io/2020/01/27/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88/Python/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Python.Python%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="Stitch&#39;s Blog">
+<meta property="og:description" content="接口测试是测试系统组件间接口的一种测试，主要用于检测外部系统与系统之间，以及内部各个子系统之间的交互点，测试重点是要检查数据的交换，传递和控制管理过程，以及系统间的相互逻辑依赖关系等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Python.Python%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/001.jpg">
+<meta property="article:published_time" content="2020-01-27T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-21T14:48:04.431Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="UnitTest框架">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Python.Python%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/001.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python接口测试 - Stitch&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Stitch&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python接口测试"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-01-27 23:00" pubdate>
+          2020年1月27日 23:00:00
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          56 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python接口测试</h1>
+            
+            <div class="markdown-body">
+              
+              <p>接口测试是测试系统组件间接口的一种测试，主要用于检测外部系统与系统之间，以及内部各个子系统之间的交互点，测试重点是要检查数据的交换，传递和控制管理过程，以及系统间的相互逻辑依赖关系等。<span id="more"></span></p>
+<h2 id="1、简单的接口"><a href="#1、简单的接口" class="headerlink" title="1、简单的接口"></a>1、简单的接口</h2><ul>
+<li>获取资源的接口，例如：<a target="_blank" rel="noopener" href="https://www.v2ex.com/p/7v9TEc53">V2EX API 接口</a>。</li>
+<li>接口的具体描述，即接口文档如下。</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Text">获得指定节点的名字，简介，URL 及头像图片的地址。<br>https://www.v2ex.com/api/nodes/show.json<br><br>Method: GET<br>Authentication: None<br>接受参数：<br>    name: 节点名（V2EX的节点名全是半角英文或者数字）<br>    例如：https://www.v2ex.com/api/nodes/show.json?name=python<br></code></pre></td></tr></table></figure>
+<ul>
+<li>接口分析<ul>
+<li>协议：采用https协议。</li>
+<li>请求方法：GET方法。</li>
+<li>鉴权方式：None不需要登录。</li>
+<li>请求参数：name参数，指定资源的名称。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2、Postman接口测试"><a href="#2、Postman接口测试" class="headerlink" title="2、Postman接口测试"></a>2、Postman接口测试</h2><ul>
+<li>常见的接口测试工具：postman、jmeter、soapui、insomnia、paw。</li>
+</ul>
+<p><img src="/img/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Python.Python%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/001.jpg" srcset="/img/load.gif" lazyload alt="Postman接口测试"></p>
+<ul>
+<li>服务器响应的重要信息<ul>
+<li>Body：返回的主体。</li>
+<li>Headers：键值对数据，补充请求的主体内容。</li>
+<li>Status：状态码，显示200说明响应是正常的。</li>
+<li>Time：响应时间。</li>
+<li>Size：响应的大小。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3、Json简介"><a href="#3、Json简介" class="headerlink" title="3、Json简介"></a>3、Json简介</h2><ul>
+<li>Json，JavaScript Object Notation，一种轻量级的数据交换格式。</li>
+<li>Json可理解为一种规定了格式的字符串，通过这种格式可在不同的编程语言之间互相传递信息。</li>
+<li>例如将JavaScript的对象转换成Json传递给Java，这样Java可以反解析出Java语言自身的对象。</li>
+<li>同理把Java对象转换成Json，通过解析Json，Python可将其转换成自身的dict(字典)或list(列表)。</li>
+<li>将Json字符串转换成Python的dict，操作如下。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># coding: utf-8</span><br><span class="hljs-keyword">import</span> json<br>json_str = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">&#123;</span><br><span class="hljs-string">    &quot;avatar_large&quot;: &quot;https://cdn.v2ex.com/navatar/8613/985e/90_large.png?m=1648339948&quot;,</span><br><span class="hljs-string">    &quot;name&quot;: &quot;python&quot;,</span><br><span class="hljs-string">    &quot;avatar_normal&quot;: &quot;https://cdn.v2ex.com/navatar/8613/985e/90_normal.png?m=1648339948&quot;,</span><br><span class="hljs-string">    &quot;title&quot;: &quot;Python&quot;,</span><br><span class="hljs-string">    &quot;url&quot;: &quot;https://www.v2ex.com/go/python&quot;,</span><br><span class="hljs-string">    &quot;topics&quot;: 14915,</span><br><span class="hljs-string">    &quot;footer&quot;: &quot;&quot;,</span><br><span class="hljs-string">    &quot;header&quot;: &quot;这里讨论各种 Python 语言编程话题，也包括 Django，Tornado 等框架的讨论。这里是一个能够帮助你解决实际问题的地方。&quot;,</span><br><span class="hljs-string">    &quot;title_alternative&quot;: &quot;Python&quot;,</span><br><span class="hljs-string">    &quot;avatar_mini&quot;: &quot;https://cdn.v2ex.com/navatar/8613/985e/90_mini.png?m=1648339948&quot;,</span><br><span class="hljs-string">    &quot;stars&quot;: 9919,</span><br><span class="hljs-string">    &quot;aliases&quot;: [],</span><br><span class="hljs-string">    &quot;root&quot;: false,</span><br><span class="hljs-string">    &quot;id&quot;: 90,</span><br><span class="hljs-string">    &quot;parent_node_name&quot;: &quot;programming&quot;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br>res = json.loads(json_str)<br><span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;id&#x27;</span>])                            <span class="hljs-comment"># 90</span><br><span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;name&#x27;</span>])                          <span class="hljs-comment"># python</span><br><span class="hljs-built_in">print</span>(res[<span class="hljs-string">&#x27;url&#x27;</span>])                           <span class="hljs-comment"># http://www.v2ex.com/go/python</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4、3A原则"><a href="#4、3A原则" class="headerlink" title="4、3A原则"></a>4、3A原则</h2><ul>
+<li>3A原则是单元测试用例编写时应遵循的原则，将其扩展到接口自动化测试的用例编写中。</li>
+<li>单元测试用例<ul>
+<li>arrange：初始化测试对象或准备测试数据。</li>
+<li>act：调用被测方法。</li>
+<li>assert：进行断言。</li>
+</ul>
+</li>
+<li>服务级接口测试实际上是黑盒测试，3A原则适用于这种测试用例的编写。</li>
+<li>接口测试用例<ul>
+<li>arrange：初始化测试数据，输入的数据和目标接口所涉及的资源数据。</li>
+<li>act：调用接口，传入输入的数据。</li>
+<li>assert：对返回的资源信息进行断言。</li>
+</ul>
+</li>
+<li>手工测试用例<ul>
+<li>arrange：准备被测功能相关的测试数据。</li>
+<li>act：调用被测的功能。</li>
+<li>assert：进行断言。</li>
+</ul>
+</li>
+<li>接口自动化测试用例总结<ul>
+<li>arrange：测试用例执行之前，需要准备测试数据，包括输入数据和存量数据。</li>
+<li>act：通过不同的参数来调用接口，拿到数据并返回。</li>
+<li>assert：必须进行断言，否则测试用例就没有任何意义。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5、UnitTest框架"><a href="#5、UnitTest框架" class="headerlink" title="5、UnitTest框架"></a>5、UnitTest框架</h2><ul>
+<li>UnitTest是Python自带的单元测试框架，也可以用来做接口的自动化测试。<ul>
+<li>拥有一套固定套路，定义测试用例时可以更加简单和统一。</li>
+<li>提供了一系列的断言。</li>
+<li>通过test suit或扩展方式，可以自定义用例执行的策略。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> unittest                                             <span class="hljs-comment"># 导入库</span><br><span class="hljs-comment"># 定义测试类，类名自定义，所有测试类须直接或间接继承自unittest.TestCase类</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">StringTestCase</span>(unittest.TestCase):<br>    <span class="hljs-comment"># setUp(self)是钩子方法，每个测试用例执行前都会执行一次，做数据初始化</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setUp</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-comment"># arrange，为每个测试方法定义被测对象，这里则是self.test_string</span><br>        self.test_string = <span class="hljs-string">&quot;This is a tring.&quot;</span>     <br>    <span class="hljs-comment"># 该方法是一个测试用例，只有方法名以test开头的方法才是测试用例</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">testUpper</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-comment"># 如果断言失败，则在测试报告中打印出错误原因</span><br>        self.asserEqual(<span class="hljs-string">&quot;THIS IS A STRING.&quot;</span>, self.test_string.upper())<br><br><span class="hljs-comment"># 直接执行该文件，运行所有的测试类中的测试用例，即以test开头的方法</span><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    unittest.main()<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用unittest需记住：<ul>
+<li>导入unittest库，定义继承自unittest.TestCase的测试类。</li>
+<li>定义以test开头的测试方法，即测试用例，可以在一个类中定义n个。</li>
+<li>进行断言，unittest.main()是执行测试用例最简单的方式。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6、Requests库"><a href="#6、Requests库" class="headerlink" title="6、Requests库"></a>6、Requests库</h2><ul>
+<li>Requests库可以简化发送HTTP请求及获取响应的代码。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-comment"># 发请求，传参数</span><br>r = requests.get(<span class="hljs-string">&quot;https://p.3.cn/prices/mgets&quot;</span>, auth=(<span class="hljs-string">&quot;skuIds&quot;</span>, <span class="hljs-string">&quot;100026761926&quot;</span>))<br><span class="hljs-built_in">print</span>(r.status_code)                        <span class="hljs-comment"># 获取响应</span><br><span class="hljs-built_in">print</span>(r.headers[<span class="hljs-string">&#x27;content-type&#x27;</span>])            <span class="hljs-comment"># 获取响应headers</span><br><span class="hljs-built_in">print</span>(r.encoding)                           <span class="hljs-comment"># 获取响应编码</span><br><span class="hljs-built_in">print</span>(r.text)                               <span class="hljs-comment"># 获取响应文本</span><br><span class="hljs-built_in">print</span>(r.json)                               <span class="hljs-comment"># 获取响应Json</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7、接口测试用例"><a href="#7、接口测试用例" class="headerlink" title="7、接口测试用例"></a>7、接口测试用例</h2><ul>
+<li>测试数据：节点名称为python。</li>
+<li>接口地址：<a target="_blank" rel="noopener" href="https://www.v2ex.com/api/nodes/show.json">https://www.v2ex.com/api/nodes/show.json</a>。</li>
+<li>断言：返回的结果中，id必须是90，name必须是python。</li>
+<li>先前已经用Postman测过接口，点击右边栏的Code&lt;&#x2F;&gt;图标。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> requests<br>url = <span class="hljs-string">&quot;https://www.v2ex.com/api/nodes/show.json?name=python&quot;</span><br>payload=&#123;&#125;<br>files=&#123;&#125;<br>headers = &#123;&#125;<br>response = requests.request(<span class="hljs-string">&quot;GET&quot;</span>, url, headers=headers, data=payload, files=files)<br><span class="hljs-built_in">print</span>(response.text)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用unittest重构代码，Python-Requests中的代码只是3A原则中的arrange和act。</li>
+<li>新建名为v2exAPICase.py的文件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> unittest<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">V2exAPITestCase</span>(unittest.TestCase):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_node_api</span>(<span class="hljs-params">self</span>):<br>        url = <span class="hljs-string">&quot;https://www.v2ex.com/api/nodes/show.json&quot;</span><br>        querystring = &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;python&quot;</span>&#125;<br>        response = requests.request(<span class="hljs-string">&quot;GET&quot;</span>, url, params=querystring).json()<br>        self.assertEqual(response[<span class="hljs-string">&quot;name&quot;</span>], <span class="hljs-string">&quot;python&quot;</span>)<br>        self.assertEqual(response[<span class="hljs-string">&quot;id&quot;</span>], <span class="hljs-number">90</span>)<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    unittest.main()<br></code></pre></td></tr></table></figure>
+<ul>
+<li>执行v2exAPICase.py文件，运行结果如下。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python">.<br>----------------------------------------------------------------------<br>Ran <span class="hljs-number">1</span> test <span class="hljs-keyword">in</span> <span class="hljs-number">0.142</span>s<br>OK<br></code></pre></td></tr></table></figure>
+<ul>
+<li>Postman可以帮助完成一半的工作，例如调试接口、导出部分代码等。</li>
+<li>使用UnitTest框架重构用例可以帮助添加断言，提供在命令行执行的能力，易与CI工具进行集成。</li>
+</ul>
+<h2 id="8、Mock-Server"><a href="#8、Mock-Server" class="headerlink" title="8、Mock Server"></a>8、Mock Server</h2><ul>
+<li>使用场景<ul>
+<li>前端客户端与后端服务端开发节奏往往不一致。</li>
+<li>前端多数情况下都需要等后台的API开发完成后才能进行开发联调和测试。</li>
+<li>开发节奏不一致，容易造成整个项目或产品交付延期。</li>
+<li>一种解决方案思路是前后端事先约定好后端提供的API接口的细节。</li>
+<li>前端人员自行模拟出这些后端的实现，调用假实现拿到返回数据。</li>
+<li>不过由前端实现的假API没办法迅速反映出后端的变化。</li>
+<li>若后端对约定好的API接口做出修改且未知会前端，这样假API没有相应更新，正式联调时就会出错。</li>
+<li>像这种不管是前后端的假API实现，都可以称为Mock Server。<ul>
+<li>Mock表示这个API返回的数据是假的，仅作为测试用。</li>
+<li>Server表示需要启动服务，简单来说就是一个服务程序。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>契约测试<ul>
+<li>前后端导致信息不对称，约定的API在前后端可能都会变化，保证一致性就成为挑战。</li>
+<li>这时契约测试出现，即前后端共用一份契约，约定API的细节。</li>
+<li>前后端的任何变化都需要先修改契约，通过它通知前后端，统一更新实现。</li>
+</ul>
+</li>
+<li>如果为契约测试设置一种测试工具，需要规划如下特性。<ul>
+<li>契约的描述工具：用什么工具去定义才能让前后端团队秒懂。</li>
+<li>通过契约自动生成Mock Server实现，这样前端就可以拿来即用，若契约修改了也容易感知。</li>
+<li>通过契约自动生成接口测试用例，持续运行这些接口测试用例，后端就可以在第一时间发现契约的修改。</li>
+</ul>
+</li>
+</ul>
+<h2 id="9、Flask实现Mock-Server"><a href="#9、Flask实现Mock-Server" class="headerlink" title="9、Flask实现Mock Server"></a>9、Flask实现Mock Server</h2><ul>
+<li>Flask<ul>
+<li>Python实现的简单Web框架，与Django互补。</li>
+<li>路由 -&gt; &#x2F;request&#x2F;uri。</li>
+<li>handler -&gt; 路由进来之后处理request并返回response的逻辑。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask<br>app = Flask(__name__)<br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/&quot;</span></span>)                             </span><span class="hljs-comment"># 路由</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">hello</span>():                                <span class="hljs-comment"># handler                    </span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello World.&quot;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>新建名为smileTaskMockServer.py的文件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, jsonify, g<br><span class="hljs-keyword">import</span> copy<br>app = Flask(__name__)<br><span class="hljs-meta">@app.before_request</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">set_up_data</span>():<br>    g.data = [<br>        &#123;<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;task 1&#x27;</span>, <span class="hljs-string">&#x27;desc&#x27;</span>: <span class="hljs-string">&#x27;this is task 1&#x27;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;task 2&#x27;</span>, <span class="hljs-string">&#x27;desc&#x27;</span>: <span class="hljs-string">&#x27;this is task 2&#x27;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;task 3&#x27;</span>, <span class="hljs-string">&#x27;desc&#x27;</span>: <span class="hljs-string">&#x27;this is task 3&#x27;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;task 4&#x27;</span>, <span class="hljs-string">&#x27;desc&#x27;</span>: <span class="hljs-string">&#x27;this is task 4&#x27;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&#x27;title&#x27;</span>: <span class="hljs-string">&#x27;task 5&#x27;</span>, <span class="hljs-string">&#x27;desc&#x27;</span>: <span class="hljs-string">&#x27;this is task 5&#x27;</span>&#125;<br>    ]<br>    g.task_does_not_exist = &#123;<span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;Task does not exist.&quot;</span>&#125;<br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/api/tasks&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_all_tasks</span>():                        <span class="hljs-comment"># 获取所有的任务</span><br>    <span class="hljs-keyword">return</span> jsonify(g.data)<br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/api/tasks/&lt;int:task_id&gt;&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_task</span>(<span class="hljs-params">task_id</span>):                      <span class="hljs-comment"># 查看一个任务的详情</span><br>    <span class="hljs-keyword">if</span> task_id &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> task_id &lt;= <span class="hljs-built_in">len</span>(g.data):<br>        <span class="hljs-keyword">return</span> jsonify(g.data[task_id-<span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> jsonify(g.task_does_not_exist)<br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/api/tasks/&lt;int:task_id&gt;&#x27;</span>, methods=[<span class="hljs-string">&#x27;PUT&#x27;</span>]</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">complete_task</span>(<span class="hljs-params">task_id</span>):                 <span class="hljs-comment"># 完成一个任务</span><br>    <span class="hljs-keyword">if</span> task_id &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> task_id &lt;= <span class="hljs-built_in">len</span>(g.data):<br>        tmp = copy.deepcopy(g.data[task_id-<span class="hljs-number">1</span>])<br>        tmp[<span class="hljs-string">&#x27;done&#x27;</span>] = <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">return</span> jsonify(tmp)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> jsonify(g.task_does_not_exist)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>命令窗口进入到smileTaskMockServer.py文件所在的目录。</li>
+<li>设置FLASK_APP：Set FLASK_APP&#x3D;smileTaskMockServer.py。</li>
+<li>flask run回车，打开浏览器输入<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/api/tasks/1">http://127.0.0.1:5000/api/tasks/1</a>进行查看。</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://class.itest.info/interface">Python接口测试-重定向科技</a></p>
+</blockquote>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88/" class="category-chain-item">测试杂谈</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/UnitTest%E6%A1%86%E6%9E%B6/">#UnitTest框架</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python接口测试</div>
+      <div>https://stitch-top.github.io/2020/01/27/测试杂谈/Python/测试杂谈.Python.Python接口测试/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年1月27日 23:00:00</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/02/18/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88/Python/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Python.Python%E7%88%AC%E8%99%AB/" title="Python爬虫">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python爬虫</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/01/01/Python/Python.Python%E5%9F%BA%E7%A1%80/" title="Python基础">
+                        <span class="hidden-mobile">Python基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"bsRkWxXK7zLX6NWYygwknNXv-gzGzoHsz","appKey":"qqiNDCxGTOGVmiM1xAbd5pzk","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="测试杂谈"
+        id="heading-7be43527cf499e537f755a4e4d5afa75" role="tab" data-toggle="collapse" href="#collapse-7be43527cf499e537f755a4e4d5afa75"
+        aria-expanded="true"
+      >
+        测试杂谈
+        <span class="list-group-count">(4)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-7be43527cf499e537f755a4e4d5afa75"
+           role="tabpanel" aria-labelledby="heading-7be43527cf499e537f755a4e4d5afa75">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2020/06/30/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88/Java/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Java.JUnit4%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" title="JUnit4测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JUnit4测试框架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/01/27/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88/Python/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Python.Python%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" title="Python接口测试"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Python接口测试</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/02/18/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88/Python/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Python.Python%E7%88%AC%E8%99%AB/" title="Python爬虫"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python爬虫</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2020/07/23/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88/Java/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Java.TestNG%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" title="TestNG测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">TestNG测试框架</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2022</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io/" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
