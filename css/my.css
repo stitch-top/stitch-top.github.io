@@ -1,0 +1,11 @@
+/* Here is your custom css styles. */
+
+@font-face {
+    font-family: "青青子衿体";
+    src: url("../fonts/青青子衿体.ttf") format("truetype");
+}
+
+body {
+    font-family: "青青子衿体" !important;
+    font-weight: bold;
+}

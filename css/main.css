@@ -754,13 +754,13 @@ sup > a::before,
   padding: 3rem 0;
 }
 html {
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 0.02em;
 }
 html,
 body {
   height: 100%;
-  font-family: 一往情深如鲸向海;
+  font-family: 青青子衿体;
   overflow-wrap: break-word;
 }
 body {
@@ -1302,7 +1302,7 @@ figure.highlight td.code > pre {
 .markdown-body {
   font-size: 1rem;
   line-height: 1.6;
-  font-family: 一往情深如鲸向海;
+  font-family: 青青子衿体;
   margin-bottom: 2rem;
   color: var(--post-text-color);
 }
@@ -1874,6 +1874,39 @@ input[type=checkbox] {
 }
 .about-icons > a > i {
   font-size: 1.5rem;
+}
+.chip .tag-length {
+  margin-left: 5px;
+  margin-right: -2px;
+  font-size: 0.5rem;
+}
+.chip-default .tag-length {
+  color: #e91e63;
+  margin-top: 1px;
+}
+.chip-active .tag-length {
+  color: #fff;
+}
+.chip-container .tag-chips {
+  margin: 1rem auto 0.5rem;
+  max-width: 850px;
+  text-align: center;
+}
+.chip-container .chip {
+  margin: 10px 10px;
+  padding: 19px 14px;
+  display: inline-flex;
+  line-height: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.12);
+  z-index: 0;
+}
+.chip-container .chip:hover {
+  color: #fff;
+  background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%) !important;
 }
 .category-bar .category-list {
   max-height: 85vh;
