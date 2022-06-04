@@ -18,24 +18,27 @@
   <meta name="author" content="Dr.626">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Python由荷兰数学和计算机科学研究学会的吉多·范罗苏姆于1990年代初设计，作为一门叫ABC语言的替代品，它是跨平台解释型脚本语言，面向对象，易于阅读和维护。">
+    <meta name="description" content="Python由荷兰数学和计算机科学研究学会的Guido van Rossum于1990年代初设计，并于1991年发布，是跨平台解释型脚本语言，面向对象，易于阅读和维护，可用于Web开发、爬虫、自动化运维、自动化测试和数据分析等，功能强大。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python基础">
-<meta property="og:url" content="https://stitch-top.github.io/2020/01/01/Python/Python.Python%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:title" content="Python 基础(二)">
+<meta property="og:url" content="https://stitch-top.github.io/2019/01/15/python/python02-python-ji-chu-er/index.html">
 <meta property="og:site_name" content="Dr.626">
-<meta property="og:description" content="Python由荷兰数学和计算机科学研究学会的吉多·范罗苏姆于1990年代初设计，作为一门叫ABC语言的替代品，它是跨平台解释型脚本语言，面向对象，易于阅读和维护。">
+<meta property="og:description" content="Python由荷兰数学和计算机科学研究学会的Guido van Rossum于1990年代初设计，并于1991年发布，是跨平台解释型脚本语言，面向对象，易于阅读和维护，可用于Web开发、爬虫、自动化运维、自动化测试和数据分析等，功能强大。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-01T14:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-21T14:48:26.957Z">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/0072312383.jpg">
+<meta property="article:published_time" content="2019-01-15T03:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-31T17:02:41.037Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="Python">
+<meta property="article:tag" content="xxx">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/0072312383.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Python基础 - Dr.626</title>
+  <title>Python 基础(二) - Dr.626</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -217,7 +220,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Python基础"></span>
+            <span id="subtitle" data-typed-text="Python 基础(二)"></span>
           
         </div>
 
@@ -233,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-01-01 22:00" pubdate>
-          2020年1月1日 22:00:00
+        <time datetime="2019-01-15 11:00" pubdate>
+          2019年1月15日 11:00:00
         </time>
       </span>
     
@@ -245,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          992 字
+          117 字
         
       </span>
     
@@ -256,7 +259,7 @@
         
         
         
-          9 分钟
+          1 分钟
         
       </span>
     
@@ -318,58 +321,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Python基础</h1>
+            <h1 style="display: none">Python 基础(二)</h1>
             
             <div class="markdown-body">
               
-              <p>Python由荷兰数学和计算机科学研究学会的吉多·范罗苏姆于1990年代初设计，作为一门叫ABC语言的替代品，它是跨平台解释型脚本语言，面向对象，易于阅读和维护。<span id="more"></span></p>
-<h2 id="1、数据类型"><a href="#1、数据类型" class="headerlink" title="1、数据类型"></a>1、数据类型</h2><ul>
-<li>5个标准类型<ul>
-<li>Numbers(数字)<ul>
-<li>例如：int num &#x3D; 5、float f &#x3D; 3.14。</li>
-<li>int，有符号整型。</li>
-<li>long，长整型，可代表8进制和16进制，3.x版本中被移除，int替代。</li>
-<li>float，浮点型。</li>
-<li>complex，复数，a + bj，或complex(a, b)。</li>
-</ul>
-</li>
-<li>String(字符串)<ul>
-<li>例如：str &#x3D; “Practice makes perfect.”。</li>
-<li>两种取值顺序，从左到右0开始索引，从右到左-1开始索引，例如：str[0]。</li>
-</ul>
-</li>
-<li>List(列表)，支持嵌套。<ul>
-<li>例如：list &#x3D; [‘a’, ‘b’, ‘c’]、nestedlist &#x3D; [1, 2, [3, 4, 5]]。</li>
-<li>切片获取元素，从左到右0开始索引，从右到左-1开始索引，例如：list[1:]。</li>
-</ul>
-</li>
-<li>Tuple(元组)，不能二次赋值。<ul>
-<li>例如：tuple &#x3D; (1, 2, 3)、tinytuple &#x3D; (‘a’, ‘b’, ‘c’)。</li>
-<li>切片获取元素，从左到右0开始索引，从右到左-1开始索引，例如：tuple[2]。</li>
-</ul>
-</li>
-<li>Dictionary(字典)，例如：dict &#x3D; {‘a’: ‘1’, ‘b’: ‘2’, ‘c’: ‘3’}。</li>
-</ul>
-</li>
-<li>数据类型转换，例如：x转整数int(x)、字符x转整数值ord(x)、整数x转8进制oct(x)。</li>
-<li>7种运算符<ul>
-<li>算术运算符：+、-、*、&#x2F;、%、**、&#x2F;&#x2F;。</li>
-<li>比较(关系)运算符：&#x3D;&#x3D;、!&#x3D;、&gt;、&lt;、&gt;&#x3D;、&lt;&#x3D;。</li>
-<li>赋值运算符：&#x3D;、+&#x3D;、-&#x3D;、*&#x3D;、&#x2F;&#x3D;、%&#x3D;、**&#x3D;、&#x2F;&#x2F;&#x3D;。</li>
-<li>逻辑运算符：and、or、not。</li>
-<li>位运算符：&amp;、|、^、~、&lt;&lt;、&gt;&gt;，将数字看作2进制来计算。</li>
-<li>成员运算符：in、not in。</li>
-<li>身份运算符：is、is not。<ul>
-<li>&#x3D;&#x3D;用于判断引用变量的值是否相等。</li>
-<li>is用于判断两个变量引用对象是否为同一个(同一块内存空间)。</li>
-</ul>
-</li>
-<li>如果不清楚优先级关系，使用()表达。</li>
-<li></li>
-</ul>
-</li>
-</ul>
-
+              <p>Python由荷兰数学和计算机科学研究学会的Guido van Rossum于1990年代初设计，并于1991年发布，是跨平台解释型脚本语言，面向对象，易于阅读和维护，可用于Web开发、爬虫、自动化运维、自动化测试和数据分析等，功能强大。</p>
+<span id="more"></span>
               
             </div>
             <hr/>
@@ -403,6 +360,8 @@
       
         <a href="/tags/Python/">#Python</a>
       
+        <a href="/tags/xxx/">#xxx</a>
+      
     </div>
   
 </div>
@@ -413,8 +372,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Python基础</div>
-      <div>https://stitch-top.github.io/2020/01/01/Python/Python.Python基础/</div>
+      <div>Python 基础(二)</div>
+      <div>https://stitch-top.github.io/2019/01/15/python/python02-python-ji-chu-er/</div>
     </div>
     <div class="license-meta">
       
@@ -426,7 +385,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2020年1月1日 22:00:00</div>
+          <div>2019年1月15日 11:00:00</div>
         </div>
       
       
@@ -468,7 +427,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/27/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88/Python/%E6%B5%8B%E8%AF%95%E6%9D%82%E8%B0%88.Python.Python%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" title="Python接口测试">
+                      <a href="/2020/01/27/ce-shi-za-tan/python/ce-shi-za-tan.python.python-jie-kou-ce-shi/" title="Python接口测试">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Python接口测试</span>
                         <span class="visible-mobile">上一篇</span>
@@ -477,6 +436,12 @@
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2019/01/01/python/python01-python-ji-chu-yi/" title="Python 基础(一)">
+                        <span class="hidden-mobile">Python 基础(一)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
@@ -539,7 +504,7 @@
         aria-expanded="true"
       >
         Python
-        <span class="list-group-count">(1)</span>
+        <span class="list-group-count">(2)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -553,10 +518,19 @@
     
       
       
-        <a href="/2020/01/01/Python/Python.Python%E5%9F%BA%E7%A1%80/" title="Python基础"
+        <a href="/2019/01/01/python/python01-python-ji-chu-yi/" title="Python 基础(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 基础(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2019/01/15/python/python02-python-ji-chu-er/" title="Python 基础(二)"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">Python基础</span>
+          <span class="category-post">Python 基础(二)</span>
         </a>
       
     
