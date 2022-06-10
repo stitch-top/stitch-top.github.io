@@ -27,11 +27,12 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/0072312383.jpg">
 <meta property="article:published_time" content="2019-01-01T15:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-09T15:06:17.963Z">
+<meta property="article:modified_time" content="2022-06-10T14:41:37.069Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="变量">
-<meta property="article:tag" content="数据类型">
 <meta property="article:tag" content="运算符">
+<meta property="article:tag" content="数据类型">
+<meta property="article:tag" content="数组">
 <meta property="article:tag" content="if语句">
 <meta property="article:tag" content="循环">
 <meta name="twitter:card" content="summary_large_image">
@@ -84,7 +85,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -251,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          27k 字
+          30k 字
         
       </span>
     
@@ -262,7 +263,7 @@
         
         
         
-          229 分钟
+          246 分钟
         
       </span>
     
@@ -427,7 +428,23 @@
 
 
 
-<h1 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3 数据类型"></a>3 数据类型</h1><ul>
+<h1 id="3-运算符"><a href="#3-运算符" class="headerlink" title="3 运算符"></a>3 运算符</h1><ul>
+<li>类型<ul>
+<li>算术：<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code>、<code>**</code>、<code>//</code>。</li>
+<li>赋值：<code>=</code>、<code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>%=</code>、<code>**=</code>、<code>//=</code>、<code>&amp;=</code>、<code>|=</code>、<code>^=</code>、<code>&gt;&gt;=</code>、<code>&lt;&lt;=</code>。</li>
+<li>比较：<code>==</code>、<code>!=</code>、<code>&gt;</code>、<code>&lt;</code>、<code>&gt;=</code>、<code>&lt;=</code>。</li>
+<li>逻辑：<code>and</code>、<code>or</code>、<code>not</code>。</li>
+<li>身份：<code>is</code>、<code>is not</code>。</li>
+<li>成员：<code>in</code>、<code>not in</code>。</li>
+<li>位：<code>&amp;</code>、<code>|</code>、<code>^</code>、<code>~</code>、<code>&lt;&lt;</code>、<code>&gt;&gt;</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Python">a, b = <span class="hljs-number">9</span>, <span class="hljs-number">2</span><br><span class="hljs-built_in">print</span>(a // b)           <span class="hljs-comment"># 算术运算，向下取整除</span><br><span class="hljs-built_in">print</span>(-a // b)<br><br>b *= a                  <span class="hljs-comment"># 赋值运算，b = b * a</span><br><span class="hljs-built_in">print</span>(b)<br><br><span class="hljs-keyword">if</span> a &gt; b:               <span class="hljs-comment"># 比较运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;a大于b.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;a小于b.&quot;</span>)<br><br><span class="hljs-keyword">if</span> a <span class="hljs-keyword">and</span> b:             <span class="hljs-comment"># 逻辑运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;变量a和b都为True.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;变量a和b有一个不为True.&quot;</span>)<br><br><span class="hljs-keyword">if</span> (a <span class="hljs-keyword">is</span> b):            <span class="hljs-comment"># 身份运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;a和b有相同的标识.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;a和b没有相同标识.&quot;</span>)<br><br><span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>]<br><span class="hljs-keyword">if</span> (a <span class="hljs-keyword">in</span> <span class="hljs-built_in">list</span>):         <span class="hljs-comment"># 成员运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;变量a在给定的列表list中.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;变量a不在给定的列表list中.&quot;</span>)<br><br>c = a &gt;&gt; <span class="hljs-number">2</span>              <span class="hljs-comment"># 位运算，9=0000 1001</span><br><span class="hljs-built_in">print</span>(c)                <span class="hljs-comment"># 右移两位，0000 0010=2</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-数据类型"><a href="#4-数据类型" class="headerlink" title="4 数据类型"></a>4 数据类型</h1><ul>
 <li>内置数据类型<ul>
 <li>无类型：<code>NoneType</code>。</li>
 <li>数字类型：<code>int</code>、<code>float</code>、<code>complex</code>。</li>
@@ -444,7 +461,7 @@
 
 
 
-<h2 id="3-1-数字"><a href="#3-1-数字" class="headerlink" title="3-1 数字"></a>3-1 数字</h2><ul>
+<h2 id="4-1-数字"><a href="#4-1-数字" class="headerlink" title="4-1 数字"></a>4-1 数字</h2><ul>
 <li>数字类型<ul>
 <li><code>int</code>：整数，正数或负数，没有小数，长度不受限制。</li>
 <li><code>float</code>：浮点数，包含一个或多个小数的正数或负数，可有带e的科学数字，表10的幂。</li>
@@ -466,7 +483,7 @@
 
 
 
-<h2 id="3-2-字符串"><a href="#3-2-字符串" class="headerlink" title="3-2 字符串"></a>3-2 字符串</h2><ul>
+<h2 id="4-2-字符串"><a href="#4-2-字符串" class="headerlink" title="4-2 字符串"></a>4-2 字符串</h2><ul>
 <li>字符串<ul>
 <li>Python中的字符串用单引号<code>&#39;&#39;</code>或双引号<code>&quot;&quot;</code>括起来。</li>
 <li>可以使用三个引号<code>&#39;&#39;&#39; &#39;&#39;&#39;</code>将多行字符串分配给变量。</li>
@@ -538,7 +555,7 @@
 
 
 
-<h2 id="3-3-布尔值"><a href="#3-3-布尔值" class="headerlink" title="3-3 布尔值"></a>3-3 布尔值</h2><ul>
+<h2 id="4-3-布尔值"><a href="#4-3-布尔值" class="headerlink" title="4-3 布尔值"></a>4-3 布尔值</h2><ul>
 <li>布尔值<ul>
 <li>只表示为<code>True</code>或<code>False</code>，这两个值其中的一个。</li>
 <li>函数<code>bool()</code>允许评估任何值，并返回<code>True</code>或<code>False</code>。</li>
@@ -581,7 +598,7 @@
 
 
 
-<h2 id="3-4-列表"><a href="#3-4-列表" class="headerlink" title="3-4 列表"></a>3-4 列表</h2><ul>
+<h2 id="4-4-列表"><a href="#4-4-列表" class="headerlink" title="4-4 列表"></a>4-4 列表</h2><ul>
 <li>列表<ul>
 <li>用于将多个项目存储在单个变量中，使用方括号<code>[]</code>创建。</li>
 <li>列表项是有序可变的，且允许重复值，索引时第一项为[0]。</li>
@@ -720,7 +737,7 @@
 
 
 
-<h2 id="3-5-元组"><a href="#3-5-元组" class="headerlink" title="3-5 元组"></a>3-5 元组</h2><ul>
+<h2 id="4-5-元组"><a href="#4-5-元组" class="headerlink" title="4-5 元组"></a>4-5 元组</h2><ul>
 <li>元组<ul>
 <li>用在单个变量中存储多个项目，用圆括号<code>()</code>书写。</li>
 <li>元组项是有序不可更改的，并且允许重复值，被索引时第一项索引为<code>[0]</code>。</li>
@@ -794,7 +811,7 @@
 
 
 
-<h2 id="3-6-集合"><a href="#3-6-集合" class="headerlink" title="3-6 集合"></a>3-6 集合</h2><ul>
+<h2 id="4-6-集合"><a href="#4-6-集合" class="headerlink" title="4-6 集合"></a>4-6 集合</h2><ul>
 <li>集合<ul>
 <li>用于将多个项目存储在单个变量中，用大括号<code>&#123;&#125;</code>书写。</li>
 <li>集合项是无序不可更改的，且无索引，也不允许重复值。</li>
@@ -867,7 +884,7 @@
 
 
 
-<h2 id="3-7-字典"><a href="#3-7-字典" class="headerlink" title="3-7 字典"></a>3-7 字典</h2><ul>
+<h2 id="4-7-字典"><a href="#4-7-字典" class="headerlink" title="4-7 字典"></a>4-7 字典</h2><ul>
 <li>字典<ul>
 <li>用于将数据值存储在键值对中，使用大括号<code>&#123;&#125;</code>进行书写，带有键和值。</li>
 <li>字典项目是有序可更改的，且不允许重复，键值对形式呈现，用键名引用。</li>
@@ -960,23 +977,59 @@
 
 
 
-<h1 id="4-运算符"><a href="#4-运算符" class="headerlink" title="4 运算符"></a>4 运算符</h1><ul>
-<li>类型<ul>
-<li>算术：<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code>、<code>**</code>、<code>//</code>。</li>
-<li>赋值：<code>=</code>、<code>+=</code>、<code>-=</code>、<code>*=</code>、<code>/=</code>、<code>%=</code>、<code>**=</code>、<code>//=</code>、<code>&amp;=</code>、<code>|=</code>、<code>^=</code>、<code>&gt;&gt;=</code>、<code>&lt;&lt;=</code>。</li>
-<li>比较：<code>==</code>、<code>!=</code>、<code>&gt;</code>、<code>&lt;</code>、<code>&gt;=</code>、<code>&lt;=</code>。</li>
-<li>逻辑：<code>and</code>、<code>or</code>、<code>not</code>。</li>
-<li>身份：<code>is</code>、<code>is not</code>。</li>
-<li>成员：<code>in</code>、<code>not in</code>。</li>
-<li>位：<code>&amp;</code>、<code>|</code>、<code>^</code>、<code>~</code>、<code>&lt;&lt;</code>、<code>&gt;&gt;</code>。</li>
+<h1 id="5-数组"><a href="#5-数组" class="headerlink" title="5 数组"></a>5 数组</h1><ul>
+<li>列表替代<ul>
+<li>Python没有数组类型，只有列表类型，数组可用列表替代。</li>
+<li>数组用于在一个变量中存储多个值，通过索引号来访问这些值。</li>
+<li>Python没有对数组的内置支持，列表代替时内置方法与之相通。<ul>
+<li><code>append()</code>、<code>clear()</code>、<code>copy()</code>、<code>count()</code>、<code>extend()</code>。</li>
+<li><code>index()</code>、<code>insert()</code>、<code>pop()</code>、<code>remove()</code>、<code>reverse()</code>、<code>sort()</code>。</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Python">a, b = <span class="hljs-number">9</span>, <span class="hljs-number">2</span><br><span class="hljs-built_in">print</span>(a // b)           <span class="hljs-comment"># 算术运算，向下取整除</span><br><span class="hljs-built_in">print</span>(-a // b)<br><br>b *= a                  <span class="hljs-comment"># 赋值运算，b = b * a</span><br><span class="hljs-built_in">print</span>(b)<br><br><span class="hljs-keyword">if</span> a &gt; b:               <span class="hljs-comment"># 比较运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;a大于b.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;a小于b.&quot;</span>)<br><br><span class="hljs-keyword">if</span> a <span class="hljs-keyword">and</span> b:             <span class="hljs-comment"># 逻辑运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;变量a和b都为True.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;变量a和b有一个不为True.&quot;</span>)<br><br><span class="hljs-keyword">if</span> (a <span class="hljs-keyword">is</span> b):            <span class="hljs-comment"># 身份运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;a和b有相同的标识.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;a和b没有相同标识.&quot;</span>)<br><br><span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>]<br><span class="hljs-keyword">if</span> (a <span class="hljs-keyword">in</span> <span class="hljs-built_in">list</span>):         <span class="hljs-comment"># 成员运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;变量a在给定的列表list中.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;变量a不在给定的列表list中.&quot;</span>)<br><br>c = a &gt;&gt; <span class="hljs-number">2</span>              <span class="hljs-comment"># 位运算，9=0000 1001</span><br><span class="hljs-built_in">print</span>(c)                <span class="hljs-comment"># 右移两位，0000 0010=2</span><br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python">cars = [<span class="hljs-string">&quot;BMW&quot;</span>, <span class="hljs-string">&quot;Ford&quot;</span>, <span class="hljs-string">&quot;Volvo&quot;</span>]<br><span class="hljs-built_in">print</span>(cars[<span class="hljs-number">0</span>])                <span class="hljs-comment"># 获取第一个数组项的值</span><br><br>cars[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;Toyota&quot;</span>            <span class="hljs-comment"># 修改第一个数组项的值</span><br><span class="hljs-built_in">print</span>(cars)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(cars))              <span class="hljs-comment"># 返回该数组的长度，长度总比最高数组索引数大1</span><br><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> cars:                <span class="hljs-comment"># 使用for循环遍历数组的所有元素</span><br>    <span class="hljs-built_in">print</span>(x)<br><br>cars.append(<span class="hljs-string">&quot;Honda&quot;</span>)          <span class="hljs-comment"># append()方法添加元素</span><br><span class="hljs-built_in">print</span>(cars)<br><br>cars.pop(<span class="hljs-number">1</span>)                   <span class="hljs-comment"># pop()方法从数组删除第二个元素</span><br><span class="hljs-built_in">print</span>(cars)<br><br>cars.remove(<span class="hljs-string">&quot;Volvo&quot;</span>)          <span class="hljs-comment"># remove()方法从数组删除Volvo元素，只删除第一次出现的指定值</span><br><span class="hljs-built_in">print</span>(cars)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>numpy库定义的数组<ul>
+<li>数组在numpy库中定义，若要使用需事先导入库，数组类型为<code>&lt;class &#39;numpy.ndarray&#39;&gt;</code>。</li>
+<li>numpy中的数组对象称为ndarray，通过使用<code>array()</code>函数可以创建一个numpy的ndarray对象。</li>
+<li>将列表、元组或任何类似数组的对象传递给<code>array()</code>方法，<code>array()</code>方法将其转换为ndarray。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>myArray = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])<br><span class="hljs-built_in">print</span>(myArray)                <span class="hljs-comment"># 列表创建数组</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(myArray))          <span class="hljs-comment"># &lt;class &#x27;numpy.ndarray&#x27;&gt;</span><br><br>myArray = np.array(((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>), (<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)))<br><span class="hljs-built_in">print</span>(myArray)                <span class="hljs-comment"># 元组创建数组</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>数组维度<ul>
+<li>数组维度是嵌套数组的一个级别，嵌套数组即数组中有数组。</li>
+<li>零维数组，也叫标量，数组值只有一个。</li>
+<li>一维数组，指由多个元素值构成的数组。</li>
+<li>二维数组<ul>
+<li>是一维数组的数组，通常用于表示矩阵或二阶张量。</li>
+<li>numpy库中有专门用于矩阵运算的完整子模块<code>numpy.mat</code>。</li>
+</ul>
+</li>
+<li>三维数组，是二维数组的数组。</li>
+<li>数组可以拥有任意数量的维度，创建数组时使用ndmin参数定义维数。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>a = <span class="hljs-number">1</span><br>arr0 = np.array(a)            <span class="hljs-comment"># 零维数组</span><br><span class="hljs-built_in">print</span>(arr0)<br><span class="hljs-built_in">print</span>(arr0.shape)             <span class="hljs-comment"># 返回元组，获取数组各个维度的维数</span><br><span class="hljs-built_in">print</span>(arr0.ndim)              <span class="hljs-comment"># ndim属性返回一个整数，检查数组维度</span><br><br>b = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br>arr1 = np.array(b)            <span class="hljs-comment"># 一维数组</span><br><span class="hljs-built_in">print</span>(arr1)<br><span class="hljs-built_in">print</span>(arr1.shape)<br><span class="hljs-built_in">print</span>(arr1.ndim)<br><br>c = [[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]]<br>arr2 = np.array(c)            <span class="hljs-comment"># 二维数组</span><br><span class="hljs-built_in">print</span>(arr2)<br><span class="hljs-built_in">print</span>(arr2.shape)<br><span class="hljs-built_in">print</span>(arr2.ndim)<br><br>d = [[<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>]]<br>arr3 = np.array([c, d])       <span class="hljs-comment"># 三维数组</span><br><span class="hljs-built_in">print</span>(arr3)<br><span class="hljs-built_in">print</span>(arr3.shape)<br><span class="hljs-built_in">print</span>(arr3.ndim)<br><br>arr5 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>], ndmin=<span class="hljs-number">5</span>)<br><span class="hljs-built_in">print</span>(arr5)                   <span class="hljs-comment"># 五维数组</span><br><span class="hljs-built_in">print</span>(arr5.shape)<br><span class="hljs-built_in">print</span>(arr5.ndim)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>数组的裁切<ul>
+<li>类似列表和元组的切片，<code>[start: end]</code>或<code>[start: end: step]</code>。</li>
+<li>将元素从一个给定的索引切到另一个给定的索引，包含开始索引，不包含结束索引。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>])<br><span class="hljs-built_in">print</span>(arr1.ndim)              <span class="hljs-comment"># 一维数组</span><br><span class="hljs-built_in">print</span>(arr1[<span class="hljs-number">1</span>: <span class="hljs-number">5</span>])             <span class="hljs-comment"># 裁切索引1到5的元素</span><br><span class="hljs-built_in">print</span>(arr1[<span class="hljs-number">1</span>: <span class="hljs-number">5</span>: <span class="hljs-number">2</span>])          <span class="hljs-comment"># 设置裁切步长</span><br><span class="hljs-built_in">print</span>(arr1[ :  : <span class="hljs-number">2</span>])          <span class="hljs-comment"># 返回数组中相隔的元素</span><br><span class="hljs-built_in">print</span>(arr1[-<span class="hljs-number">3</span>: -<span class="hljs-number">1</span>])           <span class="hljs-comment"># 负裁切，索引从-1开始</span><br><br>arr2 = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>]])<br><span class="hljs-built_in">print</span>(arr2.ndim)              <span class="hljs-comment"># 二维数组</span><br><span class="hljs-built_in">print</span>(arr2[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>: <span class="hljs-number">4</span>])          <span class="hljs-comment"># 第二个元素[6, 7, 8, 9, 10]，索引号从1到4的元素</span><br><span class="hljs-built_in">print</span>(arr2[<span class="hljs-number">0</span>: <span class="hljs-number">2</span>, <span class="hljs-number">2</span>])          <span class="hljs-comment"># 第一个元素和第二个元素，各自索引号为2的元素</span><br><span class="hljs-built_in">print</span>(arr2[<span class="hljs-number">0</span>: <span class="hljs-number">2</span>, <span class="hljs-number">1</span>: <span class="hljs-number">4</span>])       <span class="hljs-comment"># 第一个元素和第二个元素，各自索引号从1到4的元素，返回数组</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h1 id="5-if语句"><a href="#5-if语句" class="headerlink" title="5 if语句"></a>5 if语句</h1><ul>
+<h1 id="6-if语句"><a href="#6-if语句" class="headerlink" title="6 if语句"></a>6 if语句</h1><ul>
 <li>if语句<ul>
 <li>使用<code>if</code>关键字编写。</li>
 <li>支持<code>if...</code>、<code>if...elif...</code>、<code>if...elif...else...</code>和<code>if...else...</code>格式。</li>
@@ -990,7 +1043,7 @@
 
 
 
-<h1 id="6-for循环"><a href="#6-for循环" class="headerlink" title="6 for循环"></a>6 for循环</h1><ul>
+<h1 id="7-for循环"><a href="#7-for循环" class="headerlink" title="7 for循环"></a>7 for循环</h1><ul>
 <li>for循环<ul>
 <li>用于迭代序列，例如列表、元组、集合或字符串等，不需要预先设置索引变量。</li>
 <li>在循环遍历所有项目前停止循环，可以使用<code>break</code>关键字。</li>
@@ -1023,7 +1076,7 @@
 
 
 
-<h1 id="7-while循环"><a href="#7-while循环" class="headerlink" title="7 while循环"></a>7 while循环</h1><ul>
+<h1 id="8-while循环"><a href="#8-while循环" class="headerlink" title="8 while循环"></a>8 while循环</h1><ul>
 <li>while循环<ul>
 <li>只要条件为真，就可以执行一组语句。</li>
 <li>使用<code>break</code>关键字，即使while条件为真，也可以停止循环。</li>
@@ -1069,9 +1122,11 @@
       
         <a href="/tags/%E5%8F%98%E9%87%8F/">#变量</a>
       
+        <a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/">#运算符</a>
+      
         <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">#数据类型</a>
       
-        <a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/">#运算符</a>
+        <a href="/tags/%E6%95%B0%E7%BB%84/">#数组</a>
       
         <a href="/tags/if%E8%AF%AD%E5%8F%A5/">#if语句</a>
       
