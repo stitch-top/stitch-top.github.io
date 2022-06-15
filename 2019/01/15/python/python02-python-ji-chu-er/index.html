@@ -27,14 +27,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/0072312383.jpg">
 <meta property="article:published_time" content="2019-01-15T15:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-10T14:25:01.182Z">
+<meta property="article:modified_time" content="2022-06-15T14:45:48.216Z">
 <meta property="article:author" content="Dr.626">
-<meta property="article:tag" content="变量">
-<meta property="article:tag" content="运算符">
-<meta property="article:tag" content="数据类型">
-<meta property="article:tag" content="数组">
-<meta property="article:tag" content="if语句">
-<meta property="article:tag" content="循环">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="xxx">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/0072312383.jpg">
   
@@ -252,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          6.4k 字
         
       </span>
     
@@ -263,7 +259,7 @@
         
         
         
-          20 分钟
+          53 分钟
         
       </span>
     
@@ -398,8 +394,103 @@
 
 
 
-<h1 id="2-类和对象"><a href="#2-类和对象" class="headerlink" title="2 类和对象"></a>2 类和对象</h1><p>+ </p>
-<h1 id="4-继承"><a href="#4-继承" class="headerlink" title="4 继承"></a>4 继承</h1><h1 id="5-迭代器"><a href="#5-迭代器" class="headerlink" title="5 迭代器"></a>5 迭代器</h1><h1 id="6-范围"><a href="#6-范围" class="headerlink" title="6 范围"></a>6 范围</h1><h1 id="7-模块"><a href="#7-模块" class="headerlink" title="7 模块"></a>7 模块</h1><h1 id="7-1-日期"><a href="#7-1-日期" class="headerlink" title="7-1 日期"></a>7-1 日期</h1><h1 id="7-2-数学"><a href="#7-2-数学" class="headerlink" title="7-2 数学"></a>7-2 数学</h1><h1 id="7-3-Json"><a href="#7-3-Json" class="headerlink" title="7-3 Json"></a>7-3 Json</h1><h1 id="8-正则表达式"><a href="#8-正则表达式" class="headerlink" title="8 正则表达式"></a>8 正则表达式</h1><h1 id="9-PIP"><a href="#9-PIP" class="headerlink" title="9 PIP"></a>9 PIP</h1><h1 id="10-try…except"><a href="#10-try…except" class="headerlink" title="10 try…except"></a>10 try…except</h1><h1 id="11-用户输入"><a href="#11-用户输入" class="headerlink" title="11 用户输入"></a>11 用户输入</h1>
+<h1 id="2-类和对象"><a href="#2-类和对象" class="headerlink" title="2 类和对象"></a>2 类和对象</h1><ul>
+<li>类和对象<ul>
+<li>Python是一种面向对象的编程语言，Python中一切皆对象，都有其属性和方法。</li>
+<li>使用<code>class</code>关键字创建一个类，一个类就如同一个对象构造器，用于创建对象。</li>
+<li>所有类都有一个名为<code>__init()</code>的函数，<code>__init__()</code>函数总是在类启动时执行。</li>
+<li><code>class</code>定义不能为空，若<code>class</code>没有定义内容，使用<code>pass</code>关键字可以避免语句报错。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span>:                <span class="hljs-comment"># 创建一个名为MyClass的类，并带有一个名为x的属性</span><br>    x = <span class="hljs-number">5</span><br>p = MyClass()                 <span class="hljs-comment"># 创建一个名为p的对象，并打印x的值</span><br><span class="hljs-built_in">print</span>(p.x)                    <span class="hljs-comment"># 这是最为简单的类和对象，但在实际应用中没有真正用处</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:                 <span class="hljs-comment"># 创建名为Person的类，__init__()函数为name和age赋值</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age</span>):<br>        self.name = name<br>        self.age = age<br>q = Person(<span class="hljs-string">&quot;Lily&quot;</span>, <span class="hljs-number">26</span>)<br><span class="hljs-built_in">print</span>(q.name)<br><span class="hljs-built_in">print</span>(q.age)<br><br>q.age = <span class="hljs-number">25</span>                    <span class="hljs-comment"># 修改对象属性</span><br><span class="hljs-built_in">print</span>(q.age)<br><span class="hljs-keyword">del</span> q.age                     <span class="hljs-comment"># 删除q对象中的age属性</span><br><span class="hljs-keyword">del</span> q                         <span class="hljs-comment"># 删除q对象</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-keyword">pass</span>                      <span class="hljs-comment"># pass关键字避免出错</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>对象方法<ul>
+<li>对象也可以包含方法，对象中的方法属于该对象的函数。</li>
+<li>参数<code>self</code>是对当前类实例的引用，用于访问属于该类的变量。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age</span>):<br>        self.name = name<br>        self.age = age<br>    <span class="hljs-comment"># 创建对象方法，插入一个打印函数，并在q对象上执行</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">myFunc</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;My name is &quot;</span> + self.name + <span class="hljs-string">&quot;.&quot;</span>)<br>q = Person(<span class="hljs-string">&quot;Lily&quot;</span>, <span class="hljs-number">26</span>)<br>q.myFunc()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>self参数<ul>
+<li>参数<code>self</code>是对当前类实例的引用，用于访问属于该类的变量。</li>
+<li>不必命名为<code>self</code>，可随意调用，但必须是类中任何函数的第一个参数。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params"><span class="hljs-built_in">object</span>, name, age</span>):<br>        <span class="hljs-built_in">object</span>.name = name<br>        <span class="hljs-built_in">object</span>.age = age<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">myFunc</span>(<span class="hljs-params">abc</span>):          <span class="hljs-comment"># object和abc代替self</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;My name is &quot;</span> + abc.name + <span class="hljs-string">&quot;.&quot;</span>)<br>q = Person(<span class="hljs-string">&quot;Lily&quot;</span>, <span class="hljs-number">26</span>)<br>q.myFunc()<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-继承"><a href="#3-继承" class="headerlink" title="3 继承"></a>3 继承</h1><ul>
+<li>继承<ul>
+<li>让类与类之间产生父子关系，即获取另一个类的静态属性或方法。</li>
+<li>父类也叫基类或超类，子类是从另一个类继承的类，也叫派生类。</li>
+<li>任何类都可以是父类，语法与创建类相同，创建子类时需将父类作为参数发送。</li>
+<li><code>__init__()</code>函数每次使用类创建新对象时都会自动调用该函数，将其添加到子类中。<ul>
+<li>子类不再继承父类的<code>__init__()</code>函数，会覆盖父类<code>__init__()</code>函数的继承。</li>
+<li>为保持父类的<code>__init__()</code>函数继承，需添加对父类<code>__init__()</code>函数的调用。</li>
+</ul>
+</li>
+<li>还可以使用<code>super()</code>函数，让子类继承父类的所有方法和属性。</li>
+<li>若在子类中添加与父类中函数同名的方法，会覆盖父方法的继承。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:                                   <span class="hljs-comment"># 创建Person父类，具有fname和lname属性</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, fname, lname</span>):<br>        self.fname = fname<br>        self.lname = lname<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">printName</span>(<span class="hljs-params">self</span>):                        <span class="hljs-comment"># 创建printName方法</span><br>        <span class="hljs-built_in">print</span>(self.fname, self.lname)<br>x = Person(<span class="hljs-string">&quot;Lily&quot;</span>, <span class="hljs-string">&quot;Doe&quot;</span>)<br>x.printName()<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student1</span>(<span class="hljs-title class_ inherited__">Person</span>):                         <span class="hljs-comment"># 创建Student1子类，继承Person类的属性和方法</span><br>    <span class="hljs-comment"># pass                                      # 将__init__()函数添加到Student1子类中</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, fname, lname</span>):<br>        Person.__init__(self, fname, lname)     <span class="hljs-comment"># 添加对父类函数的调用，保留父类的继承</span><br>y = Student1(<span class="hljs-string">&quot;Lucy&quot;</span>, <span class="hljs-string">&quot;Doe&quot;</span>)<br>y.printName()<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student2</span>(<span class="hljs-title class_ inherited__">Person</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, fname, lname, year</span>):<br>        <span class="hljs-built_in">super</span>().__init__(fname, lname)          <span class="hljs-comment"># super函数不必使用父类名称，自动继承</span><br>        self.graduation = year                  <span class="hljs-comment"># 添加一个Student2子类的graduation属性</span><br>z = Student2(<span class="hljs-string">&quot;Liki&quot;</span>, <span class="hljs-string">&quot;Doe&quot;</span>, <span class="hljs-number">2019</span>)<br><span class="hljs-built_in">print</span>(z.fname, z.lname, z.graduation)<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student3</span>(<span class="hljs-title class_ inherited__">Person</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, fname, lname, year</span>):<br>        <span class="hljs-built_in">super</span>().__init__(fname, lname)<br>        self.graduation = year<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">Welcome</span>(<span class="hljs-params">self</span>):                          <span class="hljs-comment"># 添加一个调用类welcome方法</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Welcome&quot;</span>, self.fname, self.lname, <span class="hljs-string">&quot;to the class of&quot;</span>, self.graduation, <span class="hljs-string">&quot;.&quot;</span>)<br>x = Student3(<span class="hljs-string">&quot;Liki&quot;</span>, <span class="hljs-string">&quot;Doe&quot;</span>, <span class="hljs-number">2019</span>)<br>x.Welcome()<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-迭代器"><a href="#4-迭代器" class="headerlink" title="4 迭代器"></a>4 迭代器</h1><ul>
+<li>迭代器<ul>
+<li>一个实现迭代器协议的对象，由方法<code>__iter__()</code>和<code>__next__()</code>组成。</li>
+<li>列表、元组、字典和集合等都是可迭代对象，都有<code>iter()</code>属性，用于获取迭代器。</li>
+<li>使用for循环遍历可迭代对象，实际for循环即创建一个迭代器并循环执行<code>next()</code>方法。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python">mytuple = (<span class="hljs-string">&quot;Apple&quot;</span>, <span class="hljs-string">&quot;Banana&quot;</span>, <span class="hljs-string">&quot;Cherry&quot;</span>)<br>myfruit = <span class="hljs-built_in">iter</span>(mytuple)       <span class="hljs-comment"># 元组返回一个迭代器，并打印每个值</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myfruit))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myfruit))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myfruit))<br><br>mystring = <span class="hljs-string">&quot;apple&quot;</span>            <span class="hljs-comment"># 字符串也是可迭代对象</span><br>alphabet = <span class="hljs-built_in">iter</span>(mystring)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(alphabet))<br><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mytuple:             <span class="hljs-comment"># for循环即一个迭代器</span><br>    <span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>类和对象迭代器<ul>
+<li>要将类和对象创建为一个迭代器，必须使用<code>__iter__()</code>和<code>__next__()</code>方法。<ul>
+<li><code>__iter__()</code>方法进行初始化等操作，始终返回迭代器对象本身。</li>
+<li><code>__next__()</code>方法允许执行操作，并且必须返回序列中的下一项。</li>
+<li>如果有足够的<code>next()</code>语句或在for循环中使用，迭代将永远进行。</li>
+</ul>
+</li>
+<li>使用StopIteration语句防止迭代永远进行，<code>__next__()</code>方法中添加一个终止条件，以在迭代完成指定次数时引发错误。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyNum1</span>:                 <span class="hljs-comment"># 创建一个返回数字的迭代器</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):<br>        self.a = <span class="hljs-number">1</span>            <span class="hljs-comment"># 从1开始</span><br>        <span class="hljs-keyword">return</span> self<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__next__</span>(<span class="hljs-params">self</span>):<br>        x = self.a<br>        self.a += <span class="hljs-number">1</span>           <span class="hljs-comment"># 每个序列递增1</span><br>        <span class="hljs-keyword">return</span> x<br>myclass = MyNum1()<br>myiters = <span class="hljs-built_in">iter</span>(myclass)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myiters))<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyNum2</span>:                 <span class="hljs-comment"># 创建一个返回数字的迭代器</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):<br>        self.a = <span class="hljs-number">1</span>            <span class="hljs-comment"># 从1开始</span><br>        <span class="hljs-keyword">return</span> self<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__next__</span>(<span class="hljs-params">self</span>):<br>        x = self.a<br>        self.a += <span class="hljs-number">1</span>           <span class="hljs-comment"># 每个序列递增1</span><br>        <span class="hljs-keyword">return</span> x<br>myclass = MyNum2()<br>myiters = <span class="hljs-built_in">iter</span>(myclass)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myiters))<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyNum3</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):<br>        self.a = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> self<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__next__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">if</span> self.a &lt;= <span class="hljs-number">20</span>:      <span class="hljs-comment"># 20次迭代后停止</span><br>            x = self.a<br>            self.a += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> x<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> StopIteration<br>myclass = MyNum3()<br>myiters = <span class="hljs-built_in">iter</span>(myclass)<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> myiters:<br>    <span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-范围"><a href="#5-范围" class="headerlink" title="5 范围"></a>5 范围</h1><ul>
+<li>局部范围<ul>
+<li>在函数内部创建的变量属于该函数的局部范围，并且只能在该函数内部使用。</li>
+<li>函数内部创建的局部变量，对函数内部的任何函数都可用(嵌套函数都可用)。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">myfunc</span>():<br>    x = <span class="hljs-number">30</span>                    <span class="hljs-comment"># 在myfunc函数内部创建的变量，在该函数内部可用</span><br>    <span class="hljs-built_in">print</span>(x)<br>myfunc()<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">myFunc</span>():<br>    x = <span class="hljs-number">26</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">innerFunc</span>():<br>        <span class="hljs-built_in">print</span>(x)              <span class="hljs-comment"># 可以从函数内的函数访问x局部变量</span><br>    innerFunc()<br>myFunc()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>全局范围<ul>
+<li>在代码主体中创建的变量是全局变量，属于全局范围，可以在任何范围内使用。</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Python">x = <span class="hljs-number">30</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">myfunc</span>():<br>    <span class="hljs-built_in">print</span>(x)                  <span class="hljs-comment"># 可在函数内部使用</span><br>myfunc()<br><span class="hljs-built_in">print</span>(x)                      <span class="hljs-comment"># 也可以在主体代码中使用</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="6-模块"><a href="#6-模块" class="headerlink" title="6 模块"></a>6 模块</h1><h2 id="6-1-日期"><a href="#6-1-日期" class="headerlink" title="6-1 日期"></a>6-1 日期</h2><h2 id="6-2-数学"><a href="#6-2-数学" class="headerlink" title="6-2 数学"></a>6-2 数学</h2><h2 id="6-3-Json"><a href="#6-3-Json" class="headerlink" title="6-3 Json"></a>6-3 Json</h2><h1 id="7-正则表达式"><a href="#7-正则表达式" class="headerlink" title="7 正则表达式"></a>7 正则表达式</h1><h1 id="8-PIP"><a href="#8-PIP" class="headerlink" title="8 PIP"></a>8 PIP</h1><h1 id="9-try…except"><a href="#9-try…except" class="headerlink" title="9 try…except"></a>9 try…except</h1><h1 id="10-用户输入"><a href="#10-用户输入" class="headerlink" title="10 用户输入"></a>10 用户输入</h1>
               
             </div>
             <hr/>
@@ -431,17 +522,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%8F%98%E9%87%8F/">#变量</a>
+        <a href="/tags/Python/">#Python</a>
       
-        <a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/">#运算符</a>
-      
-        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">#数据类型</a>
-      
-        <a href="/tags/%E6%95%B0%E7%BB%84/">#数组</a>
-      
-        <a href="/tags/if%E8%AF%AD%E5%8F%A5/">#if语句</a>
-      
-        <a href="/tags/%E5%BE%AA%E7%8E%AF/">#循环</a>
+        <a href="/tags/xxx/">#xxx</a>
       
     </div>
   

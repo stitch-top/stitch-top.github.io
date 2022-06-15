@@ -1945,12 +1945,13 @@ input[type=checkbox] {
   color: var(--link-hover-color);
   background-color: initial;
   font-weight: bold;
-  font-family: "iconfont";
+  font-family: "Aa漫语手写体";
   font-style: normal;
   -webkit-font-smoothing: antialiased;
 }
 .category-bar .list-group-item.active::before {
   content: "\e61f";
+  font-family: "iconfont";
   font-weight: initial;
   position: absolute;
   left: -1.25rem;
