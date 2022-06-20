@@ -122,6 +122,33 @@
   
   
   <entry>
+    <title>Python 文件处理</title>
+    <link href="/2019/02/03/python/python03-python-wen-jian-chu-li/"/>
+    <url>/2019/02/03/python/python03-python-wen-jian-chu-li/</url>
+    
+    <content type="html"><![CDATA[<p>文件就是操作系统提供给用户或应用程序操作硬盘的一种功能，任何语言都离不开对文件的操作，Python语言更不例外。</p><span id="more"></span>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+      <tag>xxx</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python 基础(二)</title>
     <link href="/2019/01/15/python/python02-python-ji-chu-er/"/>
     <url>/2019/01/15/python/python02-python-ji-chu-er/</url>
@@ -183,7 +210,7 @@
       
       <tag>if语句</tag>
       
-      <tag>循环</tag>
+      <tag>循环语句</tag>
       
     </tags>
     
