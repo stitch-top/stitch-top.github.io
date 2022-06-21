@@ -122,11 +122,11 @@
   
   
   <entry>
-    <title>Python 文件处理</title>
-    <link href="/2019/02/03/python/python03-python-wen-jian-chu-li/"/>
-    <url>/2019/02/03/python/python03-python-wen-jian-chu-li/</url>
+    <title>Python NumPy 基础</title>
+    <link href="/2019/02/07/python/python04-python-numpy-ji-chu/"/>
+    <url>/2019/02/07/python/python04-python-numpy-ji-chu/</url>
     
-    <content type="html"><![CDATA[<p>文件就是操作系统提供给用户或应用程序操作硬盘的一种功能，任何语言都离不开对文件的操作，Python语言更不例外。</p><span id="more"></span>]]></content>
+    <content type="html"><![CDATA[<p>NumPy是一个用于处理数组的Python库，具有在线性代数、傅里叶变换和矩阵领域工作的功能，由Travis Oliphant于2005年创建。</p><span id="more"></span><h1 id="1-NumPy"><a href="#1-NumPy" class="headerlink" title="1 NumPy"></a>1 NumPy</h1><ul><li>使用<ul><li>通过import关键字将其导入应用程序，通常以np别名替代。</li><li>检查NumPy版本，版本字符串存储在<code>__version__</code>属性下。</li></ul></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np          <span class="hljs-comment"># 导入时使用关键字别名</span><br><br>arr = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])<br><span class="hljs-built_in">print</span>(arr)<br><br><span class="hljs-built_in">print</span>(np.__version__)       <span class="hljs-comment"># 检查NumPy版本</span><br></code></pre></td></tr></table></figure><h1 id="2-创建数组"><a href="#2-创建数组" class="headerlink" title="2 创建数组"></a>2 创建数组</h1><h1 id="3-数组索引"><a href="#3-数组索引" class="headerlink" title="3 数组索引"></a>3 数组索引</h1><h1 id="4-数组切片"><a href="#4-数组切片" class="headerlink" title="4 数组切片"></a>4 数组切片</h1><h1 id="5-数据类型"><a href="#5-数据类型" class="headerlink" title="5 数据类型"></a>5 数据类型</h1>]]></content>
     
     
     <categories>
@@ -138,9 +138,52 @@
     
     <tags>
       
-      <tag>Python</tag>
+      <tag>open函数</tag>
       
-      <tag>xxx</tag>
+      <tag>read方法</tag>
+      
+      <tag>readline方法</tag>
+      
+      <tag>close方法</tag>
+      
+      <tag>remove方法</tag>
+      
+      <tag>rmdir方法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Python 文件处理</title>
+    <link href="/2019/02/03/python/python03-python-wen-jian-chu-li/"/>
+    <url>/2019/02/03/python/python03-python-wen-jian-chu-li/</url>
+    
+    <content type="html"><![CDATA[<p>文件就是操作系统提供给用户或应用程序操作硬盘的一种功能，任何语言都离不开对文件的操作，Python语言更不例外。</p><span id="more"></span><h1 id="1-文件处理"><a href="#1-文件处理" class="headerlink" title="1 文件处理"></a>1 文件处理</h1><ul><li>open()函数<ul><li>文件处理的关键函数，有filename和mode两个参数。</li><li>打开文件的模式<ul><li><code>x</code>：创建指定文件，如果文件存在则返回错误。</li><li><code>r</code>：默认值，打开文件进行读取，如果文件不存在则出错。</li><li><code>w</code>：打开文件进行内容的写入，如果文件不存在则创建文件。</li><li><code>a</code>：打开文件进行内容的追加，如果文件不存在则创建文件。</li></ul></li><li>指定文件的形式<ul><li><code>t</code>：默认值，文本模式。</li><li><code>b</code>：二进制模式，例如图像。</li></ul></li><li>打开文件进行读取，指定文件名就可以了。</li></ul></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python">f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>)              <span class="hljs-comment"># 确保文件存在，否则报错</span><br>f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;rt&quot;</span>)        <span class="hljs-comment"># rt即read和text，默认值，所以不需要指定(代码同上)</span><br></code></pre></td></tr></table></figure><h1 id="2-读取文件"><a href="#2-读取文件" class="headerlink" title="2 读取文件"></a>2 读取文件</h1><ul><li>read()方法<ul><li><code>open()</code>函数返回一个文件对象，该对象的<code>read()</code>方法可以读取文件内容。</li><li>若文件位于其他位置，须指定文件路径，<code>read()</code>方法可指定要返回的字符数。</li></ul></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python">x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(x.read())                       <span class="hljs-comment"># 获取文件内容</span><br><br>y = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(y.read(<span class="hljs-number">5</span>))                      <span class="hljs-comment"># 返回文件的前5个字符</span><br><br><span class="hljs-comment"># f = open(&quot;D:\\demofile.txt&quot;, &quot;r&quot;)   # 指定文件路径</span><br><span class="hljs-comment"># print(f.read())</span><br></code></pre></td></tr></table></figure><ul><li>readline()方法<ul><li>使用该方法将返回文件的一行内容，调用两次则可以获取前两行。</li><li>通过遍历文件的行，可以逐行读取整个文件，完成操作后将文件关闭是个好习惯。</li><li>在某些情况下，由于缓冲，对文件所做的更改可能在关闭文件之前不会显示出来。</li></ul></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python">x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(x.readline())                   <span class="hljs-comment"># 读取文件的一行</span><br><span class="hljs-built_in">print</span>(x.readline())                   <span class="hljs-comment"># 读取文件的前两行</span><br><br>y = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> y:                           <span class="hljs-comment"># 逐行循环文件</span><br>    <span class="hljs-built_in">print</span>(i)<br><br>x.close()                             <span class="hljs-comment"># 完成后关闭文件</span><br>y.close()<br></code></pre></td></tr></table></figure><h1 id="3-文件操作"><a href="#3-文件操作" class="headerlink" title="3 文件操作"></a>3 文件操作</h1><ul><li>文件操作<ul><li>写入现有文件，必须向<code>open()</code>函数添加参数。<ul><li><code>a</code>：将内容追加到文件的末尾。</li><li><code>w</code>：将内容覆盖任何现有内容。</li></ul></li><li>创建新文件，使用<code>open()</code>函数带以下参数之一的方法。<ul><li><code>x</code>：创建一个文件，如果文件存在则返回错误。</li><li><code>w</code>：打开文件进行内容的写入，如果文件不存在则创建文件。</li><li><code>a</code>：打开文件进行内容的追加，如果文件不存在则创建文件。</li></ul></li></ul></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python">x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>)       <span class="hljs-comment"># 打开文件并将内容附加到文件中，如果文件不存在则创建文件</span><br>x.write(<span class="hljs-string">&quot;Now the file has more content!&quot;</span>)<br>x.close()<br>x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(x.read())<br><br>y = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>)       <span class="hljs-comment"># 打开文件并覆盖整个文件的内容，如果文件不存在则创建文件</span><br>y.write(<span class="hljs-string">&quot;Woops! I have deleted the content!&quot;</span>)<br>y.close()<br>y = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(y.read())<br></code></pre></td></tr></table></figure><h1 id="4-删除文件"><a href="#4-删除文件" class="headerlink" title="4 删除文件"></a>4 删除文件</h1><ul><li>os模块<ul><li>删除整个文件夹，需要使用<code>os.rmdir()</code>方法。</li><li>导入模块并运行<code>os.remove()</code>方法对文件进行删除操作。</li><li>为避免出现错误，需要在尝试删除文件之前检查文件是否存在。</li></ul></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> os<br>os.rmdir(<span class="hljs-string">&quot;myfolder&quot;</span>)                  <span class="hljs-comment"># 删除文件夹</span><br>os.remove(<span class="hljs-string">&quot;demofile.txt&quot;</span>)             <span class="hljs-comment"># 删除一个文件</span><br><br>x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>)         <span class="hljs-comment"># 打开文件并将内容附加到文件中</span><br>x.write(<span class="hljs-string">&quot;Now the file has more content!&quot;</span>)<br>x.close()<br><span class="hljs-keyword">if</span> os.path.exists(<span class="hljs-string">&quot;demofile.txt&quot;</span>):    <span class="hljs-comment"># 检查文件是否存在，然后将其删除</span><br>    os.remove(<span class="hljs-string">&quot;demofile.txt&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;The file does not exist.&quot;</span>)<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>open函数</tag>
+      
+      <tag>read方法</tag>
+      
+      <tag>readline方法</tag>
+      
+      <tag>close方法</tag>
+      
+      <tag>remove方法</tag>
+      
+      <tag>rmdir方法</tag>
       
     </tags>
     
