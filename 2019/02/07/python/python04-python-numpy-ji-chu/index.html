@@ -26,15 +26,15 @@
 <meta property="og:description" content="NumPy是一个用于处理数组的Python库，具有在线性代数、傅里叶变换和矩阵领域工作的功能，由Travis Oliphant于2005年创建。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/2103000750.jpg">
-<meta property="article:published_time" content="2019-02-07T15:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-29T15:14:48.923Z">
+<meta property="article:published_time" content="2019-02-06T16:37:24.000Z">
+<meta property="article:modified_time" content="2022-06-30T14:47:57.122Z">
 <meta property="article:author" content="Dr.626">
-<meta property="article:tag" content="open函数">
-<meta property="article:tag" content="read方法">
-<meta property="article:tag" content="readline方法">
-<meta property="article:tag" content="close方法">
-<meta property="article:tag" content="remove方法">
-<meta property="article:tag" content="rmdir方法">
+<meta property="article:tag" content="array函数">
+<meta property="article:tag" content="astype方法">
+<meta property="article:tag" content="view方法">
+<meta property="article:tag" content="concatenate方法">
+<meta property="article:tag" content="stack方法">
+<meta property="article:tag" content="where方法">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/2103000750.jpg">
   
@@ -240,8 +240,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2019-02-07 23:00" pubdate>
-          2019年2月7日 23:00:00
+        <time datetime="2019-02-07 00:37" pubdate>
+          2019年2月7日 00:37:24
         </time>
       </span>
     
@@ -252,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.4k 字
+          9.3k 字
         
       </span>
     
@@ -263,7 +263,7 @@
         
         
         
-          54 分钟
+          78 分钟
         
       </span>
     
@@ -335,7 +335,7 @@
 
 
 <h1 id="1-NumPy"><a href="#1-NumPy" class="headerlink" title="1 NumPy"></a>1 NumPy</h1><ul>
-<li>使用<ul>
+<li>Numpy<ul>
 <li>通过import关键字将其导入应用程序，通常以np别名替代。</li>
 <li>检查NumPy版本，版本字符串存储在<code>__version__</code>属性下。</li>
 </ul>
@@ -346,7 +346,7 @@
 
 
 <h1 id="2-创建数组"><a href="#2-创建数组" class="headerlink" title="2 创建数组"></a>2 创建数组</h1><ul>
-<li>ndarray对象<ul>
+<li>创建数组<ul>
 <li>NumPy中的数组对象称为ndarray，使用数组对象的<code>array()</code>函数创建NumPy对象。</li>
 <li><code>type()</code>用于显示数组类型numpy.ndarray，数组中的维度是一级数组深度(嵌套数组)。<ul>
 <li>0-D数组：零维数组，又叫标量，数组中的每个值都是一个0-D数组。</li>
@@ -365,7 +365,7 @@
 
 
 <h2 id="2-1-数组索引"><a href="#2-1-数组索引" class="headerlink" title="2-1 数组索引"></a>2-1 数组索引</h2><ul>
-<li>访问数组元素<ul>
+<li>数组索引<ul>
 <li>数组索引与访问数组元素相同，通过引用索引号访问数组元素。</li>
 <li>索引从0开始，第一个元素索引为0，第二个元素索引为1，以此类推。</li>
 <li>二维数组和三维数组都使用逗号分隔的整数来表示元素的维度和索引。</li>
@@ -405,7 +405,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br><span class="hljs-built_in">print</span>(arr1.dtype)           <span class="hljs-comment"># 获取数组对象的数据类型</span><br>arr2 = np.array([<span class="hljs-string">&quot;Apple&quot;</span>, <span class="hljs-string">&quot;Banana&quot;</span>])<br><span class="hljs-built_in">print</span>(arr2.dtype)           <span class="hljs-comment"># 获取包含字符串数组的数据类型</span><br><br>arr3 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], dtype=<span class="hljs-string">&quot;S&quot;</span>)<br><span class="hljs-built_in">print</span>(arr3)                 <span class="hljs-comment"># 创建一个数据类型为字符串的数组</span><br><span class="hljs-built_in">print</span>(arr3.dtype)<br>arr4 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], dtype=<span class="hljs-string">&quot;i4&quot;</span>)<br><span class="hljs-built_in">print</span>(arr4)                 <span class="hljs-comment"># 创建一个数据类型为4字节整数的数组</span><br><span class="hljs-built_in">print</span>(arr4.dtype)<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>转换类型<ul>
+<li>类型转换<ul>
 <li>若给定类型无法转换元素，NumPy将引发ValueError(传递给函数的参数类型意外或不正确时显示)。</li>
 <li>使用<code>astype()</code>方法制作数组的副本，允许将数据类型指定为参数，可以更改现有数组的数据类型。</li>
 <li>可用字符串指定数据类型，例如f(浮点数)、i(整数)等，或直接使用数据类型，例如float、int等。</li>
@@ -446,8 +446,8 @@
 <li>数组重塑意味着改变数组形状，可添加或删除维度，或更改每个维度元素的数量。</li>
 <li>只要数组重塑所需要的元素在两种形状中都相同，就可以将数组重塑成任何形状。</li>
 <li>不必为reshape方法的其中一个维度指定确切的数字，拥有未知维度，作为-1值传递。</li>
-<li>扁平化数组意味着将多维数组转换为一维数组，可以使用reshape(-1)来做到这一点。</li>
-<li>改变数组形状还有flatten、revel函数，rot90、flip、fliplr和flipud等可重新排列元素。</li>
+<li>扁平化数组意味着将多维数组转换为一维数组，可以使用<code>reshape(-1)</code>来做到这一点。</li>
+<li>改变数组形状还有flatten、revel函数，rot90、flip、fliplr和flipud等则可重新排列元素。</li>
 </ul>
 </li>
 </ul>
@@ -459,15 +459,37 @@
 <li>连接<ul>
 <li>SQL中基于键连接表，NumPy中通过轴连接数组。</li>
 <li>通过<code>concatenate()</code>函数将数组与轴一起进行传递连接，参数axis默认为0。</li>
-<li>使用堆栈函数<code>stack()</code>连接数组(堆叠，一个轴在另一个轴上)，参数axis默认为0。</li>
+<li>使用堆栈函数<code>stack()</code>连接数组(堆叠，一个轴在另一个轴上)，参数axis默认为0。<ul>
+<li><code>hstack()</code>：沿行堆叠。</li>
+<li><code>vstack()</code>：沿列堆叠。</li>
+<li><code>dstack()</code>：沿高度或深度堆叠。</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br>arr2 = np.array([<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>])<br>arr3 = np.concatenate(arr1, arr2)         <span class="hljs-comment"># 连接两个一维数组</span><br><span class="hljs-built_in">print</span>(arr3)<br><br>arr4 = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]])<br>arr5 = np.array([[<span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>]])<br>arr6 = np.concatenate(arr4, arr5, axis=<span class="hljs-number">1</span>) <span class="hljs-comment"># 连接两个二维数组</span><br><span class="hljs-built_in">print</span>(arr6)<br><br>arr7 = np.stack((arr1, arr2), axis=<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(arr7)<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br>arr2 = np.array([<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>])<br>arr3 = np.concatenate((arr1, arr2))         <span class="hljs-comment"># 连接两个一维数组</span><br><span class="hljs-built_in">print</span>(arr3)<br><br>arr4 = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]])<br>arr5 = np.array([[<span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>]])<br>arr6 = np.concatenate((arr4, arr5), axis=<span class="hljs-number">1</span>) <span class="hljs-comment"># 连接两个二维数组</span><br><span class="hljs-built_in">print</span>(arr6)<br><br>arr7 = np.stack((arr1, arr2), axis=<span class="hljs-number">1</span>)       <span class="hljs-comment"># 堆叠</span><br><span class="hljs-built_in">print</span>(arr7)<br>arrh = np.hstack((arr1, arr2))              <span class="hljs-comment"># 沿行堆叠</span><br><span class="hljs-built_in">print</span>(arrh)<br>arrv = np.vstack((arr1, arr2))              <span class="hljs-comment"># 沿列堆叠</span><br><span class="hljs-built_in">print</span>(arrv)<br>arrd = np.dstack((arr1, arr2))              <span class="hljs-comment"># 沿高度或深度堆叠</span><br><span class="hljs-built_in">print</span>(arrd)<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>拆分</li>
+<li>拆分<ul>
+<li>拆分是连接的逆操作，<code>array_split()</code>方法用于拆分数组。<ul>
+<li>如果数组的元素少于所需要的元素，那么将相应地从末尾进行自动调整。</li>
+<li>也可以使用<code>split()</code>方法，但若元素较少，不会自动调整，将返回错误。</li>
 </ul>
+</li>
+<li><code>array_split()</code>方法的返回值是一个数组，其中包含每个拆分为一个数组。<ul>
+<li>若将一个数组拆分为3个数组，可以像访问任何数组元素一样从结果中进行访问。</li>
+<li>可以指定要围绕哪个轴进行拆分，使用axis参数进行拆分，或使用<code>hsplit()</code>替代。</li>
+<li>同理，<code>vstack()</code>和<code>dstack()</code>函数对应沿列拆分<code>vsplit()</code>和沿高度拆分<code>dsplit()</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>])<br>arr2 = np.array_split(arr1, <span class="hljs-number">3</span>)              <span class="hljs-comment"># 将一维数组拆分为3部分</span><br><span class="hljs-built_in">print</span>(arr2)                                 <span class="hljs-comment"># 返回一个包含3个数组的数组</span><br><br>arr3 = np.array_split(arr1, <span class="hljs-number">4</span>)              <span class="hljs-comment"># 将一维数组拆分为4部分</span><br><span class="hljs-built_in">print</span>(arr3)                                 <span class="hljs-comment"># 数组元素少于所需的元素</span><br>arr4 = np.split(arr1, <span class="hljs-number">3</span>)                    <span class="hljs-comment"># 将一维数组拆分为3部分</span><br><span class="hljs-built_in">print</span>(arr4)<br><br><span class="hljs-built_in">print</span>(arr2[<span class="hljs-number">0</span>])                              <span class="hljs-comment"># 打印拆分后的数组</span><br><span class="hljs-built_in">print</span>(arr2[<span class="hljs-number">1</span>])<br><span class="hljs-built_in">print</span>(arr2[<span class="hljs-number">2</span>])<br><br>arr5 = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>], [<span class="hljs-number">9</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">11</span>, <span class="hljs-number">12</span>]])<br>arr6 = np.array_split(arr5, <span class="hljs-number">3</span>)              <span class="hljs-comment"># 将二维数组拆分为3个二维数组</span><br><span class="hljs-built_in">print</span>(arr6)<br><br>arr7 = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>], [<span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>], [<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>]])<br>arr8 = np.array_split(arr7, <span class="hljs-number">3</span>)              <span class="hljs-comment"># 将二维数组拆分为3个二维数组</span><br><span class="hljs-built_in">print</span>(arr8)<br><br>arr9 = np.array_split(arr7, <span class="hljs-number">3</span>, axis=<span class="hljs-number">1</span>)      <span class="hljs-comment"># 将二维数组沿行拆分为3个二维数组</span><br><span class="hljs-built_in">print</span>(arr9)<br>arrh = np.hsplit(arr7, <span class="hljs-number">3</span>)                   <span class="hljs-comment"># 将二维数组沿行拆分为3个二维数组</span><br><span class="hljs-built_in">print</span>(arrh)<br></code></pre></td></tr></table></figure>
+
+
+
 <h1 id="6-数组迭代"><a href="#6-数组迭代" class="headerlink" title="6 数组迭代"></a>6 数组迭代</h1><ul>
 <li>数组迭代<ul>
 <li>迭代意味着一个一个地遍历元素，在NumPy中处理多维数组时，使用for循环可进行迭代。</li>
@@ -478,11 +500,11 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> arr1:              <span class="hljs-comment"># 迭代一维数组的元素</span><br>    <span class="hljs-built_in">print</span>(x)<br><br>arr2 = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])<br><span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> arr2:              <span class="hljs-comment"># 迭代二维数组的元素</span><br>    <span class="hljs-built_in">print</span>(y)<br><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> arr2:              <span class="hljs-comment"># 迭代二维数组的每个标量元素</span><br>    <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> x:<br>        <span class="hljs-built_in">print</span>(y)<br><br>arr3 = np.array([[[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]], [[<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>]]])<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> arr3:              <span class="hljs-comment"># 迭代三维数组的元素</span><br>    <span class="hljs-built_in">print</span>(x)<br><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> arr3:              <span class="hljs-comment"># 迭代三维数组的每个标量元素</span><br>    <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> x:<br>        <span class="hljs-keyword">for</span> z <span class="hljs-keyword">in</span> y:<br>            <span class="hljs-built_in">print</span>(z)<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>方法迭代<ul>
+<li>迭代方法<ul>
 <li><code>nditer()</code>是一个帮助函数，可以解决迭代中的一些基本问题。<ul>
 <li>使用op_dtypes参数并将预期的数据类型传递给它，可以在迭代时更改元素的数据类型。</li>
-<li>元素在数组中时，NumPy不会就地更改元素的数据类型，需要一些其他空间来执行此操作。</li>
-<li>其他空间即缓冲区，为启用额外空间，还需使用<code>nditer()</code>函数的<code>flags=[&#39;buffered&#39;]</code>。</li>
+<li>元素在数组中时，NumPy不会就地更改元素的数据类型，需一些其他空间来执行此操作。</li>
+<li>其他空间即缓冲区，为启用额外空间，还需要使用<code>nditer()</code>函数的<code>flags=[&quot;buffered&quot;]</code>。</li>
 </ul>
 </li>
 <li>使用过滤，可以以不同的步长进行迭代。</li>
@@ -490,11 +512,54 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([[[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], [[<span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>]]])<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> np.nditer(arr1):           <span class="hljs-comment"># 遍历3-D数组</span><br>    <span class="hljs-built_in">print</span>(x)<br><br>arr2 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])          <span class="hljs-comment"># 作为字符串遍历数组</span><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> np.nditer(arr2, flags=[<span class="hljs-string">&#x27;buffered&#x27;</span>], op_dtypes=[<span class="hljs-string">&#x27;S&#x27;</span>]):<br>    <span class="hljs-built_in">print</span>(x)<br><br>arr3 = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>]])<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> np.nditer(arr3[:, ::<span class="hljs-number">2</span>]):   <span class="hljs-comment"># 每跳过1个元素，遍历2-D数组的每个标量元素</span><br>    <span class="hljs-built_in">print</span>(x)<br><br><span class="hljs-keyword">for</span> idx, x <span class="hljs-keyword">in</span> np.ndenumerate(arr2): <span class="hljs-comment"># 枚举一维数组元素</span><br>    <span class="hljs-built_in">print</span>(idx, x)<br><span class="hljs-keyword">for</span> idx, x <span class="hljs-keyword">in</span> np.ndenumerate(arr3): <span class="hljs-comment"># 枚举二维数组元素</span><br>    <span class="hljs-built_in">print</span>(idx, x)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([[[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>]], [[<span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>]]])<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> np.nditer(arr1):           <span class="hljs-comment"># 遍历3-D数组</span><br>    <span class="hljs-built_in">print</span>(x)<br><br>arr2 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])          <span class="hljs-comment"># 作为字符串遍历数组</span><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> np.nditer(arr2, flags=[<span class="hljs-string">&quot;buffered&quot;</span>], op_dtypes=[<span class="hljs-string">&quot;S&quot;</span>]):<br>    <span class="hljs-built_in">print</span>(x)<br><br>arr3 = np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>]])<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> np.nditer(arr3[:, ::<span class="hljs-number">2</span>]):   <span class="hljs-comment"># 每跳过1个元素，遍历2-D数组的每个标量元素</span><br>    <span class="hljs-built_in">print</span>(x)<br><br><span class="hljs-keyword">for</span> idx, x <span class="hljs-keyword">in</span> np.ndenumerate(arr2): <span class="hljs-comment"># 枚举一维数组元素</span><br>    <span class="hljs-built_in">print</span>(idx, x)<br><span class="hljs-keyword">for</span> idx, x <span class="hljs-keyword">in</span> np.ndenumerate(arr3): <span class="hljs-comment"># 枚举二维数组元素</span><br>    <span class="hljs-built_in">print</span>(idx, x)<br></code></pre></td></tr></table></figure>
 
 
 
-<h1 id="7-数组搜索"><a href="#7-数组搜索" class="headerlink" title="7 数组搜索"></a>7 数组搜索</h1><h1 id="8-数组排序"><a href="#8-数组排序" class="headerlink" title="8 数组排序"></a>8 数组排序</h1><h1 id="9-数组过滤器"><a href="#9-数组过滤器" class="headerlink" title="9 数组过滤器"></a>9 数组过滤器</h1>
+<h1 id="7-数组搜索"><a href="#7-数组搜索" class="headerlink" title="7 数组搜索"></a>7 数组搜索</h1><ul>
+<li>数组搜索<ul>
+<li><code>where()</code>方法可以进行数组搜索。</li>
+<li><code>searchsorted()</code>方法：考虑先插入，再排序，最后索引。<ul>
+<li>数组中执行二进制搜索，并返回将插入指定值的索引以保持搜索顺序。</li>
+<li>默认情况下返回左侧索引，使用<code>side=&quot;right&quot;</code>可以改为返回右侧索引。</li>
+<li>如果需要搜索多个值，那么可以使用具有指定值的数组进行数组的搜索。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>])<br>val4 = np.where(arr1 == <span class="hljs-number">4</span>)      <span class="hljs-comment"># 查找值为4的索引</span><br><span class="hljs-built_in">print</span>(val4)                     <span class="hljs-comment"># 返回元组(array([3, 5, 6], ))，值4出现在索引的3、5和6位置处</span><br>even = np.where(arr1 % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)  <span class="hljs-comment"># 查找值为偶数的索引</span><br><span class="hljs-built_in">print</span>(even)<br><br>arr2 = np.array([<span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>])<br>insl = np.searchsorted(arr2, <span class="hljs-number">7</span>) <span class="hljs-comment"># 查找应插入值7的索引</span><br><span class="hljs-built_in">print</span>(insl)                     <span class="hljs-comment"># 索引从左侧开始，并返回第一个索引</span><br>insr = np.searchsorted(arr2, <span class="hljs-number">7</span>, side=<span class="hljs-string">&quot;right&quot;</span>)<br><span class="hljs-built_in">print</span>(insr)                     <span class="hljs-comment"># 索引从右侧开始，并返回第一个索引</span><br><br>arr3 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>])<br>ins1 = np.searchsorted(arr3, <span class="hljs-number">0</span>)<br><span class="hljs-built_in">print</span>(ins1)                     <span class="hljs-comment"># 返回0</span><br>ins2 = np.searchsorted(arr3, [<span class="hljs-number">8</span>, <span class="hljs-number">9</span>])<br><span class="hljs-built_in">print</span>(ins2)                     <span class="hljs-comment"># 返回数组[4 4]</span><br>ins3 = np.searchsorted(arr3, [<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>])<br><span class="hljs-built_in">print</span>(ins3)                     <span class="hljs-comment"># 查找应插入值2、4和6的索引，返回数组[1 2 3]</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="8-数组排序"><a href="#8-数组排序" class="headerlink" title="8 数组排序"></a>8 数组排序</h1><ul>
+<li>数组排序<ul>
+<li>NumPy的ndarray对象有一个<code>sort()</code>函数，可以对指定的数组进行排序。</li>
+<li><code>sort()</code>函数可以对字符串数组、布尔数组或任何其他数据类型进行排序。</li>
+<li>若对二维数组使用<code>sort()</code>函数，那么二维数组中的两个数组都将被排序。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>])   <span class="hljs-comment"># 对数组排序</span><br><span class="hljs-built_in">print</span>(np.sort(arr1))            <span class="hljs-comment"># 返回数组arr1的副本，保持原始数组不变</span><br><br>arr2 = np.array([<span class="hljs-string">&quot;Banana&quot;</span>, <span class="hljs-string">&quot;Apple&quot;</span>, <span class="hljs-string">&quot;Cherry&quot;</span>])<br><span class="hljs-built_in">print</span>(np.sort(arr2))            <span class="hljs-comment"># 按字母顺序对数组排序</span><br><br>arr3 = np.array([<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>])<br><span class="hljs-built_in">print</span>(np.sort(arr3))            <span class="hljs-comment"># 对布尔数组排序</span><br><br>arr4 = np.array([[<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>]])<br><span class="hljs-built_in">print</span>(np.sort(arr4))<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="9-数组过滤器"><a href="#9-数组过滤器" class="headerlink" title="9 数组过滤器"></a>9 数组过滤器</h1><ul>
+<li>数组过滤器<ul>
+<li>从现有数组中取出一些元素，并从中创建一个新数组，称为数组过滤。</li>
+<li>布尔索引列表过滤数组<ul>
+<li>如果索引处的值是True，则该元素包含在过滤后的数组中。</li>
+<li>如果索引处的值是False，则该元素从过滤后的数组中排除。</li>
+</ul>
+</li>
+<li>根据条件创建过滤器数组，可以在条件中直接替换数组而不是可迭代变量。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">32</span>, <span class="hljs-number">33</span>])<br>boo1 = [<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]<br>new1 = arr1[boo1]         <span class="hljs-comment"># 对True和False值进行了硬编码</span><br><span class="hljs-built_in">print</span>(new1)               <span class="hljs-comment"># 返回[30 32]，新过滤器仅包含过滤器数组具有value的True值</span><br><br>filter_arr1 = []          <span class="hljs-comment"># 创建空列表</span><br><span class="hljs-keyword">for</span> element <span class="hljs-keyword">in</span> arr1:      <span class="hljs-comment"># 遍历数组arr1中的每个元素</span><br>    <span class="hljs-keyword">if</span> element &gt; <span class="hljs-number">31</span>:      <span class="hljs-comment"># 元素大于31，将值设为True，否则为False</span><br>        filter_arr1.append(<span class="hljs-literal">True</span>)<br>    <span class="hljs-keyword">else</span>:<br>        filter_arr1.append(<span class="hljs-literal">False</span>)<br>arr2 = arr1[filter_arr1]<br><span class="hljs-built_in">print</span>(filter_arr1)        <span class="hljs-comment"># [False, False, True, True]</span><br><span class="hljs-built_in">print</span>(arr2)               <span class="hljs-comment"># 返回[32 33]</span><br><br>filter_arr2 = arr1 &gt; <span class="hljs-number">31</span>   <span class="hljs-comment"># 在条件中直接替换数组</span><br>arr3 = arr1[filter_arr2]<br><span class="hljs-built_in">print</span>(filter_arr2)<br><span class="hljs-built_in">print</span>(arr3)<br></code></pre></td></tr></table></figure>
+
+
+
               
             </div>
             <hr/>
@@ -526,17 +591,17 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/open%E5%87%BD%E6%95%B0/">#open函数</a>
+        <a href="/tags/array%E5%87%BD%E6%95%B0/">#array函数</a>
       
-        <a href="/tags/read%E6%96%B9%E6%B3%95/">#read方法</a>
+        <a href="/tags/astype%E6%96%B9%E6%B3%95/">#astype方法</a>
       
-        <a href="/tags/readline%E6%96%B9%E6%B3%95/">#readline方法</a>
+        <a href="/tags/view%E6%96%B9%E6%B3%95/">#view方法</a>
       
-        <a href="/tags/close%E6%96%B9%E6%B3%95/">#close方法</a>
+        <a href="/tags/concatenate%E6%96%B9%E6%B3%95/">#concatenate方法</a>
       
-        <a href="/tags/remove%E6%96%B9%E6%B3%95/">#remove方法</a>
+        <a href="/tags/stack%E6%96%B9%E6%B3%95/">#stack方法</a>
       
-        <a href="/tags/rmdir%E6%96%B9%E6%B3%95/">#rmdir方法</a>
+        <a href="/tags/where%E6%96%B9%E6%B3%95/">#where方法</a>
       
     </div>
   
@@ -561,7 +626,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2019年2月7日 23:00:00</div>
+          <div>2019年2月7日 00:37:24</div>
         </div>
       
       
