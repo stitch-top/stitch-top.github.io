@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1420511070.jpg">
 <meta property="article:published_time" content="2019-04-15T15:25:33.000Z">
-<meta property="article:modified_time" content="2022-07-26T16:20:03.992Z">
+<meta property="article:modified_time" content="2022-08-01T16:37:04.153Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="Series()">
 <meta property="article:tag" content="DataFrame()">
@@ -252,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.2k 字
+          5.9k 字
         
       </span>
     
@@ -263,7 +263,7 @@
         
         
         
-          44 分钟
+          50 分钟
         
       </span>
     
@@ -373,7 +373,38 @@
 
 
 
-<h1 id="3-优化器"><a href="#3-优化器" class="headerlink" title="3 优化器"></a>3 优化器</h1><p>+ </p>
+<h1 id="3-优化器"><a href="#3-优化器" class="headerlink" title="3 优化器"></a>3 优化器</h1><ul>
+<li>优化器<ul>
+<li>在SciPy中定义的一组过程，找到函数的最小值，或找到方程的根。</li>
+<li>NumPy能够为多项式和线性方程求根，但是不能为非线性方程求根。</li>
+<li>例如：<code>x+cos(x)</code>，可以使用SciPy的<code>optimize.root</code>功能，接受两个必需的参数。<ul>
+<li>x0，对根的初始猜测。</li>
+<li>fun，表示方程的函数。</li>
+</ul>
+</li>
+<li><code>optimze.root</code>返回一个对象，其中包含有关解决方案的信息。</li>
+<li>最小化函数<ul>
+<li>非线性方程下一个函数代表一条曲线。</li>
+<li>曲线有高点和低点，高点称为最大值，低点称为最小值。</li>
+<li>整个曲线的最高点称为全局最大值，其余的称为局部最大值。</li>
+<li>整个曲线的最低点称为全局最小值，其余的称为局部最小值。</li>
+</ul>
+</li>
+<li>使用<code>scipy.optimize.minimize()</code>来最小化函数，接受以下参数。<ul>
+<li>x0，对根的初始猜测。</li>
+<li>fun，表示方程的函数。</li>
+<li>options，定义额外参数的字典。</li>
+<li>callback，每次优化迭代后调用的函数。</li>
+<li>method，要使用的方法名称，<code>CG</code>、<code>BFGS</code>、<code>Newton-CG</code>、<code>L-BFGS-B</code>、<code>TNC</code>、<code>COBYLA</code>、<code>SLSQP</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> cos<br><span class="hljs-keyword">from</span> scipy.optimize <span class="hljs-keyword">import</span> root<br><span class="hljs-keyword">from</span> scipy.optimize <span class="hljs-keyword">import</span> minimize<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">eqn</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span> x + cos(x)<br>myroot = root(eqn, <span class="hljs-number">0</span>)               <span class="hljs-comment"># 求方程x + cos(x)的根</span><br><span class="hljs-built_in">print</span>(myroot)                       <span class="hljs-comment"># 打印有关解决方案的所有信息</span><br><span class="hljs-built_in">print</span>(myroot.x)                     <span class="hljs-comment"># 返回的对象包含有关解决方案的更多信息</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">eqnr</span>(<span class="hljs-params">y</span>):<br>    <span class="hljs-keyword">return</span> y**<span class="hljs-number">2</span> + y + <span class="hljs-number">2</span><br>mymin = minimize(eqnr, <span class="hljs-number">0</span>, method=<span class="hljs-string">&#x27;BFGS&#x27;</span>)<br><span class="hljs-built_in">print</span>(mymin)                        <span class="hljs-comment"># 使用BFGS方法最小化y^2 + y + 2函数</span><br></code></pre></td></tr></table></figure>
+
+
+
 <h1 id="4-稀疏数据"><a href="#4-稀疏数据" class="headerlink" title="4 稀疏数据"></a>4 稀疏数据</h1><h1 id="5-图"><a href="#5-图" class="headerlink" title="5 图"></a>5 图</h1><h1 id="6-空间数据"><a href="#6-空间数据" class="headerlink" title="6 空间数据"></a>6 空间数据</h1><h1 id="7-Matlab数组"><a href="#7-Matlab数组" class="headerlink" title="7 Matlab数组"></a>7 Matlab数组</h1><h1 id="8-插值"><a href="#8-插值" class="headerlink" title="8 插值"></a>8 插值</h1><h1 id="9-显著性测试"><a href="#9-显著性测试" class="headerlink" title="9 显著性测试"></a>9 显著性测试</h1>
               
             </div>
