@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1420511070.jpg">
 <meta property="article:published_time" content="2019-04-15T15:25:33.000Z">
-<meta property="article:modified_time" content="2022-08-01T16:37:04.153Z">
+<meta property="article:modified_time" content="2022-08-08T15:31:47.783Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="Series()">
 <meta property="article:tag" content="DataFrame()">
@@ -252,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.9k 字
+          8.1k 字
         
       </span>
     
@@ -263,7 +263,7 @@
         
         
         
-          50 分钟
+          68 分钟
         
       </span>
     
@@ -377,12 +377,12 @@
 <li>优化器<ul>
 <li>在SciPy中定义的一组过程，找到函数的最小值，或找到方程的根。</li>
 <li>NumPy能够为多项式和线性方程求根，但是不能为非线性方程求根。</li>
-<li>例如：<code>x+cos(x)</code>，可以使用SciPy的<code>optimize.root</code>功能，接受两个必需的参数。<ul>
+<li>例如：<code>x+cos(x)</code>，使用SciPy的optimize.root功能，接受两个必需的参数。<ul>
 <li>x0，对根的初始猜测。</li>
 <li>fun，表示方程的函数。</li>
 </ul>
 </li>
-<li><code>optimze.root</code>返回一个对象，其中包含有关解决方案的信息。</li>
+<li>optimze.root返回一个对象，其中包含有关解决方案的信息。</li>
 <li>最小化函数<ul>
 <li>非线性方程下一个函数代表一条曲线。</li>
 <li>曲线有高点和低点，高点称为最大值，低点称为最小值。</li>
@@ -405,7 +405,62 @@
 
 
 
-<h1 id="4-稀疏数据"><a href="#4-稀疏数据" class="headerlink" title="4 稀疏数据"></a>4 稀疏数据</h1><h1 id="5-图"><a href="#5-图" class="headerlink" title="5 图"></a>5 图</h1><h1 id="6-空间数据"><a href="#6-空间数据" class="headerlink" title="6 空间数据"></a>6 空间数据</h1><h1 id="7-Matlab数组"><a href="#7-Matlab数组" class="headerlink" title="7 Matlab数组"></a>7 Matlab数组</h1><h1 id="8-插值"><a href="#8-插值" class="headerlink" title="8 插值"></a>8 插值</h1><h1 id="9-显著性测试"><a href="#9-显著性测试" class="headerlink" title="9 显著性测试"></a>9 显著性测试</h1>
+<h1 id="4-稀疏数据"><a href="#4-稀疏数据" class="headerlink" title="4 稀疏数据"></a>4 稀疏数据</h1><ul>
+<li>稀疏数据<ul>
+<li>具有大部分未使用元素的数据，元素不携带任何信息。<ul>
+<li>稀疏数据：是大多数项目值为0的数据集。</li>
+<li>密集数组：与稀疏数组相反，大多数值不为0。</li>
+</ul>
+</li>
+<li>科学计算中处理线性代数的偏导数时会遇到稀疏数据。</li>
+<li>SciPy有一个scipy.sparse模块，用于处理稀疏数据，主要使用两种类型的稀疏矩阵。<ul>
+<li>CSC：压缩稀疏列。</li>
+<li>CSR：压缩稀疏行，通过将数组传递给<code>scipy.sparse.csr_matrix()</code>函数来创建。</li>
+</ul>
+</li>
+<li>还可以使用data属性，用于查看存储的数据，<code>count_nonzero()</code>方法可以计算非零数。</li>
+<li><code>eliminate_zeros()</code>方法从矩阵中删除零条目，<code>sum_duplicates()</code>方法消除重复条目。</li>
+<li><code>tocsc()</code>方法从CSR类型转换为CSC类型，除此，稀疏矩阵还支持普通矩阵支持的所有操作。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix<br><br>arr1 = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>])<br><span class="hljs-built_in">print</span>(csr_matrix(arr1))                       <span class="hljs-comment"># 从数组创建CSR矩阵</span><br><br>arr2 = np.array([[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>]])<br><span class="hljs-built_in">print</span>(csr_matrix(arr2).data)                  <span class="hljs-comment"># 查看存储的数据，非零项</span><br><span class="hljs-built_in">print</span>(csr_matrix(arr2).count_nonzero())       <span class="hljs-comment"># 计算非零数</span><br><br>mat1 = csr_matrix(arr2)<br>mat1.eliminate_zeros()                        <span class="hljs-comment"># 删除零条目</span><br><span class="hljs-built_in">print</span>(mat1)<br><br>mat2 = csr_matrix(arr2)<br>mat2.sum_duplicates()                         <span class="hljs-comment"># 消除重复项</span><br><span class="hljs-built_in">print</span>(mat2)<br><br>arr3 = csr_matrix(arr2).tocsc()               <span class="hljs-comment"># 从CSR类型转换为CSC类型</span><br><span class="hljs-built_in">print</span>(arr3)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-图"><a href="#5-图" class="headerlink" title="5 图"></a>5 图</h1><ul>
+<li>图<ul>
+<li>使用scipy.sparse.csgraph模块处理图表数据结构。</li>
+<li>邻接矩阵：Adjacency Matrix，表示顶点之间相邻关系的矩阵。<ul>
+<li><code>connected_components()</code>：查找所有连接的组件。</li>
+<li>迪杰斯特拉：通过<code>dijkstra()</code>方法，在图中找到从一个元素到另一个元素的最短路径。<ul>
+<li>limit：路径的最大权重。</li>
+<li>indices：元素的索引，仅返回该元素的所有路径。</li>
+<li>return_predecessors：布尔值，True返回整个遍历路径，否则为False。</li>
+</ul>
+</li>
+<li>弗洛伊德·沃歇尔：<code>floyd_warshall()</code>方法找到所有元素对之间的最短路径。</li>
+<li>贝尔曼福特：<code>bellman_ford()</code>方法找到所有元素对之间的最短路径，也可处理负权重。</li>
+<li>深度一阶：<code>depth_first_order()</code>方法从节点返回深度优先遍历，采用以下的两个参数。<ul>
+<li>图表。</li>
+<li>遍历图的起始元素。</li>
+</ul>
+</li>
+<li>广度优先顺序：<code>breadth_first_order()</code>方法从节点返回广度优先遍历，采用以下参数。<ul>
+<li>图表。</li>
+<li>遍历图的起始元素。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix<br><span class="hljs-keyword">from</span> scipy.sparse.csgraph <span class="hljs-keyword">import</span> dijkstra<br><span class="hljs-keyword">from</span> scipy.sparse.csgraph <span class="hljs-keyword">import</span> bellman_ford<br><span class="hljs-keyword">from</span> scipy.sparse.csgraph <span class="hljs-keyword">import</span> floyd_warshall<br><span class="hljs-keyword">from</span> scipy.sparse.csgraph <span class="hljs-keyword">import</span> depth_first_order<br><span class="hljs-keyword">from</span> scipy.sparse.csgraph <span class="hljs-keyword">import</span> breadth_first_order<br><span class="hljs-keyword">from</span> scipy.sparse.csgraph <span class="hljs-keyword">import</span> connected_components<br><br>arr1 = np.array([[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]])<br>arr2 = csr_matrix(arr1)<br><span class="hljs-built_in">print</span>(connected_components(arr2))             <span class="hljs-comment"># 查找所有连接的组件</span><br><br>arr3 = csr_matrix(arr1)                       <span class="hljs-comment"># 元素1到元素2的最短路径</span><br><span class="hljs-built_in">print</span>(dijkstra(arr3, return_predecessors=<span class="hljs-literal">True</span>, indices=<span class="hljs-number">0</span>))<br><br>arr4 = csr_matrix(arr1)                       <span class="hljs-comment"># 所有元素对之间的最短路径</span><br><span class="hljs-built_in">print</span>(floyd_warshall(arr4, return_predecessors=<span class="hljs-literal">True</span>))<br><br>arr5 = csr_matrix(arr1)                       <span class="hljs-comment"># 用给定的负权重找到元素1到元素2的最短路径</span><br><span class="hljs-built_in">print</span>(bellman_ford(arr5, return_predecessors=<span class="hljs-literal">True</span>, indices=<span class="hljs-number">0</span>))<br><br>arr6 = np.array([<br>    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>], <br>    [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>], <br>    [<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>], <br>    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>]<br>])<br>arr7 = csr_matrix(arr6)<br><span class="hljs-built_in">print</span>(depth_first_order(arr7, <span class="hljs-number">1</span>))             <span class="hljs-comment"># 对于给定的邻接矩阵，首先遍历图深度</span><br><br>arr8 = csr_matrix(arr6)<br><span class="hljs-built_in">print</span>(breadth_first_order(arr8, <span class="hljs-number">1</span>))           <span class="hljs-comment"># 对于给定的邻接矩阵，首先遍历图宽度</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-空间数据"><a href="#6-空间数据" class="headerlink" title="6 空间数据"></a>6 空间数据</h1><h1 id="7-Matlab数组"><a href="#7-Matlab数组" class="headerlink" title="7 Matlab数组"></a>7 Matlab数组</h1><h1 id="8-插值"><a href="#8-插值" class="headerlink" title="8 插值"></a>8 插值</h1><h1 id="9-显著性测试"><a href="#9-显著性测试" class="headerlink" title="9 显著性测试"></a>9 显著性测试</h1>
               
             </div>
             <hr/>
@@ -749,7 +804,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a><span>Copyright © 2021 - 2022</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io/" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+       <a><span>Copyright © 2021 - 2022</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
     </div>
   
   
