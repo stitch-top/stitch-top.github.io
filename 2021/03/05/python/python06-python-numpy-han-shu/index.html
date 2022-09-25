@@ -1,0 +1,1156 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/image.png">
+  <link rel="icon" href="/img/image.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="NumPy数组存储在内存中的一个连续位置，因此进程可以非常有效地访问和操作，此行为在计算机科学中被称为局部性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python NumPy 函数">
+<meta property="og:url" content="https://stitch-top.github.io/2021/03/05/python/python06-python-numpy-han-shu/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="NumPy数组存储在内存中的一个连续位置，因此进程可以非常有效地访问和操作，此行为在计算机科学中被称为局部性。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/2103000750.jpg">
+<meta property="article:published_time" content="2021-03-05T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-25T14:00:19.541Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="Ufunc">
+<meta property="article:tag" content="对数函数">
+<meta property="article:tag" content="三角函数">
+<meta property="article:tag" content="双曲函数">
+<meta property="article:tag" content="公倍数">
+<meta property="article:tag" content="公约数">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/2103000750.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python NumPy 函数 - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python NumPy 函数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-03-05 23:00" pubdate>
+          2021年3月5日 23:00:00
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景 -->
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script>
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python NumPy 函数</h1>
+            
+            <div class="markdown-body">
+              
+              <p>NumPy数组存储在内存中的一个连续位置，因此进程可以非常有效地访问和操作，此行为在计算机科学中被称为局部性。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-Ufunc"><a href="#1-Ufunc" class="headerlink" title="1 Ufunc"></a>1 Ufunc</h1><ul>
+<li>Ufunc<ul>
+<li>即通用函数，指对ndarray对象进行操作的NumPy函数，用于实现矢量化。</li>
+<li>ufunc提供了广播和其他方法，对计算非常有帮助，也提供了额外的参数。<ul>
+<li>out：复制返回值的输出数组。</li>
+<li>dtype：定义元素的返回类型。</li>
+<li>where：布尔数组或条件定义操作应在哪里发生。</li>
+</ul>
+</li>
+<li>矢量化：将迭代语句转换为基于向量的操作，现代CPU优化了此类操作，速度更快。</li>
+<li>例如：添加两个列表<code>[1、2、3、4]</code>和<code>[4、5、6、7]</code>的元素。<ul>
+<li>方法一：先遍历两个列表，然后对列表的每个元素求和。</li>
+<li>方法二：ufunc提供<code>add(x, y)</code>函数，会产生相同的结果。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>x = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]<br>y = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>]<br>z = []<br><span class="hljs-keyword">for</span> i, j <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(x, y):          <span class="hljs-comment"># 使用Python的内置zip()</span><br>    z.append(i + j)<br><span class="hljs-built_in">print</span>(z)<br><br>k = np.add(x, y)                <span class="hljs-comment"># 使用ufunc的add()函数</span><br><span class="hljs-built_in">print</span>(k)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>创建Ufunc<ul>
+<li>创建ufunc，必须定义一个函数，类似Python中使用普通函数。</li>
+<li>使用<code>frompyfunc()</code>将其添加到NumPy ufunc库中，有以下参数。<ul>
+<li>function：函数名称。</li>
+<li>inputs：输入参数(数组)的数量。</li>
+<li>outputs：输出参数(数组)的数量。</li>
+</ul>
+</li>
+<li>检查是否为ufunc函数，应该返回<code>&lt;class &#39;numpy.ufunc&#39;&gt;</code>。</li>
+<li>if语句中测试函数是否为ufunc，需要使用<code>numpy.ufunc</code>值。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">myadd</span>(<span class="hljs-params">x, y</span>):<br>    <span class="hljs-keyword">return</span> x+y<br>myadd = np.frompyfunc(myadd, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)          <span class="hljs-comment"># 创建ufunc函数</span><br><span class="hljs-built_in">print</span>(myadd([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>]))<br><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(myadd))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(np.add))                         <span class="hljs-comment"># 检查函数是否为ufunc</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(np.concatenate))<br><span class="hljs-comment"># print(type(np.blahblah))                  # 函数无法识别，返回错误</span><br><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(np.add) == np.ufunc:                <span class="hljs-comment"># numpy.ufunc</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Add is ufunc.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Add is not ufunc.&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-简单算术"><a href="#2-简单算术" class="headerlink" title="2 简单算术"></a>2 简单算术</h1><ul>
+<li>简单算术<ul>
+<li>加：<code>add()</code>函数将两个数组的内容相加，并在一个新数组中返回结果。</li>
+<li>减：<code>subtract()</code>函数将两个数组的内容相减，并在一个新数组中返回结果。</li>
+<li>乘：<code>multiply()</code>函数将两个数组的内容相乘，并在一个新数组中返回结果。</li>
+<li>除：<code>divide()</code>函数将两个数组的内容相除，并且在一个新数组中返回结果。</li>
+<li>幂：<code>power()</code>函数将一个数组的值乘以另一个数组值的幂并在新数组中返回结果。</li>
+<li>余：<code>mod()</code>和<code>remainder()</code>函数都会在一个新数组中返回两个数组值相除的余数。</li>
+<li>商和模：<code>divmod()</code>函数，返回值是两个数组，第一个数组包含商，第二个数组包含模。</li>
+<li>绝对值：<code>absolute()</code>和<code>abs()</code>函数，尽量使用<code>absolute()</code>，避免与<code>math.abs()</code>混淆。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>])<br>arr2 = np.array([<span class="hljs-number">20</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>, <span class="hljs-number">23</span>, <span class="hljs-number">24</span>, <span class="hljs-number">25</span>])<br>arr3 = np.add(arr1, arr2)                   <span class="hljs-comment"># 将arr1的值添加到arr2中</span><br><span class="hljs-built_in">print</span>(arr3)<br><br>arr4 = np.subtract(arr1, arr2)              <span class="hljs-comment"># 将arr1的值减去arr2的值</span><br><span class="hljs-built_in">print</span>(arr4)<br>arr4 = np.absolute(arr4)                    <span class="hljs-comment"># 返回arr4值的绝对值</span><br><span class="hljs-built_in">print</span>(arr4)<br><br>arr5 = np.divide(arr1, arr2)                <span class="hljs-comment"># 将arr1的值除以arr2的值</span><br><span class="hljs-built_in">print</span>(arr5)<br><br>arr6 = np.array([<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>])<br>arr7 = np.power(arr1, arr6)                 <span class="hljs-comment"># 将arr1的值提高到arr6值的幂</span><br><span class="hljs-built_in">print</span>(arr7)<br><br>arr8 = np.mod(arr1, arr6)                   <span class="hljs-comment"># 返回arr1除以arr6值的余数</span><br><span class="hljs-built_in">print</span>(arr8)<br>arr8 = np.remainder(arr1, arr6)<br><span class="hljs-built_in">print</span>(arr8)<br><br>arr9 = np.<span class="hljs-built_in">divmod</span>(arr1, arr6)                <span class="hljs-comment"># 返回arr1除以arr6的商和模</span><br><span class="hljs-built_in">print</span>(arr9)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-1-四舍五入"><a href="#2-1-四舍五入" class="headerlink" title="2-1 四舍五入"></a>2-1 四舍五入</h2><ul>
+<li>四舍五入<ul>
+<li>NumPy中主要有如下五种对小数进行四舍五入的方法。</li>
+<li>通过<code>around()</code>函数将元素四舍五入到小数点后指定位。</li>
+<li><code>trunc()</code>和<code>fix()</code>函数删除小数并返回最接近零的浮点数。</li>
+<li>使用<code>ceil()</code>函数将小数四舍五入到最接近的较高整数(向上取整)。</li>
+<li>使用<code>floor()</code>函数将小数四舍五入到最接近的较低整数(向下取整)。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.around(<span class="hljs-number">3.1666</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(arr1)                     <span class="hljs-comment"># 将3.1666四舍五入到小数点后2位</span><br><br>arr2 = np.trunc([-<span class="hljs-number">3.1666</span>, <span class="hljs-number">3.6667</span>])<br><span class="hljs-built_in">print</span>(arr2)                     <span class="hljs-comment"># 截断数组元素</span><br><br>arr3 = np.fix([-<span class="hljs-number">3.1666</span>, <span class="hljs-number">3.6667</span>])<br><span class="hljs-built_in">print</span>(arr3)<br><br>arr4 = np.ceil([-<span class="hljs-number">3.1666</span>, <span class="hljs-number">3.6667</span>])<br><span class="hljs-built_in">print</span>(arr4)                     <span class="hljs-comment"># 向上取整</span><br><br>arr5 = np.floor([-<span class="hljs-number">3.1666</span>, <span class="hljs-number">3.6667</span>])<br><span class="hljs-built_in">print</span>(arr5)                     <span class="hljs-comment"># 返回一个浮点数，向下取整，与trunc()函数返回的不同</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-对数函数"><a href="#2-2-对数函数" class="headerlink" title="2-2 对数函数"></a>2-2 对数函数</h2><ul>
+<li>对数函数<ul>
+<li>NumPy提供了以e、2和10为底的log函数，不提供指定底数的log函数。</li>
+<li>如果无法计算log函数，那么所有的log函数都将在元素中放置-inf或inf。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> log<br><br>arr = np.arange(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)          <span class="hljs-comment"># 返回一个从1-10的整数数组</span><br><span class="hljs-built_in">print</span>(np.log(arr))              <span class="hljs-comment"># 自然对数</span><br><span class="hljs-built_in">print</span>(np.log2(arr))<br><span class="hljs-built_in">print</span>(np.log10(arr))<br><br>nplog = np.frompyfunc(log, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(nplog(<span class="hljs-number">100</span>, <span class="hljs-number">15</span>))           <span class="hljs-comment"># 指定底数为15的log函数</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-数组求和"><a href="#2-3-数组求和" class="headerlink" title="2-3 数组求和"></a>2-3 数组求和</h2><ul>
+<li>数组求和<ul>
+<li>加法是两个参数之间完成的，而求和则是在n个元素之间进行的。</li>
+<li>轴上求和：指定<code>axis=1</code>，NumPy将对每个数组中的数字进行求和。</li>
+<li>部分求和：使用<code>cumsum()</code>函数，例如<code>[1, 2, 3]</code>部分求和为<code>[1, 1+2, 1+2+3]</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br>arr2 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br>arr3 = np.add(arr1, arr2)       <span class="hljs-comment"># 将arr1的值添加到arr2的值，加法</span><br><span class="hljs-built_in">print</span>(arr3)<br>arr3 = np.<span class="hljs-built_in">sum</span>([arr1, arr2])     <span class="hljs-comment"># 将arr1的值与arr2的值相加，求和</span><br><span class="hljs-built_in">print</span>(arr3)<br><br>arr4 = np.<span class="hljs-built_in">sum</span>([arr1, arr2], axis=<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(arr4)                     <span class="hljs-comment"># 在arr1的轴上求和</span><br><br>arr5 = np.cumsum(arr1)          <span class="hljs-comment"># 累计求和(部分求和)</span><br><span class="hljs-built_in">print</span>(arr5)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-数组乘积"><a href="#2-4-数组乘积" class="headerlink" title="2-4 数组乘积"></a>2-4 数组乘积</h2><ul>
+<li>数组乘积<ul>
+<li>查找数组中元素的乘积，可以使用<code>prod()</code>函数。</li>
+<li>轴上乘积：指定<code>axis=1</code>，NumPy将返回每个数组的乘积。</li>
+<li>部分乘积：使用<code>cumprod()</code>函数，例如<code>[1, 2, 3]</code>部分乘积为<code>[1, 1*2, 1*2*3]</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>])<br>arr2 = np.array([<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>])<br>arr3 = np.prod(arr1)            <span class="hljs-comment"># arr1数组元素的乘积，1*2*3*4</span><br><span class="hljs-built_in">print</span>(arr3)<br>arr3 = np.prod([arr1, arr2])    <span class="hljs-comment"># arr1和arr2元素的乘积，1*2*3*4*5*6*7*8</span><br><span class="hljs-built_in">print</span>(arr3)<br><br>arr4 = np.prod([arr1, arr2], axis=<span class="hljs-number">1</span>)<br><span class="hljs-built_in">print</span>(arr4)                     <span class="hljs-comment"># 在arr1的轴上乘积</span><br><br>arr5 = np.cumprod(arr2)         <span class="hljs-comment"># 累计乘积(部分乘积)</span><br><span class="hljs-built_in">print</span>(arr5)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-5-数组差集"><a href="#2-5-数组差集" class="headerlink" title="2-5 数组差集"></a>2-5 数组差集</h2><ul>
+<li>数组差集<ul>
+<li>使用<code>diff()</code>函数，例如<code>[1, 2, 3]</code>差集是<code>[2-1, 3-2]</code>。</li>
+<li>通过给定参数n重复执行操作，例如n&#x3D;2，<code>[1, 2, 3]</code>差集再差集是<code>[1-1]</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">10</span>, <span class="hljs-number">15</span>, <span class="hljs-number">25</span>, <span class="hljs-number">5</span>])<br>arr2 = np.diff(arr1)            <span class="hljs-comment"># arr1数组元素的差集，[15-10, 25-15, 5-25]</span><br><span class="hljs-built_in">print</span>(arr2)<br><br>arr3 = np.diff(arr1, n=<span class="hljs-number">2</span>)       <span class="hljs-comment"># arr1数组元素的差集再差集，[10-5, -20-10]</span><br><span class="hljs-built_in">print</span>(arr3)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-三角函数"><a href="#3-三角函数" class="headerlink" title="3 三角函数"></a>3 三角函数</h1><ul>
+<li>三角函数<ul>
+<li>NumPy提供正弦函数<code>sin()</code>、余弦函数<code>cos()</code>和正切函数<code>tan()</code>。</li>
+<li>三角函数默认将弧度作为参数<ul>
+<li>通过<code>deg2rad()</code>函数，可以将数组中的所有值转换为弧度。</li>
+<li>使用<code>rad2deg()</code>函数，可以将数组中的所有值转换为度数。</li>
+</ul>
+</li>
+<li>还提供了反正弦<code>arcsin()</code>、反余弦<code>arccos()</code>和反正切<code>arctan()</code>，生成弧度值(角度)。</li>
+<li>NumPy提供<code>hypot()</code>函数，基于毕达哥拉斯定理(即勾股定理)获取基值和垂直值并产生斜边。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>x = np.sin(np.pi/<span class="hljs-number">2</span>)             <span class="hljs-comment"># PI/2的正弦值</span><br><span class="hljs-built_in">print</span>(x)<br>arr1 = np.array([np.pi/<span class="hljs-number">2</span>, np.pi/<span class="hljs-number">3</span>, np.pi/<span class="hljs-number">4</span>, np.pi/<span class="hljs-number">5</span>])<br>arr2 = np.sin(arr1)             <span class="hljs-comment"># 数组arr1所有值的正弦值</span><br><span class="hljs-built_in">print</span>(arr2)<br><br>arr3 = np.array([<span class="hljs-number">90</span>, <span class="hljs-number">180</span>, <span class="hljs-number">270</span>, <span class="hljs-number">360</span>])<br>arr4 = np.deg2rad(arr3)         <span class="hljs-comment"># 将数组arr3所有值转换为弧度</span><br><span class="hljs-built_in">print</span>(arr4)<br>arr5 = np.array([np.pi/<span class="hljs-number">2</span>, np.pi, <span class="hljs-number">1.5</span>*np.pi, <span class="hljs-number">2</span>*np.pi])<br>arr6 = np.rad2deg(arr5)         <span class="hljs-comment"># 将数组arr5所有值转换为度数</span><br><span class="hljs-built_in">print</span>(arr5)<br><br>y = np.arcsin(<span class="hljs-number">1.0</span>)              <span class="hljs-comment"># 1.0的角度</span><br><span class="hljs-built_in">print</span>(y)<br>arr7 = np.array([<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0.1</span>])<br>arr8 = np.arcsin(arr7)          <span class="hljs-comment"># 数组arr7中所有正弦值的角度</span><br><span class="hljs-built_in">print</span>(arr8)<br><br>base = <span class="hljs-number">3</span><br>perp = <span class="hljs-number">4</span><br>z = np.hypot(base, perp)        <span class="hljs-comment"># 勾股定理求斜边</span><br><span class="hljs-built_in">print</span>(z)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-双曲函数"><a href="#4-双曲函数" class="headerlink" title="4 双曲函数"></a>4 双曲函数</h1><ul>
+<li>双曲函数<ul>
+<li>NumPy提供双曲正弦函数<code>sinh()</code>、双曲余弦函数<code>cosh()</code>和双曲正切函数<code>tanh()</code>。</li>
+<li>还提供了反双曲正弦<code>arcsinh()</code>、反双曲余弦<code>arccosh()</code>和反双曲正切<code>arctanh()</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>x = np.sinh(np.pi/<span class="hljs-number">2</span>)            <span class="hljs-comment"># PI/2的双曲正弦值</span><br><span class="hljs-built_in">print</span>(x)<br>arr1 = np.array([np.pi/<span class="hljs-number">2</span>, np.pi/<span class="hljs-number">3</span>, np.pi/<span class="hljs-number">4</span>, np.pi/<span class="hljs-number">5</span>])<br>arr2 = np.cosh(arr1)            <span class="hljs-comment"># 数组arr1所有值的双曲余弦值</span><br><span class="hljs-built_in">print</span>(arr2)<br><br>y = np.arcsinh(<span class="hljs-number">1.0</span>)             <span class="hljs-comment"># 1.0的角度</span><br><span class="hljs-built_in">print</span>(y)<br>arr3 = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.5</span>])<br>arr4 = np.arctanh(arr3)         <span class="hljs-comment"># 数组arr3所有tanh值的角度</span><br><span class="hljs-built_in">print</span>(arr4)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-集合操作"><a href="#5-集合操作" class="headerlink" title="5 集合操作"></a>5 集合操作</h1><ul>
+<li>集合操作<ul>
+<li>创建一个集合数组，集合数组只能是一维数组。</li>
+<li><code>unique()</code>：可以从数组中查找唯一元素(集合)。</li>
+<li><code>union1d()</code>：可以查找两个数组的唯一值(并集)。</li>
+<li><code>intersect1d()</code>：仅查找两个数组都存在的值(交集)。<ul>
+<li>可选参数assume_unique为True时加快计算速度。</li>
+<li>在处理集合时，assume_unique应始终设置为True。</li>
+</ul>
+</li>
+<li><code>setdiff1d()</code>：仅查找一个数组中不存在于另一个数组中的值(差集)，参数assume_unique同上。</li>
+<li><code>setxor1d()</code>：只属于一个集合不属于另一个集合的元素集合(对称差集)，参数assume_unique同上。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>arr1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>])<br>arr2 = np.unique(arr1)          <span class="hljs-comment"># 将具有重复元素的数组转换为集合</span><br><span class="hljs-built_in">print</span>(arr2)<br><br>arr3 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>])<br>arr4 = np.array([<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>])<br>arr5 = np.union1d(arr3, arr4)   <span class="hljs-comment"># arr3和arr4的并集</span><br><span class="hljs-built_in">print</span>(arr5)<br><br>arr6 = np.intersect1d(arr3, arr4, assume_unique=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(arr6)                     <span class="hljs-comment"># arr3和arr4的交集</span><br><br>arr7 = np.setdiff1d(arr3, arr4, assume_unique=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(arr7)                     <span class="hljs-comment"># arr3和arr4的差集</span><br><br>arr8 = np.setxor1d(arr3, arr4, assume_unique=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(arr8)                     <span class="hljs-comment"># arr3和arr4的对称差集</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-最小公倍数"><a href="#6-最小公倍数" class="headerlink" title="6 最小公倍数"></a>6 最小公倍数</h1><ul>
+<li>最小公倍数<ul>
+<li>使用<code>lcm()</code>函数，可以查找两个数的最小公倍数。</li>
+<li>查找数组中所有值的最小公倍数，使用<code>reduce()</code>方法。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>num1 = <span class="hljs-number">4</span><br>num2 = <span class="hljs-number">6</span><br>x = np.lcm(num1, num2)          <span class="hljs-comment"># num1和num2的最小公倍数</span><br><span class="hljs-built_in">print</span>(x)<br><br>arr1 = np.array([<span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>])<br>y = np.lcm.reduce(arr1)         <span class="hljs-comment"># 数组arr1所有元素的最小公倍数</span><br><span class="hljs-built_in">print</span>(y)<br><br>arr2 = np.arange(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>)         <span class="hljs-comment"># 包含1-10所有整数的数组最小公倍数</span><br>z = np.lcm.reduce(arr2)<br><span class="hljs-built_in">print</span>(z)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-最大公约数"><a href="#7-最大公约数" class="headerlink" title="7 最大公约数"></a>7 最大公约数</h1><ul>
+<li>最大公约数<ul>
+<li>使用<code>gcd()</code>函数，可以查找两个数的最大公约数。</li>
+<li>查找数组中所有值的最大公约数，使用<code>reduce()</code>方法。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>num1 = <span class="hljs-number">6</span><br>num2 = <span class="hljs-number">9</span><br>x = np.gcd(num1, num2)          <span class="hljs-comment"># num1和num2的最大公约数</span><br><span class="hljs-built_in">print</span>(x)<br><br>arr = np.array([<span class="hljs-number">20</span>, <span class="hljs-number">8</span>, <span class="hljs-number">32</span>, <span class="hljs-number">36</span>, <span class="hljs-number">16</span>])<br>y = np.gcd.reduce(arr)          <span class="hljs-comment"># 数组arr所有元素的最大公约数</span><br><span class="hljs-built_in">print</span>(y)<br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Ufunc/">#Ufunc</a>
+      
+        <a href="/tags/%E5%AF%B9%E6%95%B0%E5%87%BD%E6%95%B0/">#对数函数</a>
+      
+        <a href="/tags/%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0/">#三角函数</a>
+      
+        <a href="/tags/%E5%8F%8C%E6%9B%B2%E5%87%BD%E6%95%B0/">#双曲函数</a>
+      
+        <a href="/tags/%E5%85%AC%E5%80%8D%E6%95%B0/">#公倍数</a>
+      
+        <a href="/tags/%E5%85%AC%E7%BA%A6%E6%95%B0/">#公约数</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python NumPy 函数</div>
+      <div>https://stitch-top.github.io/2021/03/05/python/python06-python-numpy-han-shu/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年3月5日 23:00:00</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/24/python/python07-python-pandas/" title="Python Pandas">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python Pandas</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/21/python/python05-python-numpy-sui-ji/" title="Python NumPy 随机">
+                        <span class="hidden-mobile">Python NumPy 随机</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"bsRkWxXK7zLX6NWYygwknNXv-gzGzoHsz","appKey":"qqiNDCxGTOGVmiM1xAbd5pzk","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Python"
+        id="heading-a7f5f35426b927411fc9231b56382173" role="tab" data-toggle="collapse" href="#collapse-a7f5f35426b927411fc9231b56382173"
+        aria-expanded="true"
+      >
+        Python
+        <span class="list-group-count">(8)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-a7f5f35426b927411fc9231b56382173"
+           role="tabpanel" aria-labelledby="heading-a7f5f35426b927411fc9231b56382173">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2021/01/01/python/python01-python-ji-chu-yi/" title="Python 基础(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 基础(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/01/15/python/python02-python-ji-chu-er/" title="Python 基础(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 基础(二)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/02/03/python/python03-python-wen-jian-chu-li/" title="Python 文件处理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 文件处理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/02/07/python/python04-python-numpy-ji-chu/" title="Python NumPy 基础"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/02/21/python/python05-python-numpy-sui-ji/" title="Python NumPy 随机"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 随机</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/05/python/python06-python-numpy-han-shu/" title="Python NumPy 函数"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Python NumPy 函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/24/python/python07-python-pandas/" title="Python Pandas"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Pandas</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/04/15/python/python08-python-scipy/" title="Python SciPy"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python SciPy</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2022</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/snow.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"right","width":180,"height":230},"mobile":{"show":false,"scale":0.3},"rect":{"opacityDefault":0.7,"opacityHover":1},"log":false});</script></body>
+</html>
