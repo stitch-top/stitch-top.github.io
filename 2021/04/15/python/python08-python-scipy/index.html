@@ -27,14 +27,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1420511070.jpg">
 <meta property="article:published_time" content="2021-04-15T15:25:33.000Z">
-<meta property="article:modified_time" content="2022-09-25T14:00:36.002Z">
+<meta property="article:modified_time" content="2022-10-18T14:53:49.497Z">
 <meta property="article:author" content="Dr.626">
-<meta property="article:tag" content="Series()">
-<meta property="article:tag" content="DataFrame()">
-<meta property="article:tag" content="dropna()">
-<meta property="article:tag" content="corr()">
-<meta property="article:tag" content="plot()">
 <meta property="article:tag" content="SciPy">
+<meta property="article:tag" content="优化器">
+<meta property="article:tag" content="数据统计">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1420511070.jpg">
   
@@ -252,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.1k 字
+          12k 字
         
       </span>
     
@@ -263,7 +260,7 @@
         
         
         
-          68 分钟
+          105 分钟
         
       </span>
     
@@ -338,7 +335,7 @@
 <li>SciPy<ul>
 <li>命令窗口下使用<code>pip install scipy</code>进行安装。</li>
 <li>通过import关键字将其导入应用程序：<code>import scipy</code>。</li>
-<li>检查SciPy版本，版本字符串存储在<code>__version__</code>属性下。</li>
+<li>检查SciPy版本，版本字符串存在<code>__version__</code>属性下。</li>
 </ul>
 </li>
 </ul>
@@ -428,11 +425,11 @@
 
 
 
-<h1 id="5-图"><a href="#5-图" class="headerlink" title="5 图"></a>5 图</h1><ul>
-<li>图<ul>
+<h1 id="5-图表数据"><a href="#5-图表数据" class="headerlink" title="5 图表数据"></a>5 图表数据</h1><ul>
+<li>图表数据<ul>
 <li>使用scipy.sparse.csgraph模块处理图表数据结构。</li>
 <li>邻接矩阵：Adjacency Matrix，表示顶点之间相邻关系的矩阵。<ul>
-<li><code>connected_components()</code>：查找所有连接的组件。</li>
+<li>通过<code>connected_components()</code>方法，查找所有连接的组件。</li>
 <li>迪杰斯特拉：通过<code>dijkstra()</code>方法，在图中找到从一个元素到另一个元素的最短路径。<ul>
 <li>limit：路径的最大权重。</li>
 <li>indices：元素的索引，仅返回该元素的所有路径。</li>
@@ -441,14 +438,14 @@
 </li>
 <li>弗洛伊德·沃歇尔：<code>floyd_warshall()</code>方法找到所有元素对之间的最短路径。</li>
 <li>贝尔曼福特：<code>bellman_ford()</code>方法找到所有元素对之间的最短路径，也可处理负权重。</li>
-<li>深度一阶：<code>depth_first_order()</code>方法从节点返回深度优先遍历，采用以下的两个参数。<ul>
-<li>图表。</li>
-<li>遍历图的起始元素。</li>
+<li>深度一阶<ul>
+<li><code>depth_first_order()</code>方法从节点返回深度优先遍历。</li>
+<li>这一方法采用了两个参数，图表和遍历图的起始元素。</li>
 </ul>
 </li>
-<li>广度优先顺序：<code>breadth_first_order()</code>方法从节点返回广度优先遍历，采用以下参数。<ul>
-<li>图表。</li>
-<li>遍历图的起始元素。</li>
+<li>广度优先顺序<ul>
+<li><code>breadth_first_order()</code>方法从节点返回广度优先遍历。</li>
+<li>这一方法采用了两个参数，即图表和遍历图的起始元素。</li>
 </ul>
 </li>
 </ul>
@@ -460,7 +457,129 @@
 
 
 
-<h1 id="6-空间数据"><a href="#6-空间数据" class="headerlink" title="6 空间数据"></a>6 空间数据</h1><h1 id="7-Matlab数组"><a href="#7-Matlab数组" class="headerlink" title="7 Matlab数组"></a>7 Matlab数组</h1><h1 id="8-插值"><a href="#8-插值" class="headerlink" title="8 插值"></a>8 插值</h1><h1 id="9-显著性测试"><a href="#9-显著性测试" class="headerlink" title="9 显著性测试"></a>9 显著性测试</h1>
+<h1 id="6-空间数据"><a href="#6-空间数据" class="headerlink" title="6 空间数据"></a>6 空间数据</h1><ul>
+<li>空间数据<ul>
+<li>指在几何空间中表示的数据，例如坐标系上的点，SciPy提供了scipy.spatial模块。</li>
+<li>三角测量：利用三角形计算多边形的面积，通过点生成三角部分的方法用<code>Delaunay()</code>。</li>
+<li>凸包：覆盖了所有给定点的最小多边形，可以使用<code>ConvexHull()</code>方法进行凸包的创建。</li>
+<li>KDTrees：指针对最近邻查询优化的数据结构，有效地询问了哪些点最接近某个给定点。<ul>
+<li><code>KDTree()</code>：返回一个KDTree对象。</li>
+<li><code>query()</code>：返回最近邻点的距离和邻点的位置。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> scipy.spatial <span class="hljs-keyword">import</span> KDTree<br><span class="hljs-keyword">from</span> scipy.spatial <span class="hljs-keyword">import</span> Delaunay<br><span class="hljs-keyword">from</span> scipy.spatial <span class="hljs-keyword">import</span> ConvexHull<br><br>points1 = np.array([[<span class="hljs-number">2</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">1</span>]])<br>simplices = Delaunay(points1).simplices                 <span class="hljs-comment"># simplices属性创建了三角形符号的一般化</span><br>plt.triplot(points1[:, <span class="hljs-number">0</span>], points1[:, <span class="hljs-number">1</span>], simplices)<br>plt.scatter(points1[:, <span class="hljs-number">0</span>], points1[:, <span class="hljs-number">1</span>], color=<span class="hljs-string">&#x27;r&#x27;</span>)<br>plt.show()                                              <span class="hljs-comment"># 为points1矩阵创建三角部分</span><br><br>points2 = np.array([[<span class="hljs-number">2</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">1</span>],<br>                    [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>]])<br>hull = ConvexHull(points2)<br>hull_points = hull.simplices<br>plt.scatter(points2[ : , <span class="hljs-number">0</span>], points2[ : , <span class="hljs-number">1</span>])<br><span class="hljs-keyword">for</span> simplex <span class="hljs-keyword">in</span> hull_points:<br>    plt.plot(points2[simplex,<span class="hljs-number">0</span>], points2[simplex,<span class="hljs-number">1</span>], <span class="hljs-string">&#x27;k-&#x27;</span>)<br>plt.show()                                              <span class="hljs-comment"># 为points2矩阵创建凸包</span><br><br>points3 = [(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">3</span>), (-<span class="hljs-number">2</span>, <span class="hljs-number">3</span>), (<span class="hljs-number">2</span>, -<span class="hljs-number">3</span>)]<br>kdtree = KDTree(points3)<br>res = kdtree.query((<span class="hljs-number">1</span>, <span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(res)                                              <span class="hljs-comment"># 找到点(1, 1)的最近邻点</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>距离矩阵<ul>
+<li>两个向量之间的距离不仅可以是直线长度，还可以是它们与原点的夹角，或所需的单位步数等。</li>
+<li>欧几里得距离：<code>euclidean()</code>。</li>
+<li>余弦距离：是A和B两点之间的余弦角值，<code>cosine()</code>。</li>
+<li>城市街区距离(曼哈顿距离)：采用四方向移动计算的距离，<code>cityblock()</code>。</li>
+<li>汉明距离：两位不同的位比例，测量二进制序列距离的方法，<code>hamming()</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> scipy.spatial.distance <span class="hljs-keyword">import</span> cosine<br><span class="hljs-keyword">from</span> scipy.spatial.distance <span class="hljs-keyword">import</span> hamming<br><span class="hljs-keyword">from</span> scipy.spatial.distance <span class="hljs-keyword">import</span> euclidean<br><span class="hljs-keyword">from</span> scipy.spatial.distance <span class="hljs-keyword">import</span> cityblock<br><br>p1 = (<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)<br>p2 = (<span class="hljs-number">10</span>, <span class="hljs-number">2</span>)<br>res1 = euclidean(p1, p2)<br><span class="hljs-built_in">print</span>(res1)                                     <span class="hljs-comment"># 给定点之间的欧几里得距离</span><br><br>res2 = cosine(p1, p2)<br><span class="hljs-built_in">print</span>(res2)                                     <span class="hljs-comment"># 给定点之间的余弦距离</span><br><br>res3 = cityblock(p1, p2)<br><span class="hljs-built_in">print</span>(res3)                                     <span class="hljs-comment"># 给定点之间的街区距离</span><br><br>p3 = (<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>)<br>p4 = (<span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>)<br>res4 = hamming(p3, p4)<br><span class="hljs-built_in">print</span>(res4)                                     <span class="hljs-comment"># 给定点之间的汉明距离</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-Matlab数组"><a href="#7-Matlab数组" class="headerlink" title="7 Matlab数组"></a>7 Matlab数组</h1><ul>
+<li>Matlab数组<ul>
+<li>SciPy提供了模块scipy.io，具有处理Matlab数组的功能。</li>
+<li><code>savemat()</code>：以Matlab格式导出数据。<ul>
+<li>mdict：包含数据的字典。</li>
+<li>filename：保存数据的文件名。</li>
+<li>do_compression：布尔值，指定是否压缩结果，默认为假。</li>
+</ul>
+</li>
+<li><code>loadmat()</code>：从Matlab文件中导入数据，filename是必须参数。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> io<br><br>arr1 = np.arange(<span class="hljs-number">10</span>)<br>io.savemat(<span class="hljs-string">&#x27;arr1.mat&#x27;</span>, &#123;<span class="hljs-string">&quot;vec&quot;</span>: arr1&#125;)   <span class="hljs-comment"># 将arr1数组作为变量名vec导出到arr1.mat文件</span><br><br>arr2 = np.array([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>,])<br>io.savemat(<span class="hljs-string">&#x27;arr2.mat&#x27;</span>, &#123;<span class="hljs-string">&quot;vec&quot;</span>: arr2&#125;)   <span class="hljs-comment"># Export</span><br>mydata = io.loadmat(<span class="hljs-string">&#x27;arr2.mat&#x27;</span>)         <span class="hljs-comment"># Import</span><br><span class="hljs-built_in">print</span>(mydata)                           <span class="hljs-comment"># 从arr2.mat文件导入数组，返回一个结构化数组</span><br><span class="hljs-built_in">print</span>(mydata[<span class="hljs-string">&#x27;vec&#x27;</span>])                    <span class="hljs-comment"># 仅显示来自matlab数据的数组</span><br><br>mydata = io.loadmat(<span class="hljs-string">&#x27;arr2.mat&#x27;</span>, squeeze_me=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(mydata[<span class="hljs-string">&#x27;vec&#x27;</span>])                    <span class="hljs-comment"># 参数去除额外增加的一维[]</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="8-插值"><a href="#8-插值" class="headerlink" title="8 插值"></a>8 插值</h1><ul>
+<li>插值<ul>
+<li>在给定点之间生成点的方法，例如点1和2，插值并找到点1.33和1.66。</li>
+<li>机器学习中经常处理数据集中的缺失数据，插值通常用于替换这些值。</li>
+<li>SciPy的scipy.interpolate模块具有许多处理插值的函数。<ul>
+<li>一维插值：<code>interp1d()</code>，用于对具有1个变量的分布进行插值，点被拟合为曲线。</li>
+<li>样条插值：<code>UnivariateSpline()</code>，点被拟合为一个叫样条多项式定义的分段函数。</li>
+<li>径向基函数插值：使用<code>Rbf()</code>函数，径向基函数是对应于固定参考点定义的函数。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy.interpolate <span class="hljs-keyword">import</span> Rbf<br><span class="hljs-keyword">from</span> scipy.interpolate <span class="hljs-keyword">import</span> interp1d<br><span class="hljs-keyword">from</span> scipy.interpolate <span class="hljs-keyword">import</span> UnivariateSpline<br><br>xs1 = np.arange(<span class="hljs-number">10</span>)<br>ys1 = <span class="hljs-number">2</span>*xs1 + <span class="hljs-number">1</span><br>interp_func = interp1d(xs1, ys1)<br>newarr1 = interp_func(np.arange(<span class="hljs-number">2.1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0.1</span>))<br><span class="hljs-built_in">print</span>(newarr1)                                  <span class="hljs-comment"># 对于给定的xs1和ys1插值从2.1、2.2...到2.9</span><br><br>xs2 = np.arange(<span class="hljs-number">10</span>)<br>ys2 = xs2**<span class="hljs-number">2</span> + np.sin(xs2) + <span class="hljs-number">1</span><br>interp_func = UnivariateSpline(xs2, ys2)<br>newarr2 = interp_func(np.arange(<span class="hljs-number">2.1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0.1</span>))<br><span class="hljs-built_in">print</span>(newarr2)                                  <span class="hljs-comment"># 为非线性点找到2.1、2.2...2.9的单变量样条插值</span><br><br>xs3 = np.arange(<span class="hljs-number">10</span>)<br>ys3 = xs3**<span class="hljs-number">2</span> + np.sin(xs3) + <span class="hljs-number">1</span><br>interp_func = Rbf(xs3, ys3)<br>newarr3 = interp_func(np.arange(<span class="hljs-number">2.1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0.1</span>))<br><span class="hljs-built_in">print</span>(newarr3)                                  <span class="hljs-comment"># 插入xs3和ys3并找到2.1、2.2...2.9的值</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="9-显著性测试"><a href="#9-显著性测试" class="headerlink" title="9 显著性测试"></a>9 显著性测试</h1><ul>
+<li>显著性测试<ul>
+<li>SciPy提供的scipy.stats模块，具有执行统计显著性检验的功能。</li>
+<li>技术及关键字<ul>
+<li>统计学假设：关于总体参数的假设。</li>
+<li>零假设：假设观察结果在统计上不显著。</li>
+<li>替代假设：假设观察结果是由于某种原因，零假设的替代品。</li>
+<li>一尾测试：当假设仅测试值的一侧时，称为单尾检验。</li>
+<li>二尾测试：当假设正在测试值的两侧时，称二尾测试。</li>
+<li>阿尔法值：Alpha值是显著性水平。</li>
+<li>P值：数据实际与极端的接近程度。</li>
+<li>如果P值&lt;&#x3D;Alpha值，拒绝原假设并说数据具有统计显著性，否则接受原假设。</li>
+</ul>
+</li>
+<li>T检验(双尾测试)<ul>
+<li>用于确定两个变量的平均值之间是否存在显著差异，是否属于同一分布。</li>
+<li><code>ttest_ind()</code>：采用两个相同大小的样本，生成一个t统计量和p值的元组。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy.stats <span class="hljs-keyword">import</span> ttest_ind<br><br>v1 = np.random.normal(size=<span class="hljs-number">100</span>)<br>v2 = np.random.normal(size=<span class="hljs-number">100</span>)<br><br>res = ttest_ind(v1, v2)                         <span class="hljs-comment"># 查找给定值v1和v2是否来自同一分布</span><br>pes = ttest_ind(v1, v2).pvalue                  <span class="hljs-comment"># 只返回p值</span><br><span class="hljs-built_in">print</span>(res)<br><span class="hljs-built_in">print</span>(pes)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-1-KS测试"><a href="#9-1-KS测试" class="headerlink" title="9-1 KS测试"></a>9-1 KS测试</h2><ul>
+<li>KS测试<ul>
+<li>用于检查给定值是否服从分布，可以用作一尾或二尾测试，默认情况下是两个尾的。</li>
+<li><code>kstest()</code>将要测试的值和CDF作为两个参数，CDF可以是字符串或返回概率的可调用函数。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy.stats <span class="hljs-keyword">import</span> kstest<br><br>v = np.random.normal(size=<span class="hljs-number">100</span>)<br>res = kstest(v, <span class="hljs-string">&#x27;norm&#x27;</span>)                         <span class="hljs-comment"># 查找给定值是否服从正态分布</span><br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-2-统计描述"><a href="#9-2-统计描述" class="headerlink" title="9-2 统计描述"></a>9-2 统计描述</h2><ul>
+<li>统计描述<ul>
+<li>使用<code>describe()</code>函数，查看数组中值的摘要。</li>
+<li>返回参数：观察次数、最小值和最大值、平均值、方差、偏度、峰度。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy.stats <span class="hljs-keyword">import</span> describe<br><br>v = np.random.normal(size=<span class="hljs-number">100</span>)<br>res = describe(v)                               <span class="hljs-comment"># 显示数组中值的统计描述</span><br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-3-正态性检验"><a href="#9-3-正态性检验" class="headerlink" title="9-3 正态性检验"></a>9-3 正态性检验</h2><ul>
+<li>正态性检验<ul>
+<li>基于偏度和峰度，使用<code>normaltest()</code>函数返回原假设的p值。</li>
+<li>偏度：数据对称性的度量，正态分布时是0，负数数据向左倾斜，正数数据向右倾斜。</li>
+<li>峰度：衡量数据是重尾还是轻尾正态分布的度量，正峰度是重尾，负峰度则轻微拖尾。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> scipy.stats <span class="hljs-keyword">import</span> normaltest<br><span class="hljs-keyword">from</span> scipy.stats <span class="hljs-keyword">import</span> skew, kurtosis<br><br>v = np.random.normal(size=<span class="hljs-number">100</span>)<br><span class="hljs-built_in">print</span>(skew(v))                                  <span class="hljs-comment"># 偏度</span><br><span class="hljs-built_in">print</span>(kurtosis(v))                              <span class="hljs-comment"># 峰度</span><br><span class="hljs-built_in">print</span>(normaltest(v))                            <span class="hljs-comment"># 查找数据是否来自正态分布</span><br></code></pre></td></tr></table></figure>
+
+
+
               
             </div>
             <hr/>
@@ -492,17 +611,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Series/">#Series()</a>
-      
-        <a href="/tags/DataFrame/">#DataFrame()</a>
-      
-        <a href="/tags/dropna/">#dropna()</a>
-      
-        <a href="/tags/corr/">#corr()</a>
-      
-        <a href="/tags/plot/">#plot()</a>
-      
         <a href="/tags/SciPy/">#SciPy</a>
+      
+        <a href="/tags/%E4%BC%98%E5%8C%96%E5%99%A8/">#优化器</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1/">#数据统计</a>
       
     </div>
   
