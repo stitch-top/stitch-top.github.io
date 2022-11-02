@@ -1,0 +1,1037 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/image.png">
+  <link rel="icon" href="/img/image.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="PyTest是Python的一种单元测试框架，与Python自带的UnitTest测试框架类似，但使用比UnitTest框架更简洁，效率更高。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyTest 测试框架(一)">
+<meta property="og:url" content="https://stitch-top.github.io/2022/01/11/testing/testing01-pytest-ce-shi-kuang-jia-yi/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="PyTest是Python的一种单元测试框架，与Python自带的UnitTest测试框架类似，但使用比UnitTest框架更简洁，效率更高。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/5921739409.jpg">
+<meta property="article:published_time" content="2022-01-11T15:03:27.000Z">
+<meta property="article:modified_time" content="2022-11-02T15:24:42.472Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="PyTest">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/5921739409.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>PyTest 测试框架(一) - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":3},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PyTest 测试框架(一)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-01-11 23:03" pubdate>
+          2022年1月11日 23:03:27
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          104 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景 -->
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script>
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PyTest 测试框架(一)</h1>
+            
+            <div class="markdown-body">
+              
+              <p>PyTest是Python的一种单元测试框架，与Python自带的UnitTest测试框架类似，但使用比UnitTest框架更简洁，效率更高。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-规则说明"><a href="#1-规则说明" class="headerlink" title="1 规则说明"></a>1 规则说明</h1><ul>
+<li>规则说明<ul>
+<li>PyTest是Python2默认自带的，在Python3中则是独立的，需使用<code>pip install pytest</code>进行安装。</li>
+<li>运行规则<ul>
+<li>查找当前目录及子目录中<code>test_*.py</code>或<code>*_test.py</code>文件。</li>
+<li>找到所有的文件后，执行文件中以<code>test</code>开头的所有函数。</li>
+</ul>
+</li>
+<li>用例设计规则<ul>
+<li>测试文件以<code>test_</code>开头，或以<code>_test</code>结尾，测试类以<code>Test</code>开头，并且不能带有<code>init</code>方法。</li>
+<li>测试函数和方法以<code>test_</code>开头，断言用<code>assert</code>，所有的package包必须带<code>__init__.py</code>文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">pip install pytest                          # 安装PyTest<br>pip show pytest                             # 查看PyTest版本的详细信息<br>pytest --version                            # 简单查看PyTest的安装版本<br>pytest -h                                   # PyTest查看帮助<br>pytest --<span class="hljs-built_in">help</span>                               # PyTest查看帮助<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-1-用例执行规则"><a href="#1-1-用例执行规则" class="headerlink" title="1-1 用例执行规则"></a>1-1 用例执行规则</h2><ul>
+<li>用例执行规则<ul>
+<li>执行某个目录下所有的用例：<code>pytest FolderName/</code>。</li>
+<li>执行某个文件中的所有用例：<code>pytest FileName.py</code>。</li>
+<li>按照关键字进行模糊匹配，匹配的名称不区分大小写：<code>pytest -k &quot;xxx&quot;</code>。</li>
+<li>显示简单结果：<code>pytest -q FileName.py</code>，<code>--quiet decrease verbosity</code>。</li>
+<li>按节点运行<ul>
+<li>每个测试用例都分配了唯一的nodeid，nodeid由模块名和说明符组成。</li>
+<li>模块名和说明符以<code>::</code>间隔，说明符可以包含类名、函数名和标记参数。</li>
+</ul>
+</li>
+<li>标记表达式运行用<code>@pytest.mark.slow</code>修饰器修饰的所有用例：<code>pytest -m slow</code>。</li>
+<li>导入pkg.testing并使用文件系统位置查找和运行：<code>pytest --pyargs pkg.testing</code>。</li>
+<li>遇到错误时，停止正在执行的测试用例：<code>pytest -x FileName.py</code>。</li>
+<li>用例错误个数达到指定数量时，停止测试：<code>pytest --maxfail=num</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">pytest                                   # 执行PyTest用例的命令，推荐使用<br>py.test                                  # 某文件夹下不带参数执行时，查找该文件夹下所有符合条件的用例<br>python -m pytest<br><br>pytest -k &quot;ClassName&quot;                    # 运行ClassName类下的所有方法<br>pytest -k &quot;MethodName&quot;                   # 运行所有名为MethodName的方法<br>pytest -k &quot;ClassName and <span class="hljs-keyword">not</span> MethodName&quot; # 运行ClassName类下的除MethodName以外的所有方法<br><br>pytest FileName.py::FunctionName                       # 函数名<br>pytest FileName.py::ClassName::FunctionName            # 类名+函数名<br>pytest FileName.py::ClassName::FunctionName[num1-num2] # 类名+函数名+标记参数<br>pytest FileName.py -vv                                 # FileName.py文件下的所有用例节点执行结果<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-PyCharm运行方式"><a href="#1-2-PyCharm运行方式" class="headerlink" title="1-2 PyCharm运行方式"></a>1-2 PyCharm运行方式</h2><ul>
+<li>PyCharm运行方式<ul>
+<li>默认以Autodetect形式运行，可以通过修改PyCharm设置来改变运行方式。</li>
+<li>File—&gt;Setting—&gt;Tools—&gt;Python Integrated Tools—&gt;Default test runner。</li>
+<li>PyTest兼容UnitTest，用UnitTest框架编写的测试用例也能用PyTest框架运行。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_node.py</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_one</span>():<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestNode</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_one</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br>    <br><span class="hljs-meta">    @pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;x, y&quot;</span>,[(<span class="hljs-params"><span class="hljs-number">1</span>, <span class="hljs-number">3</span></span>), (<span class="hljs-params"><span class="hljs-number">3</span>, <span class="hljs-number">5</span></span>)]</span>)</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_two</span>(<span class="hljs-params">self, x, y</span>):<br>        <span class="hljs-keyword">assert</span> x + <span class="hljs-number">2</span> == y<br><br><span class="hljs-comment"># pytest test_node.py::test_one                         # 函数名</span><br><span class="hljs-comment"># pytest test_node.py::TestNode::test_one               # 类名+函数名</span><br><span class="hljs-comment"># pytest test_node.py::TestNode::test_two[1-3]          # 类名+函数名+标记参数</span><br><span class="hljs-comment"># pytest test_node.py::TestNode::test_two[3-5]          # 类名+函数名+标记参数</span><br><span class="hljs-comment"># pytest test_node.py -vv                               # 该文件下的所有用例节点执行结果</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-assert断言"><a href="#2-assert断言" class="headerlink" title="2 assert断言"></a>2 assert断言</h1><ul>
+<li>assert断言<ul>
+<li>即实际结果和期望结果的比对，符合预期就pass，不符合则failed。</li>
+<li>PyTest允许使用标准的Python断言assert来验证测试中的期望和值。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():                                                <span class="hljs-comment"># test_assert.py</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_function</span>():<br>    <span class="hljs-keyword">assert</span> f() == <span class="hljs-number">4</span><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 1 item</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_assert.py::test_function FAILED                                     [100%]</span><br><span class="hljs-string">test_assert.py:3 (test_function)</span><br><span class="hljs-string">3 != 4</span><br><span class="hljs-string"></span><br><span class="hljs-string">Expected :4</span><br><span class="hljs-string">Actual   :3</span><br><span class="hljs-string">&lt;Click to see difference&gt;</span><br><span class="hljs-string"></span><br><span class="hljs-string">def test_function():</span><br><span class="hljs-string">&gt;       assert f() == 4</span><br><span class="hljs-string">E       assert 3 == 4</span><br><span class="hljs-string">E        +  where 3 = f()</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_assert.py:5: AssertionError</span><br><span class="hljs-string">============================== 1 failed in 0.04s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-1-异常信息"><a href="#2-1-异常信息" class="headerlink" title="2-1 异常信息"></a>2-1 异常信息</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>():                                                <span class="hljs-comment"># test_excinfo.py</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_function</span>():<br>    x = f()<br>    <span class="hljs-keyword">assert</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>, <span class="hljs-string">&quot;判断x为偶数，当前x的值为：%s。&quot;</span> % x<br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 1 item</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_excinfo.py::test_function FAILED                                    [100%]</span><br><span class="hljs-string">test_excinfo.py:3 (test_function)</span><br><span class="hljs-string">1 != 0</span><br><span class="hljs-string"></span><br><span class="hljs-string">Expected :0</span><br><span class="hljs-string">Actual   :1</span><br><span class="hljs-string">&lt;Click to see difference&gt;</span><br><span class="hljs-string"></span><br><span class="hljs-string">def test_function():</span><br><span class="hljs-string">        x = f()</span><br><span class="hljs-string">&gt;       assert x % 2 == 0, &quot;判断x为偶数，当前x的值为：%s。&quot; % x</span><br><span class="hljs-string">E       AssertionError: 判断x为偶数，当前x的值为：3。</span><br><span class="hljs-string">E       assert (3 % 2) == 0</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_excinfo.py:6: AssertionError</span><br><span class="hljs-string">============================== 1 failed in 0.03s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-异常断言"><a href="#2-2-异常断言" class="headerlink" title="2-2 异常断言"></a>2-2 异常断言</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_excassert.py</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_zero_division</span>():<br>    <span class="hljs-keyword">with</span> pytest.raises(ZeroDivisionError):              <span class="hljs-comment"># 使用pytest.raises作为上下文管理器</span><br>        <span class="hljs-number">1</span> / <span class="hljs-number">0</span><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 1 item</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_excassert.py::test_zero_division PASSED                             [100%]</span><br><span class="hljs-string">============================== 1 passed in 0.01s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>异常类型<ul>
+<li>要判断抛出的异常是否预期，例如<code>1/0</code>抛出的异常为：<code>ZeroDivisionError: division by zero</code>。</li>
+<li>断言该异常时，通常是断言异常的type和value值，这里type是ZeroDivisionError，value是后者。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_excassert.py</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_zero_division</span>():                               <span class="hljs-comment"># 断言异常</span><br>    <span class="hljs-keyword">with</span> pytest.raises(ZeroDivisionError) <span class="hljs-keyword">as</span> excinfo:   <span class="hljs-comment"># 使用pytest.raises作为上下文管理器</span><br>        <span class="hljs-number">1</span> / <span class="hljs-number">0</span><br><br>    <span class="hljs-keyword">assert</span> excinfo.<span class="hljs-built_in">type</span> == ZeroDivisionError            <span class="hljs-comment"># 断言异常type值</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;division by zero&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">str</span>(excinfo.value)     <span class="hljs-comment"># 断言异常value值</span><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 1 item</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_excassert.py::test_zero_division PASSED                             [100%]</span><br><span class="hljs-string">============================== 1 passed in 0.01s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-常用断言"><a href="#2-3-常用断言" class="headerlink" title="2-3 常用断言"></a>2-3 常用断言</h2><ul>
+<li>常用断言<ul>
+<li><code>assert xx</code>：判断xx为真。</li>
+<li><code>assert not xx</code>：判断xx不为真。</li>
+<li><code>assert a in b</code>：判断b包含a。</li>
+<li><code>assert a == b</code>：判断a等于b。</li>
+<li><code>assert a != b</code>：判断a不等于b。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-用例运行级别"><a href="#3-用例运行级别" class="headerlink" title="3 用例运行级别"></a>3 用例运行级别</h1><ul>
+<li>用例运行级别<ul>
+<li>模块级：setup_module、teardown_module，在所有用例前后只执行一次。</li>
+<li>函数级：setup_function、teardown_function，在所有用例前后都执行一次。</li>
+<li>类级别：setup_class、teardown_class，在类中的所有用例前后只执行一次。</li>
+<li>类方法级：setup_method、teardown_method，在类中的所有用例前后都执行一次。</li>
+<li>类方法细化级：setup、teardown，运行规则与类方法级相同，在每个用例前后都执行一次。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-模块级"><a href="#3-1-模块级" class="headerlink" title="3-1 模块级"></a>3-1 模块级</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_module.py</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_module</span>():                                     <span class="hljs-comment"># 模块级</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;setup_module：在所有用例开始前只执行一次。&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_module</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;teardown_module：在所有用例结束后只执行一次。&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_one</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_one()&quot;</span>)<br>    x = <span class="hljs-string">&#x27;this&#x27;</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_two</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_two()&quot;</span>)<br>    x = <span class="hljs-string">&#x27;hello&#x27;</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;o&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>, <span class="hljs-string">&#x27;test_module.py&#x27;</span>])<br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 2 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_module.py::test_one setup_module：在所有用例开始前只执行一次。</span><br><span class="hljs-string">PASSED                                          [ 50%]正在执行---test_one()</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_module.py::test_two PASSED                 [100%]正在执行---test_two()</span><br><span class="hljs-string">teardown_module：在所有用例结束后只执行一次。</span><br><span class="hljs-string">============================== 2 passed in 0.01s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2-函数级"><a href="#3-2-函数级" class="headerlink" title="3-2 函数级"></a>3-2 函数级</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_function.py</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_function</span>():                                   <span class="hljs-comment"># 函数级</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;setup_function：在所有用例开始前都执行一次。&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_function</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;teardown_function：在所有用例结束后都执行一次。&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_one</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_one()&quot;</span>)<br>    x = <span class="hljs-string">&#x27;this&#x27;</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_two</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_two()&quot;</span>)<br>    x = <span class="hljs-string">&#x27;hello&#x27;</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;o&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>, <span class="hljs-string">&#x27;test_function.py&#x27;</span>])<br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 2 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_function.py::test_one setup_function：在所有用例开始前都执行一次。</span><br><span class="hljs-string">PASSED                                        [ 50%]正在执行---test_one()</span><br><span class="hljs-string">teardown_function：在所有用例结束后都执行一次。</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_function.py::test_two setup_function：在所有用例开始前都执行一次。</span><br><span class="hljs-string">PASSED                                        [100%]正在执行---test_two()</span><br><span class="hljs-string">teardown_function：在所有用例结束后都执行一次。</span><br><span class="hljs-string">============================== 2 passed in 0.01s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-类级别"><a href="#3-3-类级别" class="headerlink" title="3-3 类级别"></a>3-3 类级别</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_class.py</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestCase</span>():                                       <span class="hljs-comment"># 类级别</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_class</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;setup_class：在类中的所有用例开始前只执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_class</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;teardown_class：在类中的所有用例结束后只执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_one</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_one()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;this&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">in</span> x<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_two</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_two()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;hello&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;o&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>, <span class="hljs-string">&#x27;test_class.py&#x27;</span>])<br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 2 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_class.py::TestCase::test_one setup_class：在类中的所有用例开始前只执行一次。</span><br><span class="hljs-string">PASSED                                             [ 50%]正在执行---test_one()</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_class.py::TestCase::test_two PASSED           [100%]正在执行---test_two()</span><br><span class="hljs-string">teardown_class：在类中的所有用例结束后只执行一次。</span><br><span class="hljs-string">============================== 2 passed in 0.01s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-4-类方法级"><a href="#3-4-类方法级" class="headerlink" title="3-4 类方法级"></a>3-4 类方法级</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_method.py</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestCase</span>():                                       <span class="hljs-comment"># 类方法级</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_method</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;setup_method：在类中的所有用例开始前都执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_method</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;teardown_method：在类中的所有用例结束后都执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_one</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_one()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;this&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">in</span> x<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_two</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_two()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;hello&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;o&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>, <span class="hljs-string">&#x27;test_method.py&#x27;</span>])<br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 2 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_method.py::TestCase::test_one setup_method：在类中的所有用例开始前都执行一次。</span><br><span class="hljs-string">PASSED                                [ 50%]正在执行---test_one()</span><br><span class="hljs-string">teardown_method：在类中的所有用例结束后都执行一次。</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_method.py::TestCase::test_two setup_method：在类中的所有用例开始前都执行一次。</span><br><span class="hljs-string">PASSED                                [100%]正在执行---test_two()</span><br><span class="hljs-string">teardown_method：在类中的所有用例结束后都执行一次。</span><br><span class="hljs-string">============================== 2 passed in 0.01s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-5-类方法细化级"><a href="#3-5-类方法细化级" class="headerlink" title="3-5 类方法细化级"></a>3-5 类方法细化级</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_fixtclass.py</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestCase</span>():                                       <span class="hljs-comment"># 类方法细化级</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setup</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;setup：在每个用例开始前都执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;teardown：在每个用例结束后都执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_one</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_one()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;this&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">in</span> x<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_two</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_two()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;hello&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;o&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>, <span class="hljs-string">&#x27;test_fixtclass.py&#x27;</span>])<br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 2 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_fixtclass.py::TestCase::test_one setup：在每个用例开始前都执行一次。</span><br><span class="hljs-string">PASSED                             [ 50%]正在执行---test_one()</span><br><span class="hljs-string">teardown：在每个用例结束后都执行一次。</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_fixtclass.py::TestCase::test_two setup：在每个用例开始前都执行一次。</span><br><span class="hljs-string">PASSED                             [100%]正在执行---test_two()</span><br><span class="hljs-string">teardown：在每个用例结束后都执行一次。</span><br><span class="hljs-string">============================== 2 passed in 0.03s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-6-类和方法混合"><a href="#3-6-类和方法混合" class="headerlink" title="3-6 类和方法混合"></a>3-6 类和方法混合</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_mixclass.py</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestCase</span>():<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_class</span>(<span class="hljs-params">self</span>):                              <span class="hljs-comment"># 类级</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;setup_class：在类中的所有用例开始前只执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_class</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;teardown_class：在类中的所有用例结束后只执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_method</span>(<span class="hljs-params">self</span>):                             <span class="hljs-comment"># 方法级</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;setup_method：在类中的所有用例开始前都执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_method</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;teardown_method：在类中的所有用例结束后都执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setup</span>(<span class="hljs-params">self</span>):                                    <span class="hljs-comment"># 类方法细化级</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;setup：在每个用例开始前都执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;teardown：在每个用例结束后都执行一次。&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_one</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_one()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;this&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">in</span> x<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_two</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_two()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;hello&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;o&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>, <span class="hljs-string">&#x27;test_mixclass.py&#x27;</span>])<br><br><span class="hljs-string">&quot;&quot;&quot;        ！！！注意：这里类方法级和类方法细化级一起执行，优先考虑类方法级。        </span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 2 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_mixclass.py::TestCase::test_one setup_class：在类中的所有用例开始前只执行一次。</span><br><span class="hljs-string">setup_method：在类中的所有用例开始前都执行一次。</span><br><span class="hljs-string">PASSED                              [ 50%]正在执行---test_one()</span><br><span class="hljs-string">teardown_method：在类中的所有用例结束后都执行一次。</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_mixclass.py::TestCase::test_two setup_method：在类中的所有用例开始前都执行一次。</span><br><span class="hljs-string">PASSED                              [100%]正在执行---test_two()</span><br><span class="hljs-string">teardown_method：在类中的所有用例结束后都执行一次。</span><br><span class="hljs-string">teardown_class：在类中的所有用例结束后只执行一次。</span><br><span class="hljs-string">============================== 2 passed in 0.01s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-7-模块和类混合"><a href="#3-7-模块和类混合" class="headerlink" title="3-7 模块和类混合"></a>3-7 模块和类混合</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                           <span class="hljs-comment"># test_mixmodule.py</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_module</span>():                                     <span class="hljs-comment"># 模块级</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;【setup_module】&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_module</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;【teardown_module】&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_function</span>():                                   <span class="hljs-comment"># 函数级</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;【setup_function】&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_function</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;【teardown_function】&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_mone</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_mone()&quot;</span>)<br>    x = <span class="hljs-string">&#x27;this&#x27;</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_mtwo</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_mtwo()&quot;</span>)<br>    x = <span class="hljs-string">&#x27;hello&#x27;</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;o&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestCase</span>():                                       <span class="hljs-comment"># 类级别</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_class</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;【setup_class】&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_class</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;【teardown_class】&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_cone</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_cone()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;class&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;c&#x27;</span> <span class="hljs-keyword">in</span> x<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_ctwo</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;正在执行---test_ctwo()&quot;</span>)<br>        x = <span class="hljs-string">&#x27;module&#x27;</span><br>        <span class="hljs-keyword">assert</span> <span class="hljs-string">&#x27;m&#x27;</span> <span class="hljs-keyword">in</span> x<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>, <span class="hljs-string">&#x27;test_mixmodule.py&#x27;</span>])<br><br><span class="hljs-string">&quot;&quot;&quot;             ！！！注意：模块级优先权最大，函数级和类级别互不干涉。              </span><br><span class="hljs-string">============================= test session starts =============================</span><br><span class="hljs-string">collecting ... collected 4 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_mixmodule.py::test_mone 【setup_module】</span><br><span class="hljs-string">【setup_function】</span><br><span class="hljs-string">PASSED                                             [ 25%]正在执行---test_mone()</span><br><span class="hljs-string">【teardown_function】</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_mixmodule.py::test_mtwo 【setup_function】</span><br><span class="hljs-string">PASSED                                             [ 50%]正在执行---test_mtwo()</span><br><span class="hljs-string">【teardown_function】</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_mixmodule.py::TestCase::test_cone 【setup_class】</span><br><span class="hljs-string">PASSED                                             [ 75%]正在执行---test_cone()</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_mixmodule.py::TestCase::test_ctwo PASSED      [100%]正在执行---test_ctwo()</span><br><span class="hljs-string">【teardown_class】</span><br><span class="hljs-string">【teardown_module】</span><br><span class="hljs-string">============================== 4 passed in 0.02s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-Fixture预置条件"><a href="#4-Fixture预置条件" class="headerlink" title="4 Fixture预置条件"></a>4 Fixture预置条件</h1><ul>
+<li>Fixture预置条件<ul>
+<li>相比用例运行级别的setup和teardown，命名方式更为灵活。</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-skip跳过用例"><a href="#5-skip跳过用例" class="headerlink" title="5 skip跳过用例"></a>5 skip跳过用例</h1>
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Testing/" class="category-chain-item">Testing</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/PyTest/">#PyTest</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>PyTest 测试框架(一)</div>
+      <div>https://stitch-top.github.io/2022/01/11/testing/testing01-pytest-ce-shi-kuang-jia-yi/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年1月11日 23:03:27</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/15/python/python08-python-scipy/" title="Python SciPy">
+                        <span class="hidden-mobile">Python SciPy</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"bsRkWxXK7zLX6NWYygwknNXv-gzGzoHsz","appKey":"qqiNDCxGTOGVmiM1xAbd5pzk","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Testing"
+        id="heading-fa6a5a3224d7da66d9e0bdec25f62cf0" role="tab" data-toggle="collapse" href="#collapse-fa6a5a3224d7da66d9e0bdec25f62cf0"
+        aria-expanded="true"
+      >
+        Testing
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-fa6a5a3224d7da66d9e0bdec25f62cf0"
+           role="tabpanel" aria-labelledby="heading-fa6a5a3224d7da66d9e0bdec25f62cf0">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/01/11/testing/testing01-pytest-ce-shi-kuang-jia-yi/" title="PyTest 测试框架(一)"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">PyTest 测试框架(一)</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2022</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/snow.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"right","width":180,"height":230},"mobile":{"show":false,"scale":0.3},"rect":{"opacityDefault":0.7,"opacityHover":1},"log":false});</script></body>
+</html>
