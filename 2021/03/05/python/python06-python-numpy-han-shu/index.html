@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/2103000750.jpg">
 <meta property="article:published_time" content="2021-03-05T15:00:00.000Z">
-<meta property="article:modified_time" content="2022-11-03T15:31:16.473Z">
+<meta property="article:modified_time" content="2022-11-04T15:54:51.920Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="NumPy">
 <meta property="article:tag" content="数据处理">
@@ -81,7 +81,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -341,8 +341,8 @@
 </li>
 <li>矢量化：将迭代语句转换为基于向量的操作，现代CPU优化了此类操作，速度更快。</li>
 <li>例如：添加两个列表<code>[1、2、3、4]</code>和<code>[4、5、6、7]</code>的元素。<ul>
-<li>方法一：先遍历两个列表，然后对列表的每个元素求和。</li>
-<li>方法二：ufunc提供<code>add(x, y)</code>函数，会产生相同的结果。</li>
+<li>方法一：先遍历两个列表，然后再对列表的每个元素求和。</li>
+<li>方法二：ufunc提供了<code>add(x, y)</code>函数，会产生相同的结果。</li>
 </ul>
 </li>
 </ul>
@@ -353,13 +353,13 @@
 <ul>
 <li>创建Ufunc<ul>
 <li>创建ufunc，必须定义一个函数，类似Python中使用普通函数。</li>
-<li>使用<code>frompyfunc()</code>将其添加到NumPy ufunc库中，有以下参数。<ul>
+<li>用<code>frompyfunc()</code>将其添加到NumPy ufunc库中，有以下参数。<ul>
 <li>function：函数名称。</li>
 <li>inputs：输入参数(数组)的数量。</li>
 <li>outputs：输出参数(数组)的数量。</li>
 </ul>
 </li>
-<li>检查是否为ufunc函数，应该返回<code>&lt;class &#39;numpy.ufunc&#39;&gt;</code>。</li>
+<li>检查是否为ufunc函数，应返回<code>&lt;class &#39;numpy.ufunc&#39;&gt;</code>。</li>
 <li>if语句中测试函数是否为ufunc，需要使用<code>numpy.ufunc</code>值。</li>
 </ul>
 </li>
@@ -377,7 +377,7 @@
 <li>幂：<code>power()</code>函数将一个数组的值乘以另一个数组值的幂并在新数组中返回结果。</li>
 <li>余：<code>mod()</code>和<code>remainder()</code>函数都会在一个新数组中返回两个数组值相除的余数。</li>
 <li>商和模：<code>divmod()</code>函数，返回值是两个数组，第一个数组包含商，第二个数组包含模。</li>
-<li>绝对值：<code>absolute()</code>和<code>abs()</code>函数，尽量使用<code>absolute()</code>，避免与<code>math.abs()</code>混淆。</li>
+<li>绝对值：<code>absolute()</code>和<code>abs()</code>函数，尽量用<code>absolute()</code>，避免与<code>math.abs()</code>混淆。</li>
 </ul>
 </li>
 </ul>
@@ -402,7 +402,7 @@
 <h2 id="2-2-对数函数"><a href="#2-2-对数函数" class="headerlink" title="2-2 对数函数"></a>2-2 对数函数</h2><ul>
 <li>对数函数<ul>
 <li>NumPy提供了以e、2和10为底的log函数，不提供指定底数的log函数。</li>
-<li>如果无法计算log函数，那么所有的log函数都将在元素中放置-inf或inf。</li>
+<li>若无法计算log函数，那么所有的log函数都将在元素中放置-inf或inf。</li>
 </ul>
 </li>
 </ul>
@@ -412,7 +412,7 @@
 
 <h2 id="2-3-数组求和"><a href="#2-3-数组求和" class="headerlink" title="2-3 数组求和"></a>2-3 数组求和</h2><ul>
 <li>数组求和<ul>
-<li>加法是两个参数之间完成的，而求和则是在n个元素之间进行的。</li>
+<li>加法是在两个参数之间完成的，而求和则是在n个元素之间进行的。</li>
 <li>轴上求和：指定<code>axis=1</code>，NumPy将对每个数组中的数字进行求和。</li>
 <li>部分求和：使用<code>cumsum()</code>函数，例如<code>[1, 2, 3]</code>部分求和为<code>[1, 1+2, 1+2+3]</code>。</li>
 </ul>
@@ -495,7 +495,7 @@
 <h1 id="6-最小公倍数"><a href="#6-最小公倍数" class="headerlink" title="6 最小公倍数"></a>6 最小公倍数</h1><ul>
 <li>最小公倍数<ul>
 <li>使用<code>lcm()</code>函数，可以查找两个数的最小公倍数。</li>
-<li>查找数组中所有值的最小公倍数，使用<code>reduce()</code>方法。</li>
+<li>查找数组中所有值的最小公倍数用<code>reduce()</code>方法。</li>
 </ul>
 </li>
 </ul>
@@ -506,7 +506,7 @@
 <h1 id="7-最大公约数"><a href="#7-最大公约数" class="headerlink" title="7 最大公约数"></a>7 最大公约数</h1><ul>
 <li>最大公约数<ul>
 <li>使用<code>gcd()</code>函数，可以查找两个数的最大公约数。</li>
-<li>查找数组中所有值的最大公约数，使用<code>reduce()</code>方法。</li>
+<li>查找数组中所有值的最大公约数用<code>reduce()</code>方法。</li>
 </ul>
 </li>
 </ul>

@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1420511070.jpg">
 <meta property="article:published_time" content="2021-04-15T15:25:33.000Z">
-<meta property="article:modified_time" content="2022-11-03T15:31:28.059Z">
+<meta property="article:modified_time" content="2022-11-04T16:07:05.906Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="SciPy">
 <meta property="article:tag" content="科学计算">
@@ -81,7 +81,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -404,7 +404,7 @@
 <h1 id="4-稀疏数据"><a href="#4-稀疏数据" class="headerlink" title="4 稀疏数据"></a>4 稀疏数据</h1><ul>
 <li>稀疏数据<ul>
 <li>具有大部分未使用元素的数据，元素不携带任何信息。<ul>
-<li>稀疏数据：是大多数项目值为0的数据集。</li>
+<li>稀疏数据：表示大多数项目值为0的数据集。</li>
 <li>密集数组：与稀疏数组相反，大多数值不为0。</li>
 </ul>
 </li>
@@ -416,7 +416,7 @@
 </li>
 <li>还可以使用data属性，用于查看存储的数据，<code>count_nonzero()</code>方法可以计算非零数。</li>
 <li><code>eliminate_zeros()</code>方法从矩阵中删除零条目，<code>sum_duplicates()</code>方法消除重复条目。</li>
-<li><code>tocsc()</code>方法从CSR类型转换为CSC类型，除此，稀疏矩阵还支持普通矩阵支持的所有操作。</li>
+<li><code>tocsc()</code>方法从CSR类型转换为CSC类型，稀疏矩阵同样还支持普通矩阵支持的所有操作。</li>
 </ul>
 </li>
 </ul>
@@ -428,23 +428,23 @@
 <li>图表数据<ul>
 <li>使用scipy.sparse.csgraph模块处理图表数据结构。</li>
 <li>邻接矩阵：Adjacency Matrix，表示顶点之间相邻关系的矩阵。<ul>
-<li>通过<code>connected_components()</code>方法，查找所有连接的组件。</li>
-<li>迪杰斯特拉：通过<code>dijkstra()</code>方法，在图中找到从一个元素到另一个元素的最短路径。<ul>
+<li>通过<code>connected_components()</code>方法查找所有连接的组件。</li>
+<li>迪杰斯特拉：通过<code>dijkstra()</code>方法在图中找到从一个元素到另一个元素的最短路径。<ul>
 <li>limit：路径的最大权重。</li>
 <li>indices：元素的索引，仅返回该元素的所有路径。</li>
-<li>return_predecessors：布尔值，True返回整个遍历路径，否则为False。</li>
+<li>return_predecessors：布尔值，True将返回整个遍历路径，否则为False。</li>
 </ul>
 </li>
 <li>弗洛伊德·沃歇尔：<code>floyd_warshall()</code>方法找到所有元素对之间的最短路径。</li>
 <li>贝尔曼福特：<code>bellman_ford()</code>方法找到所有元素对之间的最短路径，也可处理负权重。</li>
 <li>深度一阶<ul>
 <li><code>depth_first_order()</code>方法从节点返回深度优先遍历。</li>
-<li>这一方法采用了两个参数，图表和遍历图的起始元素。</li>
+<li>这一方法采用了两个参数，即图表和遍历图的起始元素。</li>
 </ul>
 </li>
 <li>广度优先顺序<ul>
 <li><code>breadth_first_order()</code>方法从节点返回广度优先遍历。</li>
-<li>这一方法采用了两个参数，即图表和遍历图的起始元素。</li>
+<li>这一方法采用了两个参数，包括图表和遍历图的起始元素。</li>
 </ul>
 </li>
 </ul>
@@ -535,7 +535,7 @@
 </li>
 <li>T检验(双尾测试)<ul>
 <li>用于确定两个变量的平均值之间是否存在显著差异，是否属于同一分布。</li>
-<li><code>ttest_ind()</code>：采用两个相同大小的样本，生成一个t统计量和p值的元组。</li>
+<li><code>ttest_ind()</code>：用两个相同大小的样本，生成一个t统计量和p值的元组。</li>
 </ul>
 </li>
 </ul>

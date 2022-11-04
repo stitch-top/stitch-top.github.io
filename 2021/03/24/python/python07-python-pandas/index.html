@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1000123212.jpg">
 <meta property="article:published_time" content="2021-03-24T13:33:30.000Z">
-<meta property="article:modified_time" content="2022-11-03T15:31:22.159Z">
+<meta property="article:modified_time" content="2022-11-04T15:59:59.811Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="Pandas">
 <meta property="article:tag" content="数据分析">
@@ -81,7 +81,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":2},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -333,7 +333,7 @@
 <h1 id="1-Pandas"><a href="#1-Pandas" class="headerlink" title="1 Pandas"></a>1 Pandas</h1><ul>
 <li>Pandas<ul>
 <li>命令窗口下使用<code>pip install pandas</code>进行安装。</li>
-<li>通过import关键字将其导入应用程序，通常以pd别名替代。</li>
+<li>通过import关键字将其导入应用程序，通常以<code>pd</code>别名替代。</li>
 <li>检查Pandas版本，版本字符串存储在<code>__version__</code>属性下。</li>
 </ul>
 </li>
@@ -359,7 +359,7 @@
 <li>DataFrame<ul>
 <li>一种二维数据结构，例如二维数组或具有行和列的表。</li>
 <li>使用loc属性返回一个或多个指定行，index参数自定义索引。</li>
-<li>如果数据集存储在文件中，Pandas可将其加载到DataFrame中。</li>
+<li>若数据集存储在文件中，Pandas可将其加载到DataFrame中。</li>
 </ul>
 </li>
 </ul>
@@ -371,7 +371,7 @@
 <li>读取CSV<ul>
 <li><code>to_string()</code>：用于打印整个DataFrame。</li>
 <li>若包含多行的大型DataFrame，Pandas将只返回前5行和最后5行。</li>
-<li>可以使用<code>pd.options.display.max_rows</code>语句检查系统的最大行数。</li>
+<li>可使用<code>pd.options.display.max_rows</code>语句检查系统的最大行数。</li>
 </ul>
 </li>
 </ul>
@@ -382,7 +382,7 @@
 <h2 id="3-2-读取JSON"><a href="#3-2-读取JSON" class="headerlink" title="3-2 读取JSON"></a>3-2 读取JSON</h2><ul>
 <li>读取JSON<ul>
 <li><code>to_string()</code>：用于打印整个DataFrame，JSON对象具有与字典相同的格式。</li>
-<li>若JSON代码不在文件中，而在Python字典里，则可直接将其加载到DataFrame中。</li>
+<li>若JSON代码不在文件中，在Python字典里，则可直接将其加载到DataFrame中。</li>
 </ul>
 </li>
 </ul>
@@ -435,7 +435,7 @@
 
 <ul>
 <li>重复数据<ul>
-<li><code>duplicated()</code>：为每一行返回一个布尔值，重复返回True，否则为False。</li>
+<li><code>duplicated()</code>：为每一行返回一个布尔值，重复将返回True，否则为False。</li>
 <li><code>drop_duplicates()</code>：删除重复项，inplace参数会从原始DataFrame中删除。</li>
 </ul>
 </li>
@@ -446,8 +446,8 @@
 
 <h1 id="6-数据相关性"><a href="#6-数据相关性" class="headerlink" title="6 数据相关性"></a>6 数据相关性</h1><ul>
 <li>数据相关性<ul>
-<li><code>corr()</code>：计算数据集中每一列之间的关系，该方法忽略非数字列。</li>
-<li>返回的结果是一个包含大量数字的表格，这些数字表示两列之间的关系。</li>
+<li><code>corr()</code>：计算数据集中每一列之间的关系，该方法将忽略非数字列。</li>
+<li>返回结果是一个包含大量数字的表格，这些数字表示两列之间的关系。</li>
 <li>数字从-1到1不等。<ul>
 <li>1表示完全相关，数据集中，每次第一列中的值上升，另一个值也会上升。</li>
 <li>0.9表示良好相关，增加一个值，另一个可能也增加。</li>
