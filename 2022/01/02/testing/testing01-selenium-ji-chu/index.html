@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/5560477875.jpg">
 <meta property="article:published_time" content="2022-01-02T12:15:40.000Z">
-<meta property="article:modified_time" content="2022-11-25T15:32:23.197Z">
+<meta property="article:modified_time" content="2022-11-28T14:58:01.847Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Selenium">
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15k 字
+          14k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          128 分钟
+          115 分钟
         
       </span>
     
@@ -579,188 +579,42 @@
 <li><code>get_window_size()</code>························获取当前窗口的宽和高</li>
 <li><code>set_window_size(width, height)</code>···········设置当前窗口的宽和高</li>
 <li><code>get_screenshot_as_file(filename)</code>·········截取当前页面</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep<br><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver                          <span class="hljs-comment"># common.py</span><br><span class="hljs-keyword">from</span> selenium.webdriver.common.action_chains <span class="hljs-keyword">import</span> ActionChains<br><br>driver = webdriver.Edge()<br>driver.get(<span class="hljs-string">&quot;https://www.baidu.com/&quot;</span>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Browser: &quot;</span> + driver.name)                        <span class="hljs-comment"># 查看浏览器名称</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Title: &quot;</span> + driver.title)                         <span class="hljs-comment"># 获取当前页面标题</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;URL: &quot;</span> + driver.current_url)                     <span class="hljs-comment"># 获取当前页面URL</span><br><br>driver.find_element_by_id(<span class="hljs-string">&quot;kw&quot;</span>).send_keys(<span class="hljs-string">&quot;Selenium&quot;</span>)<br>driver.find_element_by_id(<span class="hljs-string">&quot;su&quot;</span>).click()                 <span class="hljs-comment"># 点击搜索selenium内容</span><br>sleep(<span class="hljs-number">3</span>)<br>driver.back()                                           <span class="hljs-comment"># 后退回百度首页</span><br>sleep(<span class="hljs-number">3</span>)<br>driver.forward()                                        <span class="hljs-comment"># 前进到搜索selenium页面</span><br>sleep(<span class="hljs-number">3</span>)<br>driver.back()                                           <span class="hljs-comment"># 后退回百度首页</span><br>sleep(<span class="hljs-number">3</span>)<br>driver.refresh()                                        <span class="hljs-comment"># 刷新页面</span><br><br>driver.maximize_window()                                <span class="hljs-comment"># 浏览器窗口最大化</span><br>sleep(<span class="hljs-number">3</span>)<br>setmenu = driver.find_element_by_id(<span class="hljs-string">&quot;s-usersetting-top&quot;</span>)<br>ActionChains(driver).move_to_element(setmenu).perform()<br>driver.find_element_by_link_text(<span class="hljs-string">&#x27;搜索设置&#x27;</span>).click()<br>sleep(<span class="hljs-number">3</span>)<br>driver.find_element_by_link_text(<span class="hljs-string">&#x27;保存设置&#x27;</span>).click()<br>sleep(<span class="hljs-number">3</span>)<br>text = driver.switch_to.alert.text                      <span class="hljs-comment"># 切换到弹窗中，获取弹窗提示信息</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Pop-up alert message: &quot;</span> + text)<br>sleep(<span class="hljs-number">3</span>)<br>driver.switch_to.alert.accept()                         <span class="hljs-comment"># 接受警告框</span><br>sleep(<span class="hljs-number">3</span>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Coordinates of the current window: &quot;</span> + <span class="hljs-built_in">str</span>(driver.get_window_position()))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Width and height of the current window: &quot;</span> + <span class="hljs-built_in">str</span>(driver.get_window_size()))<br>driver.set_window_size(<span class="hljs-number">1440</span>, <span class="hljs-number">900</span>)                       <span class="hljs-comment"># 设置当前窗口的宽和高</span><br>driver.get_screenshot_as_file(<span class="hljs-string">&quot;.\common.png&quot;</span>)           <span class="hljs-comment"># 截取当前页面</span><br>sleep(<span class="hljs-number">3</span>)<br><br>driver.quit()                                           <span class="hljs-comment"># 关闭整个浏览器</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-1-处理Cookie"><a href="#4-1-处理Cookie" class="headerlink" title="4-1 处理Cookie"></a>4-1 处理Cookie</h2><ul>
 <li>处理Cookie<ul>
-<li><code>get_cookies()</code>··························获取所有Cookie</li>
-<li><code>get_cookie(name)</code>·······················获取name属性的Cookie</li>
-<li><code>delete_all_cookies()</code>···················删除浏览器中的所有Cookie</li>
-<li><code>delete_cookie(name)</code>····················删除name属性的Cookie</li>
-<li><code>add_cookie(cookie_dic)</code>·················添加Cookie(Cookie格式为字典)</li>
+<li><code>get_cookies()</code>····························获取所有Cookie</li>
+<li><code>get_cookie(name)</code>·························获取name属性的Cookie</li>
+<li><code>delete_all_cookies()</code>·····················删除浏览器中的所有Cookie</li>
+<li><code>delete_cookie(name)</code>······················删除name属性的Cookie</li>
+<li><code>add_cookie(cookie_dic)</code>···················添加Cookie(Cookie格式为字典)</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver                          <span class="hljs-comment"># cookie.py</span><br><br>driver = webdriver.Edge()<br>driver.get(<span class="hljs-string">&quot;https://www.baidu.com/&quot;</span>)<br><br><span class="hljs-built_in">print</span>(driver.get_cookies())                             <span class="hljs-comment"># 获取所有Cookie</span><br><span class="hljs-built_in">print</span>(driver.get_cookie(name=<span class="hljs-string">&quot;ZFY&quot;</span>))                    <span class="hljs-comment"># 获取ZFY属性的Cookie</span><br>driver.delete_cookie(name=<span class="hljs-string">&quot;ZFY&quot;</span>)                        <span class="hljs-comment"># 删除ZFY属性的Cookie</span><br><span class="hljs-keyword">if</span> driver.get_cookie(name=<span class="hljs-string">&quot;ZFY&quot;</span>):                       <span class="hljs-comment"># 判断ZFY属性的Cookie是否还在</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Failed to delete.&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Deleted successfully.&quot;</span>)<br>driver.delete_all_cookies()                             <span class="hljs-comment"># 删除浏览器中的所有Cookie</span><br>driver.add_cookie(&#123;                                     <span class="hljs-comment"># 添加Cookie</span><br>    <span class="hljs-string">&#x27;domain&#x27;</span>: <span class="hljs-string">&#x27;.baidu.com&#x27;</span>,<br>    <span class="hljs-string">&#x27;expiry&#x27;</span>: <span class="hljs-number">2022112517</span>,<br>    <span class="hljs-string">&#x27;httpOnly&#x27;</span>: <span class="hljs-literal">False</span>,<br>    <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;Test&#x27;</span>,<br>    <span class="hljs-string">&#x27;path&#x27;</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>    <span class="hljs-string">&#x27;sameSite&#x27;</span>: <span class="hljs-string">&#x27;None&#x27;</span>,<br>    <span class="hljs-string">&#x27;secure&#x27;</span>: <span class="hljs-literal">True</span>,<br>    <span class="hljs-string">&#x27;value&#x27;</span>: <span class="hljs-string">&#x27;BWo2kLK:ASP9EHiAqyW83MVaN3FAjB:BD1FVCezH7s42g:C&#x27;</span><br>&#125;)<br><span class="hljs-built_in">print</span>(driver.get_cookie(name=<span class="hljs-string">&quot;Test&quot;</span>))                   <span class="hljs-comment"># 获取Test属性的Cookie</span><br><br>driver.quit()                                           <span class="hljs-comment"># 关闭整个浏览器</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="4-1-多窗口处理"><a href="#4-1-多窗口处理" class="headerlink" title="4-1 多窗口处理"></a>4-1 多窗口处理</h2><ul>
+<h2 id="4-2-多窗口处理"><a href="#4-2-多窗口处理" class="headerlink" title="4-2 多窗口处理"></a>4-2 多窗口处理</h2><ul>
 <li>多窗口处理<ul>
-<li>首先要获得每一个窗口的句柄(唯一标识符号)。</li>
-<li><code>quit()</code>········································关闭所有窗口</li>
-<li><code>close()</code>·······································关闭当前窗口</li>
-<li><code>window_handles</code>································获取所有窗口的句柄</li>
-<li><code>switch_to.window()</code>····························切换到相应的窗口中</li>
-<li><code>switch_to_handle()</code>····························切回句柄所属的窗口</li>
-<li><code>current_window_handle</code>·························获取当前窗口的句柄</li>
-<li><code>switch_to.parent_content</code>······················返回上一级表单，新方法</li>
-<li><code>switch_to_parent_content()</code>····················返回上一级表单，旧方法</li>
-<li><code>switch_to.default_content()</code>···················返回最外层表单，新方法</li>
-<li><code>switch_to_default_content()</code>···················返回最外层表单，旧方法</li>
-<li><code>switch_to.frame(id/name/xpath)</code>················切换到被嵌套的frame中</li>
+<li>首先需要获得每一个窗口的句柄，句柄即唯一标识符号。</li>
+<li><code>quit()</code>···································关闭所有窗口</li>
+<li><code>close()</code>··································关闭当前窗口</li>
+<li><code>window_handles</code>···························获取所有窗口的句柄</li>
+<li><code>switch_to.window()</code>·······················切换到相应的窗口中</li>
+<li><code>current_window_handle</code>····················获取当前窗口的句柄</li>
+<li><code>switch_to.parent_content</code>·················返回上一级表单，新方法</li>
+<li><code>switch_to_parent_content()</code>···············返回上一级表单，旧方法</li>
+<li><code>switch_to.default_content()</code>··············返回最外层表单，新方法</li>
+<li><code>switch_to_default_content()</code>··············返回最外层表单，旧方法</li>
+<li><code>switch_to.frame(id/name/xpath)</code>···········切换到被嵌套的frame中</li>
 </ul>
 </li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-2-警告框处理"><a href="#4-2-警告框处理" class="headerlink" title="4-2 警告框处理"></a>4-2 警告框处理</h2><ul>
-<li>警告框处理<ul>
-<li>WebDriver处理JavaScript生成的alert、confirm和prompt，使用<code>switch_to.alert</code>方法实现。</li>
-<li><code>switch_to.alert.text</code>···························返回alert、confirm、prompt中的文字信息</li>
-<li><code>switch_to.alert.accept()</code>·······················接受现有警告框</li>
-<li><code>switch_to.alert.dismiss()</code>······················解散现有警告框</li>
-<li><code>switch_to.alert.send_keys()</code>····················在警告框中输入文本(如果可以输入的话)</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-3-下拉框处理"><a href="#4-3-下拉框处理" class="headerlink" title="4-3 下拉框处理"></a>4-3 下拉框处理</h2><ul>
-<li>下拉框处理<ul>
-<li>先定位到下拉框，再定位选项。</li>
-<li>需点击才能显示选项时，有两次点击动作，第一次点击下拉框，第二次点击选项。</li>
-<li>不需点击，鼠标放上去就会显示选项时，则可使用<code>move_to_element()</code>方法定位。</li>
-<li>针对下拉框标签是select的，导入Select类：<code>from selenium.webdriver.support.select import Select</code>。</li>
-<li><code>select_by_index(index)</code>·······························根据index属性定位选项，index从0开始</li>
-<li><code>select_by_value(value)</code>·······························根据value属性定位选项</li>
-<li><code>select_by_visible_text(text)</code>·························根据选项文本值定位选项</li>
-<li><code>first_selected_option()</code>······························选择第一个选项</li>
-<li><code>deselect_by_index(index)</code>·····························根据index属性清除选定的选项，index从0开始</li>
-<li><code>deselect_by_value(value)</code>·····························根据value属性清除选定的选项</li>
-<li><code>deselect_by_visible_text(text)</code>·······················根据选项文本值清除选定的选项</li>
-<li><code>deselect_all()</code>·······································清除所有选项</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-4-操作对象元素"><a href="#4-4-操作对象元素" class="headerlink" title="4-4 操作对象元素"></a>4-4 操作对象元素</h2><ul>
-<li>操作对象元素<ul>
-<li><code>size</code>······································返回元素尺寸</li>
-<li><code>text</code>······································获取元素文本信息</li>
-<li><code>clear()</code>···································清除内容</li>
-<li><code>click()</code>···································鼠标点击</li>
-<li><code>submit()</code>··································提交表单</li>
-<li><code>location</code>··································获取元素坐标</li>
-<li><code>tag_name</code>··································返回元素的tagName</li>
-<li><code>send_keys()</code>·······························向输入框输入内容</li>
-<li><code>is_enabled()</code>······························判断元素是否被使用</li>
-<li><code>is_selected()</code>·····························判断元素是否被选中</li>
-<li><code>is_displayed()</code>····························判断元素是否显示</li>
-<li><code>get_attribute(element_name)</code>···············获取元素某个属性值</li>
-<li><code>value_of_css_property(css_name)</code>···········获取CSS的属性值</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-5-鼠标事件"><a href="#4-5-鼠标事件" class="headerlink" title="4-5 鼠标事件"></a>4-5 鼠标事件</h2><ul>
-<li>鼠标事件<ul>
-<li>使用前需先导入ActionChains类：<code>from selenium.webdriver.common.action_chains import ActionChains</code>。</li>
-<li>用户行为不会立即执行，而是将所有操作放在一个队列中，执行perform方法时按放入队列的顺序，先进先出执行。</li>
-<li><code>perform()</code>················执行ActionChains类中存储的所有行为</li>
-<li><code>release()</code>················在某个元素上释放鼠标，写在<code>perform()</code>前，通过perform方法来执行</li>
-<li><code>click()</code>··················鼠标点击</li>
-<li><code>double_click()</code>···········鼠标双击</li>
-<li><code>context_click()</code>··········鼠标右击</li>
-<li><code>click_and_hold()</code>·········按住鼠标左键不动</li>
-<li><code>reset_actions()</code>··········清除已存储在本地和远程端的操作，写在<code>perform()</code>后，不依赖perform方法来执行</li>
-<li><code>move_to_element(target)</code>·····························移动到某个元素上</li>
-<li><code>move_by_offset(xoffset, yoffset)</code>····················移动到某个坐标上</li>
-<li><code>drag_and_drop(source, target)</code>·······················按住鼠标左键，然后移动到目标元素并释放鼠标按钮</li>
-<li><code>drag_and_drop_by_offset(source, xoffset, yoffset)</code>···按住鼠标左键，然后移动到目标偏移并释放鼠标按钮</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-6-键盘事件"><a href="#4-6-键盘事件" class="headerlink" title="4-6 键盘事件"></a>4-6 键盘事件</h2><ul>
-<li>键盘事件<ul>
-<li>导入Keys类：<code>from selenium.webdriver.common.keys import Keys</code>。</li>
-<li>组合键<ul>
-<li><code>send_keys(Keys.CONTROL, &#39;a&#39;)</code>····················全选</li>
-<li><code>send_keys(Keys.CONTROL, &#39;c&#39;)</code>····················复制</li>
-<li><code>send_keys(Keys.CONTROL, &#39;v&#39;)</code>····················粘贴</li>
-<li><code>send_keys(Keys.CONTROL, &#39;x&#39;)</code>····················剪切</li>
-</ul>
-</li>
-<li>非组合键<ul>
-<li><code>send_keys(Keys.F1~F12)</code>··························键盘F1~F12</li>
-<li><code>send_keys(Keys.F5)</code>······························刷新键</li>
-<li><code>send_keys(Keys.TAB)</code>·····························制表键</li>
-<li><code>send_keys(Keys.ENTER)</code>···························回车键</li>
-<li><code>send_keys(Keys.SPACE)</code>···························空格键</li>
-<li><code>send_keys(Keys.ESCAPE)</code>··························回退键</li>
-<li><code>send_keys(Keys.BACK_SPACE)</code>······················删除键</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-7-调用JavaScript"><a href="#4-7-调用JavaScript" class="headerlink" title="4-7 调用JavaScript"></a>4-7 调用JavaScript</h2><ul>
-<li>调用JavaScript<ul>
-<li>Webdriver提供了<code>execute_script(script, *args)</code>方法调用JavaScript。<ul>
-<li><code>js=&quot;window.scrollTo(100, 450);&quot;</code></li>
-<li><code>driver.execute_script(js)</code></li>
-</ul>
-</li>
-<li>JavaScript的作用不仅体现在滚动条操作上，还可在页面的textarea文本框中输入内容。<ul>
-<li><code>&lt;textarea id=&quot;id&quot; style=&quot;width: 98%&quot; cols=&quot;50&quot; rows=&quot;5&quot; class=&quot;textarea&quot;&gt;&lt;/textarea&gt;</code></li>
-<li><code>text=&quot;input text&quot;</code></li>
-<li><code>js=&quot;document.getElementById(&#39;id&#39;).value=&#39;&quot;+text+&quot;&#39;;&quot;</code></li>
-<li><code>driver.execute_script(js)</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Python"><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-8-控制浏览器滚动条"><a href="#4-8-控制浏览器滚动条" class="headerlink" title="4-8 控制浏览器滚动条"></a>4-8 控制浏览器滚动条</h2><ul>
-<li><p>控制浏览器滚动条</p>
-<ul>
-<li><code>window.scrollTo()</code>方法用于设置浏览器窗口滚动条的水平和垂直位置。</li>
-<li>第一个参数表示水平的左间距，第二个参数表示垂直的上边距。</li>
-<li>通过javascript设置浏览器窗口的滚动条位置。</li>
-</ul>
-</li>
-<li><p>上传文件：打开一个系统的Window窗口，从窗口选择文件上传，问题一般会卡在如何操作Window窗口。</p>
-<ul>
-<li>上传控件标签为input时，只要定位上传按钮，通过<code>send_keys()</code>添加文件路径就可以了。</li>
-<li>上传控件标签为非input时，可以借助第三方工具<a target="_blank" rel="noopener" href="https://www.autoitx.com/Doc/">AutoIt</a>。</li>
-</ul>
-</li>
-<li><p>下载文件：Webdriver允许设置默认下载路径，从而可以跳过下载弹窗提示。</p>
-</li>
-<li><p>处理HTML5视频播放</p>
-</li>
-<li></li>
 </ul>
 
               
