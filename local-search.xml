@@ -8,7 +8,7 @@
     <link href="/2022/03/05/jmeter/jmeter01-jmeter-ji-chu/"/>
     <url>/2022/03/05/jmeter/jmeter01-jmeter-ji-chu/</url>
     
-    <content type="html"><![CDATA[<p>JMeter是Apache组织使用Java开发的一款测试工具，可以用于对服务器、网络或对象模拟巨大的负载，开源、免费、功能强大。</p><span id="more"></span><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><ul><li>简介<ul><li>优点：开源、跨平台、支持多协议、小巧、功能强大。</li><li>缺点：不支持IP欺骗、无法验证JS程序，也无法验证页面UI，需与Selenium配合完成Web2.0应用的测试。</li><li>安装<ul><li>Java环境依赖：JDK和JRE，这里使用Java1.8.0版本。</li><li><a href="https://jmeter.apache.org/">JMeter官网</a>：自行下载解压，使用JMeter5.4.3版本。</li></ul></li></ul></li></ul>]]></content>
+    <content type="html"><![CDATA[<p>JMeter是Apache组织使用Java开发的一款测试工具，可以用于对服务器、网络或对象模拟巨大的负载，开源、免费、功能强大。</p><span id="more"></span><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><ul><li>简介<ul><li>优点：开源、跨平台、支持多协议、小巧、功能强大。</li><li>缺点：不支持IP欺骗、无法验证JS程序，也无法验证页面UI，需与Selenium配合完成Web2.0应用的测试。</li><li>安装<ul><li>Java环境依赖：JDK和JRE，这里使用Java1.8.0版本。</li><li><a href="https://jmeter.apache.org/">JMeter官网</a>：自行下载解压，使用JMeter5.4.3版本。</li></ul></li><li>中文乱码<ul><li>到bin目录的<code>jmeter.properties</code>文件中修改编码集，打开文件后，<code>CTRL+F</code>搜索定位<code>ISO-8859-1</code>。</li><li>将<code># sampleresult.default.encoding=ISO-8859-1</code>一行注释取消，并把<code>ISO-8859-1</code>改为<code>UTF-8</code>。</li></ul></li><li>bin目录下文件说明<ul><li><code>jmeter.sh</code>：Linux下命令行启动。</li><li><code>jmeter.bat</code>：Windows下命令行启动。</li><li><code>ApacheJMeter.jar</code>：图形化启动入口。</li></ul></li></ul></li></ul>]]></content>
     
     
     <categories>
