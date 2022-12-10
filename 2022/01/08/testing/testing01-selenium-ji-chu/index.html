@@ -21,13 +21,13 @@
     <meta name="description" content="Selenium提供了一个简单的API，使用WebDriver来编写校验测试，通过API可直观地使用Selenium WebDriver的所有功能。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Selenium 基础">
-<meta property="og:url" content="https://stitch-top.github.io/2022/01/02/testing/testing01-selenium-ji-chu/index.html">
+<meta property="og:url" content="https://stitch-top.github.io/2022/01/08/testing/testing01-selenium-ji-chu/index.html">
 <meta property="og:site_name" content="Dr.626">
 <meta property="og:description" content="Selenium提供了一个简单的API，使用WebDriver来编写校验测试，通过API可直观地使用Selenium WebDriver的所有功能。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/5560477875.jpg">
-<meta property="article:published_time" content="2022-01-02T12:15:40.000Z">
-<meta property="article:modified_time" content="2022-12-09T15:42:52.484Z">
+<meta property="article:published_time" content="2022-01-08T12:15:40.000Z">
+<meta property="article:modified_time" content="2022-12-10T15:47:10.555Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Selenium">
@@ -236,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-01-02 20:15" pubdate>
-          2022年1月2日 20:15:40
+        <time datetime="2022-01-08 20:15" pubdate>
+          2022年1月8日 20:15:40
         </time>
       </span>
     
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          59k 字
+          61k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          495 分钟
+          510 分钟
         
       </span>
     
@@ -766,18 +766,16 @@
 
 <h1 id="5-调用JavaScript"><a href="#5-调用JavaScript" class="headerlink" title="5 调用JavaScript"></a>5 调用JavaScript</h1><ul>
 <li>调用JavaScript<ul>
-<li>Webdriver提供了<code>execute_script(script, *args)</code>方法调用JavaScript。<ul>
-<li><code>js=&quot;window.scrollTo(100, 450);&quot;</code></li>
-<li><code>driver.execute_script(js)</code></li>
+<li>开发Web端自动化用例代码时，主要过程可以拆分为四个阶段。<ul>
+<li>Web页面加载。</li>
+<li>定位页面元素。</li>
+<li>操作页面元素。</li>
+<li>判断返回结果。</li>
 </ul>
 </li>
-<li>JavaScript的作用不仅体现在滚动条操作上，还可在页面的textarea文本框中输入内容。<ul>
-<li><code>&lt;textarea id=&quot;id&quot; style=&quot;width: 98%&quot; cols=&quot;50&quot; rows=&quot;5&quot; class=&quot;textarea&quot;&gt;&lt;/textarea&gt;</code></li>
-<li><code>text=&quot;input text&quot;</code></li>
-<li><code>js=&quot;document.getElementById(&#39;id&#39;).value=&#39;&quot;+text+&quot;&#39;;&quot;</code></li>
-<li><code>driver.execute_script(js)</code></li>
-</ul>
-</li>
+<li>实际使用中常遇到代码执行缓慢，以及代码执行稳定性不高等问题。</li>
+<li>针对稳定性问题，可以将这部分对网页元素进行操作的代码替换成对应的JavaScript脚本。</li>
+<li>就可较大程度地提高稳定性和执行效率(浏览器原生支持JavaScript，直接在内核中执行)。</li>
 </ul>
 </li>
 </ul>
@@ -888,7 +886,28 @@
 
 
 
-<h1 id="7-HTML5视频播放"><a href="#7-HTML5视频播放" class="headerlink" title="7 HTML5视频播放"></a>7 HTML5视频播放</h1>
+<h1 id="7-HTML5标签处理"><a href="#7-HTML5标签处理" class="headerlink" title="7 HTML5标签处理"></a>7 HTML5标签处理</h1><ul>
+<li>HTML5标签处理<ul>
+<li>video视频标签：<code>&lt;video&gt;&lt;/video&gt;</code>。<ul>
+<li><code>return arguments[0].play()</code>：在线播放视频。</li>
+<li><code>return arguments[0].load()</code>：重新载入视频。</li>
+<li><code>return arguments[0].pause()</code>：暂停播放视频。</li>
+<li><code>return arguments[0].duration</code>：获取视频文件的播放时长。</li>
+<li><code>return arguments[0].currentSrc</code>：获取视频文件的网络存储地址。</li>
+</ul>
+</li>
+<li>canvas画图标签：<code>&lt;canvas&gt;&lt;/canvas&gt;</code>，结合鼠标事件或JavaScript脚本实现效果图。</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-1-video视频标签"><a href="#7-1-video视频标签" class="headerlink" title="7-1 video视频标签"></a>7-1 video视频标签</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep<br><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver                          <span class="hljs-comment"># h5video.py</span><br><span class="hljs-keyword">from</span> selenium.webdriver.common.action_chains <span class="hljs-keyword">import</span> ActionChains<br><br>driver = webdriver.Edge()<br>driver.get(<span class="hljs-string">&quot;https://videojs.com/&quot;</span>)                      <span class="hljs-comment"># 有梯子更佳，部分地区访问速度慢</span><br>driver.maximize_window()                                <span class="hljs-comment"># 浏览器窗口最大化</span><br>driver.implicitly_wait(<span class="hljs-number">30</span>)<br><br>element_video = driver.find_element_by_id(<span class="hljs-string">&quot;preview-player_html5_api&quot;</span>)<br>url = driver.execute_script(<span class="hljs-string">&quot;return arguments[0].currentSrc&quot;</span>, element_video)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Src: &quot;</span> + url)                                    <span class="hljs-comment"># 获取视频文件的网络存储地址</span><br>dur = driver.execute_script(<span class="hljs-string">&quot;return arguments[0].duration&quot;</span>, element_video)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dur: &quot;</span> + <span class="hljs-built_in">str</span>(dur))                               <span class="hljs-comment"># 获取视频文件的播放时长</span><br><br>ActionChains(driver).click(element_video).perform()     <span class="hljs-comment"># 使用鼠标事件进行点击，播放3秒</span><br>sleep(<span class="hljs-number">3</span>)<br>driver.execute_script(<span class="hljs-string">&quot;return arguments[0].pause()&quot;</span>, element_video)<br>sleep(<span class="hljs-number">3</span>)                                                <span class="hljs-comment"># 暂停视频</span><br>driver.execute_script(<span class="hljs-string">&quot;return arguments[0].load()&quot;</span>, element_video)<br>sleep(<span class="hljs-number">3</span>)                                                <span class="hljs-comment"># 重新载入视频</span><br>driver.execute_script(<span class="hljs-string">&quot;return arguments[0].play()&quot;</span>, element_video)<br>sleep(<span class="hljs-number">3</span>)                                                <span class="hljs-comment"># 持续播放3秒</span><br>driver.save_screenshot(<span class="hljs-string">r&quot;D:/.../h5video.png&quot;</span>)           <span class="hljs-comment"># 截图存放路径</span><br>sleep(<span class="hljs-number">3</span>)                                                <span class="hljs-comment"># 视频截图</span><br><br>driver.quit()                                           <span class="hljs-comment"># quit关闭整个浏览器</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-2-canvas画图标签"><a href="#7-2-canvas画图标签" class="headerlink" title="7-2 canvas画图标签"></a>7-2 canvas画图标签</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep<br><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver                          <span class="hljs-comment"># h5canvas.py</span><br><span class="hljs-keyword">from</span> selenium.webdriver.common.action_chains <span class="hljs-keyword">import</span> ActionChains<br><br>driver = webdriver.Edge()<br>driver.get(<span class="hljs-string">&quot;http://literallycanvas.com/&quot;</span>)               <span class="hljs-comment"># 有梯子更佳，部分地区访问速度慢</span><br>driver.maximize_window()                                <span class="hljs-comment"># 浏览器窗口最大化</span><br>driver.implicitly_wait(<span class="hljs-number">30</span>)<br><br>element_canvas = driver.find_element_by_xpath(<span class="hljs-string">&quot;//*[@id=&#x27;literally-canvas&#x27;]/div[3]/div[1]/canvas[1]&quot;</span>)<br>ActionChains(driver).click_and_hold(element_canvas).perform()<br>ActionChains(driver).move_by_offset(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>).move_by_offset(<span class="hljs-number">10</span>, -<span class="hljs-number">10</span>).perform()<br>ActionChains(driver).release().perform()                <span class="hljs-comment"># 模拟鼠标释放操作</span><br>sleep(<span class="hljs-number">3</span>)<br><br>driver.quit()                                           <span class="hljs-comment"># quit关闭整个浏览器</span><br></code></pre></td></tr></table></figure>
+
+
+
               
             </div>
             <hr/>
@@ -935,7 +954,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Selenium 基础</div>
-      <div>https://stitch-top.github.io/2022/01/02/testing/testing01-selenium-ji-chu/</div>
+      <div>https://stitch-top.github.io/2022/01/08/testing/testing01-selenium-ji-chu/</div>
     </div>
     <div class="license-meta">
       
@@ -947,7 +966,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年1月2日 20:15:40</div>
+          <div>2022年1月8日 20:15:40</div>
         </div>
       
       
@@ -1080,7 +1099,7 @@
     
       
       
-        <a href="/2022/01/02/testing/testing01-selenium-ji-chu/" title="Selenium 基础"
+        <a href="/2022/01/08/testing/testing01-selenium-ji-chu/" title="Selenium 基础"
            class="list-group-item list-group-item-action
            active">
           <span class="category-post">Selenium 基础</span>
