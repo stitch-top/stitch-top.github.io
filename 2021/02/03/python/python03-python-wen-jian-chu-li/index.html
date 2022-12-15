@@ -27,8 +27,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/0015241292.jpg">
 <meta property="article:published_time" content="2021-02-03T14:23:57.000Z">
-<meta property="article:modified_time" content="2022-11-04T15:27:25.105Z">
+<meta property="article:modified_time" content="2022-12-15T14:25:29.681Z">
 <meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="xlwt">
+<meta property="article:tag" content="xlrd">
 <meta property="article:tag" content="文件处理">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/0015241292.jpg">
@@ -247,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          8.3k 字
         
       </span>
     
@@ -258,7 +260,7 @@
         
         
         
-          17 分钟
+          69 分钟
         
       </span>
     
@@ -330,8 +332,8 @@
 
 
 <h1 id="1-文件处理"><a href="#1-文件处理" class="headerlink" title="1 文件处理"></a>1 文件处理</h1><ul>
-<li>open()函数<ul>
-<li>文件处理的关键函数，有filename和mode两个参数。</li>
+<li>文件处理<ul>
+<li><code>open()</code>函数，文件处理的关键函数，有filename和mode两个参数。</li>
 <li>打开文件的模式<ul>
 <li><code>x</code>：创建指定文件，如果文件存在则返回错误。</li>
 <li><code>r</code>：默认值，打开文件进行读取，如果文件不存在则出错。</li>
@@ -352,28 +354,31 @@
 
 
 
-<h1 id="2-读取文件"><a href="#2-读取文件" class="headerlink" title="2 读取文件"></a>2 读取文件</h1><ul>
-<li>read()方法<ul>
+<h2 id="1-1-读取文件"><a href="#1-1-读取文件" class="headerlink" title="1-1 读取文件"></a>1-1 读取文件</h2><ul>
+<li>读取文件<ul>
+<li><code>read()</code>方法<ul>
 <li><code>open()</code>函数返回一个文件对象，该对象的<code>read()</code>方法可以读取文件内容。</li>
 <li>若文件位于其他位置，须指定文件路径，<code>read()</code>方法可指定要返回的字符数。</li>
 </ul>
 </li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python">x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(x.read())                       <span class="hljs-comment"># 获取文件内容</span><br><br>y = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(y.read(<span class="hljs-number">5</span>))                      <span class="hljs-comment"># 返回文件的前5个字符</span><br><br><span class="hljs-comment"># f = open(&quot;D:\\demofile.txt&quot;, &quot;r&quot;)   # 指定文件路径</span><br><span class="hljs-comment"># print(f.read())</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>readline()方法<ul>
+<li><code>readline()</code>方法<ul>
 <li>使用该方法将返回文件的一行内容，调用两次则可以获取前两行。</li>
 <li>通过遍历文件的行，可以逐行读取整个文件，完成操作后将文件关闭是个好习惯。</li>
 <li>在某些情况下，由于缓冲，对文件所做的更改可能在关闭文件之前不会显示出来。</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python">x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(x.readline())                   <span class="hljs-comment"># 读取文件的一行</span><br><span class="hljs-built_in">print</span>(x.readline())                   <span class="hljs-comment"># 读取文件的前两行</span><br><br>y = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> y:                           <span class="hljs-comment"># 逐行循环文件</span><br>    <span class="hljs-built_in">print</span>(i)<br><br>x.close()                             <span class="hljs-comment"># 完成后关闭文件</span><br>y.close()<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-read"><a href="#1-read" class="headerlink" title="(1) read()"></a>(1) read()</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python">x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(x.read())                       <span class="hljs-comment"># 获取文件内容</span><br><br>y = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(y.read(<span class="hljs-number">5</span>))                      <span class="hljs-comment"># 返回文件的前5个字符</span><br><br><span class="hljs-comment"># f = open(&quot;D:\\demofile.txt&quot;, &quot;r&quot;)   # 指定文件路径</span><br><span class="hljs-comment"># print(f.read())</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h1 id="3-文件操作"><a href="#3-文件操作" class="headerlink" title="3 文件操作"></a>3 文件操作</h1><ul>
+<h4 id="2-readline"><a href="#2-readline" class="headerlink" title="(2) readline()"></a>(2) readline()</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python">x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-built_in">print</span>(x.readline())                   <span class="hljs-comment"># 读取文件的一行</span><br><span class="hljs-built_in">print</span>(x.readline())                   <span class="hljs-comment"># 读取文件的前两行</span><br><br>y = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> y:                           <span class="hljs-comment"># 逐行循环文件</span><br>    <span class="hljs-built_in">print</span>(i)<br><br>x.close()                             <span class="hljs-comment"># 完成后关闭文件</span><br>y.close()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-文件操作"><a href="#1-2-文件操作" class="headerlink" title="1-2 文件操作"></a>1-2 文件操作</h2><ul>
 <li>文件操作<ul>
 <li>写入现有文件，必须向<code>open()</code>函数添加参数。<ul>
 <li><code>a</code>：将内容追加到文件的末尾。</li>
@@ -393,15 +398,98 @@
 
 
 
-<h1 id="4-删除文件"><a href="#4-删除文件" class="headerlink" title="4 删除文件"></a>4 删除文件</h1><ul>
-<li>os模块<ul>
-<li>删除整个文件夹，需要使用<code>os.rmdir()</code>方法。</li>
+<h2 id="1-3-删除文件"><a href="#1-3-删除文件" class="headerlink" title="1-3 删除文件"></a>1-3 删除文件</h2><ul>
+<li>删除文件<ul>
+<li>os模块：删除整个文件夹，需要使用<code>os.rmdir()</code>方法。</li>
 <li>导入模块并运行<code>os.remove()</code>方法对文件进行删除操作。</li>
 <li>为避免出现错误，需要在尝试删除文件之前检查文件是否存在。</li>
 </ul>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> os<br>os.rmdir(<span class="hljs-string">&quot;myfolder&quot;</span>)                  <span class="hljs-comment"># 删除文件夹</span><br>os.remove(<span class="hljs-string">&quot;demofile.txt&quot;</span>)             <span class="hljs-comment"># 删除一个文件</span><br><br>x = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;demofile.txt&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>)         <span class="hljs-comment"># 打开文件并将内容附加到文件中</span><br>x.write(<span class="hljs-string">&quot;Now the file has more content!&quot;</span>)<br>x.close()<br><span class="hljs-keyword">if</span> os.path.exists(<span class="hljs-string">&quot;demofile.txt&quot;</span>):    <span class="hljs-comment"># 检查文件是否存在，然后将其删除</span><br>    os.remove(<span class="hljs-string">&quot;demofile.txt&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;The file does not exist.&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-Excel操作"><a href="#2-Excel操作" class="headerlink" title="2 Excel操作"></a>2 Excel操作</h1><ul>
+<li>Excel操作<ul>
+<li>xlwt库用于将数据写入Excel中，不支持xlsx格式，仅支持xls格式的Excel，命令<code>pip install xlwt</code>进行安装。</li>
+<li>xlrd库用于读取Excel中的数据，新版不支持xlsx格式，若要支持，命令<code>pip install xlrd==1.2.0</code>进行安装。<ul>
+<li>Python3.9新版中，xlrd库更新删除了<code>getiterator()</code>方法，xlrd版本1.2.0在读取xlsx格式文档时会报错。</li>
+<li>执行时的报错信息：<code>AttributeError: &#39;ElementTree&#39; object has no attribute &#39;getiterator&#39;</code>。</li>
+<li>到Python目录的\Lib\site-packages\xlrd\xlsx.py文件中，将两个<code>getiterator()</code>都改为<code>iter()</code>即可。</li>
+</ul>
+</li>
+<li>常用单元格中的数据类型：empty(空的)、string(文本)、number、date、boolean、error、blank(空白表格)。</li>
+<li>Excel中三大对象：Cell(单元格对象)、Sheet(工作表对象)、WorkBook(工作簿对象)。<ul>
+<li><code>style_compression=0</code>：表示是否压缩。</li>
+<li><code>cell_overwrite_ok=True</code>：是否可以覆盖单元格(覆写)，默认为False。</li>
+<li><code>worksheet.write(行, 列, 值)</code>：向Sheet页的第一行第一列写入数据值。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlwt                                         <span class="hljs-comment"># excel.py</span><br><span class="hljs-keyword">import</span> xlrd<br><br>wbook = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>, style_compression=<span class="hljs-number">0</span>)<br>sheet = wbook.add_sheet(<span class="hljs-string">&#x27;tabname&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br>sheet.write(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;xlwt&#x27;</span>)                           <span class="hljs-comment"># 第1行第1列写入xlwt</span><br>wbook.save(<span class="hljs-string">&#x27;write.xls&#x27;</span>)                             <span class="hljs-comment"># 保存到当前路径的write.xls中</span><br><br>data = xlrd.open_workbook(<span class="hljs-string">&#x27;write.xls&#x27;</span>)              <span class="hljs-comment"># 读取write.xls中的数据</span><br><span class="hljs-built_in">print</span>(data)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-1-写入样式"><a href="#2-1-写入样式" class="headerlink" title="2-1 写入样式"></a>2-1 写入样式</h2><ul>
+<li>写入样式<ul>
+<li>xlwt中设置单元格样式主要通过XFStyle这个类来完成。</li>
+<li><code>font</code>：字体，Font类实例。</li>
+<li><code>pattern</code>：填充，Pattern类实例。</li>
+<li><code>borders</code>：边框，Borders类实例。</li>
+<li><code>alignment</code>：对齐，Alignment类实例。</li>
+<li><code>protection</code>：保护，Protection类实例。</li>
+<li><code>num_format_str</code>(属性名)：数据格式(属性)，str(值类型)。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-字体"><a href="#1-字体" class="headerlink" title="(1) 字体"></a>(1) 字体</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlwt                                         <span class="hljs-comment"># font.py</span><br><br>wbook = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>sheet = wbook.add_sheet(<span class="hljs-string">&#x27;font&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br><br>style = xlwt.XFStyle()                              <span class="hljs-comment"># 初始化样式</span><br>fonts = xlwt.Font()                                 <span class="hljs-comment"># 为样式创建字体</span><br><br>fonts.name = <span class="hljs-string">&quot;Arial&quot;</span>                                <span class="hljs-comment"># 指定字体</span><br>fonts.height = <span class="hljs-number">200</span>                                  <span class="hljs-comment"># 与Excel字体大小比例是1:20，200/20=10号字体</span><br>fonts.bold = <span class="hljs-literal">True</span>                                   <span class="hljs-comment"># 加粗</span><br>fonts.underline = <span class="hljs-literal">True</span>                              <span class="hljs-comment"># 加下划线</span><br>fonts.struck_out = <span class="hljs-literal">True</span>                             <span class="hljs-comment"># 加横线</span><br>fonts.italic = <span class="hljs-literal">True</span>                                 <span class="hljs-comment"># 斜体字</span><br>fonts.colour_index = <span class="hljs-number">4</span>                              <span class="hljs-comment"># 字体颜色</span><br><br>style.font = fonts                                  <span class="hljs-comment"># 设定字体样式</span><br>sheet.write(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;no style&#x27;</span>)                       <span class="hljs-comment"># 向sheet页添加数据</span><br>sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;font&#x27;</span>, style)<br><br>wbook.save(<span class="hljs-string">&#x27;write.xls&#x27;</span>)                             <span class="hljs-comment"># 保存到当前路径的write.xls中</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-背景颜色"><a href="#2-背景颜色" class="headerlink" title="(2) 背景颜色"></a>(2) 背景颜色</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlwt                                         <span class="hljs-comment"># pattern.py</span><br><br>wbook = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>sheet = wbook.add_sheet(<span class="hljs-string">&#x27;pattern&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br><br>style = xlwt.XFStyle()                              <span class="hljs-comment"># 初始化样式</span><br>pattern = xlwt.Pattern()                            <span class="hljs-comment"># 为样式创建背景图案</span><br><br>pattern.pattern = xlwt.Pattern.SOLID_PATTERN        <span class="hljs-comment"># 设置背景颜色模式</span><br>pattern.pattern_fore_colour = <span class="hljs-number">3</span>                     <span class="hljs-comment"># 不同值代表不同背景色</span><br><br>style.pattern = pattern                             <span class="hljs-comment"># 设定背景图案样式</span><br>sheet.write(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;no style&#x27;</span>)                       <span class="hljs-comment"># 向sheet页添加数据</span><br>sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;pattern&#x27;</span>, style)<br><br>wbook.save(<span class="hljs-string">&#x27;write.xls&#x27;</span>)                             <span class="hljs-comment"># 保存到当前路径的write.xls中</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-边框设置"><a href="#3-边框设置" class="headerlink" title="(3) 边框设置"></a>(3) 边框设置</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlwt                                         <span class="hljs-comment"># borders.py</span><br><br>wbook = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>sheet = wbook.add_sheet(<span class="hljs-string">&#x27;borders&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br><br>style = xlwt.XFStyle()                              <span class="hljs-comment"># 初始化样式</span><br>borders = xlwt.Borders()                            <span class="hljs-comment"># 为样式创建边框设置</span><br><br>borders.left = xlwt.Borders.THIN                    <span class="hljs-comment"># 设定边框属性</span><br>borders.right = xlwt.Borders.THIN<br>borders.top = xlwt.Borders.THIN<br>borders.bottom = xlwt.Borders.THIN<br><br>style.borders = borders                             <span class="hljs-comment"># 设定边框样式</span><br>sheet.write(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;no style&#x27;</span>)                       <span class="hljs-comment"># 向sheet页添加数据</span><br>sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;borders&#x27;</span>, style)<br><br>wbook.save(<span class="hljs-string">&#x27;write.xls&#x27;</span>)                             <span class="hljs-comment"># 保存到当前路径的write.xls中</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-对齐方式"><a href="#4-对齐方式" class="headerlink" title="(4) 对齐方式"></a>(4) 对齐方式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlwt                                         <span class="hljs-comment"># alignment.py</span><br><br>wbook = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>sheet = wbook.add_sheet(<span class="hljs-string">&#x27;alignment&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br><br>style = xlwt.XFStyle()                              <span class="hljs-comment"># 初始化样式</span><br>alignment = xlwt.Alignment()                        <span class="hljs-comment"># 为样式创建对齐方式设置</span><br><br>alignment.vert = <span class="hljs-number">0x01</span>                               <span class="hljs-comment"># vert垂直对齐：0x00上、0x01中、0x02下</span><br>alignment.horz = <span class="hljs-number">0x03</span>                               <span class="hljs-comment"># horz水平对齐：0x01左、0x02中、0x03右</span><br>alignment.wrap = <span class="hljs-number">1</span>                                  <span class="hljs-comment"># 设定自动换行</span><br><br>style.alignment = alignment                         <span class="hljs-comment"># 设定对齐方式</span><br>sheet.write(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;no style&#x27;</span>)                       <span class="hljs-comment"># 向sheet页添加数据</span><br>sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;alignment\nalignment\nalignment&#x27;</span>, style)<br><br>wbook.save(<span class="hljs-string">&#x27;write.xls&#x27;</span>)                             <span class="hljs-comment"># 保存到当前路径的write.xls中</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-单元格格式"><a href="#5-单元格格式" class="headerlink" title="(5) 单元格格式"></a>(5) 单元格格式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlwt                                     <span class="hljs-comment"># format.py</span><br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime<br><br>wbook = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>sheet = wbook.add_sheet(<span class="hljs-string">&#x27;format&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br><br>data = <span class="hljs-string">&#x27;2022-02-02&#x27;</span><br>style = xlwt.XFStyle()                          <span class="hljs-comment"># 初始化样式</span><br>num_format_str = <span class="hljs-string">&#x27;YYYY\/MM\/DD&#x27;</span>                 <span class="hljs-comment"># ..\site-packages\xlwt\Style.py文件中可查</span><br>style.num_format_str = num_format_str<br><br>sheet.write(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, data)                         <span class="hljs-comment"># 向sheet页添加数据</span><br>sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, datetime.strptime(data, <span class="hljs-string">&#x27;%Y-%m-%d&#x27;</span>).date(), style)<br><br>wbook.save(<span class="hljs-string">&#x27;write.xls&#x27;</span>)                         <span class="hljs-comment"># 保存到当前路径的write.xls中</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-列宽与行高"><a href="#6-列宽与行高" class="headerlink" title="(6) 列宽与行高"></a>(6) 列宽与行高</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlwt                                             <span class="hljs-comment"># col.py</span><br><br>wbook = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>sheet = wbook.add_sheet(<span class="hljs-string">&#x27;col&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br><br>sheet.write(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;no style&#x27;</span>)                           <span class="hljs-comment"># 向sheet页添加数据</span><br>sheet.write(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;col&#x27;</span>)<br>sheet.write(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;col&#x27;</span>)<br>sheet.col(<span class="hljs-number">1</span>).width = <span class="hljs-number">256</span>*<span class="hljs-number">30</span>                             <span class="hljs-comment"># 设定第1列列宽，约为30个字符</span><br>sheet.row(<span class="hljs-number">1</span>).set_style(xlwt.easyxf(<span class="hljs-string">&#x27;font: height 720&#x27;</span>)) <span class="hljs-comment"># 44.25磅，怎么换算的？？？</span><br><br>wbook.save(<span class="hljs-string">&#x27;write.xls&#x27;</span>)                                 <span class="hljs-comment"># 保存到当前路径的write.xls中</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-行与列合并"><a href="#7-行与列合并" class="headerlink" title="(7) 行与列合并"></a>(7) 行与列合并</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlwt                                             <span class="hljs-comment"># merge.py</span><br><br>wbook = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>sheet = wbook.add_sheet(<span class="hljs-string">&#x27;merge&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)<br><br>sheet.write(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;no style&#x27;</span>)                           <span class="hljs-comment"># 向sheet页添加数据</span><br>sheet.write_merge(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-string">&#x27;merge&#x27;</span>)                  <span class="hljs-comment"># 1-4行，2-5列，合并单元格</span><br><br>wbook.save(<span class="hljs-string">&#x27;write.xls&#x27;</span>)                                 <span class="hljs-comment"># 保存到当前路径的write.xls中</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-读取数据"><a href="#2-2-读取数据" class="headerlink" title="2-2 读取数据"></a>2-2 读取数据</h2><figure class="highlight xlsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Xlsx"># write.xlsx<br>Name  Age Language  Registration <span class="hljs-built_in">date</span><br>Sims  <span class="hljs-number">30</span>  C         <span class="hljs-number">2020</span>-<span class="hljs-number">12</span>-<span class="hljs-number">20</span><br>Peck  <span class="hljs-number">29</span>  C#        <span class="hljs-number">2020</span>-<span class="hljs-number">12</span>-<span class="hljs-number">21</span><br>Lane  <span class="hljs-number">28</span>  C++       <span class="hljs-number">2020</span>-<span class="hljs-number">12</span>-<span class="hljs-number">22</span><br>Fred  <span class="hljs-number">27</span>  Java      <span class="hljs-number">2020</span>-<span class="hljs-number">12</span>-<span class="hljs-number">23</span><br>Miya  <span class="hljs-number">26</span>  Python    <span class="hljs-number">2020</span>-<span class="hljs-number">12</span>-<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-获取Sheet"><a href="#1-获取Sheet" class="headerlink" title="(1) 获取Sheet"></a>(1) 获取Sheet</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlrd                              <span class="hljs-comment"># sheet.py</span><br><br>data = xlrd.open_workbook(<span class="hljs-string">&#x27;write.xlsx&#x27;</span>)  <span class="hljs-comment"># 读取文件中的数据，write.xlsx与当前代码同个目录</span><br><br>sheet1 = data.sheets()[<span class="hljs-number">0</span>]                <span class="hljs-comment"># 索引顺序获取首个sheet</span><br>sheet2 = data.sheet_by_index(<span class="hljs-number">0</span>)          <span class="hljs-comment"># 索引顺序获取首个sheet</span><br>sheet3 = data.sheet_by_name(<span class="hljs-string">&#x27;write&#x27;</span>)     <span class="hljs-comment"># 通过sheet名称获取，上述方式若不存在sheet会报错</span><br>sheetNames = data.sheet_names()          <span class="hljs-comment"># 获取文件中的所有sheet页面名称</span><br><span class="hljs-built_in">print</span>(sheet1)<br><span class="hljs-built_in">print</span>(sheet2)<br><span class="hljs-built_in">print</span>(sheet3)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;All sheet page names: &quot;</span> + <span class="hljs-built_in">str</span>(sheetNames))<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-获取行操作"><a href="#2-获取行操作" class="headerlink" title="(2) 获取行操作"></a>(2) 获取行操作</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlrd                              <span class="hljs-comment"># nrows.py</span><br><br>data = xlrd.open_workbook(<span class="hljs-string">&#x27;write.xlsx&#x27;</span>)  <span class="hljs-comment"># 读取文件中的数据，write.xlsx与当前代码同个目录</span><br>sheet = data.sheet_by_index(<span class="hljs-number">0</span>)           <span class="hljs-comment"># 获取首个sheet页数据</span><br><br>nrows = sheet.nrows                      <span class="hljs-comment"># 获取该sheet中的有效行数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of valid nrows: &quot;</span> + <span class="hljs-built_in">str</span>(nrows))<br><br>cells = sheet.row_len(<span class="hljs-number">0</span>)                 <span class="hljs-comment"># 获取第一行中有效单元格数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of valid cells: &quot;</span> + <span class="hljs-built_in">str</span>(cells))<br><br>firstLine = sheet.row_values(<span class="hljs-number">0</span>)          <span class="hljs-comment"># 获取第一行内容</span><br><span class="hljs-built_in">print</span>(firstLine)<br><br><span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nrows):                   <span class="hljs-comment"># 获取所有行数据</span><br>    <span class="hljs-built_in">print</span>(sheet.row_values(r))<br><br><span class="hljs-built_in">print</span>(sheet.row_slice(<span class="hljs-number">0</span>))                <span class="hljs-comment"># 返回由该行中所有的单元格对象组成的列表</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-获取列操作"><a href="#3-获取列操作" class="headerlink" title="(3) 获取列操作"></a>(3) 获取列操作</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlrd                              <span class="hljs-comment"># ncols.py</span><br><br>data = xlrd.open_workbook(<span class="hljs-string">&#x27;write.xlsx&#x27;</span>)  <span class="hljs-comment"># 读取文件中的数据，write.xlsx与当前代码同个目录</span><br>sheet = data.sheet_by_index(<span class="hljs-number">0</span>)           <span class="hljs-comment"># 获取首个sheet页数据</span><br><br>ncols = sheet.ncols                      <span class="hljs-comment"># 获取该sheet中的有效列数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of valid ncols: &quot;</span> + <span class="hljs-built_in">str</span>(ncols))<br><span class="hljs-built_in">print</span>(sheet.col(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>))                <span class="hljs-comment"># 返回第一行和第二行的单元格对象组成的列表</span><br><span class="hljs-built_in">print</span>(sheet.col_slice(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>))          <span class="hljs-comment"># 返回第一行和第二行的单元格对象组成的列表</span><br><span class="hljs-built_in">print</span>(sheet.col_values(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>))         <span class="hljs-comment"># 返回第一行和第二行的单元格数据组成的列表</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-获取单元格"><a href="#4-获取单元格" class="headerlink" title="(4) 获取单元格"></a>(4) 获取单元格</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> xlrd                                    <span class="hljs-comment"># cell.py</span><br><br>data = xlrd.open_workbook(<span class="hljs-string">&#x27;write.xlsx&#x27;</span>)        <span class="hljs-comment"># 读取文件中的数据，write.xlsx与当前代码同个目录</span><br>sheet = data.sheet_by_index(<span class="hljs-number">0</span>)                 <span class="hljs-comment"># 获取首个sheet页数据</span><br><br><span class="hljs-built_in">print</span>(sheet.cell(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>))                        <span class="hljs-comment"># 返回第一行第一列的单元格对象</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data: &quot;</span> + <span class="hljs-built_in">str</span>(sheet.cell_value(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)))  <span class="hljs-comment"># 返回第一行第一列的单元格数据</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -435,6 +523,10 @@
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/xlwt/">#xlwt</a>
+      
+        <a href="/tags/xlrd/">#xlrd</a>
       
         <a href="/tags/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/">#文件处理</a>
       
