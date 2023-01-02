@@ -4,33 +4,6 @@
   
   
   <entry>
-    <title>JMeter 基础</title>
-    <link href="/2022/05/15/jmeter/jmeter01-jmeter-ji-chu/"/>
-    <url>/2022/05/15/jmeter/jmeter01-jmeter-ji-chu/</url>
-    
-    <content type="html"><![CDATA[<p>JMeter是Apache组织使用Java开发的一款测试工具，可以用于对服务器、网络或对象模拟巨大的负载，开源、免费、功能强大。</p><span id="more"></span><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><ul><li>简介<ul><li>优点：开源、跨平台、支持多协议、小巧、功能强大。</li><li>缺点：不支持IP欺骗、无法验证JS程序，也无法验证页面UI，需与Selenium配合完成Web2.0应用的测试。</li><li>安装<ul><li>Java环境依赖：JDK和JRE，这里使用Java1.8.0版本。<ul><li><code>JAVA_HOME</code>：JDK路径。</li><li><code>PATH</code>：JDK的bin路径，以及JRE的bin路径。</li><li><code>CLASSPATH</code>：JDK目录的lib文件夹下的<code>dt.jar</code>路径，以及<code>tools.jar</code>路径。</li><li>命令窗口下分别输入<code>java -version</code>和<code>javac -version</code>进行验证是否成功。</li></ul></li><li><a href="https://jmeter.apache.org/">JMeter官网</a>：自行下载解压，使用JMeter5.4.3版本。</li><li><a href="https://www.python.org/">Python官网</a>、<a href="https://www.anaconda.com/">Anaconda官网</a>：自行下载安装其一即可。</li></ul></li><li>中文乱码<ul><li>到bin目录的<code>jmeter.properties</code>文件中修改编码集，打开文件后，<code>CTRL+F</code>搜索定位<code>ISO-8859-1</code>。</li><li>将<code># sampleresult.default.encoding=ISO-8859-1</code>一行注释取消，并把<code>ISO-8859-1</code>改为<code>UTF-8</code>。</li></ul></li><li>bin目录下文件说明<ul><li><code>jmeter.sh</code>：Linux下命令行启动。</li><li><code>jmeter.bat</code>：Windows下命令行启动。</li><li><code>ApacheJMeter.jar</code>：图形化启动入口。</li></ul></li></ul></li></ul><h2 id="1-1-接口"><a href="#1-1-接口" class="headerlink" title="1-1 接口"></a>1-1 接口</h2><ul><li>接口<ul><li>接口大全：<a href="http://www.free-api.com/">http://www.free-api.com/</a>，失效自行更换。</li><li>这里以“<a href="http://www.free-api.com/doc/320">天气查询</a>”接口为例，介绍JMeter的简单使用。</li><li>基本说明<table><thead><tr><th align="center">接口地址</th><th align="left"><a href="https://api.asilu.com/weather/">https://api.asilu.com/weather/</a></th></tr></thead><tbody><tr><td align="center">返回格式</td><td align="left">Json</td></tr><tr><td align="center">请求方式</td><td align="left">Get&#x2F;Post</td></tr><tr><td align="center">请求示例</td><td align="left"><a href="https://api.asilu.com/weather/?city=%E5%8E%A6%E9%97%A8">https://api.asilu.com/weather/?city=%E5%8E%A6%E9%97%A8</a></td></tr></tbody></table></li><li>请求参数说明<table><thead><tr><th align="center">名称<div style="width: 50px;"></div></th><th align="center">类型<div style="width: 50px;"></div></th><th align="center">必填<div style="width: 50px;"></div></th><th align="center">说明<div style="width: 250px;"></div></th></tr></thead><tbody><tr><td align="center">city</td><td align="center">string</td><td align="center">必填</td><td align="center">要查询天气的城市，例如：厦门</td></tr></tbody></table></li></ul></li><li>JMeter<ul><li>选中左侧的“测试计划”，右键：添加—&gt;线程（用户）—&gt;线程组。</li><li>选中已添加好的“线程组”，右键：添加—&gt;取样器—&gt;HTTP请求。</li><li>选中左侧的“测试计划”，右键：添加—&gt;监听器—&gt;察看结果树。</li></ul></li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>JMeter</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>JMeter</tag>
-      
-      <tag>Apache</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Allure 报告框架</title>
     <link href="/2022/03/01/testing/testing03-allure-bao-gao-kuang-jia/"/>
     <url>/2022/03/01/testing/testing03-allure-bao-gao-kuang-jia/</url>
