@@ -85,6 +85,33 @@
   
   
   <entry>
+    <title>F12 开发者工具</title>
+    <link href="/2022/01/03/testing/testing01-f12-kai-fa-zhe-gong-ju/"/>
+    <url>/2022/01/03/testing/testing01-f12-kai-fa-zhe-gong-ju/</url>
+    
+    <content type="html"><![CDATA[<p>利用浏览器中的F12开发者工具选项，可以进行网站界面的测试、调试及分析网页出现的问题，查看HTML元素、响应事件等。</p><span id="more"></span><h1 id="1-开发者工具"><a href="#1-开发者工具" class="headerlink" title="1 开发者工具"></a>1 开发者工具</h1><ul><li>开发者工具<ul><li>Elements：元素，用于查找网页源代码中的元素，手动修改任一元素的属性和样式能在浏览器中得到实时反馈。</li><li>Console：控制台，记录开发者开发过程中的日志信息，并且可以作为与JavaScript代码进行交互的命令行Shell。</li><li>Sources：源代码。<ul><li>用于查看页面的HTML源代码、JavaScript源代码、CSS源代码。</li><li>还可用于调试JavaScript源代码，给JavaScript源代码添加断点。</li></ul></li><li>Network：网络。<ul><li>从发起网页页面请求Request，到分析HTTP请求后，得到的各个请求资源信息。</li><li>包括名称、状态、类型、启动器、大小、时间、瀑布流，测试人员应重点掌握。</li></ul></li><li>Performance：前端性能，监控CPU、内存、网络、GPU、时间消耗等资源。</li><li>Memory：内存，查看当前网页的JavaScript占用内存情况，有堆快照、分时段的内存占用、分配采样这三种分析类型。</li><li>Application：应用，记录加载的所有资源，包括本地和会话存储空间、IndexedDB、Web SQL、Cookie、应用程序缓存。</li><li>Security：安全，调试当前网页的安全和认证问题，确保网站正确地实现HTTPS，即判断当前网页是否安全。</li></ul></li></ul><h1 id="2-Elements"><a href="#2-Elements" class="headerlink" title="2 Elements"></a>2 Elements</h1><ul><li>Elements<ul><li></li></ul></li></ul><h1 id="3-Console"><a href="#3-Console" class="headerlink" title="3 Console"></a>3 Console</h1><h1 id="4-Sources"><a href="#4-Sources" class="headerlink" title="4 Sources"></a>4 Sources</h1><h1 id="5-Network"><a href="#5-Network" class="headerlink" title="5 Network"></a>5 Network</h1><h1 id="6-Performance"><a href="#6-Performance" class="headerlink" title="6 Performance"></a>6 Performance</h1><h1 id="7-Memory"><a href="#7-Memory" class="headerlink" title="7 Memory"></a>7 Memory</h1><h1 id="8-Application"><a href="#8-Application" class="headerlink" title="8 Application"></a>8 Application</h1><h1 id="9-Security"><a href="#9-Security" class="headerlink" title="9 Security"></a>9 Security</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>Testing</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Chrome</tag>
+      
+      <tag>F12</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python 机器学习</title>
     <link href="/2021/06/06/python/python10-python-ji-qi-xue-xi/"/>
     <url>/2021/06/06/python/python10-python-ji-qi-xue-xi/</url>
@@ -290,9 +317,9 @@
     
     <tags>
       
-      <tag>xlwt</tag>
+      <tag>Xlwt</tag>
       
-      <tag>xlrd</tag>
+      <tag>Xlrd</tag>
       
       <tag>文件处理</tag>
       
