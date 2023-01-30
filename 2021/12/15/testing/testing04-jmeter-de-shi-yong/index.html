@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/8576352387.jpg">
 <meta property="article:published_time" content="2021-12-15T15:33:27.000Z">
-<meta property="article:modified_time" content="2023-01-29T09:28:17.273Z">
+<meta property="article:modified_time" content="2023-01-30T13:59:25.849Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="JMeter">
 <meta property="article:tag" content="Apache">
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          3.4k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          21 分钟
+          29 分钟
         
       </span>
     
@@ -345,6 +345,7 @@
 <li>启动JMeter，双击<code>..\apache-jmeter-5.1\bin\jmeter.bat</code>文件，如果位于系统盘，最好以管理员身份启动。</li>
 </ul>
 </li>
+<li><a target="_blank" rel="noopener" href="https://www.zentao.net/dl/zentao/18.0/ZenTaoPMS.18.0.win64.exe">禅道开源版18.0</a>：下载安装后进入xampp目录中，再双击start.exe启动(账号Admin，密码123456，改为Aa12345)。</li>
 </ul>
 </li>
 </ul>
@@ -406,7 +407,7 @@
 <li>原则：以取样器为核心，取样器没有作用域。<ul>
 <li>逻辑控制器：只对子节点的取样器和逻辑控制器起作用。</li>
 <li>其他组件<ul>
-<li>如果父节点是取样器，则只对其父节点起作用。</li>
+<li>如果父节点是取样器，只对父节点(取样器)起作用。</li>
 <li>如果父节点非取样器，则该作用域是其父节点下的其他所有后代节点，包括子节点，以及子子节点等。</li>
 </ul>
 </li>
@@ -462,18 +463,73 @@
 <h2 id="2-2-参数列表传参-GET"><a href="#2-2-参数列表传参-GET" class="headerlink" title="2-2 参数列表传参(GET)"></a>2-2 参数列表传参(GET)</h2><p><img src="/../../img/JMeter/JMeter@011.jpg" srcset="/img/load.gif" lazyload alt="HTTP请求-参数列表传参(GET)"></p>
 <h2 id="2-3-参数列表传参-POST"><a href="#2-3-参数列表传参-POST" class="headerlink" title="2-3 参数列表传参(POST)"></a>2-3 参数列表传参(POST)</h2><p><img src="/../../img/JMeter/JMeter@012.jpg" srcset="/img/load.gif" lazyload alt="HTTP请求-参数列表传参(POST)"></p>
 <h2 id="2-4-请求体数据传参"><a href="#2-4-请求体数据传参" class="headerlink" title="2-4 请求体数据传参"></a>2-4 请求体数据传参</h2><p><img src="/../../img/JMeter/JMeter@013.jpg" srcset="/img/load.gif" lazyload alt="HTTP请求-请求体数据传参"></p>
-<h1 id="3-参数化"><a href="#3-参数化" class="headerlink" title="3 参数化"></a>3 参数化</h1><ul>
-<li>参数化<ul>
+<h1 id="3-参数化设置"><a href="#3-参数化设置" class="headerlink" title="3 参数化设置"></a>3 参数化设置</h1><ul>
+<li>参数化设置<ul>
 <li>根据需求动态获取数据并进行赋值的过程，参数化变量用<code>$&#123;name&#125;</code>表示。</li>
-<li>参数化常用方式(元件)：用户参数、用户定义的变量、CSV数据文件设置。</li>
+<li>常用的方式<ul>
+<li>函数助手：适用于值在一定区间无规律且随机的情况。</li>
+<li>用户参数：适用于取值范围小的参数(少量测试数据)。</li>
+<li>用户定义的变量：并非做参数化使用，而是用来定义全局变量。</li>
+<li>CSV数据文件设置：支持读取外部数据，适用于大量数据测试。</li>
 </ul>
 </li>
 </ul>
-<h2 id="3-1-用户参数"><a href="#3-1-用户参数" class="headerlink" title="3-1 用户参数"></a>3-1 用户参数</h2><ul>
+</li>
+</ul>
+<h2 id="3-1-函数助手"><a href="#3-1-函数助手" class="headerlink" title="3-1 函数助手"></a>3-1 函数助手</h2><ul>
+<li>函数助手<ul>
+<li>位于任务栏的工具中，适用于值在一定区间无规律且随机的情况，例如：价格、数量等。</li>
+<li>示例：实现HTTP请求的名称带有随机值，需使用到的元件包含HTTP请求、察看结果树。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-取值设置"><a href="#1-取值设置" class="headerlink" title="(1) 取值设置"></a>(1) 取值设置</h4><p><img src="/../../img/JMeter/JMeter@014.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-函数助手-取值设置"></p>
+<h4 id="2-结果分析"><a href="#2-结果分析" class="headerlink" title="(2) 结果分析"></a>(2) 结果分析</h4><p><img src="/../../img/JMeter/JMeter@015.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-函数助手-结果分析"></p>
+<h2 id="3-2-用户参数"><a href="#3-2-用户参数" class="headerlink" title="3-2 用户参数"></a>3-2 用户参数</h2><ul>
 <li>用户参数<ul>
-<li>适用于取值范围小的参数(少量测试数据)，位于前置处理器中。</li>
-<li>在用户参数中添加变量后，需要在其父节点HTTP请求的参数列表中引用相应的变量。</li>
-<li>并且每个线程会一直使用一组数据，需要在线程组中设置与用户数一致的“线程数”。</li>
+<li>适用于取值范围小的参数(少量测试数据)，元件位于“前置处理器”中。</li>
+<li>在用户参数中添加变量后，需要在父节点“HTTP请求”的参数列表中引用相应的变量。</li>
+<li>并且每个线程会一直使用一组数据，需在“线程组”中设置与用户数一致的“线程数”。</li>
+<li>示例：实现禅道批量用户登录，需使用到的元件包含HTTP请求、用户参数、察看结果树。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-添加变量"><a href="#1-添加变量" class="headerlink" title="(1) 添加变量"></a>(1) 添加变量</h4><p><img src="/../../img/JMeter/JMeter@016.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-用户参数-添加变量"></p>
+<h4 id="2-参数设置"><a href="#2-参数设置" class="headerlink" title="(2) 参数设置"></a>(2) 参数设置</h4><p><img src="/../../img/JMeter/JMeter@017.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-用户参数-参数设置"></p>
+<h2 id="3-3-用户定义的变量"><a href="#3-3-用户定义的变量" class="headerlink" title="3-3 用户定义的变量"></a>3-3 用户定义的变量</h2><ul>
+<li>用户定义的变量<ul>
+<li>并非用来做HTTP请求参数化，而是用来定义全局变量，例如参数化文件路径、HOST、URL等。</li>
+<li>创建在“线程组”下，则在线程组内生效，如果创建在“测试计划”下，则对所有线程组生效。</li>
+<li>示例：实现HTTP请求的IP参数化，需使用到的元件包含用户定义的变量、HTTP请求、察看结果树。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-添加变量-1"><a href="#1-添加变量-1" class="headerlink" title="(1) 添加变量"></a>(1) 添加变量</h4><p><img src="/../../img/JMeter/JMeter@018.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-用户定义的变量-添加变量"></p>
+<h4 id="2-参数设置-1"><a href="#2-参数设置-1" class="headerlink" title="(2) 参数设置"></a>(2) 参数设置</h4><p><img src="/../../img/JMeter/JMeter@019.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-用户定义的变量-参数设置"></p>
+<h4 id="3-结果分析"><a href="#3-结果分析" class="headerlink" title="(3) 结果分析"></a>(3) 结果分析</h4><p><img src="/../../img/JMeter/JMeter@020.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-用户定义的变量-结果分析"></p>
+<h2 id="3-4-CSV数据文件设置"><a href="#3-4-CSV数据文件设置" class="headerlink" title="3-4 CSV数据文件设置"></a>3-4 CSV数据文件设置</h2><ul>
+<li>CSV数据文件设置<ul>
+<li>支持读取外部数据，适用于大量数据测试，元件位于“配置元件”中。</li>
+<li>线程共享模式：指多个线程对文件数据取值顺序模式，JMeter提供了三种模式。<ul>
+<li>例如：脚本有2个线程组，各有2个线程，文件内有5行数据，脚本运行时，将如下循环往复取值。</li>
+<li>所有线程：如果脚本有多个线程组，在这种模式下，各线程组的所有线程也要依次唯一顺序取值。<br><img src="/../../img/JMeter/JMeter@021.png" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-线程共享模式-所有线程"></li>
+<li>当前线程组：各个线程组之间隔离，线程组内的线程顺序唯一取值。<br><img src="/../../img/JMeter/JMeter@022.png" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-线程共享模式-当前线程组"></li>
+<li>当前线程：每个线程独立，顺序唯一取值。<br><img src="/../../img/JMeter/JMeter@023.png" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-线程共享模式-当前线程"></li>
+</ul>
+</li>
+<li>示例：实现禅道批量用户登录，需使用到的元件包含HTTP请求、CSV数据文件设置、察看结果树。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-userinfo-txt"><a href="#1-userinfo-txt" class="headerlink" title="(1) userinfo.txt"></a>(1) userinfo.txt</h4><p><img src="/../../img/JMeter/JMeter@024.png" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-userinfo.txt"></p>
+<h4 id="2-设置CSV数据文件"><a href="#2-设置CSV数据文件" class="headerlink" title="(2) 设置CSV数据文件"></a>(2) 设置CSV数据文件</h4><p><img src="/../../img/JMeter/JMeter@025.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-设置CSV数据文件"></p>
+<h4 id="3-HTTP请求参数配置"><a href="#3-HTTP请求参数配置" class="headerlink" title="(3) HTTP请求参数配置"></a>(3) HTTP请求参数配置</h4><p><img src="/../../img/JMeter/JMeter@026.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-HTTP请求参数配置"></p>
+<h4 id="4-察看结果树进行分析"><a href="#4-察看结果树进行分析" class="headerlink" title="(4) 察看结果树进行分析"></a>(4) 察看结果树进行分析</h4><p><img src="/../../img/JMeter/JMeter@027.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-察看结果树分析"></p>
+<h1 id="4-常用的断言"><a href="#4-常用的断言" class="headerlink" title="4 常用的断言"></a>4 常用的断言</h1><ul>
+<li>常用的断言<ul>
+<li>响应断言：对HTTP请求的任意格式响应结果进行断言。</li>
+<li>JSON断言：HTTP响应结果是JSON格式时，使用JSON断言。</li>
+<li>断言持续时间：检查HTTP请求的响应数据是否超出要求范围。</li>
 </ul>
 </li>
 </ul>
@@ -792,7 +848,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a><span>Copyright © 2021 - 2022</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+       <a><span>Copyright © 2021 - 2023</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
     </div>
   
   
