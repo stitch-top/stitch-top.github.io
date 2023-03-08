@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1452632220.png">
 <meta property="article:published_time" content="2022-02-06T15:13:00.000Z">
-<meta property="article:modified_time" content="2023-03-08T09:36:56.471Z">
+<meta property="article:modified_time" content="2023-03-08T15:58:47.861Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="接口">
 <meta name="twitter:card" content="summary_large_image">
@@ -247,7 +247,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.6k 字
         
       </span>
     
@@ -258,7 +258,7 @@
         
         
         
-          10 分钟
+          14 分钟
         
       </span>
     
@@ -401,10 +401,51 @@
 <li>Content-Type：标识请求体的数据类型。</li>
 </ul>
 </li>
-<li>空行：代表http请求头结束。</li>
+<li>空行：代表HTTP请求头结束。</li>
 <li>请求体：请求发送时携带的数据，数据类型受Content-Type值的影响。<ul>
 <li>POST、PUT：有请求体</li>
 <li>GET、DELETE：无请求体。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-HTTP响应"><a href="#1-3-HTTP响应" class="headerlink" title="1-3 HTTP响应"></a>1-3 HTTP响应</h2><ul>
+<li>HTTP响应<ul>
+<li>作用<ul>
+<li>规定了回发给客户端的数据组织格式。</li>
+<li>服务器端针对客户端发送的HTTP请求，回发响应数据(HTTP应答)。</li>
+</ul>
+</li>
+<li>格式<ul>
+<li>响应行(状态行)：协议版本 + 空格 + 状态码 + 空格 + 状态码描述<ul>
+<li>状态码：由3个数字组成。<ul>
+<li>1xx：指示信息，请求已被接收，等待继续处理。</li>
+<li>2xx：请求已被成功处理、接收，常见200、201。</li>
+<li>3xx：重定向，待访问的资源需重新指定路径访问。</li>
+<li>4xx：客户端错误，常见有403、404。</li>
+<li>5xx：服务器端错误，未实现合法请求。</li>
+</ul>
+</li>
+<li>状态码描述：与状态码唯一对应。<ul>
+<li>200 -&gt; OK</li>
+<li>404 -&gt; File Not Found.</li>
+<li>502 -&gt; Connection Failed.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>响应头：语法格式<code>key:value</code>。<ul>
+<li>Content-Type：描述响应体中的数据类型。</li>
+<li>Content-Length：响应体大小，不写浏览器将自动获取，一旦写必须准确。</li>
+</ul>
+</li>
+<li>空行：代表响应头结束。</li>
+<li>响应体：即测试中的实际结果。<ul>
+<li>绝大多数为空，数据类型受Content-Type值影响。</li>
+<li>请求成功回发数据，失败回发错误信息，常见html、xml、json。</li>
 </ul>
 </li>
 </ul>
