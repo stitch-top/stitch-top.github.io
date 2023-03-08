@@ -18,20 +18,20 @@
   <meta name="author" content="Dr.626">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Charles是一款代理服务器，通过成为电脑或浏览器的代理，截取请求和结果进行抓包分析，支持重发网络请求，方便后端调试。">
+    <meta name="description" content="接口测试用例可以帮助理清思路，避免漏测和重复测试，提高测试效率，跟进测试进度，更好地发现问题、复现问题、记录问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="接口用例设计">
-<meta property="og:url" content="https://stitch-top.github.io/2021/12/06/software-test/st02-jie-kou-yong-li-she-ji/index.html">
+<meta property="og:url" content="https://stitch-top.github.io/2022/02/06/software-test/st02-jie-kou-yong-li-she-ji/index.html">
 <meta property="og:site_name" content="Dr.626">
-<meta property="og:description" content="Charles是一款代理服务器，通过成为电脑或浏览器的代理，截取请求和结果进行抓包分析，支持重发网络请求，方便后端调试。">
+<meta property="og:description" content="接口测试用例可以帮助理清思路，避免漏测和重复测试，提高测试效率，跟进测试进度，更好地发现问题、复现问题、记录问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1526632111.jpg">
-<meta property="article:published_time" content="2021-12-06T15:13:00.000Z">
-<meta property="article:modified_time" content="2023-02-25T15:24:29.269Z">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1452632220.png">
+<meta property="article:published_time" content="2022-02-06T15:13:00.000Z">
+<meta property="article:modified_time" content="2023-03-08T09:36:56.471Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="接口">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1526632111.jpg">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1452632220.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -235,8 +235,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-12-06 23:13" pubdate>
-          2021年12月6日 23:13:00
+        <time datetime="2022-02-06 23:13" pubdate>
+          2022年2月6日 23:13:00
         </time>
       </span>
     
@@ -247,7 +247,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          60 字
+          1.1k 字
         
       </span>
     
@@ -258,7 +258,7 @@
         
         
         
-          1 分钟
+          10 分钟
         
       </span>
     
@@ -324,10 +324,94 @@
             
             <div class="markdown-body">
               
-              <p>Charles是一款代理服务器，通过成为电脑或浏览器的代理，截取请求和结果进行抓包分析，支持重发网络请求，方便后端调试。</p>
+              <p>接口测试用例可以帮助理清思路，避免漏测和重复测试，提高测试效率，跟进测试进度，更好地发现问题、复现问题、记录问题。</p>
 <span id="more"></span>
 
 
+
+<h1 id="1-接口"><a href="#1-接口" class="headerlink" title="1 接口"></a>1 接口</h1><ul>
+<li>接口<ul>
+<li>接口概念：系统或组件之间，数据传递与交互的通道。</li>
+<li>接口类型<ul>
+<li>协议：HTTP、TCP、IP。</li>
+<li>语言：C++、Java、PHP等。</li>
+<li>范围<ul>
+<li>系统之间：内部系统之间、内外系统之间。</li>
+<li>程序之间：方法之间、函数之间、模块之间。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>接口测试：对系统或组件间的接口进行测试，校验传递数据和逻辑依赖关系的正确性。<ul>
+<li>原理：针对测试目标(服务器)，模拟客户端向服务器端发送请求。</li>
+<li>测什么？请求返回的响应数据(实际结果)，是否与预期结果一致。</li>
+<li>用什么测？<ul>
+<li>工具：Fiddler、Postman、JMeter。</li>
+<li>代码：Python + UnitTest框架 + Requests框架。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>自动化接口测试<ul>
+<li>借助工具或代码，模拟客户端发送请求给服务器端。</li>
+<li>借助断言，判断预期结果与实际结果是否保持一致。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-HTTP协议"><a href="#1-1-HTTP协议" class="headerlink" title="1-1 HTTP协议"></a>1-1 HTTP协议</h2><ul>
+<li>HTTP协议<ul>
+<li>超文本传输协议(应用层)，无状态无连接(特点)。</li>
+<li>示例：<a target="_blank" rel="noopener" href="http://tpshop-test.itheima.net/index.php?m=Home&c=User&a=do_login">http://tpshop-test.itheima.net/index.php?m=Home&c=User&a=do_login</a>。</li>
+<li>URL组成<ul>
+<li>协议：http，规定数据的传输方式，与域名之间用<code>://</code>隔开。</li>
+<li>域名(IP)<ul>
+<li>tpshop-test.itheima.net，在网络环境中查询主机。</li>
+<li>与端口之间用<code>:</code>隔开，例如：<a target="_blank" rel="noopener" href="http://127.0.0.1/">http://127.0.0.1:80</a>。</li>
+</ul>
+</li>
+<li>端口(Port)：与资源路径之间用<code>/</code>隔开。<ul>
+<li>范围0~65535，http默认80，https默认443。</li>
+<li>网络主机上，唯一标识一个进程(即应用程序)。</li>
+</ul>
+</li>
+<li>资源路径：index.php，表示网络资源，例如文件、图片等，与查询参数之间用<code>?</code>隔开。</li>
+<li>查询参数：m&#x3D;Home&amp;.....login，传递给资源路径对应的数据，查询参数之间用<code>&amp;</code>隔开。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-HTTP请求"><a href="#1-2-HTTP请求" class="headerlink" title="1-2 HTTP请求"></a>1-2 HTTP请求</h2><ul>
+<li>HTTP请求<ul>
+<li>作用<ul>
+<li>规定了发送给服务器端的数据传输语法格式。</li>
+<li>客户端(app、浏览器)发送请求给服务器时使用的协议。</li>
+</ul>
+</li>
+<li>格式<ul>
+<li>请求行(首行)：请求方法 + 空格 + URL + 空格 + 协议版本。<ul>
+<li>请求方法(大小写无所谓)：GET查询、POST添加(登录)、PUT修改、DELETE删除。</li>
+<li>URL的组成：<code>协议://域名(IP):端口(Port)/资源路径?查询参数&amp;...&amp;查询参数</code>。</li>
+</ul>
+</li>
+<li>请求头：语法格式<code>key:value</code>。<ul>
+<li>User-Agent：描述了本地的浏览器类型。</li>
+<li>Content-Type：标识请求体的数据类型。</li>
+</ul>
+</li>
+<li>空行：代表http请求头结束。</li>
+<li>请求体：请求发送时携带的数据，数据类型受Content-Type值的影响。<ul>
+<li>POST、PUT：有请求体</li>
+<li>GET、DELETE：无请求体。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
               
             </div>
@@ -373,7 +457,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>接口用例设计</div>
-      <div>https://stitch-top.github.io/2021/12/06/software-test/st02-jie-kou-yong-li-she-ji/</div>
+      <div>https://stitch-top.github.io/2022/02/06/software-test/st02-jie-kou-yong-li-she-ji/</div>
     </div>
     <div class="license-meta">
       
@@ -385,7 +469,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2021年12月6日 23:13:00</div>
+          <div>2022年2月6日 23:13:00</div>
         </div>
       
       
@@ -427,9 +511,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/08/test-tools/tt01-f12-gong-ju/" title="F12 工具">
+                      <a href="/2022/03/10/test-tools/tt03-charles-shi-yong/" title="Charles 使用">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">F12 工具</span>
+                        <span class="hidden-mobile">Charles 使用</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -437,8 +521,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/04/python/python10-python-ji-qi-xue-xi/" title="Python 机器学习">
-                        <span class="hidden-mobile">Python 机器学习</span>
+                      <a href="/2022/02/05/test-tools/tt02-jmeter-gong-neng/" title="JMeter 功能">
+                        <span class="hidden-mobile">JMeter 功能</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -518,7 +602,7 @@
     
       
       
-        <a href="/2021/12/06/software-test/st02-jie-kou-yong-li-she-ji/" title="接口用例设计"
+        <a href="/2022/02/06/software-test/st02-jie-kou-yong-li-she-ji/" title="接口用例设计"
            class="list-group-item list-group-item-action
            active">
           <span class="category-post">接口用例设计</span>
