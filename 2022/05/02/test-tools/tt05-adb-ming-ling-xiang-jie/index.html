@@ -1,0 +1,1351 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/image.png">
+  <link rel="icon" href="/img/image.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Android Debug Bridge是一种允许模拟器或已连接的Android设备进行通信的命令行工具，可为各种设备操作提供便利。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ADB 命令详解">
+<meta property="og:url" content="https://stitch-top.github.io/2022/05/02/test-tools/tt05-adb-ming-ling-xiang-jie/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="Android Debug Bridge是一种允许模拟器或已连接的Android设备进行通信的命令行工具，可为各种设备操作提供便利。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1859652140.png">
+<meta property="article:published_time" content="2022-05-02T15:21:00.000Z">
+<meta property="article:modified_time" content="2023-03-09T01:49:46.303Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="ADB">
+<meta property="article:tag" content="Android调试工具">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1859652140.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>ADB 命令详解 - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ADB 命令详解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-02 23:21" pubdate>
+          2022年5月2日 23:21:00
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          76 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景 -->
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script>
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ADB 命令详解</h1>
+            
+            <div class="markdown-body">
+              
+              <p>Android Debug Bridge是一种允许模拟器或已连接的Android设备进行通信的命令行工具，可为各种设备操作提供便利。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-工作原理"><a href="#1-工作原理" class="headerlink" title="1 工作原理"></a>1 工作原理</h1><ul>
+<li>工作原理<ul>
+<li>Client端：运行在开发机器中，例如电脑，用来发送adb命令。</li>
+<li>Daemon守护进程：运行在调试设备，例如手机、模拟器中，用来接收并执行adb命令。</li>
+<li>Server端：运行在开发机器中，例如电脑，用来管理Client和手机端Daemon间的通信。</li>
+<li>电脑命令行窗口输入adb命令，先执行Client端，Client端拿到命令后发送给Server端，Server再传给Daemon，最后在手机上执行。</li>
+<li>例如：在手机上安装一个应用，会有一个返回信息，将信息传递给电脑的Server端，命令再将其传给Client端，最后显示在命令行。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-安装ADB"><a href="#1-1-安装ADB" class="headerlink" title="1-1 安装ADB"></a>1-1 安装ADB</h2><ul>
+<li>安装ADB<ul>
+<li>ADB工具下载：<a target="_blank" rel="noopener" href="https://adbdownload.com/">https://adbdownload.com/</a>。</li>
+<li>环境变量配置：Path，变量值为下载的ADB路径。</li>
+<li>验证是否安装成功，命令窗口下输入：<code>adb help</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-调试模式"><a href="#1-2-调试模式" class="headerlink" title="1-2 调试模式"></a>1-2 调试模式</h2><ul>
+<li>调试模式<ul>
+<li>使用USB数据线将PC端和Android手机设备进行连接，再将手机设备的USB调试模式打开，不同型号手机调试模式位置不同。</li>
+<li>Android模拟器：Android Studio Emulator(官方)、Genymotion(国外软件)、网易mumu、雷电、夜神、逍遥等第三方模拟器。</li>
+<li>手机设备的调试模式开启后，打开PC端的命令行窗口中，输入命令<code>adb devices</code>，回车确认PC端是否可以正常连接手机设备。</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2 常用命令"></a>2 常用命令</h1><ul>
+<li>常用命令<ul>
+<li>单一设备的adb命令语法：<code>adb &lt;command&gt;</code>。</li>
+<li>多个设备的adb命令语法：<code>adb [-e|-d|-s &lt;serial-number&gt;] &lt;command&gt;</code>。<ul>
+<li><code>-e</code>：指定当前唯一运行的模拟器为命令目标。</li>
+<li><code>-d</code>：指定当前唯一通过USB连接的Android设备为命令目标。</li>
+<li><code>serial-number</code>：设备序列号，通过<code>adb devices</code>命令获取。</li>
+<li><code>-s &lt;serial-number&gt;</code>：指定相应设备序列号的设备或模拟器为命令目标，多设备或模拟器情况较常使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-1-帮助信息"><a href="#2-1-帮助信息" class="headerlink" title="2-1 帮助信息"></a>2-1 帮助信息</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb <span class="hljs-built_in">help</span>                        # 显示adb的版本和帮助信息<br>adb --<span class="hljs-built_in">help</span>                      # 显示adb的版本和帮助信息<br>adb version                     # 查看adb的版本信息<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-开关服务"><a href="#2-2-开关服务" class="headerlink" title="2-2 开关服务"></a>2-2 开关服务</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb <span class="hljs-built_in">start</span>-server                # 开启adb服务，一般无需执行此命令，运行adb时若发现Server没有启动会自动调起<br>adb -P &lt;port&gt; <span class="hljs-built_in">start</span>-server      # 指定Server网络端口启动服务，默认端口为<span class="hljs-number">5037</span><br>adb kill-server                 # 关掉adb服务<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-查看连接"><a href="#2-3-查看连接" class="headerlink" title="2-3 查看连接"></a>2-3 查看连接</h2><ul>
+<li>查看连接<ul>
+<li>通过USB数据线，开启Android设备的调试模式进行连接：<code>adb devices</code>。</li>
+<li>WLAN连接(需USB线)<ul>
+<li>Android设备与电脑连接到同一WiFi上，再通过USB线连接，命令<code>adb tcpip 5555</code>让设备在5555端口监听TCP&#x2F;IP连接。</li>
+<li>断开USB线，找到设备的IP地址，通过<code>adb connect &lt;device-ip-address&gt;</code>使用IP地址将Android设备与电脑连接起来。</li>
+<li>使用结束后，则通过<code>adb disconnect &lt;device-ip-address&gt;</code>来断开无线连接，<code>adb usb</code>可以将WiFi连接转为USB连接。</li>
+</ul>
+</li>
+<li>WLAN连接(无需USB线，需root权限)<ul>
+<li>Android设备上安装一个终端模拟器，地址：<a target="_blank" rel="noopener" href="https://jackpal.github.io/Android-Terminal-Emulator/">Terminal Emulator for Android Downloads</a>。</li>
+<li>将Android设备与要运行adb的电脑连接到同一WiFi上，打开Android设备上的终端模拟器。</li>
+<li>输入<code>su</code>以root权限操作，再输入<code>setprop service.adb.tcp.port 5555</code>开启设备的5555端口。</li>
+<li>找到设备的IP，通过<code>adb connect &lt;device-ip-address&gt;</code>使用IP将Android设备与电脑连接起来。</li>
+</ul>
+</li>
+<li><code>adb get-state</code>返回的状态信息类型<ul>
+<li>devices：设备或模拟器已经连接到adb服务器上了。</li>
+<li>offline：设备或模拟器没有连接到adb服务器或无响应。</li>
+<li>no devices&#x2F;emulators found：没有设备或找不到模拟器。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb root                        # root权限运行adbd<br>adb devices                     # 查询已连接的设备或模拟器列表<br>adb devices -l                  # 查询已连接的设备或模拟器具体信息<br>adb get-state                   # 返回设备或模拟器的连接状态信息<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-安装应用"><a href="#2-4-安装应用" class="headerlink" title="2-4 安装应用"></a>2-4 安装应用</h2><ul>
+<li>安装应用<ul>
+<li>三步骤：push apk文件到&#x2F;data&#x2F;local&#x2F;tmp，调用pm install安装，删除tmp中对应的apk文件。</li>
+<li>单一设备的adb命令语法：<code>adb install [-d] [-s] [-g] [-l] [-r] [-t] &lt;apk-file&gt;</code>。<ul>
+<li><code>-d</code>：允许降级覆盖安装。</li>
+<li><code>-s</code>：将应用安装到sdcard。</li>
+<li><code>-g</code>：授予所有运行时权限。</li>
+<li><code>-l</code>：将应用安装到保护目录&#x2F;mnt&#x2F;asec。</li>
+<li><code>-r</code>：覆盖原来安装的软件，并保留数据。</li>
+<li><code>-t</code><ul>
+<li>允许安装AndroidManifest.xml里application指定<code>android:testOnly=&quot;true&quot;</code>的应用。</li>
+<li>安装过程中如果遇到Failure输出代码为<code>INSTALL_FAILED_TEST_ONLY</code>，则使用该命令。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多个设备的adb命令语法：<code>adb -s &lt;serial-number&gt; install &lt;apk-file&gt;</code>。</li>
+<li>安装状态：Success(成功)、Failure(失败，对应的失败输出代码，如下所示)。<table>
+<thead>
+<tr>
+<th align="left">输出代码类型&gt;&gt;&gt;参看“<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhonglunshun/article/details/78362439">玩转ADB命令</a>”</th>
+<th align="left">说明及解决办法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>INSTALL_FAILED_DEXOPT</code></td>
+<td align="left">dex优化验证失败，或空间不足</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_OLDER_SDK</code></td>
+<td align="left">设备系统版本低于应用要求</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_NEWER_SDK</code></td>
+<td align="left">设备系统版本高于应用要求</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_TEST_ONLY</code></td>
+<td align="left">应用是test-only的，但安装时没有指定-t参数</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_TEST_ONLY</code></td>
+<td align="left">APK文件是使用Android Studio直接RUN编译出来的文件(通过Gradle的assembleDebug或assembleRelease重新编译，或 Generate Signed APK)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_INVALID_APK</code></td>
+<td align="left">无效的APK文件</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_INVALID_URI</code></td>
+<td align="left">无效的APK文件名(确保APK文件名里无中文)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_UID_CHANGED</code></td>
+<td align="left">安装过该应用，与本次分配的UID不一致(清除以前安装过的残留文件)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_INTERNAL_ERROR</code></td>
+<td align="left">因系统问题安装失败</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_NO_SHARED_USER</code></td>
+<td align="left">请求的共享用户不存在</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_ALREADY_EXISTS</code></td>
+<td align="left">应用已存在或没卸载干净(install时使用-r参数，或先uninstall再安装)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_USER_RESTRICTED</code></td>
+<td align="left">用户被限制安装应用</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_MISSING_FEATURE</code></td>
+<td align="left">应用使用了设备不可用的功能</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_PACKAGE_CHANGED</code></td>
+<td align="left">应用与调用程序期望的不一致</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_CONTAINER_ERROR</code></td>
+<td align="left">sdcard访问失败(确认sdcard可用，或安装到内置存储)，应用签名与ROM签名一致，被当作内置应用(打包时不与ROM使用相同签名)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_NO_MATCHING_ABIS</code></td>
+<td align="left">包含设备的应用程序二进制接口不支持的native code</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_VERSION_DOWNGRADE</code></td>
+<td align="left">已安装了该应用的更高版本(使用-d参数)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_ACWF_INCOMPATIBLE</code></td>
+<td align="left">应用程序与设备不兼容</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_DUPLICATE_PACKAGE</code></td>
+<td align="left">已存在同名程序</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_MEDIA_UNAVAILABLE</code></td>
+<td align="left">安装位置不可用(一般为sdcard，确认sdcard可用或安装到内置存储)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_UPDATE_INCOMPATIBLE</code></td>
+<td align="left">安装过同名应用卸载时数据未移除，或已安装该应用但签名不一致(先卸载再安装)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_INSUFFICIENT_STORAGE</code></td>
+<td align="left">空间不足(清理空间)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_VERIFICATION_TIMEOUT</code></td>
+<td align="left">验证安装包超时</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_VERIFICATION_FAILURE</code></td>
+<td align="left">验证安装包失败</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_DUPLICATE_PERMISSION</code></td>
+<td align="left">尝试定义一个已存在的权限名称</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_CONFLICTING_PROVIDER</code></td>
+<td align="left">设备里已存在与应用同名的content provider</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_CPU_ABI_INCOMPATIBLE</code></td>
+<td align="left">包含不兼容设备CPU应用程序二进制接口的native code</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_MISSING_SHARED_LIBRARY</code></td>
+<td align="left">安装包使用了设备上不可用的共享库</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_REPLACE_COULDNT_DELETE</code></td>
+<td align="left">替换时无法删除</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_SHARED_USER_INCOMPATIBLE</code></td>
+<td align="left">请求的共享用户存在，但签名不一致</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_INVALID_INSTALL_LOCATION</code></td>
+<td align="left">不能安装到指定位置(切换安装位置，添加或删除-s参数)，应用签名与ROM签名一致，被当作内置应用(打包时不与ROM使用相同签名)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_FAILED_PERMISSION_MODEL_DOWNGRADE</code></td>
+<td align="left">已安装target SDK支持运行时权限的同名应用，要安装的版本不支持运行时权限</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_CANCELED_BY_USER</code></td>
+<td align="left">应用安装需在设备上确认，但未操作设备或点了取消(在设备上同意安装)</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_NOT_APK</code></td>
+<td align="left">指定路径不是文件，或不是以.apk结尾</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_BAD_MANIFEST</code></td>
+<td align="left">无法解析的AndroidManifest.xml文件</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_MANIFEST_EMPTY</code></td>
+<td align="left">在manifest文件里找不到，则找可操作标签instrumentation或application</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_NO_CERTIFICATES</code></td>
+<td align="left">安装包没有签名</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_BAD_PACKAGE_NAME</code></td>
+<td align="left">manifest文件里没有或使用了无效包名</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_MANIFEST_MALFORMED</code></td>
+<td align="left">解析manifest文件时遇到结构性错误</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_BAD_SHARED_USER_ID</code></td>
+<td align="left">manifest文件里指定了无效的共享用户ID</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_UNEXPECTED_EXCEPTION</code></td>
+<td align="left">解析器遇到异常</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_CERTIFICATE_ENCODING</code></td>
+<td align="left">解析APK文件时遇到CertificateEncodingException</td>
+</tr>
+<tr>
+<td align="left"><code>INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES</code></td>
+<td align="left">已安装该应用，且签名与APK文件不一致(先卸载再安装)</td>
+</tr>
+<tr>
+<td align="left"><code>does not contain AndroidManifest.xml</code></td>
+<td align="left">无效的APK文件</td>
+</tr>
+<tr>
+<td align="left"><code>is not a valid zip file</code></td>
+<td align="left">无效的APK文件</td>
+</tr>
+<tr>
+<td align="left"><code>Offline</code></td>
+<td align="left">设备未连接成功(先将设备与adb连接成功)</td>
+</tr>
+<tr>
+<td align="left"><code>unauthorized</code></td>
+<td align="left">设备未授权允许调试</td>
+</tr>
+<tr>
+<td align="left"><code>protocol failure</code></td>
+<td align="left">设备已断开连接(先将设备与adb连接成功)</td>
+</tr>
+<tr>
+<td align="left"><code>Unknown option: -s</code></td>
+<td align="left">Android2.2以下不支持安装到sdcard(不使用-s参数)</td>
+</tr>
+<tr>
+<td align="left"><code>error: device not found</code></td>
+<td align="left">没有连接成功的设备(先将设备与adb连接成功)</td>
+</tr>
+<tr>
+<td align="left"><code>No space left on device</code></td>
+<td align="left">空间不足(清理空间)</td>
+</tr>
+<tr>
+<td align="left"><code>Permission denied...sdcard...</code></td>
+<td align="left">sdcard不可用</td>
+</tr>
+<tr>
+<td align="left"><code>signatures do not match the previously installed version; ignoring!</code></td>
+<td align="left">已安装该应用且签名不一致(先卸载再安装)</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb install -d demo.apk               # 允许降级覆盖安装demo.apk<br>adb install -g demo.apk               # 授予demo.apk所有运行时权限<br>adb install -t demo.apk               # 允许安装指定android:testOnly=&quot;true&quot;的应用<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-5-日志打印"><a href="#2-5-日志打印" class="headerlink" title="2-5 日志打印"></a>2-5 日志打印</h2><ul>
+<li>日志打印<ul>
+<li>Android系统的日志分为两部分，底层的Linux内核日志输出到&#x2F;proc&#x2F;kmsg，Android的日志输出到&#x2F;dev&#x2F;log。</li>
+<li>查看设备属性的基本命令格式：<code>adb logcat [option] [filter-specs]</code>，<code>Ctrl + C</code>可以停止日志监控。</li>
+<li>级别过滤：<code>adb logcat [filter-specs]</code>，MacOS下用<code>adb logcat &quot;*:W&quot;</code>，否则报错<code>no matches found: *:W</code>。<ul>
+<li><code>*:V</code>：过滤只显示(开发产品中的调试信息)Verbose及以上级别(优先级最低)。</li>
+<li><code>*:D</code>：过滤只显示(发布产品中的调试信息)Debug及以上级别。</li>
+<li><code>*:I</code>：过滤只显示(一般提示性的信息)Info及以上级别。</li>
+<li><code>*:W</code>：过滤只显示(警告信息)Warning及以上级别。</li>
+<li><code>*:E</code>：过滤只显示(错误信息)Error及以上级别。</li>
+<li><code>*:F</code>：过滤只显示Fatal及以上级别。</li>
+<li><code>*:S</code>：过滤只显示Silent及以上级别(优先级最高，什么也不输出)。</li>
+</ul>
+</li>
+<li>tag和级别过滤：<code>adb logcat [tag:level] ... [tag:level]</code>。</li>
+<li>格式化输出：<code>adb logcat -v &lt;format&gt;</code>，format指定日志输出的格式，默认为brief。<ul>
+<li>raw：<code>&lt;message&gt;</code>。</li>
+<li>tag：<code>&lt;priority&gt;/&lt;tag&gt;: &lt;message&gt;</code>。</li>
+<li>process：<code>&lt;priority&gt;(&lt;pid&gt;) &lt;message&gt;</code>。</li>
+<li>brief：<code>&lt;priority&gt;/&lt;tag&gt;(&lt;pid&gt;): &lt;message&gt;</code>。</li>
+<li>time：<code>&lt;datetime&gt; &lt;priority&gt;/&lt;tag&gt;(&lt;pid&gt;): &lt;message&gt;</code>。</li>
+<li>long：<code>[&lt;datetime&gt; &lt;pid&gt;:&lt;tid&gt; &lt;priority&gt;/&lt;tag&gt;] &lt;message&gt;</code>。</li>
+<li>threadtime：<code>&lt;datetime&gt; &lt;pid&gt; &lt;tid&gt; &lt;priority&gt; &lt;tag&gt;: &lt;message&gt;</code>。</li>
+</ul>
+</li>
+<li>加载一个可使用的日志缓冲区供查看：<code>adb logcat -b &lt;Buffer&gt;</code>。<ul>
+<li>Radio：输出通信系统的log。</li>
+<li>System：输出系统组件的log。</li>
+<li>Event：输出Event模块的log。</li>
+<li>Main：所有Java层的log以及不属于上面3层的log。</li>
+<li>缓冲区主要给系统组件使用，一般应用不需关心，应用的log都输出到Main缓冲区中。</li>
+<li>默认log输出，即在不指定缓冲区的情况下，是输出System缓冲区和Main缓冲区的log。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb logcat *:W                        # 输出Warning、Error、Fatal和Silent日志<br>adb logcat ActivityManager:I *:S      # 输出ActivityManager的Info以上级别日志，及其他tag的Silent以上级别日志<br>adb logcat -v <span class="hljs-built_in">time</span>                    # 打印时间<br>adb logcat -v <span class="hljs-built_in">color</span>                   # 使用不同的颜色来显示每个优先级<br>adb logcat -v long *:S                # 以long格式输出tag的Silent以上级别日志<br>adb logcat &gt; log.log                  # 保存日志到PC端的log.log文件中<br>adb logcat -c                         # 清空已存在的日志<br>adb logcat -d                         # 将日志显示在控制台<br>adb logcat -f &lt;file-<span class="hljs-built_in">path</span>&gt;             # 将日志输出到文件<br>adb logcat -g                         # 打印指定日志缓冲区的大小<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-6-文件传送"><a href="#2-6-文件传送" class="headerlink" title="2-6 文件传送"></a>2-6 文件传送</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb uninstall [-k] &lt;package-name&gt;     # 卸载应用，-k参数可选，表示卸载应用但保留数据和缓存目录<br>adb pull &lt;remote&gt; [local]             # 将移动设备中的文件传送到PC上，remote是移动设备路径，local是PC路径<br>adb push &lt;local&gt; &lt;remote&gt;             # 将PC中的文件传送到移动设备端，local是PC路径，remote是移动设备路径<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-7-重启命令"><a href="#2-7-重启命令" class="headerlink" title="2-7 重启命令"></a>2-7 重启命令</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb reboot recovery                           # 重启到Recovery模式<br>adb reboot                                    # 从Recovery重启到Android<br>adb reboot bootloader                         # 重启到Fastboot模式<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-高级命令"><a href="#3-高级命令" class="headerlink" title="3 高级命令"></a>3 高级命令</h1><ul>
+<li>高级命令<ul>
+<li>Android系统是基于Linux内核开发的，支持常见的Linux命令。</li>
+<li>命令都保存在手机的&#x2F;system&#x2F;bin文件中，在adb shell里可调用。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb shell ls                          # PC端查看Android设备当前目录的所有内容<br>abd shell                             # 进入Android设备目录<br>ls                                    # 查看设备当前目录的所有内容<br><span class="hljs-built_in">cd</span> /system/bin                        # 进入手机的/system/bin文件中<br>ls                                    # 查看保存在手机/system/bin文件中的Linux命令<br><span class="hljs-keyword">exit</span>                                  # 退出Android设备目录，回到PC端<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-1-查看应用"><a href="#3-1-查看应用" class="headerlink" title="3-1 查看应用"></a>3-1 查看应用</h2><ul>
+<li>查看应用<ul>
+<li>基本命令格式：<code>adb shell pm list packages [-s] [-u] [-3] [-i] [-e] [-d] [-f] [--user USER_ID] [FILTER]</code>。<ul>
+<li><code>-s</code>：只显示系统应用。</li>
+<li><code>-u</code>：包含已卸载应用。</li>
+<li><code>-3</code>：只显示第三方应用。</li>
+<li><code>-i</code>：显示应用的installer。</li>
+<li><code>-e</code>：只显示enabled的应用。</li>
+<li><code>-d</code>：只显示disabled的应用。</li>
+<li><code>-f</code>：显示应用关联的apk文件。</li>
+<li><code>&lt;FILTER&gt;</code>：包名包含<code>&lt;FILTER&gt;</code>字符串。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb shell pm list packages                    # 列出系统应用<br>adb shell pm list packages -s                 # 列出系统应用<br>adb shell pm list packages -<span class="hljs-number">3</span>                 # 列出第三方应用<br>adb shell pm list packages test               # 查看包名包含字符串test的应用列表<br>adb shell pm list packages | grep test        # 使用grep过滤包名包含字符串test的应用列表<br>adb shell pm clear &lt;package-name&gt;             # 清除应用数据及缓存<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2-设备信息"><a href="#3-2-设备信息" class="headerlink" title="3-2 设备信息"></a>3-2 设备信息</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb shell getprop ro.product.model            # 查看设备型号<br>adb shell getprop ro.build.version.release    # 查看Android系统版本<br>adb shell dumpsys wifi                        # 查看无限网络信息<br>adb shell dumpsys power                       # 查看电源管理相关信息<br>adb shell dumpsys battery                     # 查看电池状况，scale指最大电量，level指当前电量<br>adb shell dumpsys cpuinfo                     # 查看当前设备CPU使用情况，获取的是一段时间的均值<br>adb shell dumpsys meminfo                     # 查看进程占用情况，即内存信息<br>adb shell dumpsys window displays             # 查看显示屏参数<br>adb shell wm size                             # 查看屏幕分辨率<br>adb shell wm density                          # 查看屏幕密度<br>adb shell settings get secure android_id      # 查看android_id<br>adb shell ifconfig &quot;| grep Mask&quot;              # 查看手机IP地址<br>adb shell cat /proc/cpuinfo                   # 查看CPU使用情况<br>adb shell cat /proc/meminfo                   # 查看内存信息，MemTotal指设备总内存，MemFree指当前空闲内存<br>adb shell df                                  # 获取Android系统各个分区的相关信息<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-实用功能"><a href="#3-3-实用功能" class="headerlink" title="3-3 实用功能"></a>3-3 实用功能</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb exec-out screencap -p &gt; sc.png            # 截图保存到电脑，如果adb版本较老，则无法使用exec-out命令<br>adb shell screencap -p /sdcard/sc.png         # 截图保存到设备里<br>adb shell screenrecord /sdcard/filename.mp4   # 录制屏幕以mp4格式保存到/sdcard，Ctrl+C停止录屏<br>adb shell monkey -p &lt;package-name&gt; -v <span class="hljs-number">500</span>     # Monkey压力测试，向package-name指定的应用程序发送<span class="hljs-number">500</span>个伪随机事件<br>adb shell ps                                  # 查看进程，USER-所属用户，PID-进程ID，PPID-父进程ID，NAME-进程名<br>adb shell top                                 # 查看实时资源占用情况，PR-优先级，S-进程状态(R/S/T/Z)，#THR-线程数<br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Test-Tools/" class="category-chain-item">Test Tools</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ADB/">#ADB</a>
+      
+        <a href="/tags/Android%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/">#Android调试工具</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ADB 命令详解</div>
+      <div>https://stitch-top.github.io/2022/05/02/test-tools/tt05-adb-ming-ling-xiang-jie/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年5月2日 23:21:00</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/06/10/test-tools/tt06-f12-kai-fa-zhe-gong-ju/" title="F12 开发者工具">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">F12 开发者工具</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/21/test-tools/tt04-postman/" title="Postman">
+                        <span class="hidden-mobile">Postman</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"bsRkWxXK7zLX6NWYygwknNXv-gzGzoHsz","appKey":"qqiNDCxGTOGVmiM1xAbd5pzk","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Test Tools"
+        id="heading-5ef9e01b088fc95d871b4bb44455e367" role="tab" data-toggle="collapse" href="#collapse-5ef9e01b088fc95d871b4bb44455e367"
+        aria-expanded="true"
+      >
+        Test Tools
+        <span class="list-group-count">(6)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-5ef9e01b088fc95d871b4bb44455e367"
+           role="tabpanel" aria-labelledby="heading-5ef9e01b088fc95d871b4bb44455e367">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/01/05/test-tools/tt01-jmeter/" title="JMeter"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JMeter</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/02/02/test-tools/tt02-fiddler/" title="Fiddler"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Fiddler</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/03/10/test-tools/tt03-charles/" title="Charles"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Charles</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/04/21/test-tools/tt04-postman/" title="Postman"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Postman</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/05/02/test-tools/tt05-adb-ming-ling-xiang-jie/" title="ADB 命令详解"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">ADB 命令详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/06/10/test-tools/tt06-f12-kai-fa-zhe-gong-ju/" title="F12 开发者工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">F12 开发者工具</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2023</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/snow.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"right","width":180,"height":230},"mobile":{"show":false,"scale":0.3},"rect":{"opacityDefault":0.7,"opacityHover":1},"log":false});</script></body>
+</html>
