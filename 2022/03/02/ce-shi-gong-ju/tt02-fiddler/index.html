@@ -18,16 +18,16 @@
   <meta name="author" content="Dr.626">
   <meta name="keywords" content="">
   
-    <meta name="description" content="JMeter是Apche公司使用Java平台开发的一款测试工具，用于接口测试、性能测试、压力测试、数据库测试、Java程序测试。">
+    <meta name="description" content="Fiddler是一个HTTP的调试代理工具，以代理服务器的方式，监听系统的HTTP网络数据流动，还能设置断点，用于抓包。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fiddler">
 <meta property="og:url" content="https://stitch-top.github.io/2022/03/02/ce-shi-gong-ju/tt02-fiddler/index.html">
 <meta property="og:site_name" content="Dr.626">
-<meta property="og:description" content="JMeter是Apche公司使用Java平台开发的一款测试工具，用于接口测试、性能测试、压力测试、数据库测试、Java程序测试。">
+<meta property="og:description" content="Fiddler是一个HTTP的调试代理工具，以代理服务器的方式，监听系统的HTTP网络数据流动，还能设置断点，用于抓包。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1675421003.png">
 <meta property="article:published_time" content="2022-03-02T14:37:55.000Z">
-<meta property="article:modified_time" content="2023-05-04T15:20:13.286Z">
+<meta property="article:modified_time" content="2023-05-14T13:56:48.169Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="Fiddler">
 <meta property="article:tag" content="HTTP调试代理工具">
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          64 字
+          1.6k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          1 分钟
+          14 分钟
         
       </span>
     
@@ -325,10 +325,74 @@
             
             <div class="markdown-body">
               
-              <p>JMeter是Apche公司使用Java平台开发的一款测试工具，用于接口测试、性能测试、压力测试、数据库测试、Java程序测试。</p>
+              <p>Fiddler是一个HTTP的调试代理工具，以代理服务器的方式，监听系统的HTTP网络数据流动，还能设置断点，用于抓包。</p>
 <span id="more"></span>
 
 
+
+<h1 id="1-Fiddler"><a href="#1-Fiddler" class="headerlink" title="1 Fiddler"></a>1 Fiddler</h1><ul>
+<li>Fiddler<ul>
+<li>官网地址：<a target="_blank" rel="noopener" href="https://www.telerik.com/fiddler">https://www.telerik.com/fiddler</a>。</li>
+<li>免费版本：<a target="_blank" rel="noopener" href="https://blog.csdn.net/g_optimistic/article/details/89931109">https://blog.csdn.net/g_optimistic&#x2F;article&#x2F;details&#x2F;89931109</a>。</li>
+<li>主要特征<ul>
+<li>系统流量捕获、预配置浏览器捕获、流量分析、现代HTTP版本支持、模拟请求和响应。</li>
+<li>API编写、安全协作、跨平台支持、样式选项(提供现代、直观的UI和一组流行的主题)。</li>
+</ul>
+</li>
+<li>主页说明<ul>
+<li>菜单栏：File、Edit、Rules、Tools、View、Help。</li>
+<li>工具面板：WinConfig、Replay、Go、Stream、Decode、Find、Save、Browse、Clear Cache等快捷按钮。</li>
+<li>会话面板：捕获到的所有会话都将在这里展示，包括会话的状态码、协议Protocol、Host主机、URL地址等。</li>
+<li>监控面板：提供Statistics、Inspectors、AutoResponder等多个选项卡，通过不同的选项卡操作捕获的会话。</li>
+<li>状态面板：Capturing(启用禁用抓包)、All Processes(当前正在捕获的进程)、Number of sessions(会话数)等。</li>
+<li>命令输入栏：可以结合正则表达式，输入一些命令快速过滤会话列表。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Fiddler/Fiddler@001.png" srcset="/img/load.gif" lazyload alt="Fiddler-主页说明"></p>
+<h2 id="1-1-工作原理"><a href="#1-1-工作原理" class="headerlink" title="1-1 工作原理"></a>1-1 工作原理</h2><ul>
+<li>工作原理<ul>
+<li>Fiddler本质上是一个Web代理服务器，默认的工作端口是8888，查看方式如下。</li>
+<li>菜单栏-&gt;Tools-&gt;Options-&gt;Connections-&gt;Fiddler listens on port-&gt;8888。</li>
+<li>Web代理服务器(Web Proxy Server)，是网络的中间实体，位于Web客户端和Web服务器之间，扮演中间人的角色。</li>
+<li>HTTP的代理服务器即可以作为Web服务器，为客户端提供服务，又可以作为Web客户端，向其他服务器请求数据。</li>
+<li>代理服务器的作用：共享网络、提高访问速度(有缓存功能)、突破访问限制、隐藏身份。</li>
+<li>打开Fiddler后，会自动设置代理，关闭则自动注销代理，这样就不会影响到其他程序的运行了。</li>
+<li>非正常退出时不会自动注销代理，容易造成网页无法访问的情况，可通过重启Fiddler解决问题。</li>
+<li>抓包原理<ul>
+<li>类似于快递代收点，快递员将快递放到代收点。</li>
+<li>如果快递没有使用胶带等封口，那么代收点可以任意查看、替换快递中的物品，类似于HTTP。</li>
+<li>如果快递使用胶带等封了口，那么代收点就不能随意查看、替换快递中的物品，类似于HTTPS。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Fiddler/Fiddler@002.png" srcset="/img/load.gif" lazyload alt="Fiddler-工作原理-默认端口"></p>
+<h2 id="1-2-快速抓包"><a href="#1-2-快速抓包" class="headerlink" title="1-2 快速抓包"></a>1-2 快速抓包</h2><ul>
+<li>快速抓包<ul>
+<li>若Fiddler没有抓到想要的包，逐一排查以下内容。</li>
+<li>检查是否开启抓包模式，主页左下角是否有Capturing图标，有则处于抓包中，没有则点击一下开启抓包。</li>
+<li>检查访问本地搭建的静态网站地址，是否使用了回路地址localhost或127.0.0.1，如果是则不能成功抓包。<ul>
+<li>控制面板-&gt;Internet选项-&gt;连接-&gt;局域网设置-&gt;代理服务器的高级-&gt;例外默认设为<code>&lt;-loopback&gt;</code>。</li>
+<li>说明在默认的代理设置中，回路地址localhost或127.0.0.1被排除了。</li>
+<li>但若搭建的静态网站指定了端口，Fiddler的默认设置中可能并未排除指定端口的流量，因此可正常抓包。</li>
+</ul>
+</li>
+<li>如果还是不能正常抓包，更换不同的浏览器试下。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Fiddler/Fiddler@003.png" srcset="/img/load.gif" lazyload alt="Fiddler-快速抓包"></p>
+<h2 id="1-3-HTTP协议"><a href="#1-3-HTTP协议" class="headerlink" title="1-3 HTTP协议"></a>1-3 HTTP协议</h2><ul>
+<li>HTTP协议<ul>
+<li>超文本传输协议，Hyper Text Transfer Protocol，一个简单的请求响应协议，基于TCP&#x2F;IP协议栈的应用层协议。</li>
+<li>发展历史：0.9版本(交换信息的无序协议)-&gt;1.0版本(1982年)-&gt;1.1版本(规定了连接方式和类型)-&gt;2.0版本。</li>
+</ul>
+</li>
+</ul>
 
               
             </div>
