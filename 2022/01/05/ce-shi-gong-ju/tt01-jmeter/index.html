@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/8576352387.jpg">
 <meta property="article:published_time" content="2022-01-05T15:33:27.000Z">
-<meta property="article:modified_time" content="2023-05-14T07:11:05.465Z">
+<meta property="article:modified_time" content="2023-08-06T15:34:09.046Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="JMeter">
 <meta property="article:tag" content="Apache">
@@ -512,9 +512,9 @@
 <li>支持读取外部数据，适用于大量数据测试，元件位于“配置元件”中。</li>
 <li>线程共享模式：指多个线程对文件数据取值顺序模式，JMeter提供了三种模式。<ul>
 <li>例如：脚本有2个线程组，各有2个线程，文件内有5行数据，脚本运行时，将如下循环往复取值。</li>
-<li>所有线程：如果脚本有多个线程组，在这种模式下，各线程组的所有线程也要依次唯一顺序取值。<br><img src="/../../img/JMeter/JMeter@021.png" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-线程共享模式-所有线程"></li>
-<li>当前线程组：各个线程组之间隔离，线程组内的线程顺序唯一取值。<br><img src="/../../img/JMeter/JMeter@022.png" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-线程共享模式-当前线程组"></li>
-<li>当前线程：每个线程独立，顺序唯一取值。<br><img src="/../../img/JMeter/JMeter@023.png" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-线程共享模式-当前线程"></li>
+<li>所有线程：如果脚本有多个线程组，在这种模式下，各线程组的所有线程也要依次唯一顺序取值。<br><img src="/../../img/JMeter/JMeter@021.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-线程共享模式-所有线程"></li>
+<li>当前线程组：各个线程组之间隔离，线程组内的线程顺序唯一取值。<br><img src="/../../img/JMeter/JMeter@022.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-线程共享模式-当前线程组"></li>
+<li>当前线程：每个线程独立，顺序唯一取值。<br><img src="/../../img/JMeter/JMeter@023.jpg" srcset="/img/load.gif" lazyload alt="参数化设置-CSV数据文件设置-线程共享模式-当前线程"></li>
 </ul>
 </li>
 <li>示例：实现禅道批量用户登录，需使用到的元件包含HTTP请求、CSV数据文件设置、察看结果树。</li>
