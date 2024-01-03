@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1254263210.jpg">
 <meta property="article:published_time" content="2022-07-21T13:50:23.000Z">
-<meta property="article:modified_time" content="2023-05-14T07:18:40.130Z">
+<meta property="article:modified_time" content="2024-01-03T16:08:01.484Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="Postman">
 <meta property="article:tag" content="Chrome扩展">
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          11k 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          25 分钟
+          93 分钟
         
       </span>
     
@@ -330,23 +330,76 @@
 
 
 
-<h1 id="1-Postman"><a href="#1-Postman" class="headerlink" title="1 Postman"></a>1 Postman</h1><ul>
+<h1 id="1-常见请求"><a href="#1-常见请求" class="headerlink" title="1 常见请求"></a>1 常见请求</h1><ul>
+<li>常见请求<ul>
+<li>查询参数接口<ul>
+<li>例如接口：<a target="_blank" rel="noopener" href="https://api.oioweb.cn/api/ip/geocoder?lat=39.9&lng=116.4">https://api.oioweb.cn/api/ip/geocoder?<u>lat&#x3D;39.9&amp;lng&#x3D;116.4</u></a>。</li>
+<li>问号<code>?</code>后面的部分即查询参数，以键值对形式展示，多组键值对用<code>&amp;</code>隔开。</li>
+<li>将带有查询参数的URL拷贝到Postman请求页面的URL中，或在Params中输入查询参数。</li>
+</ul>
+</li>
+<li>表单类型接口<ul>
+<li>请求头为<code>Content-Type: application/x-www-form-urlencoded</code>的接口地址。</li>
+<li>Postman的请求页面中选择Body的x-www-form-urlencoded填写参数内容。</li>
+</ul>
+</li>
+<li>上传文件接口<ul>
+<li>请求头为<code>Content-Type: multipart/form-data</code>的接口地址。</li>
+<li>Postman请求页面中，选择Body的form-data填写参数内容。</li>
+</ul>
+</li>
+<li>Json类型接口<ul>
+<li>请求头为<code>Content-Type: application/json</code>的接口地址。</li>
+<li>Postman请求页面中，选择Body的raw以Json格式填写内容。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Postman/Postman@001.jpg" srcset="/img/load.gif" lazyload alt="常见请求"></p>
+<h1 id="2-Postman"><a href="#2-Postman" class="headerlink" title="2 Postman"></a>2 Postman</h1><ul>
 <li>Postman<ul>
 <li>官方下载安装后注册账号，登录使用：<a target="_blank" rel="noopener" href="https://www.postman.com/downloads/">https://www.postman.com/downloads/</a>。</li>
 <li>Create new collection：添加用例集，Documentation是用例集描述(非必填项)。</li>
 <li>Add folder：添加模块。</li>
-<li>Add request：添加请求，Headers(请求头)、Body(请求体，为Json时选择raw)。</li>
+<li>Add request：添加请求，Headers(请求头)、Body(请求体是Json时候选择raw)。</li>
 <li>Export：导出用例集。</li>
 <li>Import：导入用例集，若已存在同名的用例集，则Import as Copy，即导出一个拷贝份，不建议Replace替换。</li>
+<li>注意：Postman是按串行方式发送请求，无论执行多少次，后台接收请求也是按顺序来，无法实现并发功能。</li>
+<li>参考：<a target="_blank" rel="noopener" href="https://postman.xiniushu.com/">Postman中文文档</a>、<a target="_blank" rel="noopener" href="https://learning.postman.com/docs/introduction/overview/">Postman官方文档</a>。</li>
 </ul>
 </li>
 </ul>
-<p><img src="/../../img/Postman/Postman@001.jpg" srcset="/img/load.gif" lazyload alt="Postman"></p>
-<h1 id="2-常用断言"><a href="#2-常用断言" class="headerlink" title="2 常用断言"></a>2 常用断言</h1><ul>
+<p><img src="/../img/Postman/Postman@002.jpg" srcset="/img/load.gif" lazyload alt="Postman"></p>
+<h2 id="2-1-前置脚本"><a href="#2-1-前置脚本" class="headerlink" title="2-1 前置脚本"></a>2-1 前置脚本</h2><ul>
+<li>前置脚本<ul>
+<li>即在Pre-requests Script中编写的JavaScript脚本，请求发送之前，会先执行该前置脚本。</li>
+<li>接口测试时该功能非常有用，对于一些复杂场景，也支持使用前置脚本处理后再请求接口。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Postman/Postman@003.jpg" srcset="/img/load.gif" lazyload alt="Postman-前置脚本"></p>
+<h2 id="2-2-日志调试"><a href="#2-2-日志调试" class="headerlink" title="2-2 日志调试"></a>2-2 日志调试</h2><ul>
+<li>日志调试<ul>
+<li>打印日志的JavaScript语句：<code>console.log(&quot;日志内容&quot;)</code>，放在Pre-request Script或Tests中。</li>
+<li>菜单栏 &gt; View &gt; Show Postman Console，或选Postman，快捷键<code>Ctrl + Alt + C</code>按钮打开。</li>
+<li>界面功能<ul>
+<li>Show raw log：查看原始报文。</li>
+<li>All Logs：按日志级别定位错误。</li>
+<li>Show timestamps：查看时间戳。</li>
+<li>Hide network：隐藏请求，只查看输出日志。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Postman/Postman@004.jpg" srcset="/img/load.gif" lazyload alt="Postman-日志调试"></p>
+<h2 id="2-3-常用断言"><a href="#2-3-常用断言" class="headerlink" title="2-3 常用断言"></a>2-3 常用断言</h2><ul>
 <li>常用断言<ul>
 <li>借助JavaScript语言进行代码的编写，自动判断预期结果与实际结果是否一致。</li>
 <li>断言代码写在请求的Tests标签中，请求Response中的Test Results即断言结果。</li>
-<li>工作原理(由上往下依次执行)<ul>
+<li>按响应的组成划分，分别是状态行(包括状态码、状态消息)、响应头、响应体。</li>
+<li>工作原理(由上往下依次执行)：请求发送之后，再执行Tests内容。<ul>
 <li>Postman界面：组织http请求方法、请求头、请求体、url等。</li>
 <li>Postman内部：分析http请求方法、请求头、请求体、url等。</li>
 <li>服务器：接收Postman发送过来的请求后，解析http请求，回发http响应。</li>
@@ -357,43 +410,207 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-1-响应头"><a href="#2-1-响应头" class="headerlink" title="2-1 响应头"></a>2-1 响应头</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title class_">Snippets</span>：<span class="hljs-title class_">Response</span> <span class="hljs-attr">headers</span>: <span class="hljs-title class_">Content</span>-<span class="hljs-title class_">Type</span> header check<br><br>pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Content-Type is present&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">header</span>(<span class="hljs-string">&quot;Content-Type&quot;</span>);<br>&#125;);<br><br><span class="hljs-comment">// pm代表Postman的一个实例，test()是Postman实例的一个方法，有以下两个参数</span><br><span class="hljs-comment">// 参数一：断言结束后给出的文字提示(可修改)</span><br><span class="hljs-comment">// 参数二：匿名函数</span><br>pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">header</span>(<span class="hljs-string">&quot;Content-Type&quot;</span>);<br><span class="hljs-comment">// Postman的响应头中包含Content-Type</span><br><span class="hljs-comment">// header()的第二个参数可添加Content-Type对应的value值，用逗号隔开</span><br></code></pre></td></tr></table></figure>
+<h4 id="1-状态行"><a href="#1-状态行" class="headerlink" title="(1) 状态行"></a>(1) 状态行</h4><ul>
+<li>断言状态码：<code>Status code: code is 200</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">// pm代表Postman的一个实例，test()是Postman实例的一个方法，有以下两个参数</span><br><span class="hljs-comment">// 参数一：断言结束后给出的文字提示(可自定义修改)</span><br><span class="hljs-comment">// 参数二：匿名函数</span><br><br>pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Status code is 200&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 响应结果中应该包含状态码200</span><br>    pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>断言状态消息：<code>Status code: code name has string</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Status code name has string&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 断言响应状态消息包含OK</span><br>    pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">status</span>(<span class="hljs-string">&quot;OK&quot;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="2-2-Json数据"><a href="#2-2-Json数据" class="headerlink" title="2-2 Json数据"></a>2-2 Json数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title class_">Snippets</span>：<span class="hljs-title class_">Response</span> <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span> value check<br><br>pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Your test name&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> jsonData = pm.<span class="hljs-property">response</span>.<span class="hljs-title function_">json</span>();<br>    pm.<span class="hljs-title function_">expect</span>(jsonData.<span class="hljs-property">value</span>).<span class="hljs-property">to</span>.<span class="hljs-title function_">eql</span>(<span class="hljs-number">100</span>);<br>&#125;);<br><br><span class="hljs-comment">// pm代表Postman的一个实例，test()是Postman实例的一个方法，有以下两个参数</span><br><span class="hljs-comment">// 参数一：断言结束后给出的文字提示(可修改)</span><br><span class="hljs-comment">// 参数二：匿名函数</span><br><span class="hljs-keyword">var</span> jsonData<br><span class="hljs-comment">// 用JavaScript语法定义一个变量，变量名为jsonData</span><br>pm.<span class="hljs-title function_">expect</span>(jsonData.<span class="hljs-property">value</span>).<span class="hljs-property">to</span>.<span class="hljs-title function_">eql</span>(xxx);<br><span class="hljs-comment">// Postman预期Json结果key所对应的值等于xxx</span><br></code></pre></td></tr></table></figure>
+<h4 id="2-响应头"><a href="#2-响应头" class="headerlink" title="(2) 响应头"></a>(2) 响应头</h4><ul>
+<li>断言响应头：<code>Response headers: Content-Type header check</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Content-Type is present&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 断言响应头包含Content-Type</span><br>    pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">header</span>(<span class="hljs-string">&quot;Content-Type&quot;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="2-3-响应状态码"><a href="#2-3-响应状态码" class="headerlink" title="2-3 响应状态码"></a>2-3 响应状态码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title class_">Snippets</span>：<span class="hljs-title class_">Status</span> <span class="hljs-attr">code</span>: <span class="hljs-title class_">Code</span> is <span class="hljs-number">200</span><br><br>pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Status code is 200&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>);<br>&#125;);<br><br><span class="hljs-comment">// pm代表Postman的一个实例，test()是Postman实例的一个方法，有以下两个参数</span><br><span class="hljs-comment">// 参数一：断言结束后给出的文字提示(可修改)</span><br><span class="hljs-comment">// 参数二：匿名函数</span><br>pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>);<br><span class="hljs-comment">// Postman的响应结果中应该包含状态码200</span><br></code></pre></td></tr></table></figure>
+<h4 id="3-响应体"><a href="#3-响应体" class="headerlink" title="(3) 响应体"></a>(3) 响应体</h4><ul>
+<li>断言响应体包含字符串：<code>Response body: Contains string</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Body matches string&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 获取响应体包含字符串string_you_want_to_search</span><br>    pm.<span class="hljs-title function_">expect</span>(pm.<span class="hljs-property">response</span>.<span class="hljs-title function_">text</span>()).<span class="hljs-property">to</span>.<span class="hljs-title function_">include</span>(<span class="hljs-string">&quot;string_you_want_to_search&quot;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>断言响应体等于字符串：<code>Response body: is equal to a string</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Body is correct&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 获取响应体等于字符串response_body_string</span><br>    pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">body</span>(<span class="hljs-string">&quot;response_body_string&quot;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>断言响应体中某个键名对应的值：<code>Response body: JSON value check</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Your test name&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 获取响应体，以Json形式显示，赋值给jsonData</span><br>    <span class="hljs-keyword">var</span> jsonData = pm.<span class="hljs-property">response</span>.<span class="hljs-title function_">json</span>();<br>    <span class="hljs-comment">// 获取jsonData中键名为value的值，然后和100进行比较</span><br>    pm.<span class="hljs-title function_">expect</span>(jsonData.<span class="hljs-property">value</span>).<span class="hljs-property">to</span>.<span class="hljs-title function_">eql</span>(<span class="hljs-number">100</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="2-4-包含字符串"><a href="#2-4-包含字符串" class="headerlink" title="2-4 包含字符串"></a>2-4 包含字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title class_">Snippets</span>：<span class="hljs-title class_">Response</span> <span class="hljs-attr">body</span>: <span class="hljs-title class_">Contains</span> <span class="hljs-title function_">string</span>(响应体是否包含某个字符串)<br><br>pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Body matches string&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    pm.<span class="hljs-title function_">expect</span>(pm.<span class="hljs-property">response</span>.<span class="hljs-title function_">text</span>()).<span class="hljs-property">to</span>.<span class="hljs-title function_">include</span>(<span class="hljs-string">&quot;string_you_want_to_search&quot;</span>);<br>&#125;);<br><br><span class="hljs-comment">// pm代表Postman的一个实例，test()是Postman实例的一个方法，有以下两个参数</span><br><span class="hljs-comment">// 参数一：断言结束后给出的文字提示(可修改)</span><br><span class="hljs-comment">// 参数二：匿名函数</span><br>pm.<span class="hljs-title function_">expect</span>(pm.<span class="hljs-property">response</span>.<span class="hljs-title function_">text</span>()).<span class="hljs-property">to</span>.<span class="hljs-title function_">include</span>(<span class="hljs-string">&quot;xxx&quot;</span>);<br><span class="hljs-comment">// Postman期望响应文本中，包含xxx字符串，其中string_you_want_to_search为预期结果(可修改)</span><br></code></pre></td></tr></table></figure>
+<h4 id="4-响应时间"><a href="#4-响应时间" class="headerlink" title="(4) 响应时间"></a>(4) 响应时间</h4><ul>
+<li>断言响应时间，一般用于性能测试：<code>Response time is less than 200ms</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Response time is less than 200ms&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 断言响应时间小于200ms</span><br>    pm.<span class="hljs-title function_">expect</span>(pm.<span class="hljs-property">response</span>.<span class="hljs-property">responseTime</span>).<span class="hljs-property">to</span>.<span class="hljs-property">be</span>.<span class="hljs-title function_">below</span>(<span class="hljs-number">200</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="2-5-等于字符串"><a href="#2-5-等于字符串" class="headerlink" title="2-5 等于字符串"></a>2-5 等于字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title class_">Snippets</span>：<span class="hljs-title class_">Response</span> <span class="hljs-attr">body</span>: <span class="hljs-title class_">Is</span> equal to a <span class="hljs-title function_">string</span>(响应体是否等于某个字符串或对象)<br><br>pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Body is correct&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">body</span>(<span class="hljs-string">&quot;response_body_string&quot;</span>);<br>&#125;);<br><br><span class="hljs-comment">// pm代表Postman的一个实例，test()是Postman实例的一个方法，有以下两个参数</span><br><span class="hljs-comment">// 参数一：断言结束后给出的文字提示(可修改)</span><br><span class="hljs-comment">// 参数二：匿名函数</span><br>pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">body</span>(<span class="hljs-string">&quot;xxx&quot;</span>);<br><span class="hljs-comment">// Postman的响应中应该有响应体xxx，其中response_body_string为预期结果(可修改)</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h1 id="3-变量设置"><a href="#3-变量设置" class="headerlink" title="3 变量设置"></a>3 变量设置</h1><ul>
+<h2 id="2-4-变量设置"><a href="#2-4-变量设置" class="headerlink" title="2-4 变量设置"></a>2-4 变量设置</h2><ul>
 <li>变量设置<ul>
-<li>全局变量：在Postman中全局生效的变量，全局唯一。<ul>
-<li>代码设置：<code>pm.globals.set(&quot;var_name&quot;, value);</code>，var_name是全局变量名，value是全局变量值。</li>
-<li>代码获取：<code>var value = pm.globals.get(&quot;var_name&quot;);</code>，var_name全局变量名，value接收值变量。</li>
-<li>请求参数获取(即Postman界面获取)：<code>&#123;&#123; var_name &#125;&#125;</code>，var_name是全局变量名。</li>
+<li>作用域<ul>
+<li>作用域范围从大到小为：全局变量 &gt; 集合变量 &gt; 环境变量。</li>
+<li>在不同范围内申明相同变量时，会优先使用范围最小的变量。</li>
 </ul>
 </li>
-<li>环境变量：特定环境(生产环境、开发环境、测试环境)下生效的变量，在本环境内唯一。<ul>
-<li>代码设置：<code>pm.environment.set(&quot;var_name&quot;, value);</code>，var_name是环境变量名，value是环境变量值。</li>
-<li>代码获取：<code>var value = pm.environment.get(&quot;var_name&quot;);</code>，var_name环境变量名，value接收值变量。</li>
-<li>请求参数获取(即Postman界面获取)：<code>&#123;&#123; var_name &#125;&#125;</code>，var_name是环境变量名。</li>
+<li>环境变量(Environments)<ul>
+<li>全局变量(Globals)：Postman中全局生效的变量，全局唯一。</li>
+<li>特定环境(生产环境、开发环境、测试环境等)下生效的变量，在本环境内唯一。</li>
+</ul>
+</li>
+<li>集合变量：针对集合的变量，声明的变量必须基于某个集合，作用域只针对该集合。</li>
+<li>要使用变量中的值，先在Pre-request Script或Tests中设置该变量，然后获取变量。<ul>
+<li>variable_key变量名，variable_value变量值，获取变量使用<code>&#123;&#123;variable_key&#125;&#125;</code>。</li>
+<li>获取变量值的请求参数指的是：URL、Params、Authorization、Headers、Body。</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">// 设置全局变量</span><br>pm.<span class="hljs-property">globals</span>.<span class="hljs-title function_">set</span>(<span class="hljs-string">&quot;variable_key&quot;</span>, <span class="hljs-string">&quot;variable_value&quot;</span>);<br><span class="hljs-comment">// 获取全局变量</span><br>pm.<span class="hljs-property">globals</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;variable_key&quot;</span>);<br><br><span class="hljs-comment">// 设置环境变量</span><br>pm.<span class="hljs-property">environment</span>.<span class="hljs-title function_">set</span>(<span class="hljs-string">&quot;variable_key&quot;</span>, <span class="hljs-string">&quot;variable_value&quot;</span>);<br><span class="hljs-comment">// 获取环境变量</span><br>pm.<span class="hljs-property">environment</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;variable_key&quot;</span>);<br><br><span class="hljs-comment">// 设置集合变量</span><br>pm.<span class="hljs-property">collectionVariables</span>.<span class="hljs-title function_">set</span>(<span class="hljs-string">&quot;variable_key&quot;</span>, <span class="hljs-string">&quot;variable_value&quot;</span>);<br><span class="hljs-comment">// 获取集合变量</span><br>pm.<span class="hljs-property">collectionVariables</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;variable_key&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-环境变量"><a href="#1-环境变量" class="headerlink" title="(1) 环境变量"></a>(1) 环境变量</h4><p><img src="/../img/Postman/Postman@005.jpg" srcset="/img/load.gif" lazyload alt="Postman-变量设置-环境变量"></p>
+<h4 id="2-集合变量"><a href="#2-集合变量" class="headerlink" title="(2) 集合变量"></a>(2) 集合变量</h4><p><img src="/../img/Postman/Postman@006.jpg" srcset="/img/load.gif" lazyload alt="Postman-变量设置-集合变量"></p>
+<h1 id="3-接口关联"><a href="#3-接口关联" class="headerlink" title="3 接口关联"></a>3 接口关联</h1><ul>
+<li>接口关联<ul>
+<li>上一个接口的返回数据值，刚好是下一个接口的输入参数，这样两个接口就产生了关联。</li>
+<li>实现思路：提取上个接口的返回数据值，将其保存到环境变量中，下个接口获取变量值。</li>
+<li>例如：上个接口返回北京的经纬度坐标，将其保存到环境变量中，下个接口获取经纬度坐标值查询地点。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-返回经纬度"><a href="#3-1-返回经纬度" class="headerlink" title="3-1 返回经纬度"></a>3-1 返回经纬度</h2><p><img src="/../img/Postman/Postman@007.jpg" srcset="/img/load.gif" lazyload alt="接口关联-返回经纬度"></p>
+<h2 id="3-2-经纬度查询"><a href="#3-2-经纬度查询" class="headerlink" title="3-2 经纬度查询"></a>3-2 经纬度查询</h2><p><img src="/../img/Postman/Postman@008.jpg" srcset="/img/load.gif" lazyload alt="接口关联-经纬度查询"></p>
+<h1 id="4-集合测试"><a href="#4-集合测试" class="headerlink" title="4 集合测试"></a>4 集合测试</h1><ul>
+<li>集合测试<ul>
+<li>Run manually：默认手动运行，可选计划执行(Schedule runs)或集成自动化命令运行(Automate runs via CLI)。</li>
+<li>Iterations：集合运行的迭代次数。</li>
+<li>Delay：每个请求之间的时间间隔。</li>
+<li>Data：用于测试的数据文件，参数化文件。</li>
+<li>Persist responses for a session：保持会话的响应，勾选执行后可查看响应体和响应头。</li>
+<li>Stop run if an error occurs：如果集合中的任意请求在运行时报错，则会停止批量运行。</li>
+<li>Keep variable values：保留运行时使用的变量值。</li>
+<li>Run collection without using stored cookies：在不使用存储cookies的情况下批量运行。</li>
+<li>Save cookies after collection run：批量运行后将使用的cookies保存到cookie管理器中。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Postman/Postman@009.jpg" srcset="/img/load.gif" lazyload alt="集合测试"></p>
+<h2 id="4-1-Schedule-runs"><a href="#4-1-Schedule-runs" class="headerlink" title="4-1 Schedule runs"></a>4-1 Schedule runs</h2><ul>
+<li>Schedule runs<ul>
+<li>允许在预定的时间间隔内自动运行集合中的请求，可以设置运行的时间、频率和持续时间。</li>
+<li>主要适用于自动化测试和定期运行请求的场景，旨在帮助保持API请求的一致性和稳定性。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Postman/Postman@010.jpg" srcset="/img/load.gif" lazyload alt="集合测试-Schedule runs"></p>
+<h2 id="4-2-Monitors-runs"><a href="#4-2-Monitors-runs" class="headerlink" title="4-2 Monitors runs"></a>4-2 Monitors runs</h2><ul>
+<li>Monitors runs<ul>
+<li>主要用于在生产环境中监控和管理API的性能和可用性，定期发送API请求并获取响应时间等指标。</li>
+<li>监视器还提供了报警通知、实时监控和历史记录等功能，以便及时发现和解决API请求的潜在问题。</li>
+<li>参数说明<ul>
+<li>Run this monitor：时间调度，设置固定时间来执行集合。</li>
+<li>Receive email notifications for run failures and errors：失败和错误发送邮件通知。</li>
+<li>Retry if run fails (This might affect your billing.)：如果集合测试运行失败则重试。</li>
+<li>Set request timeout：设置请求超时的时间。</li>
+<li>Set delay between requests：设置请求之间的延迟时间。</li>
+<li>Follow redirects：跟随重定向，勾选则Postman会自动发送新的请求到重定向的URL。</li>
+<li>Enable SSL validation：启用SSL验证，确保请求和响应在传输过程中是加密和安全的。</li>
+<li>Run之后，点击Pause将暂停正在运行的监视器，再点击Resume恢复当前监视器的运行。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Postman/Postman@011.jpg" srcset="/img/load.gif" lazyload alt="集合测试-Monitors runs"></p>
+<h2 id="4-3-Newman的使用"><a href="#4-3-Newman的使用" class="headerlink" title="4-3 Newman的使用"></a>4-3 Newman的使用</h2><ul>
+<li>Newman的使用<ul>
+<li>集合测试的另一种方式是使用Newman，Postman Newman是一款由Postman开发的命令行工具。</li>
+<li>使用Newman之前，需要先安装Node.js，然后再使用命令<code>npm install -g newman</code>安装Newman。</li>
+<li>在Postman中以Json文件方式导出要测试的集合，以及对应的环境变量，就可以命令运行集合了。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 无环境依赖的情况下，只运行集合</span><br>newman run &lt;collection_name&gt;<br>newman run 常用接口.postman_collection.json<br><br><span class="hljs-comment"># 运行集合和环境</span><br>newman run &lt;collection_name&gt; <span class="hljs-literal">-e</span> &lt;environment_name&gt;<br>newman run 常用接口.postman_collection.json <span class="hljs-literal">-e</span> workspace.postman_globals.json<br><br><span class="hljs-comment"># 使用所需的编号运行集合的迭代</span><br>newman run &lt;collection_name&gt; <span class="hljs-literal">-n</span> &lt;no.of_iterations&gt;<br>newman run 常用接口.postman_collection.json <span class="hljs-literal">-n</span> <span class="hljs-number">3</span><br><br><span class="hljs-comment"># 运行数据文件</span><br>newman run &lt;collection_name&gt; <span class="hljs-literal">--data</span> &lt;file_name&gt; <span class="hljs-literal">-n</span> &lt;no.of_iterations&gt; <span class="hljs-literal">-e</span> &lt;environment_name&gt;<br>newman run 常用接口.postman_collection.json <span class="hljs-literal">--data</span> data.csv <span class="hljs-literal">-n</span> <span class="hljs-number">3</span> <span class="hljs-literal">-e</span> workspace.postman_globals.json<br><br><span class="hljs-comment"># 设置延迟时间，单位毫秒</span><br>newman run &lt;collection_name&gt; <span class="hljs-literal">-d</span> &lt;delay_time&gt;<br>newman run 常用接口.postman_collection.json <span class="hljs-literal">-d</span> <span class="hljs-number">500</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-Mock服务"><a href="#5-Mock服务" class="headerlink" title="5 Mock服务"></a>5 Mock服务</h1><ul>
+<li>Mock服务<ul>
+<li>Mock定义<ul>
+<li>一种特殊测试技巧，可以在没有依赖项的情况下进行接口或单元测试。</li>
+<li>Mock服务不是一个真实的服务，而是一个被伪装成真实服务的假服务。</li>
+</ul>
+</li>
+<li>Postman可以创建两种类型的Mock服务<ul>
+<li>私有Mock<ul>
+<li>头像&gt;Settings&gt;API keys&gt;Generate API Key&gt;命名为<code>x-api-key</code>&gt;复制生成的密钥。</li>
+<li>在Postman的Mock servers中，创建Mock服务，配置中勾选<u>Make mock server private</u>。</li>
+<li>Mock服务创建完成后，Collections中生成的请求Headers里添加x-api-key和密钥内容。</li>
+</ul>
+</li>
+<li>公有Mock：可以被任何人访问，不需要使用Postman API Key。</li>
+</ul>
+</li>
+<li>Next &gt; Configuration<ul>
+<li>Mock Server Name：Mock服务名称。</li>
+<li>Environment：选择已有环境，或勾选Save…将服务地址保存为一个新环境变量。</li>
+<li>Simulate a fixed network delay：模拟固定的网络延迟，默认No delay selected。</li>
+<li><u>Make mock server private</u>：设置为私有Mock服务。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-1-参数内容"><a href="#5-1-参数内容" class="headerlink" title="5-1 参数内容"></a>5-1 参数内容</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs Json"><span class="hljs-comment">// Request Body</span><br><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;厦门&quot;</span><br><span class="hljs-punctuation">&#125;</span><br><br><span class="hljs-comment">// Response Body</span><br><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;200&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;msg&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;success&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;infocode&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;10000&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;lives&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;province&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;福建&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;厦门市&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;adcode&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;350200&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;weather&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;晴&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;temperature&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;7&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;winddirection&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;东北&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;windpower&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;4&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;humidity&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;57&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;reporttime&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-08-22 08:34:17&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;temperature_float&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;7.0&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;humidity_float&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;57.0&quot;</span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-创建Mock"><a href="#5-2-创建Mock" class="headerlink" title="5-2 创建Mock"></a>5-2 创建Mock</h2><p><img src="/../img/Postman/Postman@012.jpg" srcset="/img/load.gif" lazyload alt="Mock服务-创建Mock"></p>
+<h2 id="5-3-Mock请求"><a href="#5-3-Mock请求" class="headerlink" title="5-3 Mock请求"></a>5-3 Mock请求</h2><p><img src="/../img/Postman/Postman@013.jpg" srcset="/img/load.gif" lazyload alt="Mock服务-Mock请求"></p>
+<h1 id="6-APIs设计"><a href="#6-APIs设计" class="headerlink" title="6 APIs设计"></a>6 APIs设计</h1><ul>
+<li>设计开发API<ul>
+<li>创建API &gt; 定义API &gt; 测试API &gt; 部署API &gt; 监控API。</li>
+<li>定义API：入参、出参、方法、响应的定义(主要)。</li>
+<li>测试API：测试与自动化(Collections、Automate)。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Postman/Postman@014.jpg" srcset="/img/load.gif" lazyload alt="设计开发API"></p>
+<h2 id="6-1-定义API"><a href="#6-1-定义API" class="headerlink" title="6-1 定义API"></a>6-1 定义API</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">openapi:</span> <span class="hljs-string">&#x27;3.0.0&#x27;</span><br><span class="hljs-attr">info:</span><br>  <span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;1.0.0&#x27;</span><br>  <span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;图书管理API&#x27;</span><br>  <span class="hljs-attr">description:</span> <span class="hljs-string">图书库存管理</span><br><br><span class="hljs-attr">paths:</span><br>  <span class="hljs-comment"># 定义接口路径</span><br>  <span class="hljs-string">/books:</span><br>    <span class="hljs-comment"># 定义接口的请求方法</span><br>    <span class="hljs-attr">get:</span><br>      <span class="hljs-attr">summary:</span> <span class="hljs-string">获取所有图书</span><br>      <span class="hljs-attr">operationId:</span> <span class="hljs-string">listBooks</span><br>      <span class="hljs-comment"># 定义接口请求的响应内容</span><br>      <span class="hljs-attr">responses:</span><br>        <span class="hljs-attr">&#x27;200&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">返回图书数组</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-attr">type:</span> <span class="hljs-string">array</span><br>                <span class="hljs-attr">items:</span><br>                  <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Book&#x27;</span><br>        <span class="hljs-attr">&#x27;500&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">出现意外错误</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br><br>    <span class="hljs-attr">post:</span><br>      <span class="hljs-attr">summary:</span> <span class="hljs-string">创建新的图书</span><br>      <span class="hljs-attr">operationId:</span> <span class="hljs-string">createBook</span><br>      <span class="hljs-attr">requestBody:</span><br>        <span class="hljs-attr">description:</span> <span class="hljs-string">待创建的图书信息</span><br>        <span class="hljs-attr">required:</span> <span class="hljs-literal">true</span><br>        <span class="hljs-attr">content:</span><br>          <span class="hljs-attr">application/json:</span><br>            <span class="hljs-attr">schema:</span><br>              <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/NewBook&#x27;</span><br>      <span class="hljs-attr">responses:</span><br>        <span class="hljs-attr">&#x27;201&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">图书创建成功</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Book&#x27;</span><br>        <span class="hljs-attr">&#x27;400&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">输入无效</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br>        <span class="hljs-attr">&#x27;500&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">出现意外错误</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br><br>  <span class="hljs-string">/books/&#123;bookId&#125;:</span><br>    <span class="hljs-attr">parameters:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">bookId</span><br>        <span class="hljs-attr">in:</span> <span class="hljs-string">path</span><br>        <span class="hljs-attr">required:</span> <span class="hljs-literal">true</span><br>        <span class="hljs-attr">description:</span> <span class="hljs-string">图书的唯一标识符</span><br>        <span class="hljs-attr">schema:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br><br>    <span class="hljs-attr">get:</span><br>      <span class="hljs-attr">summary:</span> <span class="hljs-string">根据ID获取图书详情</span><br>      <span class="hljs-attr">operationId:</span> <span class="hljs-string">readBook</span><br>      <span class="hljs-attr">responses:</span><br>        <span class="hljs-attr">&#x27;200&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">返回图书详情</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Book&#x27;</span><br>        <span class="hljs-attr">&#x27;404&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">未找到图书</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br>        <span class="hljs-attr">&#x27;500&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">出现意外错误</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br><br>    <span class="hljs-attr">put:</span><br>      <span class="hljs-attr">summary:</span> <span class="hljs-string">根据ID更新图书信息</span><br>      <span class="hljs-attr">operationId:</span> <span class="hljs-string">updateBook</span><br>      <span class="hljs-attr">requestBody:</span><br>        <span class="hljs-attr">description:</span> <span class="hljs-string">更新后的图书信息</span><br>        <span class="hljs-attr">required:</span> <span class="hljs-literal">true</span><br>        <span class="hljs-attr">content:</span><br>          <span class="hljs-attr">application/json:</span><br>            <span class="hljs-attr">schema:</span><br>              <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/NewBook&#x27;</span><br>      <span class="hljs-attr">responses:</span><br>        <span class="hljs-attr">&#x27;200&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">图书信息更新成功</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Book&#x27;</span><br>        <span class="hljs-attr">&#x27;400&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">输入无效</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br>        <span class="hljs-attr">&#x27;404&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">未找到图书</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br>        <span class="hljs-attr">&#x27;500&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">出现意外错误</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br>    <br>    <span class="hljs-attr">delete:</span><br>      <span class="hljs-attr">summary:</span> <span class="hljs-string">根据ID删除图书</span><br>      <span class="hljs-attr">operationId:</span> <span class="hljs-string">deleteBook</span><br>      <span class="hljs-attr">responses:</span><br>        <span class="hljs-attr">&#x27;204&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">图书删除成功</span><br>        <span class="hljs-attr">&#x27;404&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">未找到图书</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br>        <span class="hljs-attr">&#x27;500&#x27;:</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">出现意外错误</span><br>          <span class="hljs-attr">content:</span><br>            <span class="hljs-attr">application/json:</span><br>              <span class="hljs-attr">schema:</span><br>                <span class="hljs-string">$ref:</span> <span class="hljs-string">&#x27;#/components/schemas/Error&#x27;</span><br><br><span class="hljs-attr">components:</span><br>  <span class="hljs-attr">schemas:</span><br>    <span class="hljs-attr">Book:</span><br>      <span class="hljs-comment"># 数据模型的类型</span><br>      <span class="hljs-attr">type:</span> <span class="hljs-string">object</span><br>      <span class="hljs-comment"># 指定数据模型中的必填属性</span><br>      <span class="hljs-attr">required:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">id</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">title</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">author</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">isbn</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">price</span><br>      <span class="hljs-comment"># 定义数据模型中的属性</span><br>      <span class="hljs-attr">properties:</span><br>        <span class="hljs-attr">id:</span><br>          <span class="hljs-comment"># 指定属性的数据类型</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br>          <span class="hljs-comment"># 提供属性的描述信息</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">图书的唯一标识符</span><br>        <span class="hljs-attr">title:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">图书标题</span><br>        <span class="hljs-attr">author:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">图书作者</span><br>        <span class="hljs-attr">isbn:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">图书ISBN</span><br>        <span class="hljs-attr">price:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">number</span><br>          <span class="hljs-attr">format:</span> <span class="hljs-string">float</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">图书价格</span><br>        <span class="hljs-attr">description:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">图书简介</span><br>          <br>    <span class="hljs-attr">NewBook:</span><br>      <span class="hljs-attr">type:</span> <span class="hljs-string">object</span><br>      <span class="hljs-attr">required:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">title</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">author</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">isbn</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">price</span><br>      <span class="hljs-attr">properties:</span><br>        <span class="hljs-attr">title:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br>        <span class="hljs-attr">author:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br>        <span class="hljs-attr">isbn:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br>        <span class="hljs-attr">price:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">number</span><br>          <span class="hljs-attr">format:</span> <span class="hljs-string">float</span><br>        <span class="hljs-attr">description:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br><br>    <span class="hljs-attr">Error:</span><br>      <span class="hljs-attr">type:</span> <span class="hljs-string">object</span><br>      <span class="hljs-attr">required:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">message</span><br>      <span class="hljs-attr">properties:</span><br>        <span class="hljs-attr">message:</span><br>          <span class="hljs-attr">type:</span> <span class="hljs-string">string</span><br>          <span class="hljs-attr">description:</span> <span class="hljs-string">可读的错误信息</span><br><br>  <span class="hljs-attr">securitySchemes:</span><br>    <span class="hljs-attr">ApiKey:</span><br>      <span class="hljs-attr">type:</span> <span class="hljs-string">apiKey</span><br>      <span class="hljs-attr">in:</span> <span class="hljs-string">header</span><br>      <span class="hljs-attr">name:</span> <span class="hljs-string">X-Api-Key</span><br><br><span class="hljs-attr">security:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">ApiKey:</span> []<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-2-API文档"><a href="#6-2-API文档" class="headerlink" title="6-2 API文档"></a>6-2 API文档</h2><p><img src="/../img/Postman/Postman@015.jpg" srcset="/img/load.gif" lazyload alt="设计开发API-API文档"></p>
+<h2 id="6-3-测试API"><a href="#6-3-测试API" class="headerlink" title="6-3 测试API"></a>6-3 测试API</h2><ul>
+<li>测试API<ul>
+<li>由于定义好的API没有设置baseUrl，测试集合无法直接执行。</li>
+<li>Postman直接生成定义好的API Flask代码，下载到本地运行。<ul>
+<li>解压zip后，将yourCompany目录名改为books，在当前目录下打开命令窗口。</li>
+<li>在解压zip的目录下，执行环境依赖：<code>pip install -r requirements.txt</code>。</li>
+<li>设置环境变量FLASK_APP，程序主模块名books：<code>set FLASK_APP=books </code>。</li>
+<li>设置环境变量FLASK_ENV，默认production：<code>set FLASK_ENV=development</code>。</li>
+</ul>
+</li>
+<li>命令窗口执行<code>flask run</code>，浏览器打开地址验证：<a href="127.0.0.1:5000/books">127.0.0.1:5000&#x2F;books</a>。<ul>
+<li>访问成功后，进行本地Mock，将Postman中的baseUrl设为<a href="127.0.0.1:5000">127.0.0.1:5000</a>。</li>
+<li>由Postman生成的API Flask只有接口相关的代码，没有后台数据库对应操作。</li>
+<li>如果测试集合要完全呈现接口功能，需将生成的Flask代码改写优化，再Mock。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/Postman/Postman@016.jpg" srcset="/img/load.gif" lazyload alt="设计开发API-测试API"></p>
 
               
             </div>
