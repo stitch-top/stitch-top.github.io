@@ -1,0 +1,1145 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为Web应用提供可扩展的高性能数据存储解决方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python MongoDB">
+<meta property="og:url" content="https://stitch-top.github.io/2021/11/03/python/python12-python-mongodb/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为Web应用提供可扩展的高性能数据存储解决方案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1529632145.jpg">
+<meta property="article:published_time" content="2021-11-03T14:50:12.000Z">
+<meta property="article:modified_time" content="2024-01-09T15:21:41.156Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1529632145.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python MongoDB - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python MongoDB"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-11-03 22:50" pubdate>
+          2021年11月3日 22:50:12
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          89 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景 -->
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script>
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python MongoDB</h1>
+            
+            <div class="markdown-body">
+              
+              <p>MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为Web应用提供可扩展的高性能数据存储解决方案。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-MongoDB"><a href="#1-MongoDB" class="headerlink" title="1 MongoDB"></a>1 MongoDB</h1><ul>
+<li>MongoDB<ul>
+<li>Python需要MongoDB驱动程序，用以访问MongoDB数据库，使用PyMongo驱动程序。</li>
+<li>使用PIP进行下载并安装驱动，命令窗口输入：<code>python -m pip install pymongo</code>。</li>
+<li>命令窗口下进入Python交互界面，输入<code>import pymongo</code>回车，没报错说明成功安装。</li>
+<li>下载安装并配置MongoDB，参看“<a target="_blank" rel="noopener" href="https://blog.csdn.net/yuan2019035055/article/details/123031732">MongoDB数据库入门到精通看这一篇就够了</a>”。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-创建数据库"><a href="#1-1-创建数据库" class="headerlink" title="1-1 创建数据库"></a>1-1 创建数据库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br>mydic = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;John&#x27;</span>, <span class="hljs-string">&#x27;address&#x27;</span>: <span class="hljs-string">&#x27;Highway 37&#x27;</span>&#125;<br><br>x = mycol.insert_one(mydic)             <span class="hljs-comment"># 给customers集合插入数据</span><br><span class="hljs-built_in">print</span>(x)                                <span class="hljs-comment"># 只有给创建的数据库，创建集合及插入数据后，才能查询到该数据库</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-查询数据库"><a href="#1-2-查询数据库" class="headerlink" title="1-2 查询数据库"></a>1-2 查询数据库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br><span class="hljs-comment"># dbslists = myclient.database_names()  # 旧版使用    </span><br>dbslists = myclient.list_database_names()<br><br><span class="hljs-built_in">print</span>(dbslists)                         <span class="hljs-comment"># 返回数据库列表</span><br><span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;mydatabase&#x27;</span> <span class="hljs-keyword">in</span> dbslists:            <span class="hljs-comment"># 按名称查询特定数据库</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;The database &quot;mydatabase&quot; exists.&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3-查集合方法"><a href="#1-3-查集合方法" class="headerlink" title="1-3 查集合方法"></a>1-3 查集合方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br><span class="hljs-comment"># collists = mydbs.collection_names()   # 旧版使用</span><br>collists = mydbs.list_collection_names()<br><br><span class="hljs-built_in">print</span>(collists)                         <span class="hljs-comment"># 返回集合列表</span><br><span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;customers&#x27;</span> <span class="hljs-keyword">in</span> collists:             <span class="hljs-comment"># 按名称查询特定集合</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;The collection &quot;customers&quot; exists.&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-插入记录"><a href="#2-插入记录" class="headerlink" title="2 插入记录"></a>2 插入记录</h1><ul>
+<li>插入记录<ul>
+<li>不指定id字段时，MongoDB会自动添加一个，并给每个记录分配一个唯一的id。</li>
+<li>插入单行记录：<code>insert_one()</code>。</li>
+<li>插入多行记录：<code>insert_many()</code>，第一个参数是一个包含字典的列表。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-1-返回id字段"><a href="#2-1-返回id字段" class="headerlink" title="2-1 返回id字段"></a>2-1 返回id字段</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br>mydic = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;Peter&#x27;</span>, <span class="hljs-string">&#x27;address&#x27;</span>: <span class="hljs-string">&#x27;Lowstreet 27&#x27;</span>&#125;<br><br>x = mycol.insert_one(mydic)             <span class="hljs-comment"># 插入另一条数据</span><br><span class="hljs-built_in">print</span>(x.inserted_id)                    <span class="hljs-comment"># 返回id字段的值</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-多记录插入"><a href="#2-2-多记录插入" class="headerlink" title="2-2 多记录插入"></a>2-2 多记录插入</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]         <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]             <span class="hljs-comment"># 创建名为customers的集合</span><br>mydic = [<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Amy&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Apple st 652&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Hannah&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Mountain 21&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Michael&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Valley 345&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Sandy&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Ocean blvd 2&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Betty&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Green Grass 1&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Richard&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Sky st 331&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Susan&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;One way 98&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Vicky&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Yellow Garden 2&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Park Lane 38&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;William&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Central st 954&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Chuck&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Main Road 989&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Viola&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Sideway 1633&quot;</span>&#125;<br>]<br><br>x = mycol.insert_many(mydic)<br><span class="hljs-built_in">print</span>(x.inserted_ids)                  <span class="hljs-comment"># 返回插入的多行记录id值</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-插入指定id"><a href="#2-3-插入指定id" class="headerlink" title="2-3 插入指定id"></a>2-3 插入指定id</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]         <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]             <span class="hljs-comment"># 创建名为customers的集合</span><br>mydic = [<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;John&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Highway 37&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Peter&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Lowstreet 27&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Amy&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Apple st 652&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Hannah&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Mountain 21&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Michael&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Valley 345&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">6</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Sandy&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Ocean blvd 2&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">7</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Betty&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Green Grass 1&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">8</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Richard&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Sky st 331&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">9</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Susan&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;One way 98&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Vicky&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Yellow Garden 2&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Ben&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Park Lane 38&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">12</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;William&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Central st 954&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">13</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Chuck&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Main Road 989&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">14</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Viola&quot;</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Sideway 1633&quot;</span>&#125;<br>]<br><br>x = mycol.insert_many(mydic)<br><span class="hljs-built_in">print</span>(x.inserted_ids)                  <span class="hljs-comment"># 返回插入的多行记录id值</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-查询记录"><a href="#3-查询记录" class="headerlink" title="3 查询记录"></a>3 查询记录</h1><ul>
+<li>查询记录<ul>
+<li>查集合中的第一条记录使用<code>find_one()</code>方法。</li>
+<li>查集合中的所有记录则可以使用<code>find()</code>方法。<ul>
+<li>参数一是一个查询对象，参数二是一个对象(可选)，描述要在结果中包含哪些字段。</li>
+<li>当且仅当同一个对象中的其中一个值为id字段时，才能同时指定0和1值，否则报错。</li>
+</ul>
+</li>
+<li>进行高级查询，可以使用修饰符作为查询对象中的值。</li>
+<li>使用正则表达式进行过滤查询，只能用于查询字符串。</li>
+<li><code>sort()</code>方法按升序或降序对结果进行排序(默认升序)，接受fieldname和direction参数。</li>
+<li>通过使用<code>limit()</code>方法，定义需要返回记录的个数，限制查询结果返回对应个数的记录。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-单条记录"><a href="#3-1-单条记录" class="headerlink" title="3-1 单条记录"></a>3-1 单条记录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br>x = mycol.find_one()                    <span class="hljs-comment"># 查询集合中的第一个记录</span><br><span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2-所有记录"><a href="#3-2-所有记录" class="headerlink" title="3-2 所有记录"></a>3-2 所有记录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find():                  <span class="hljs-comment"># 查询集合中的所有记录</span><br>    <span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-指定记录"><a href="#3-3-指定记录" class="headerlink" title="3-3 指定记录"></a>3-3 指定记录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]         <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]             <span class="hljs-comment"># 创建名为customers的集合</span><br><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find(&#123;&#125;, &#123;<span class="hljs-string">&quot;_id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-number">1</span>&#125;):<br>    <span class="hljs-built_in">print</span>(x)                           <span class="hljs-comment"># 只返回名称和地址，不返回id值</span><br><br><span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> mycol.find(&#123;&#125;, &#123;<span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-number">0</span>&#125;):<br>    <span class="hljs-built_in">print</span>(y)                           <span class="hljs-comment"># 返回结果中排除地址</span><br><br>myque = &#123;<span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Park Lane 38&quot;</span>&#125;<br><span class="hljs-keyword">for</span> z <span class="hljs-keyword">in</span> mycol.find(myque):            <span class="hljs-comment"># 查找地址为“Park Lane 38”的记录</span><br>    <span class="hljs-built_in">print</span>(z)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-4-高级查询"><a href="#3-4-高级查询" class="headerlink" title="3-4 高级查询"></a>3-4 高级查询</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br>myque = &#123;<span class="hljs-string">&quot;address&quot;</span>: &#123;<span class="hljs-string">&quot;$gt&quot;</span>: <span class="hljs-string">&quot;S&quot;</span>&#125;&#125;       <span class="hljs-comment"># 查找地址以S及往后字母开头的记录</span><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find(myque):<br>    <span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-5-正则过滤"><a href="#3-5-正则过滤" class="headerlink" title="3-5 正则过滤"></a>3-5 正则过滤</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br>myque = &#123;<span class="hljs-string">&quot;address&quot;</span>: &#123;<span class="hljs-string">&quot;$regex&quot;</span>: <span class="hljs-string">&quot;^S&quot;</span>&#125;&#125;   <span class="hljs-comment"># 仅查找地址为字母S开头的记录</span><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find(myque):<br>    <span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-6-升序排序"><a href="#3-6-升序排序" class="headerlink" title="3-6 升序排序"></a>3-6 升序排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find().sort(<span class="hljs-string">&#x27;name&#x27;</span>):     <span class="hljs-comment"># 按名称字母顺序对结果进行升序排序</span><br>    <span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-7-降序排序"><a href="#3-7-降序排序" class="headerlink" title="3-7 降序排序"></a>3-7 降序排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find().sort(<span class="hljs-string">&#x27;name&#x27;</span>, -<span class="hljs-number">1</span>):<br>    <span class="hljs-built_in">print</span>(x)                            <span class="hljs-comment"># 按名称字母顺序对结果进行(反向)降序排序</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-8-限制查询"><a href="#3-8-限制查询" class="headerlink" title="3-8 限制查询"></a>3-8 限制查询</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br>result = mycol.find().limit(<span class="hljs-number">5</span>)          <span class="hljs-comment"># 限制结果只返回5条记录</span><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> result:<br>    <span class="hljs-built_in">print</span>(x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-修改记录"><a href="#4-修改记录" class="headerlink" title="4 修改记录"></a>4 修改记录</h1><ul>
+<li>修改记录<ul>
+<li>修改一条记录：<code>update_one()</code>。<ul>
+<li>第一个参数是一个查询对象，定义要修改的记录。</li>
+<li>若查询到多个记录，则只修改第一个出现的记录。</li>
+<li>第二个参数是定义记录新值的对象。</li>
+</ul>
+</li>
+<li>修改多条记录：<code>update_many()</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-1-修改单条记录"><a href="#4-1-修改单条记录" class="headerlink" title="4-1 修改单条记录"></a>4-1 修改单条记录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]         <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]             <span class="hljs-comment"># 创建名为customers的集合</span><br><br>myque = &#123;<span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Valley 345&quot;</span>&#125;      <span class="hljs-comment"># 将地址“Valley 345”改为“Canyon 123”</span><br>mynew = &#123;<span class="hljs-string">&quot;$set&quot;</span>: &#123;<span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Canyon 123&quot;</span>&#125;&#125;<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find():<br>    <span class="hljs-built_in">print</span>(x)                           <span class="hljs-comment"># 查询修改前的记录</span><br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;**************************************************************************************&#x27;</span>)<br><br>mycol.update_one(myque, mynew)<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find():<br>    <span class="hljs-built_in">print</span>(x)                           <span class="hljs-comment"># 查询修改后的记录</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-修改多条记录"><a href="#4-2-修改多条记录" class="headerlink" title="4-2 修改多条记录"></a>4-2 修改多条记录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]         <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]             <span class="hljs-comment"># 创建名为customers的集合</span><br><br>myque = &#123;<span class="hljs-string">&quot;address&quot;</span>: &#123;<span class="hljs-string">&quot;$regex&quot;</span>: <span class="hljs-string">&quot;^S&quot;</span>&#125;&#125;  <span class="hljs-comment"># 将地址以字母S开头的记录，name都改为“Minnie”</span><br>mynew = &#123;<span class="hljs-string">&quot;$set&quot;</span>: &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Minnie&quot;</span>&#125;&#125;<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find():<br>    <span class="hljs-built_in">print</span>(x)                           <span class="hljs-comment"># 查询修改前的记录</span><br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;**************************************************************************************&#x27;</span>)<br><br>y = mycol.update_many(myque, mynew)<br><span class="hljs-built_in">print</span>(y.modified_count, <span class="hljs-string">&#x27;documents updated.&#x27;</span>)<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> mycol.find():<br>    <span class="hljs-built_in">print</span>(x)                           <span class="hljs-comment"># 查询修改后的记录</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-删除记录"><a href="#5-删除记录" class="headerlink" title="5 删除记录"></a>5 删除记录</h1><ul>
+<li>删除记录<ul>
+<li>删除单个记录：<code>delete_one()</code>方法。<ul>
+<li>第一个参数是一个查询对象，定义要删除的文档。</li>
+<li>若找到多个文档，则只会删除第一个出现的文档。</li>
+</ul>
+</li>
+<li>删除多个记录：<code>delete_many()</code>方法。<ul>
+<li>第一个参数定义了要删除哪些文档的查询对象。</li>
+<li>要删除所有记录，将空查询对象传递给该方法。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-1-删除单个记录"><a href="#5-1-删除单个记录" class="headerlink" title="5-1 删除单个记录"></a>5-1 删除单个记录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br>myque = &#123;<span class="hljs-string">&quot;address&quot;</span>: <span class="hljs-string">&quot;Mountain 21&quot;</span>&#125;      <span class="hljs-comment"># 删除地址为“Mountain 21”的记录</span><br>mycol.delete_one(myque)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-删除多个记录"><a href="#5-2-删除多个记录" class="headerlink" title="5-2 删除多个记录"></a>5-2 删除多个记录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br>myque = &#123;<span class="hljs-string">&quot;address&quot;</span>: &#123;<span class="hljs-string">&quot;$regex&quot;</span>: <span class="hljs-string">&quot;^S&quot;</span>&#125;&#125;   <span class="hljs-comment"># 删除地址以字母S开头的所有记录</span><br>x = mycol.delete_many(myque)<br><span class="hljs-built_in">print</span>(x.deleted_count, <span class="hljs-string">&#x27;documents deleted.&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-3-删除所有记录"><a href="#5-3-删除所有记录" class="headerlink" title="5-3 删除所有记录"></a>5-3 删除所有记录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]              <span class="hljs-comment"># 创建名为customers的集合</span><br><br>x = mycol.delete_many(&#123;&#125;)               <span class="hljs-comment"># 删除集合中的所有记录</span><br><span class="hljs-built_in">print</span>(x.deleted_count, <span class="hljs-string">&#x27;documents deleted.&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-删除集合"><a href="#6-删除集合" class="headerlink" title="6 删除集合"></a>6 删除集合</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]         <span class="hljs-comment"># 创建mydatabase数据库</span><br>mycol = mydbs[<span class="hljs-string">&#x27;customers&#x27;</span>]             <span class="hljs-comment"># 创建名为customers的集合</span><br><br>mycol.drop()                           <span class="hljs-comment"># 删除名为customers的集合</span><br><br><span class="hljs-comment"># collists = mydbs.collection_names()  # 旧版使用</span><br>collists = mydbs.list_collection_names()<br><span class="hljs-built_in">print</span>(collists)                        <span class="hljs-comment"># 查询该数据库剩余的集合列表</span><br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MongoDB/">#MongoDB</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python MongoDB</div>
+      <div>https://stitch-top.github.io/2021/11/03/python/python12-python-mongodb/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年11月3日 22:50:12</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/10/python/python13-python-flask/" title="Python Flask">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python Flask</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/07/python/python11-python-mysql/" title="Python MySQL">
+                        <span class="hidden-mobile">Python MySQL</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"bsRkWxXK7zLX6NWYygwknNXv-gzGzoHsz","appKey":"qqiNDCxGTOGVmiM1xAbd5pzk","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Python"
+        id="heading-a7f5f35426b927411fc9231b56382173" role="tab" data-toggle="collapse" href="#collapse-a7f5f35426b927411fc9231b56382173"
+        aria-expanded="true"
+      >
+        Python
+        <span class="list-group-count">(13)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-a7f5f35426b927411fc9231b56382173"
+           role="tabpanel" aria-labelledby="heading-a7f5f35426b927411fc9231b56382173">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2021/01/01/python/python01-python-ji-chu-yi/" title="Python 基础(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 基础(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/01/15/python/python02-python-ji-chu-er/" title="Python 基础(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 基础(二)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/02/03/python/python03-python-wen-jian-chu-li/" title="Python 文件处理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 文件处理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/01/python/python04-python-numpy-ji-chu/" title="Python NumPy 基础"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/04/06/python/python05-python-numpy-sui-ji/" title="Python NumPy 随机"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 随机</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/05/05/python/python06-python-numpy-han-shu/" title="Python NumPy 函数"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/06/08/python/python07-python-pandas/" title="Python Pandas"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Pandas</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/09/python/python08-python-scipy/" title="Python SciPy"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python SciPy</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/08/02/python/python09-python-matplotlib/" title="Python Matplotlib"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Matplotlib</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/09/04/python/python10-python-ji-qi-xue-xi/" title="Python 机器学习"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 机器学习</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/10/07/python/python11-python-mysql/" title="Python MySQL"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python MySQL</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/11/03/python/python12-python-mongodb/" title="Python MongoDB"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Python MongoDB</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/12/10/python/python13-python-flask/" title="Python Flask"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Flask</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2023</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://cdn.staticfile.org/busuanzi/2.3.0/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/snow.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"right","width":180,"height":230},"mobile":{"show":false,"scale":0.3},"rect":{"opacityDefault":0.7,"opacityHover":1},"log":false});</script></body>
+</html>

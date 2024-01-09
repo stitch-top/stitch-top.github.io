@@ -1,0 +1,1494 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="机器学习是一种分析数据并学习预测结果的程序，是让计算机从研究数据和统计数据中学习，是迈向人工智能(AI)方向的一步。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 机器学习">
+<meta property="og:url" content="https://stitch-top.github.io/2021/09/04/python/python10-python-ji-qi-xue-xi/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="机器学习是一种分析数据并学习预测结果的程序，是让计算机从研究数据和统计数据中学习，是迈向人工智能(AI)方向的一步。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/2215166355.jpg">
+<meta property="article:published_time" content="2021-09-04T14:56:36.000Z">
+<meta property="article:modified_time" content="2024-01-09T15:21:23.366Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="人工智能">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/2215166355.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Python 机器学习 - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"(ง •_•)ง"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python 机器学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-09-04 22:56" pubdate>
+          2021年9月4日 22:56:36
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          37k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          305 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景 -->
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script>
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python 机器学习</h1>
+            
+            <div class="markdown-body">
+              
+              <p>机器学习是一种分析数据并学习预测结果的程序，是让计算机从研究数据和统计数据中学习，是迈向人工智能(AI)方向的一步。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-机器学习"><a href="#1-机器学习" class="headerlink" title="1 机器学习"></a>1 机器学习</h1><ul>
+<li>机器学习<ul>
+<li>数据类型三大类：数值的、绝对的、序数。<ul>
+<li>数值数据是数字，两个类别：离散数据(仅限于整数)、连续数据(具有无限价值)。</li>
+<li>分类数据是无法相互比较的值，而序数数据类似于分类数据，但是可以相互比较。</li>
+</ul>
+</li>
+<li>平均数<code>mean</code>、中位数<code>median</code>、众数<code>mode</code>、标准差<code>std</code>。</li>
+<li>方差<code>var</code>、方差的平方根&#x3D;标准差、百分位数<code>percentile()</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> stats<br><span class="hljs-keyword">from</span> warnings <span class="hljs-keyword">import</span> simplefilter              <span class="hljs-comment"># 忽略警告信息</span><br>simplefilter(action=<span class="hljs-string">&#x27;ignore&#x27;</span>, category=FutureWarning)<br><br>speed = [<span class="hljs-number">99</span>, <span class="hljs-number">86</span>, <span class="hljs-number">87</span>, <span class="hljs-number">88</span>, <span class="hljs-number">111</span>, <span class="hljs-number">86</span>, <span class="hljs-number">103</span>, <span class="hljs-number">87</span>, <span class="hljs-number">94</span>, <span class="hljs-number">78</span>, <span class="hljs-number">77</span>, <span class="hljs-number">85</span>, <span class="hljs-number">86</span>]<br>a = numpy.mean(speed)                          <span class="hljs-comment"># 平均数</span><br>b = numpy.median(speed)                        <span class="hljs-comment"># 中位数</span><br>c = stats.mode(speed)                          <span class="hljs-comment"># 众数</span><br>d = numpy.std(speed)                           <span class="hljs-comment"># 标准差，方差的平方根，通常用符号Sigma表示σ</span><br>e = numpy.var(speed)                           <span class="hljs-comment"># 方差，Sigma Squared指σ2</span><br>f = numpy.percentile(speed, <span class="hljs-number">80</span>)                <span class="hljs-comment"># 查找百分位数</span><br><br><span class="hljs-built_in">print</span>(a)<br><span class="hljs-built_in">print</span>(b)<br><span class="hljs-built_in">print</span>(c)<br><span class="hljs-built_in">print</span>(d)<br><span class="hljs-built_in">print</span>(e)                                       <span class="hljs-comment"># 方差，每个值与平均数的差值的平方值的和的平均数</span><br><span class="hljs-built_in">print</span>(f)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-1-数据分布"><a href="#1-1-数据分布" class="headerlink" title="1-1 数据分布"></a>1-1 数据分布</h2><ul>
+<li>数据分布<ul>
+<li>正态数据分布：高斯数据分布，正态分布图也被叫做钟形曲线，具有钟形特征。</li>
+<li>随机数据分布：测试算法时可能没有真实世界的数据，此时需用随机生成的值。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-直方图"><a href="#1-直方图" class="headerlink" title="(1) 直方图"></a>(1) 直方图</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>x = numpy.random.uniform(<span class="hljs-number">0.0</span>, <span class="hljs-number">5.0</span>, <span class="hljs-number">250</span>)         <span class="hljs-comment"># 250个介于0和5之间的随机浮点数数组</span><br><br><span class="hljs-built_in">print</span>(x)<br>plt.hist(x, <span class="hljs-number">5</span>)                                  <span class="hljs-comment"># 绘制直方图</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-正态分布"><a href="#2-正态分布" class="headerlink" title="(2) 正态分布"></a>(2) 正态分布</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>x = numpy.random.normal(<span class="hljs-number">5.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">100000</span>)       <span class="hljs-comment"># 100000个平均数为5.0，标准差为1.0的数组</span><br><br><span class="hljs-built_in">print</span>(x)<br>plt.hist(x, <span class="hljs-number">100</span>)                                <span class="hljs-comment"># 正态数据分布，绘制包含100个柱的直方图</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-散点图"><a href="#3-散点图" class="headerlink" title="(3) 散点图"></a>(3) 散点图</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt                 <span class="hljs-comment"># Matplotlib有个绘制散点图的方法，需两个相同长度的数组</span><br><br>x = [<span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span>, <span class="hljs-number">2</span>, <span class="hljs-number">17</span>, <span class="hljs-number">2</span>, <span class="hljs-number">9</span>, <span class="hljs-number">4</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">9</span>, <span class="hljs-number">6</span>]  <span class="hljs-comment"># x数组代表每辆汽车的年龄，y数组代表每辆车的速度</span><br>y = [<span class="hljs-number">99</span>, <span class="hljs-number">86</span>, <span class="hljs-number">87</span>, <span class="hljs-number">88</span>, <span class="hljs-number">111</span>, <span class="hljs-number">86</span>, <span class="hljs-number">103</span>, <span class="hljs-number">87</span>, <span class="hljs-number">94</span>, <span class="hljs-number">78</span>, <span class="hljs-number">77</span>, <span class="hljs-number">85</span>, <span class="hljs-number">86</span>]<br><br>plt.scatter(x, y)                               <span class="hljs-comment"># 绘制散点图</span><br>plt.show()                                      <span class="hljs-comment"># 越新的车越快，也可能是巧合，数据量少</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-随机分布"><a href="#4-随机分布" class="headerlink" title="(4) 随机分布"></a>(4) 随机分布</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>x = numpy.random.normal(<span class="hljs-number">5.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1000</span>)         <span class="hljs-comment"># 1000个数组，平均值为5.0，标准差为1.0的随机数</span><br>y = numpy.random.normal(<span class="hljs-number">10.0</span>, <span class="hljs-number">2.0</span>, <span class="hljs-number">1000</span>)        <span class="hljs-comment"># 1000个数组，平均值为10.0，标准差为2.0的随机数</span><br><br>plt.scatter(x, y)                               <span class="hljs-comment"># 随机数据分布，具有1000个点的散点图</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-线性回归"><a href="#1-2-线性回归" class="headerlink" title="1-2 线性回归"></a>1-2 线性回归</h2><ul>
+<li>线性回归<ul>
+<li>知道x和y轴的值之间的关系，没有关系则线性回归不能用于预测结果。</li>
+<li>R关系的取值范围为-1到1，0表示没有关系，1和-1则表示100%相关。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> stats<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt                <span class="hljs-comment"># 13辆汽车经过收费站时的车龄和速度</span><br><br>x = [<span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span>, <span class="hljs-number">2</span>, <span class="hljs-number">17</span>, <span class="hljs-number">2</span>, <span class="hljs-number">9</span>, <span class="hljs-number">4</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">9</span>, <span class="hljs-number">6</span>]<br>y = [<span class="hljs-number">99</span>, <span class="hljs-number">86</span>, <span class="hljs-number">87</span>, <span class="hljs-number">88</span>, <span class="hljs-number">111</span>, <span class="hljs-number">86</span>, <span class="hljs-number">103</span>, <span class="hljs-number">87</span>, <span class="hljs-number">94</span>, <span class="hljs-number">78</span>, <span class="hljs-number">77</span>, <span class="hljs-number">85</span>, <span class="hljs-number">86</span>]<br>slope, intercept, r, p, std_err = stats.linregress(x, y)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">x</span>):                                   <span class="hljs-comment"># 创建一个使用slope和intercept值返回新值的函数</span><br>    <span class="hljs-keyword">return</span> slope * x + intercept               <span class="hljs-comment"># 这个新值表示对应的x值在y轴上的位置</span><br><br><br>model = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(func, x))                     <span class="hljs-comment"># 运行x数组的每个值，生成一个新数组，包含y轴的新值</span><br>plt.scatter(x, y)                              <span class="hljs-comment"># 绘制原始散点图</span><br>plt.plot(x, model)                             <span class="hljs-comment"># 绘制线性回归线</span><br>plt.show()                                     <span class="hljs-comment"># 显示图表</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-R关系"><a href="#1-R关系" class="headerlink" title="(1) R关系"></a>(1) R关系</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> stats<br><br>x = [<span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span>, <span class="hljs-number">2</span>, <span class="hljs-number">17</span>, <span class="hljs-number">2</span>, <span class="hljs-number">9</span>, <span class="hljs-number">4</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">9</span>, <span class="hljs-number">6</span>]  <span class="hljs-comment"># 数据在线性回归中的拟合程度</span><br>y = [<span class="hljs-number">99</span>, <span class="hljs-number">86</span>, <span class="hljs-number">87</span>, <span class="hljs-number">88</span>, <span class="hljs-number">111</span>, <span class="hljs-number">86</span>, <span class="hljs-number">103</span>, <span class="hljs-number">87</span>, <span class="hljs-number">94</span>, <span class="hljs-number">78</span>, <span class="hljs-number">77</span>, <span class="hljs-number">85</span>, <span class="hljs-number">86</span>]<br><br>slope, intercept, r, p, std_err = stats.linregress(x, y)<br><span class="hljs-built_in">print</span>(r)                                        <span class="hljs-comment"># -0.76表明存在关系，但并不完美</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-预测未来价值"><a href="#2-预测未来价值" class="headerlink" title="(2) 预测未来价值"></a>(2) 预测未来价值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> stats<br><br>x = [<span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span>, <span class="hljs-number">2</span>, <span class="hljs-number">17</span>, <span class="hljs-number">2</span>, <span class="hljs-number">9</span>, <span class="hljs-number">4</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">9</span>, <span class="hljs-number">6</span>]<br>y = [<span class="hljs-number">99</span>, <span class="hljs-number">86</span>, <span class="hljs-number">87</span>, <span class="hljs-number">88</span>, <span class="hljs-number">111</span>, <span class="hljs-number">86</span>, <span class="hljs-number">103</span>, <span class="hljs-number">87</span>, <span class="hljs-number">94</span>, <span class="hljs-number">78</span>, <span class="hljs-number">77</span>, <span class="hljs-number">85</span>, <span class="hljs-number">86</span>]<br><br>slope, intercept, r, p, std_err = stats.linregress(x, y)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span> slope * x + intercept<br><br><br>speed = func(<span class="hljs-number">10</span>)                               <span class="hljs-comment"># 预测一辆10年车龄的汽车速度</span><br><span class="hljs-built_in">print</span>(speed)                                   <span class="hljs-comment"># 85.6，也可以从图表中读取</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-非预测最佳法"><a href="#3-非预测最佳法" class="headerlink" title="(3) 非预测最佳法"></a>(3) 非预测最佳法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> scipy <span class="hljs-keyword">import</span> stats                        <span class="hljs-comment"># 线性回归不是预测未来值的最佳方法</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>x = [<span class="hljs-number">89</span>, <span class="hljs-number">43</span>, <span class="hljs-number">36</span>, <span class="hljs-number">36</span>, <span class="hljs-number">95</span>, <span class="hljs-number">10</span>, <span class="hljs-number">66</span>, <span class="hljs-number">34</span>, <span class="hljs-number">38</span>, <span class="hljs-number">20</span>, <span class="hljs-number">26</span>, <span class="hljs-number">29</span>, <span class="hljs-number">48</span>, <span class="hljs-number">64</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>, <span class="hljs-number">36</span>, <span class="hljs-number">66</span>, <span class="hljs-number">72</span>, <span class="hljs-number">40</span>]<br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">46</span>, <span class="hljs-number">3</span>, <span class="hljs-number">35</span>, <span class="hljs-number">67</span>, <span class="hljs-number">95</span>, <span class="hljs-number">53</span>, <span class="hljs-number">72</span>, <span class="hljs-number">58</span>, <span class="hljs-number">10</span>, <span class="hljs-number">26</span>, <span class="hljs-number">34</span>, <span class="hljs-number">90</span>, <span class="hljs-number">33</span>, <span class="hljs-number">38</span>, <span class="hljs-number">20</span>, <span class="hljs-number">56</span>, <span class="hljs-number">2</span>, <span class="hljs-number">47</span>, <span class="hljs-number">15</span>]<br>slope, intercept, r, p, std_err = stats.linregress(x, y)<br><span class="hljs-built_in">print</span>(r)                                       <span class="hljs-comment"># 0.013，得到的R值小，表明关系很差，不适合做线性回归</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span> slope * x + intercept<br><br><br>model = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(func, x))<br>plt.scatter(x, y)<br>plt.plot(x, model)<br>plt.show()                                     <span class="hljs-comment"># x轴和y轴的值导致线性回归的拟合非常差</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3-多项式回归"><a href="#1-3-多项式回归" class="headerlink" title="1-3 多项式回归"></a>1-3 多项式回归</h2><ul>
+<li>多项式回归<ul>
+<li>若x和y轴的值之间没有关系，则多项式回归不能用于预测结果。</li>
+<li>R平方值的取值范围为0到1，0表示没有关系，1表示100%相关。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt                <span class="hljs-comment"># 收集了通过某收费站的18辆汽车的超车发生时间和汽车速度</span><br><br>x = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>]<br>y = [<span class="hljs-number">100</span>, <span class="hljs-number">90</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>, <span class="hljs-number">60</span>, <span class="hljs-number">55</span>, <span class="hljs-number">60</span>, <span class="hljs-number">65</span>, <span class="hljs-number">70</span>, <span class="hljs-number">70</span>, <span class="hljs-number">75</span>, <span class="hljs-number">76</span>, <span class="hljs-number">78</span>, <span class="hljs-number">79</span>, <span class="hljs-number">90</span>, <span class="hljs-number">99</span>, <span class="hljs-number">99</span>, <span class="hljs-number">100</span>]<br><br>model = numpy.poly1d(numpy.polyfit(x, y, <span class="hljs-number">3</span>))   <span class="hljs-comment"># 注意poly1d是1d不是ld，建立多项式模型</span><br>lines = numpy.linspace(<span class="hljs-number">1</span>, <span class="hljs-number">22</span>, <span class="hljs-number">100</span>)             <span class="hljs-comment"># 指定该行将如何显示，从位置1开始，到位置22结束</span><br><br>plt.scatter(x, y)                              <span class="hljs-comment"># 绘制原始散点图</span><br>plt.plot(lines, model(lines))                  <span class="hljs-comment"># 绘制多项式回归线</span><br>plt.show()                                     <span class="hljs-comment"># 显示图表</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-R平方"><a href="#1-R平方" class="headerlink" title="(1) R平方"></a>(1) R平方</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> r2_score<br><br>x = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>]<br>y = [<span class="hljs-number">100</span>, <span class="hljs-number">90</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>, <span class="hljs-number">60</span>, <span class="hljs-number">55</span>, <span class="hljs-number">60</span>, <span class="hljs-number">65</span>, <span class="hljs-number">70</span>, <span class="hljs-number">70</span>, <span class="hljs-number">75</span>, <span class="hljs-number">76</span>, <span class="hljs-number">78</span>, <span class="hljs-number">79</span>, <span class="hljs-number">90</span>, <span class="hljs-number">99</span>, <span class="hljs-number">99</span>, <span class="hljs-number">100</span>]<br><br>model = numpy.poly1d(numpy.polyfit(x, y, <span class="hljs-number">3</span>))    <span class="hljs-comment"># 注意poly1d是1d不是ld，建立多项式模型</span><br><span class="hljs-built_in">print</span>(r2_score(y, model(x)))                    <span class="hljs-comment"># 数据在多项式回归中的拟合程度，0.94表明关系非常好</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-预测未来价值-1"><a href="#2-预测未来价值-1" class="headerlink" title="(2) 预测未来价值"></a>(2) 预测未来价值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><br>x = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>, <span class="hljs-number">21</span>, <span class="hljs-number">22</span>]<br>y = [<span class="hljs-number">100</span>, <span class="hljs-number">90</span>, <span class="hljs-number">80</span>, <span class="hljs-number">60</span>, <span class="hljs-number">60</span>, <span class="hljs-number">55</span>, <span class="hljs-number">60</span>, <span class="hljs-number">65</span>, <span class="hljs-number">70</span>, <span class="hljs-number">70</span>, <span class="hljs-number">75</span>, <span class="hljs-number">76</span>, <span class="hljs-number">78</span>, <span class="hljs-number">79</span>, <span class="hljs-number">90</span>, <span class="hljs-number">99</span>, <span class="hljs-number">99</span>, <span class="hljs-number">100</span>]<br><br>model = numpy.poly1d(numpy.polyfit(x, y, <span class="hljs-number">3</span>))    <span class="hljs-comment"># 注意poly1d是1d不是ld，建立多项式模型</span><br>speed = model(<span class="hljs-number">17</span>)                               <span class="hljs-comment"># 预测17:00左右通过某收费站的汽车速度</span><br><span class="hljs-built_in">print</span>(speed)                                    <span class="hljs-comment"># 88.87，也可以从图中读取该值</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-非预测最佳法-1"><a href="#3-非预测最佳法-1" class="headerlink" title="(3) 非预测最佳法"></a>(3) 非预测最佳法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> r2_score           <span class="hljs-comment"># 多项式回归不是预测未来值的最佳方法</span><br><br>x = [<span class="hljs-number">89</span>, <span class="hljs-number">43</span>, <span class="hljs-number">36</span>, <span class="hljs-number">36</span>, <span class="hljs-number">95</span>, <span class="hljs-number">10</span>, <span class="hljs-number">66</span>, <span class="hljs-number">34</span>, <span class="hljs-number">38</span>, <span class="hljs-number">20</span>, <span class="hljs-number">26</span>, <span class="hljs-number">29</span>, <span class="hljs-number">48</span>, <span class="hljs-number">64</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>, <span class="hljs-number">36</span>, <span class="hljs-number">66</span>, <span class="hljs-number">72</span>, <span class="hljs-number">40</span>]<br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">46</span>, <span class="hljs-number">3</span>, <span class="hljs-number">35</span>, <span class="hljs-number">67</span>, <span class="hljs-number">95</span>, <span class="hljs-number">53</span>, <span class="hljs-number">72</span>, <span class="hljs-number">58</span>, <span class="hljs-number">10</span>, <span class="hljs-number">26</span>, <span class="hljs-number">34</span>, <span class="hljs-number">90</span>, <span class="hljs-number">33</span>, <span class="hljs-number">38</span>, <span class="hljs-number">20</span>, <span class="hljs-number">56</span>, <span class="hljs-number">2</span>, <span class="hljs-number">47</span>, <span class="hljs-number">15</span>]<br><br>model = numpy.poly1d(numpy.polyfit(x, y, <span class="hljs-number">3</span>))   <span class="hljs-comment"># 注意poly1d是1d不是ld，建立多项式模型</span><br>lines = numpy.linspace(<span class="hljs-number">2</span>, <span class="hljs-number">95</span>, <span class="hljs-number">100</span>)<br><span class="hljs-built_in">print</span>(r2_score(y, model(x)))                   <span class="hljs-comment"># 0.00995表明关系很差，该数据集不适合做多项式回归</span><br><br>plt.scatter(x, y)<br>plt.plot(lines, model(lines))<br>plt.show()                                     <span class="hljs-comment"># x轴和y轴的值导致多项式回归的拟合非常差</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-4-多元线性回归"><a href="#1-4-多元线性回归" class="headerlink" title="1-4 多元线性回归"></a>1-4 多元线性回归</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> linear_model               <span class="hljs-comment"># data.csv改名为vehicle_info.csv</span><br><br>df = pandas.read_csv(<span class="hljs-string">&#x27;data/vehicle_info.csv&#x27;</span>)  <span class="hljs-comment"># 汽车的信息：https://www.w3schools.com/python/data.csv</span><br><br>X = df[[<span class="hljs-string">&#x27;Weight&#x27;</span>, <span class="hljs-string">&#x27;Volume&#x27;</span>]]                   <span class="hljs-comment"># 列出独立值并调用X变量</span><br>y = df[<span class="hljs-string">&#x27;CO2&#x27;</span>]                                  <span class="hljs-comment"># 将依赖值放在一个名为y的变量中</span><br><br>regr = linear_model.LinearRegression()         <span class="hljs-comment"># 创建一个线性回归对象，将独立值和相关值作为参数</span><br>regr.fit(X.values, y.values)                   <span class="hljs-comment"># 并用描述关系的数据填充回归对象</span><br><br><span class="hljs-comment"># 根据汽车的重量和体积预测CO2值，预测一辆配备1.3升发动机、重量为2300kg的汽车每行驶一公里释放107克CO2</span><br>predictedCO2 = regr.predict([[<span class="hljs-number">2300</span>, <span class="hljs-number">1300</span>]])<br><span class="hljs-built_in">print</span>(predictedCO2)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-系数"><a href="#1-系数" class="headerlink" title="(1) 系数"></a>(1) 系数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas                                  <span class="hljs-comment"># 系数是描述与未知变量之间关系的因子</span><br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> linear_model               <span class="hljs-comment"># data.csv改名为vehicle_info.csv</span><br><br>df = pandas.read_csv(<span class="hljs-string">&#x27;data/vehicle_info.csv&#x27;</span>)  <span class="hljs-comment"># 汽车的信息：https://www.w3schools.com/python/data.csv</span><br><br>X = df[[<span class="hljs-string">&#x27;Weight&#x27;</span>, <span class="hljs-string">&#x27;Volume&#x27;</span>]]                   <span class="hljs-comment"># 列出独立值并调用X变量</span><br>y = df[<span class="hljs-string">&#x27;CO2&#x27;</span>]                                  <span class="hljs-comment"># 将依赖值放在一个名为y的变量中</span><br><br>regr = linear_model.LinearRegression()         <span class="hljs-comment"># 创建一个线性回归对象，将独立值和相关值作为参数</span><br>regr.fit(X.values, y.values)                   <span class="hljs-comment"># 并用描述关系的数据填充回归对象</span><br><br><span class="hljs-comment"># 体重增加1kg，CO2排放量就会增加0.00755095g，发动机尺寸增加1cm3，CO2排放量增加0.00780526g</span><br><span class="hljs-built_in">print</span>(regr.coef_)                              <span class="hljs-comment"># 回归对象的系数值[重量0.00755095 体积0.00780526]</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-预测未来价值-2"><a href="#2-预测未来价值-2" class="headerlink" title="(2) 预测未来价值"></a>(2) 预测未来价值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> linear_model               <span class="hljs-comment"># data.csv改名为vehicle_info.csv</span><br><br>df = pandas.read_csv(<span class="hljs-string">&#x27;data/vehicle_info.csv&#x27;</span>)  <span class="hljs-comment"># 汽车的信息：https://www.w3schools.com/python/data.csv</span><br><br>X = df[[<span class="hljs-string">&#x27;Weight&#x27;</span>, <span class="hljs-string">&#x27;Volume&#x27;</span>]]                   <span class="hljs-comment"># 列出独立值并调用X变量</span><br>y = df[<span class="hljs-string">&#x27;CO2&#x27;</span>]                                  <span class="hljs-comment"># 将依赖值放在一个名为y的变量中</span><br><br>regr = linear_model.LinearRegression()         <span class="hljs-comment"># 创建一个线性回归对象，将独立值和相关值作为参数</span><br>regr.fit(X.values, y.values)                   <span class="hljs-comment"># 并用描述关系的数据填充回归对象</span><br><br><span class="hljs-comment"># 将权重从2300更改为3300，一辆配备1.3升发动机、重量为3300kg的汽车每行驶一公里将释放115克CO2</span><br>predictedCO2 = regr.predict([[<span class="hljs-number">3300</span>, <span class="hljs-number">1300</span>]])<br><span class="hljs-built_in">print</span>(predictedCO2)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-5-比例特征方法"><a href="#1-5-比例特征方法" class="headerlink" title="1-5 比例特征方法"></a>1-5 比例特征方法</h2><ul>
+<li>比例特征方法<ul>
+<li>当数据具有不同的值，甚至不同的测量单位时，很难比较，可将数据缩放为容易比较的新值。</li>
+<li>标准化方法使用的公式：<code>z = (x - u) / s</code>，z是新值，x是原始值，u是平均值，s是标准差。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-比例特征缩放"><a href="#1-比例特征缩放" class="headerlink" title="(1) 比例特征缩放"></a>(1) 比例特征缩放</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas<br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler<br>scale = StandardScaler()                        <span class="hljs-comment"># data.csv改名为vehicle_info.csv</span><br><br>df = pandas.read_csv(<span class="hljs-string">&#x27;data/vehicle_info.csv&#x27;</span>)   <span class="hljs-comment"># 汽车的信息：https://www.w3schools.com/python/data.csv</span><br>X = df[[<span class="hljs-string">&#x27;Weight&#x27;</span>, <span class="hljs-string">&#x27;Volume&#x27;</span>]]                    <span class="hljs-comment"># 列出独立值并调用X变量</span><br>scaledX = scale.fit_transform(X)                <span class="hljs-comment"># 缩放重量和体积列中的所有值</span><br><br><span class="hljs-built_in">print</span>(scaledX)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-预测CO2的值"><a href="#2-预测CO2的值" class="headerlink" title="(2) 预测CO2的值"></a>(2) 预测CO2的值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> linear_model<br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler<br>scale = StandardScaler()                       <span class="hljs-comment"># data.csv改名为vehicle_info.csv</span><br><br>df = pandas.read_csv(<span class="hljs-string">&#x27;data/vehicle_info.csv&#x27;</span>)  <span class="hljs-comment"># 汽车的信息：https://www.w3schools.com/python/data.csv</span><br><br>X = df[[<span class="hljs-string">&#x27;Weight&#x27;</span>, <span class="hljs-string">&#x27;Volume&#x27;</span>]]                   <span class="hljs-comment"># 列出独立值并调用X变量</span><br>y = df[<span class="hljs-string">&#x27;CO2&#x27;</span>]<br><br>scaledX = scale.fit_transform(X.values)        <span class="hljs-comment"># 缩放重量和体积列中的所有值</span><br><br>regr = linear_model.LinearRegression()<br>regr.fit(scaledX, y.values)<br><br>scaled = scale.transform([[<span class="hljs-number">2300</span>, <span class="hljs-number">1.3</span>]])        <span class="hljs-comment"># 预测一辆重2300公斤的1.3升汽车的二氧化碳排放量</span><br><br>predictedCO2 = regr.predict([scaled[<span class="hljs-number">0</span>]])<br><span class="hljs-built_in">print</span>(predictedCO2)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-训练-x2F-测试"><a href="#2-训练-x2F-测试" class="headerlink" title="2 训练&#x2F;测试"></a>2 训练&#x2F;测试</h1><ul>
+<li>训练&#x2F;测试<ul>
+<li>一种衡量模型准确性的方法，将数据集分成了两个组：训练集(训练模型)、测试集(测试模型)。</li>
+<li>80%用于训练(训练模型意味着创建模型)，20%用于测试(测试模型意味着测试模型的准确性)。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-1-数据集"><a href="#2-1-数据集" class="headerlink" title="2-1 数据集"></a>2-1 数据集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt                 <span class="hljs-comment"># 展示了一家商店中的100位顾客，以及他们的购物习惯</span><br><br>numpy.random.seed(<span class="hljs-number">2</span>)<br>x = numpy.random.normal(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>)              <span class="hljs-comment"># x轴表示购买前的分钟数</span><br>y = numpy.random.normal(<span class="hljs-number">150</span>, <span class="hljs-number">40</span>, <span class="hljs-number">100</span>) / x       <span class="hljs-comment"># y轴表示购买时花费的金额</span><br><br>plt.scatter(x, y)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-显示训练集"><a href="#2-2-显示训练集" class="headerlink" title="2-2 显示训练集"></a>2-2 显示训练集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>numpy.random.seed(<span class="hljs-number">2</span>)<br>x = numpy.random.normal(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>)<br>y = numpy.random.normal(<span class="hljs-number">150</span>, <span class="hljs-number">40</span>, <span class="hljs-number">100</span>) / x<br><br>train_x = x[:<span class="hljs-number">80</span>]                               <span class="hljs-comment"># 拆分成训练集，随机选择80%的原始数据</span><br>train_y = y[:<span class="hljs-number">80</span>]<br><br>test_x = x[<span class="hljs-number">80</span>:]                                <span class="hljs-comment"># 拆分成测试集，剩下的20%</span><br>test_y = y[<span class="hljs-number">80</span>:]<br><br>plt.scatter(train_x, train_y)                  <span class="hljs-comment"># 显示训练集，看起来像原始数据集</span><br>plt.show()<br><br><span class="hljs-comment"># plt.scatter(test_x, test_y)                  # 显示测试集，看起来像原始数据集</span><br><span class="hljs-comment"># plt.show()</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-拟合数据集"><a href="#2-3-拟合数据集" class="headerlink" title="2-3 拟合数据集"></a>2-3 拟合数据集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>numpy.random.seed(<span class="hljs-number">2</span>)<br>x = numpy.random.normal(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>)<br>y = numpy.random.normal(<span class="hljs-number">150</span>, <span class="hljs-number">40</span>, <span class="hljs-number">100</span>) / x<br><br>train_x = x[:<span class="hljs-number">80</span>]                               <span class="hljs-comment"># 拆分成训练集，随机选择80%的原始数据</span><br>train_y = y[:<span class="hljs-number">80</span>]<br><br>test_x = x[<span class="hljs-number">80</span>:]                                <span class="hljs-comment"># 拆分成测试集，剩下的20%</span><br>test_y = y[<span class="hljs-number">80</span>:]<br><br>model = numpy.poly1d(numpy.polyfit(train_x, train_y, <span class="hljs-number">4</span>))<br>lines = numpy.linspace(<span class="hljs-number">0</span>, <span class="hljs-number">6</span>, <span class="hljs-number">100</span>)              <span class="hljs-comment"># 通过数据点画一条线</span><br><br>plt.scatter(train_x, train_y)                  <span class="hljs-comment"># 显示训练集</span><br>plt.plot(lines, model(lines))                  <span class="hljs-comment"># 这条线表示顾客在商店里花费6分钟可能购买价值200的商品</span><br>plt.show()                                     <span class="hljs-comment"># 有过度拟合的迹象</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-R平方分数"><a href="#2-4-R平方分数" class="headerlink" title="2-4 R平方分数"></a>2-4 R平方分数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> r2_score<br><br>numpy.random.seed(<span class="hljs-number">2</span>)<br>x = numpy.random.normal(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>)<br>y = numpy.random.normal(<span class="hljs-number">150</span>, <span class="hljs-number">40</span>, <span class="hljs-number">100</span>) / x<br><br>train_x = x[:<span class="hljs-number">80</span>]                               <span class="hljs-comment"># 拆分成训练集</span><br>train_y = y[:<span class="hljs-number">80</span>]<br><br>test_x = x[<span class="hljs-number">80</span>:]                                <span class="hljs-comment"># 拆分成测试集</span><br>test_y = y[<span class="hljs-number">80</span>:]<br><br>model = numpy.poly1d(numpy.polyfit(train_x, train_y, <span class="hljs-number">4</span>))<br>r2 = r2_score(train_y, model(train_x))         <span class="hljs-comment"># 训练数据在多项式回归中的拟合程度</span><br><span class="hljs-built_in">print</span>(r2)                                      <span class="hljs-comment"># 结果0.799说明存在关系</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-5-引入测试集"><a href="#2-5-引入测试集" class="headerlink" title="2-5 引入测试集"></a>2-5 引入测试集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> r2_score<br><br>numpy.random.seed(<span class="hljs-number">2</span>)<br>x = numpy.random.normal(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>)<br>y = numpy.random.normal(<span class="hljs-number">150</span>, <span class="hljs-number">40</span>, <span class="hljs-number">100</span>) / x<br><br>train_x = x[:<span class="hljs-number">80</span>]                               <span class="hljs-comment"># 拆分成训练集</span><br>train_y = y[:<span class="hljs-number">80</span>]<br><br>test_x = x[<span class="hljs-number">80</span>:]                                <span class="hljs-comment"># 拆分成测试集</span><br>test_y = y[<span class="hljs-number">80</span>:]<br><br>model = numpy.poly1d(numpy.polyfit(train_x, train_y, <span class="hljs-number">4</span>))<br>r2 = r2_score(test_y, model(test_x))<br><span class="hljs-built_in">print</span>(r2)                                      <span class="hljs-comment"># 结果0.809说明该模型适合测试集</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-6-预测未来价值"><a href="#2-6-预测未来价值" class="headerlink" title="2-6 预测未来价值"></a>2-6 预测未来价值</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><br>numpy.random.seed(<span class="hljs-number">2</span>)<br>x = numpy.random.normal(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">100</span>)<br>y = numpy.random.normal(<span class="hljs-number">150</span>, <span class="hljs-number">40</span>, <span class="hljs-number">100</span>) / x<br><br>train_x = x[:<span class="hljs-number">80</span>]                               <span class="hljs-comment"># 拆分成训练集</span><br>train_y = y[:<span class="hljs-number">80</span>]<br><br>test_x = x[<span class="hljs-number">80</span>:]                                <span class="hljs-comment"># 拆分成测试集</span><br>test_y = y[<span class="hljs-number">80</span>:]<br><br>model = numpy.poly1d(numpy.polyfit(train_x, train_y, <span class="hljs-number">4</span>))<br><span class="hljs-built_in">print</span>(model(<span class="hljs-number">5</span>))                                <span class="hljs-comment"># 如果一位购物顾客在店里停留5分钟，预测花费22.88美元</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-常见分类算法"><a href="#3-常见分类算法" class="headerlink" title="3 常见分类算法"></a>3 常见分类算法</h1><ul>
+<li>常见分类算法<ul>
+<li>监督学习算法，Supervised Algorithms。<ul>
+<li>在监督学习训练过程中，可以由训练数据集学到或建立一个模式(函数&#x2F;Learning model)，并依此模式推测新的实例。</li>
+<li>要求特定的输入&#x2F;输出，首先需要决定使用哪种数据作为范例，包括神经网络、支持向量机、最近邻居法、决策树等。</li>
+</ul>
+</li>
+<li>无监督学习算法，Unsupervised Algorithms：没有特定的目标输出，算法将数据集分为不同的组。</li>
+<li>强化学习算法，Reinforcement Algorithms。<ul>
+<li>主要基于决策进行训练，根据输出结果的成功或错误训练，通过大量经验训练优化后的算法将能够给出较好的预测。</li>
+<li>在运筹学和控制论的语境下，强化学习被称作“近似动态规划”，即Approximate Dynamic Programming，简称ADP。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-决策树"><a href="#3-1-决策树" class="headerlink" title="3-1 决策树"></a>3-1 决策树</h2><ul>
+<li>决策树<ul>
+<li>一个流程图，可根据以前的经验做出决策，决策树需满足所有数据都是数字。</li>
+<li>运行决策树的次数足够多时，会看到它给出不同结果，即便提供了相同的数据。</li>
+<li>决策树并未给定100%确定的答案，只是基于结果的概率，因而结果会有所不同。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas<br><br><span class="hljs-string">&quot;&quot;&quot; data/actor_info.csv</span><br><span class="hljs-string">Age	Experience	Rank	Nationality	Go</span><br><span class="hljs-string">36  10          9	    UK          NO</span><br><span class="hljs-string">42  12          4	    USA         NO</span><br><span class="hljs-string">23  4           6	    N           NO</span><br><span class="hljs-string">52  4           4	    USA         NO</span><br><span class="hljs-string">43  21          8	    USA         YES</span><br><span class="hljs-string">44  14          5	    UK          NO</span><br><span class="hljs-string">66  3           7	    N           YES</span><br><span class="hljs-string">35  14          9	    UK          YES</span><br><span class="hljs-string">52  13          7	    N           YES</span><br><span class="hljs-string">35  5           9	    N           YES</span><br><span class="hljs-string">24  3           5	    USA         NO</span><br><span class="hljs-string">18  3           7	    UK          YES</span><br><span class="hljs-string">45  9           9	    UK          YES</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br>df = pandas.read_csv(<span class="hljs-string">&#x27;data/actor_info.csv&#x27;</span>)    <span class="hljs-comment"># 喜剧演员的信息，是否决定看节目</span><br><span class="hljs-built_in">print</span>(df)                                      <span class="hljs-comment"># 读取并打印数据集</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-数值转换"><a href="#1-数值转换" class="headerlink" title="(1) 数值转换"></a>(1) 数值转换</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas<br><br>df = pandas.read_csv(<span class="hljs-string">&#x27;data/actor_info.csv&#x27;</span>)<br>ds = &#123;<span class="hljs-string">&#x27;UK&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;USA&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;N&#x27;</span>: <span class="hljs-number">2</span>&#125;                <span class="hljs-comment"># 将非数字列转换为数字列</span><br>df[<span class="hljs-string">&#x27;Nationality&#x27;</span>] = df[<span class="hljs-string">&#x27;Nationality&#x27;</span>].<span class="hljs-built_in">map</span>(ds)<br>ds = &#123;<span class="hljs-string">&#x27;YES&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;NO&#x27;</span>: <span class="hljs-number">0</span>&#125;<br>df[<span class="hljs-string">&#x27;Go&#x27;</span>] = df[<span class="hljs-string">&#x27;Go&#x27;</span>].<span class="hljs-built_in">map</span>(ds)<br><br><span class="hljs-built_in">print</span>(df)                                       <span class="hljs-comment"># 读取并打印数据集</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-创建决策树"><a href="#2-创建决策树" class="headerlink" title="(2) 创建决策树"></a>(2) 创建决策树</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas<br><span class="hljs-keyword">import</span> graphviz                                <span class="hljs-comment"># 需要安装graphviz库和PlantUML插件</span><br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> tree<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier<br><br>df = pandas.read_csv(<span class="hljs-string">&#x27;data/actor_info.csv&#x27;</span>)<br>ds = &#123;<span class="hljs-string">&#x27;UK&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;USA&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;N&#x27;</span>: <span class="hljs-number">2</span>&#125;               <span class="hljs-comment"># 将非数字列转换为数字列</span><br>df[<span class="hljs-string">&#x27;Nationality&#x27;</span>] = df[<span class="hljs-string">&#x27;Nationality&#x27;</span>].<span class="hljs-built_in">map</span>(ds)<br>ds = &#123;<span class="hljs-string">&#x27;YES&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;NO&#x27;</span>: <span class="hljs-number">0</span>&#125;<br>df[<span class="hljs-string">&#x27;Go&#x27;</span>] = df[<span class="hljs-string">&#x27;Go&#x27;</span>].<span class="hljs-built_in">map</span>(ds)<br><br>features = [<span class="hljs-string">&#x27;Age&#x27;</span>, <span class="hljs-string">&#x27;Experience&#x27;</span>, <span class="hljs-string">&#x27;Rank&#x27;</span>, <span class="hljs-string">&#x27;Nationality&#x27;</span>]<br>X = df[features]                               <span class="hljs-comment"># 特征列，尝试从中预测的列</span><br>y = df[<span class="hljs-string">&#x27;Go&#x27;</span>]                                   <span class="hljs-comment"># 目标列，尝试预测值的列</span><br><br><span class="hljs-built_in">print</span>(X)<br><span class="hljs-built_in">print</span>(y)<br><br>dtree = DecisionTreeClassifier()               <span class="hljs-comment"># 分割样本的GINI方法：Gini=1-(x/n)2+(y/n)2</span><br>dtree = dtree.fit(X, y)<br><span class="hljs-comment"># tree.plot_tree(dtree, feature_names=features)</span><br><span class="hljs-comment"># plt.savefig(sys.stdout.buffer)               # 违背了可视化的初衷，简单粗暴，不建议使用</span><br><span class="hljs-comment"># sys.stdout.flush()</span><br><br>dot_data = tree.export_graphviz(dtree, feature_names=features)<br>graph = graphviz.Source(dot_data)<br>graph.render(<span class="hljs-string">&#x27;data/decision_tree&#x27;</span>)             <span class="hljs-comment"># 生成decision_tree.pdf可视化决策树</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-预测未来价值"><a href="#3-预测未来价值" class="headerlink" title="(3) 预测未来价值"></a>(3) 预测未来价值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier<br><br>df = pandas.read_csv(<span class="hljs-string">&#x27;data/actor_info.csv&#x27;</span>)<br>ds = &#123;<span class="hljs-string">&#x27;UK&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;USA&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;N&#x27;</span>: <span class="hljs-number">2</span>&#125;               <span class="hljs-comment"># 将非数字列转换为数值</span><br>df[<span class="hljs-string">&#x27;Nationality&#x27;</span>] = df[<span class="hljs-string">&#x27;Nationality&#x27;</span>].<span class="hljs-built_in">map</span>(ds)<br>ds = &#123;<span class="hljs-string">&#x27;YES&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;NO&#x27;</span>: <span class="hljs-number">0</span>&#125;<br>df[<span class="hljs-string">&#x27;Go&#x27;</span>] = df[<span class="hljs-string">&#x27;Go&#x27;</span>].<span class="hljs-built_in">map</span>(ds)<br><br>features = [<span class="hljs-string">&#x27;Age&#x27;</span>, <span class="hljs-string">&#x27;Experience&#x27;</span>, <span class="hljs-string">&#x27;Rank&#x27;</span>, <span class="hljs-string">&#x27;Nationality&#x27;</span>]<br>X = df[features]                               <span class="hljs-comment"># 特征列，尝试从中预测的列</span><br>y = df[<span class="hljs-string">&#x27;Go&#x27;</span>]                                   <span class="hljs-comment"># 目标列，尝试预测值的列</span><br><br>dtree = DecisionTreeClassifier()<br>dtree = dtree.fit(X.values, y.values)<br><span class="hljs-built_in">print</span>(dtree.predict([[<span class="hljs-number">40</span>, <span class="hljs-number">10</span>, <span class="hljs-number">6</span>, <span class="hljs-number">1</span>]]))         <span class="hljs-comment"># 是否该看40岁10年经验喜剧排名为7的演员主演的节目</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2-K-均值"><a href="#3-2-K-均值" class="headerlink" title="3-2 K-均值"></a>3-2 K-均值</h2><ul>
+<li>K-均值<ul>
+<li>一种用于聚类数据点的无监督学习方法，该算法通过最小化每个簇中的方差将数据点迭代划分为K个簇。<ul>
+<li>首先，每个数据点被随机分配到K个集群中的任意一个，然后，计算每个集群的质心(即功能上的中心)。</li>
+<li>并将每个数据点重新分配给具有最接近质心的集群，重复该过程，直到每个数据点的集群分配不再变化。</li>
+</ul>
+</li>
+<li>K-均值聚类要求选择K，即要将数据分组到的聚类数。eblow方法绘制惯性(基于距离的度量)。</li>
+<li>并可视化惯性开始线性下降的点，该点被称为eblow，是根据数据对K最佳值的一个很好估计。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>x = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]<br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>]<br><br>plt.scatter(x, y)<br>plt.show()                                      <span class="hljs-comment"># 可视化一些数据点</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-eblow法"><a href="#1-eblow法" class="headerlink" title="(1) eblow法"></a>(1) eblow法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> warnings<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.cluster <span class="hljs-keyword">import</span> KMeans<br><br>x = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]<br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>]<br><br>data = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(x, y))                         <span class="hljs-comment"># 将数据转换为一组点</span><br><br>inertias = []                                  <span class="hljs-comment"># 找到K的最佳值，需对数据运行K均值以获得一系列可能值</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>):                         <span class="hljs-comment"># 只有10个数据点，因此最大簇数为10</span><br>    kmeans = KMeans(n_clusters=i)<br>    <span class="hljs-keyword">with</span> warnings.catch_warnings():<br>        warnings.simplefilter(<span class="hljs-string">&#x27;ignore&#x27;</span>)<br>        kmeans.fit(data)<br>    inertias.append(kmeans.inertia_)<br><br>plt.plot(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>), inertias, marker=<span class="hljs-string">&#x27;o&#x27;</span>)<br>plt.title(<span class="hljs-string">&#x27;Elbow method&#x27;</span>)<br>plt.xlabel(<span class="hljs-string">&#x27;Number of clusters&#x27;</span>)<br>plt.ylabel(<span class="hljs-string">&#x27;Inertia&#x27;</span>)                          <span class="hljs-comment"># 利用eblow法可视化不同K值的惯量</span><br>plt.show()                                     <span class="hljs-comment"># 图中值2是K的一个很好的值</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-重新训练"><a href="#2-重新训练" class="headerlink" title="(2) 重新训练"></a>(2) 重新训练</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> warnings<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.cluster <span class="hljs-keyword">import</span> KMeans<br><br>x = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]<br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>]<br><br>data = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(x, y))                         <span class="hljs-comment"># 将数据转换为一组点</span><br><br>kmeans = KMeans(n_clusters=<span class="hljs-number">2</span>)<br><span class="hljs-keyword">with</span> warnings.catch_warnings():<br>    warnings.simplefilter(<span class="hljs-string">&#x27;ignore&#x27;</span>)<br>    kmeans.fit(data)<br><br>plt.scatter(x, y, c=kmeans.labels_)<br>plt.show()                                     <span class="hljs-comment"># 可视化数据点</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-混淆矩阵"><a href="#3-3-混淆矩阵" class="headerlink" title="3-3 混淆矩阵"></a>3-3 混淆矩阵</h2><ul>
+<li>混淆矩阵<ul>
+<li>一个用于分类问题的表格，用于评估模型中出现错误的位置，行代表结果应该属于的实际类别，列代表所做的预测。</li>
+<li>创建的混淆矩阵有4个象限：真阴性、假阳性、假阴性、真阳性，True表准确预测值，False表存在错误或错误预测。</li>
+<li>该矩阵提供了许多指标，可评估分类模型，不同的衡量标准包括：准确度、精确度、灵敏度(召回率)、特异性和F-score。<ul>
+<li>准确度：衡量模型正确的频率，计算方法为(真阳性+真阴性)&#x2F;总预测。</li>
+<li>精确度：在预测的积极因素中，真正积极的百分比，计算方法为真阳性&#x2F;(真阳性+假阳性)。</li>
+<li>灵敏度：在所有的阳性病例中，预测阳性的百分比，计算方法为真阳性&#x2F;(真阳性+假阴性)。</li>
+<li>特异性：类似于灵敏度，但从阴性结果的角度来看，计算方法为真阴性&#x2F;(真阴性+假阳性)。</li>
+<li>F-score：即精度和灵敏度的调和平均值，计算方法为2*((精度*灵敏度)&#x2F;(精度+灵敏度))。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy                                                 <span class="hljs-comment"># 通过逻辑回归的预测来创建混淆矩阵</span><br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>actual = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)            <span class="hljs-comment"># 生成实际值</span><br>predic = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)            <span class="hljs-comment"># 生成预测值</span><br><br>confusion_matrix = metrics.confusion_matrix(actual, predic)  <span class="hljs-comment"># 对实际值和预测值使用混淆矩阵函数</span><br>cm_display = metrics.ConfusionMatrixDisplay(                 <span class="hljs-comment"># 将表格转换为混淆矩阵显示</span><br>    confusion_matrix=confusion_matrix,<br>    display_labels=[<span class="hljs-literal">False</span>, <span class="hljs-literal">True</span>]<br>)<br><br>cm_display.plot()                                            <span class="hljs-comment"># 显示绘图</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-准确度"><a href="#1-准确度" class="headerlink" title="(1) 准确度"></a>(1) 准确度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics<br><br>actual = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成实际值</span><br>predic = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成预测值</span><br><br>Accuracy = metrics.accuracy_score(actual, predic)             <span class="hljs-comment"># 准确度，衡量模型正确的频率</span><br><span class="hljs-built_in">print</span>(Accuracy)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-精确度"><a href="#2-精确度" class="headerlink" title="(2) 精确度"></a>(2) 精确度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics<br><br>actual = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成实际值</span><br>predic = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成预测值</span><br><br>Precision = metrics.precision_score(actual, predic)           <span class="hljs-comment"># 精确度，不评估正确预测的负面案例</span><br><span class="hljs-built_in">print</span>(Precision)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-灵敏度"><a href="#3-灵敏度" class="headerlink" title="(3) 灵敏度"></a>(3) 灵敏度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics<br><br>actual = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成实际值</span><br>predic = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成预测值</span><br><br>Sensitivity_recall = metrics.recall_score(actual, predic)     <span class="hljs-comment"># 灵敏度，衡量模型预测阳性的好坏程度</span><br><span class="hljs-built_in">print</span>(Sensitivity_recall)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-特异性"><a href="#4-特异性" class="headerlink" title="(4) 特异性"></a>(4) 特异性</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics<br><br>actual = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成实际值</span><br>predic = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成预测值</span><br><br>Specificity = metrics.recall_score(actual, predic, pos_label=<span class="hljs-number">0</span>)<br><span class="hljs-built_in">print</span>(Specificity)                                            <span class="hljs-comment"># 特异性，类似敏感性，从阴性结果角度看</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-F-score"><a href="#5-F-score" class="headerlink" title="(5) F-score"></a>(5) F-score</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics<br><br>actual = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成实际值</span><br>predic = numpy.random.binomial(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>, size=<span class="hljs-number">1000</span>)             <span class="hljs-comment"># 生成预测值</span><br><br>F1_score = metrics.f1_score(actual, predic)                   <span class="hljs-comment"># 同时考虑假阳性和假阴性</span><br><span class="hljs-built_in">print</span>(F1_score)                                               <span class="hljs-comment"># 适用于不平衡的数据集，F-score</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-4-层次聚类"><a href="#3-4-层次聚类" class="headerlink" title="3-4 层次聚类"></a>3-4 层次聚类</h2><ul>
+<li>层次聚类<ul>
+<li>是一种用于聚类数据点的无监督学习方法，该算法通过测量数据之间的差异来构建集群。</li>
+<li>无监督学习意味着模型不需要训练，可用于任何数据，以可视化和解释各个数据点之间的关系。<ul>
+<li>首先将每个数据点视为其自己的集群，然后将它们之间距离最短的集群连接在一起，以创建更大的集群。</li>
+<li>重复此步骤，直到形成一个包含所有数据点的大集群，凝聚聚类(即一种遵循自下而上方法的层次聚类)。</li>
+</ul>
+</li>
+<li>在这里将使用层次聚类对数据点进行分组，并使用树状图和散点图可视化聚类。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>x = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span> , <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]<br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>]<br><br>plt.scatter(x, y)                                  <span class="hljs-comment"># 可视化一些数据点</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-树状图可视化"><a href="#1-树状图可视化" class="headerlink" title="(1) 树状图可视化"></a>(1) 树状图可视化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> scipy.cluster.hierarchy <span class="hljs-keyword">import</span> dendrogram, linkage<br><br>x = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]<br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>]<br><br>data = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(x, y))<br><br>linkage_data = linkage(data, method=<span class="hljs-string">&#x27;ward&#x27;</span>, metric=<span class="hljs-string">&#x27;euclidean&#x27;</span>)<br>dendrogram(linkage_data)                          <span class="hljs-comment"># 使用欧几里得距离度量，并使用树状图将其可视化</span><br><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-散点图可视化"><a href="#2-散点图可视化" class="headerlink" title="(2) 散点图可视化"></a>(2) 散点图可视化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.cluster <span class="hljs-keyword">import</span> AgglomerativeClustering<br><br>x = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]<br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>]<br><br>data = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(x, y))<br><br>hierarchical_cluster = AgglomerativeClustering(n_clusters=<span class="hljs-number">2</span>, affinity=<span class="hljs-string">&#x27;euclidean&#x27;</span>, linkage=<span class="hljs-string">&#x27;ward&#x27;</span>)<br>labels = hierarchical_cluster.fit_predict(data)   <span class="hljs-comment"># AgglomerativeClustering()使用了scikit-learn库</span><br><br>plt.scatter(x, y, c=labels)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-5-逻辑回归"><a href="#3-5-逻辑回归" class="headerlink" title="3-5 逻辑回归"></a>3-5 逻辑回归</h2><ul>
+<li>逻辑回归<ul>
+<li>旨在解决分类问题，通过预测分类结果来做到这一点，与预测连续结果的线性回归不同。<ul>
+<li>最简单的情况有两个结果，称为二项式，例如：预测肿瘤是恶性肿瘤还是良性肿瘤。</li>
+<li>两个以上结果的分类情况，称为多项式，例如：预测3种不同物种之间的鸢尾花类别。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> linear_model                  <span class="hljs-comment"># 将自变量存储在X中，将因变量存储在y中</span><br><br>X = numpy.array([<span class="hljs-number">3.78</span>, <span class="hljs-number">2.44</span>, <span class="hljs-number">2.09</span>, <span class="hljs-number">0.14</span>, <span class="hljs-number">1.72</span>, <span class="hljs-number">1.65</span>, <span class="hljs-number">4.92</span>, <span class="hljs-number">4.37</span>, <span class="hljs-number">4.96</span>, <span class="hljs-number">4.52</span>, <span class="hljs-number">3.69</span>, <span class="hljs-number">5.88</span>]).reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)<br>y = numpy.array([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>])<br><br>logr = linear_model.LogisticRegression()          <span class="hljs-comment"># 创建逻辑回归对象，将独立值和相关值作为参数</span><br>logr.fit(X, y)                                    <span class="hljs-comment"># 并用描述关系的数据填充回归对象</span><br><br>predicted = logr.predict(numpy.array([<span class="hljs-number">3.46</span>]).reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(predicted)                                  <span class="hljs-comment"># 结果为[0]，预测3.46mm的肿瘤不会癌变</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-系数-1"><a href="#1-系数-1" class="headerlink" title="(1) 系数"></a>(1) 系数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> linear_model<br><br>X = numpy.array([<span class="hljs-number">3.78</span>, <span class="hljs-number">2.44</span>, <span class="hljs-number">2.09</span>, <span class="hljs-number">0.14</span>, <span class="hljs-number">1.72</span>, <span class="hljs-number">1.65</span>, <span class="hljs-number">4.92</span>, <span class="hljs-number">4.37</span>, <span class="hljs-number">4.96</span>, <span class="hljs-number">4.52</span>, <span class="hljs-number">3.69</span>, <span class="hljs-number">5.88</span>]).reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)<br>y = numpy.array([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>])<br><br>logr = linear_model.LogisticRegression()          <span class="hljs-comment"># 创建逻辑回归对象，将独立值和相关值作为参数</span><br>logr.fit(X, y)                                    <span class="hljs-comment"># 并用描述关系的数据填充回归对象</span><br><br>log_odds = logr.coef_                             <span class="hljs-comment"># 系数是X中每单位变化的结果的对数几率的预期变化</span><br>odds = numpy.exp(log_odds)                        <span class="hljs-comment"># 赔率，随着肿瘤大小增加1毫米，成为肿瘤的几率增加4倍</span><br><br><span class="hljs-built_in">print</span>(odds)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-概率"><a href="#2-概率" class="headerlink" title="(2) 概率"></a>(2) 概率</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> linear_model<br><br>X = numpy.array([<span class="hljs-number">3.78</span>, <span class="hljs-number">2.44</span>, <span class="hljs-number">2.09</span>, <span class="hljs-number">0.14</span>, <span class="hljs-number">1.72</span>, <span class="hljs-number">1.65</span>, <span class="hljs-number">4.92</span>, <span class="hljs-number">4.37</span>, <span class="hljs-number">4.96</span>, <span class="hljs-number">4.52</span>, <span class="hljs-number">3.69</span>, <span class="hljs-number">5.88</span>]).reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)<br>y = numpy.array([<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>])<br><br>logr = linear_model.LogisticRegression()          <span class="hljs-comment"># 创建逻辑回归对象，将独立值和相关值作为参数</span><br>logr.fit(X, y)                                    <span class="hljs-comment"># 并用描述关系的数据填充回归对象</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">logit2prob</span>(<span class="hljs-params">logr, X</span>):<br>    log_odds = logr.coef_ * X + logr.intercept_   <span class="hljs-comment"># 创建一个看起来类似于线性回归的公式，提取系数和截距</span><br>    odds = numpy.exp(log_odds)                    <span class="hljs-comment"># 为了将对数赔率转换为赔率，必须对对数赔率取幂</span><br>    probability = odds / (<span class="hljs-number">1</span> + odds)               <span class="hljs-comment"># 有了赔率，可以将其除以1加上赔率，将其转换为概率</span><br>    <span class="hljs-keyword">return</span> probability<br><br><br><span class="hljs-built_in">print</span>(logit2prob(logr, X))                        <span class="hljs-comment"># 找出每个肿瘤癌变的概率，3.78cm的肿瘤癌变的概率为61%</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-6-网格搜索"><a href="#3-6-网格搜索" class="headerlink" title="3-6 网格搜索"></a>3-6 网格搜索</h2><ul>
+<li>网格搜索<ul>
+<li>穷举搜索：在所有候选参数的选择中，通过循环遍历尝试每一种可能性，表现最好的参数就是最终的结果。</li>
+<li>大多数机器学习模型都包含可以调整以改变模型学习方式的参数，例如：逻辑回归模型。<ul>
+<li>有个C控制正则化参数，影响模型的复杂性，选择最佳值C取决于训练模型的数据。</li>
+<li>一种方法是尝试不同的值，然后选择给出最佳分数的值，这种技术称为网格搜索。</li>
+<li>若必须为两个及两个以上参数选择值，将评估值集的所有组合，从而形成值网格。</li>
+</ul>
+</li>
+<li>使用训练数据对逻辑回归模型进行评分<ul>
+<li>若模型与数据过于接近，可能无法很好地预测未知数据，这种统计误差被称为过度拟合。</li>
+<li>为了避免被训练的数据过度拟合导致的误差，可以保留一部分数据，专门用于测试模型。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-默认参数"><a href="#1-默认参数" class="headerlink" title="(1) 默认参数"></a>(1) 默认参数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets                      <span class="hljs-comment"># 将加载用于对鸢尾花进行分类的逻辑模型</span><br><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LogisticRegression<br><br>iris = datasets.load_iris()                       <span class="hljs-comment"># 加载将使用的数据集</span><br><br>X = iris[<span class="hljs-string">&#x27;data&#x27;</span>]                                  <span class="hljs-comment"># 创建一组自变量X和一个因变量y</span><br>y = iris[<span class="hljs-string">&#x27;target&#x27;</span>]<br><br>logit = LogisticRegression(max_iter=<span class="hljs-number">10000</span>)        <span class="hljs-comment"># 查看iris数据集并尝试在逻辑回归中训练不同值的模型</span><br><br><span class="hljs-built_in">print</span>(logit.fit(X, y))                            <span class="hljs-comment"># 使模型适合数据</span><br><span class="hljs-built_in">print</span>(logit.score(X, y))                          <span class="hljs-comment"># 运行评分方法，默认设置C为1，得分为0.973</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-设置范围"><a href="#2-设置范围" class="headerlink" title="(2) 设置范围"></a>(2) 设置范围</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets                      <span class="hljs-comment"># 将加载用于对鸢尾花进行分类的逻辑模型</span><br><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LogisticRegression<br><br>iris = datasets.load_iris()                       <span class="hljs-comment"># 加载将使用的数据集</span><br><br>X = iris[<span class="hljs-string">&#x27;data&#x27;</span>]                                  <span class="hljs-comment"># 创建一组自变量X和一个因变量y</span><br>y = iris[<span class="hljs-string">&#x27;target&#x27;</span>]<br><br>logit = LogisticRegression(max_iter=<span class="hljs-number">10000</span>)        <span class="hljs-comment"># 查看iris数据集并尝试在逻辑回归中训练不同值的模型</span><br><br>C = [<span class="hljs-number">0.25</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.75</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1.25</span>, <span class="hljs-number">1.5</span>, <span class="hljs-number">1.75</span>, <span class="hljs-number">2</span>]      <span class="hljs-comment"># 将C设置为一系列值</span><br>scores = []                                       <span class="hljs-comment"># 创建一个空列表来存储分数</span><br><br><span class="hljs-keyword">for</span> choice <span class="hljs-keyword">in</span> C:                                  <span class="hljs-comment"># for循环更改模型的C值并在每次更改时评估模型</span><br>    logit.set_params(C=choice)<br>    logit.fit(X, y)<br>    scores.append(logit.score(X, y))<br><br><span class="hljs-built_in">print</span>(scores)                                     <span class="hljs-comment"># 通过存储在列表中的分数，评估最佳C值1.75左右</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-7-分类数据"><a href="#3-7-分类数据" class="headerlink" title="3-7 分类数据"></a>3-7 分类数据</h2><ul>
+<li>分类数据<ul>
+<li>当数据由字符串表示类别时，很难使用它们来训练只接受数字数据的机器学习模型。</li>
+<li>此时可以转换数据，以便在模型中使用，而不是忽略分类数据并从模型中排除信息。</li>
+<li>热编码：用一列代表类别中的每个组，对于每一列，值将为1或0，1表示包含组，0表示排除组。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd                         <span class="hljs-comment"># data.csv改名为vehicle_info.csv</span><br><br>cars = pd.read_csv(<span class="hljs-string">&#x27;data/vehicle_info.csv&#x27;</span>)<br><span class="hljs-built_in">print</span>(cars.to_string())                     <span class="hljs-comment"># 在&quot;多元线性回归&quot;中预测CO2的排放量，排除了汽车品牌和型号</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-热编码"><a href="#1-热编码" class="headerlink" title="(1) 热编码"></a>(1) 热编码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd                         <span class="hljs-comment"># data.csv改名为vehicle_info.csv</span><br><br>cars = pd.read_csv(<span class="hljs-string">&#x27;data/vehicle_info.csv&#x27;</span>)<br>ohe_cars = pd.get_dummies(cars[[<span class="hljs-string">&#x27;Car&#x27;</span>]])    <span class="hljs-comment"># 执行一次热编码</span><br><br><span class="hljs-built_in">print</span>(ohe_cars.to_string())                 <span class="hljs-comment"># 为Car列中的每个汽车品牌创建了一个列</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-预测CO2"><a href="#2-预测CO2" class="headerlink" title="(2) 预测CO2"></a>(2) 预测CO2</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd                        <span class="hljs-comment"># data.csv改名为vehicle_info.csv</span><br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> linear_model           <span class="hljs-comment"># 创建一个线性模型</span><br><br>cars = pd.read_csv(<span class="hljs-string">&#x27;data/vehicle_info.csv&#x27;</span>)<br>ohe_cars = pd.get_dummies(cars[[<span class="hljs-string">&#x27;Car&#x27;</span>]])   <span class="hljs-comment"># 执行一次热编码，创建虚拟变量</span><br><br>X = pd.concat([cars[[<span class="hljs-string">&#x27;Volume&#x27;</span>, <span class="hljs-string">&#x27;Weight&#x27;</span>]], ohe_cars], axis=<span class="hljs-number">1</span>)<br>y = cars[<span class="hljs-string">&#x27;CO2&#x27;</span>]                            <span class="hljs-comment"># 选择自变量X并按列添加虚拟变量，将因变量存储在y中</span><br><br>regr = linear_model.LinearRegression()     <span class="hljs-comment"># 将数据拟合为线性回归</span><br>regr.fit(X.values, y.values)<br><br>predictedCO2 = regr.predict([[<span class="hljs-number">2300</span>, <span class="hljs-number">1300</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>]])<br><span class="hljs-built_in">print</span>(predictedCO2)                        <span class="hljs-comment"># 根据汽车的重量、体积和制造商来预测CO2排放量</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-Dummifying"><a href="#3-Dummifying" class="headerlink" title="(3) Dummifying"></a>(3) Dummifying</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>colors1 = pd.DataFrame(&#123;<span class="hljs-string">&#x27;color&#x27;</span>: [<span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-string">&#x27;pink&#x27;</span>]&#125;)<br><span class="hljs-built_in">print</span>(colors1)                             <span class="hljs-comment"># 有一个表示颜色的列，2个组</span><br>dummies = pd.get_dummies(colors1, drop_first=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(dummies)                             <span class="hljs-comment"># 使用用于一次热编码的函数，然后删除其中一列</span><br><br>colors2 = pd.DataFrame(&#123;<span class="hljs-string">&#x27;color&#x27;</span>: [<span class="hljs-string">&#x27;blue&#x27;</span>, <span class="hljs-string">&#x27;pink&#x27;</span>, <span class="hljs-string">&#x27;grey&#x27;</span>]&#125;)<br><span class="hljs-built_in">print</span>(colors2)                             <span class="hljs-comment"># 有一个表示颜色的列，3个组</span><br>dummies = pd.get_dummies(colors2, drop_first=<span class="hljs-literal">True</span>)<br>dummies[<span class="hljs-string">&#x27;color2&#x27;</span>] = colors2[<span class="hljs-string">&#x27;color&#x27;</span>]<br><span class="hljs-built_in">print</span>(dummies)                             <span class="hljs-comment"># 使用用于一次热编码的函数，然后删除其中一列</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-8-K-最近邻"><a href="#3-8-K-最近邻" class="headerlink" title="3-8 K-最近邻"></a>3-8 K-最近邻</h2><ul>
+<li>K-最近邻<ul>
+<li>K-Nearest Neighbor，KNN，即一种分类(Classification)算法，输入基于实例的学习，属于懒惰学习。</li>
+<li>即没有训练阶段，数据集事先已有了分类和特征值，待收到新样本后直接进行处理，与急切学习相对应。</li>
+<li>基本思想：如果一个样本在特征空间中的k个最邻近的样本中的大多数属于某一个类别，则该样本也划分为这个类别。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>x = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]          <span class="hljs-comment"># 两个输入特征x和y</span><br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>]<br>classes = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>]         <span class="hljs-comment"># 一个目标类classes</span><br><br>plt.scatter(x, y, c=classes)<br>plt.show()                                       <span class="hljs-comment"># 可视化一些数据点</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-K-x3D-1拟合KNN"><a href="#1-K-x3D-1拟合KNN" class="headerlink" title="(1) K&#x3D;1拟合KNN"></a>(1) K&#x3D;1拟合KNN</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># Three lines to make our compiler able to draw</span><br><span class="hljs-comment"># import sys</span><br><span class="hljs-comment"># import matplotlib</span><br><span class="hljs-comment"># matplotlib.use(&#x27;Agg&#x27;)</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> warnings <span class="hljs-keyword">import</span> simplefilter               <span class="hljs-comment"># 忽视所有的警告消息</span><br><span class="hljs-keyword">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsClassifier<br>simplefilter(action=<span class="hljs-string">&#x27;ignore&#x27;</span>, category=FutureWarning)<br><br>x = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]         <span class="hljs-comment"># 两个输入特征x和y</span><br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>]<br>classes = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>]        <span class="hljs-comment"># 一个目标类classes</span><br><br>data = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(x, y))                          <span class="hljs-comment"># 将输入特征转换为一组点</span><br>knn = KNeighborsClassifier(n_neighbors=<span class="hljs-number">1</span>)       <span class="hljs-comment"># K=1拟合KNN算法</span><br><br>knn.fit(data, classes)<br><br>new_x = <span class="hljs-number">8</span>                                       <span class="hljs-comment"># 创建新的x和y特征</span><br>new_y = <span class="hljs-number">21</span><br>new_point = [(new_x, new_y)]<br><br>prediction = knn.predict(new_point)             <span class="hljs-comment"># 调用knn.predict()分类一个新的数据点</span><br><br>plt.scatter(x + [new_x], y + [new_y], c=classes + [prediction[<span class="hljs-number">0</span>]])<br>plt.text(x=new_x - <span class="hljs-number">1.7</span>, y=new_y - <span class="hljs-number">0.7</span>, s=<span class="hljs-string">f&quot;new point, class: <span class="hljs-subst">&#123;prediction[<span class="hljs-number">0</span>]&#125;</span>&quot;</span>)<br>plt.show()                                      <span class="hljs-comment"># 可视化一些数据点，text()突出新点的位置</span><br><br><span class="hljs-comment"># Two lines to make our compiler able to draw</span><br><span class="hljs-comment"># plt.savefig(sys.stdout.buffer)</span><br><span class="hljs-comment"># sys.stdout.flush()</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-K-x3D-5拟合KNN"><a href="#2-K-x3D-5拟合KNN" class="headerlink" title="(2) K&#x3D;5拟合KNN"></a>(2) K&#x3D;5拟合KNN</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># Three lines to make our compiler able to draw</span><br><span class="hljs-comment"># import sys</span><br><span class="hljs-comment"># import matplotlib</span><br><span class="hljs-comment"># matplotlib.use(&#x27;Agg&#x27;)</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> warnings <span class="hljs-keyword">import</span> simplefilter               <span class="hljs-comment"># 忽视所有的警告消息</span><br><span class="hljs-keyword">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsClassifier<br>simplefilter(action=<span class="hljs-string">&#x27;ignore&#x27;</span>, category=FutureWarning)<br><br>x = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>]         <span class="hljs-comment"># 两个输入特征x和y</span><br>y = [<span class="hljs-number">21</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">24</span>, <span class="hljs-number">22</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>]<br>classes = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>]        <span class="hljs-comment"># 一个目标类classes</span><br><br>data = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(x, y))                          <span class="hljs-comment"># 将输入特征转换为一组点</span><br>knn = KNeighborsClassifier(n_neighbors=<span class="hljs-number">5</span>)       <span class="hljs-comment"># K=5拟合KNN算法，更高的K值来改变预测</span><br><br>knn.fit(data, classes)<br><br>new_x = <span class="hljs-number">8</span>                                       <span class="hljs-comment"># 创建新的x和y特征</span><br>new_y = <span class="hljs-number">21</span><br>new_point = [(new_x, new_y)]<br><br>prediction = knn.predict(new_point)             <span class="hljs-comment"># 调用knn.predict()分类一个新的数据点</span><br><br>plt.scatter(x + [new_x], y + [new_y], c=classes + [prediction[<span class="hljs-number">0</span>]])<br>plt.text(x=new_x - <span class="hljs-number">1.7</span>, y=new_y - <span class="hljs-number">0.7</span>, s=<span class="hljs-string">f&quot;new point, class: <span class="hljs-subst">&#123;prediction[<span class="hljs-number">0</span>]&#125;</span>&quot;</span>)<br>plt.show()                                      <span class="hljs-comment"># 可视化一些数据点，text()突出新点的位置</span><br><br><span class="hljs-comment"># Two lines to make our compiler able to draw</span><br><span class="hljs-comment"># plt.savefig(sys.stdout.buffer)</span><br><span class="hljs-comment"># sys.stdout.flush()</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-Bootstrap聚合"><a href="#4-Bootstrap聚合" class="headerlink" title="4 Bootstrap聚合"></a>4 Bootstrap聚合</h1><ul>
+<li>Bootstrap聚合<ul>
+<li>也叫Bagging算法或引导聚集算法，又称装袋算法，试图解决分类或回归的过度拟合问题。<ul>
+<li>主要想法是分别训练几个不同的模型，然后让所有的模型表决测试样例的输出。</li>
+<li>是机器学习中常规策略的一个例子，被称为模型平均，该技术被称为集成方法。</li>
+</ul>
+</li>
+<li>了解装袋提高模型性能的方法，必须先评估分类器在数据集上的表现，装袋是决策树概念的延续。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-1-分类器评估"><a href="#4-1-分类器评估" class="headerlink" title="4-1 分类器评估"></a>4-1 分类器评估</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets                    <span class="hljs-comment"># 通过Sklearn的葡萄酒数据集发现不同类别的葡萄酒</span><br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> accuracy_score<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br>data = datasets.load_wine(as_frame=<span class="hljs-literal">True</span>)        <span class="hljs-comment"># as_frame设为True，在加载数据时不会丢失特征名称</span><br><br>X = data.data                                   <span class="hljs-comment"># 将其存储到X(输入特征)和y(目标)中</span><br>y = data.target<br><br>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.25</span>, random_state=<span class="hljs-number">22</span>)<br><br>dtree = DecisionTreeClassifier(random_state=<span class="hljs-number">22</span>)<br>dtree.fit(X_train, y_train)                     <span class="hljs-comment"># 实例化一个基础分类器并将其拟合到训练数据中</span><br><br>y_pred = dtree.predict(X_test)                  <span class="hljs-comment"># 预测未见过测试集的葡萄酒类别并评估模型性能</span><br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Train data accuracy:&quot;</span>, accuracy_score(y_true=y_train, y_pred=dtree.predict(X_train)))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Test data accuracy:&quot;</span>, accuracy_score(y_true=y_test, y_pred=y_pred))<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-装袋分类器"><a href="#4-2-装袋分类器" class="headerlink" title="4-2 装袋分类器"></a>4-2 装袋分类器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> accuracy_score<br><span class="hljs-keyword">from</span> sklearn.ensemble <span class="hljs-keyword">import</span> BaggingClassifier<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br>data = datasets.load_wine(as_frame=<span class="hljs-literal">True</span>)<br><br>X = data.data<br>y = data.target<br><br>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.25</span>, random_state=<span class="hljs-number">22</span>)<br><br>estimator_range = [<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">14</span>, <span class="hljs-number">16</span>]  <span class="hljs-comment"># 创建一个值范围，代表想要在每个集成中使用的估计数量</span><br><br>models = []<br>scores = []<br><br><span class="hljs-keyword">for</span> n_estimators <span class="hljs-keyword">in</span> estimator_range:            <span class="hljs-comment"># for循环将模型和分数存储在单独的列表中以供后续可视化</span><br>    <span class="hljs-comment"># Create bagging classifier</span><br>    clf = BaggingClassifier(n_estimators=n_estimators, random_state=<span class="hljs-number">22</span>)<br>    <span class="hljs-comment"># Fit the model</span><br>    clf.fit(X_train, y_train)<br><br>    <span class="hljs-comment"># Append the model and score to their respective list</span><br>    models.append(clf)<br>    scores.append(accuracy_score(y_true=y_test, y_pred=clf.predict(X_test)))<br><br><span class="hljs-comment"># Generate the plot of scores against number of estimators</span><br>plt.figure(figsize=(<span class="hljs-number">9</span>, <span class="hljs-number">6</span>))<br>plt.plot(estimator_range, scores)<br><br><span class="hljs-comment"># Adjust labels and font (to make visable)</span><br>plt.xlabel(<span class="hljs-string">&quot;n_estimators&quot;</span>, fontsize=<span class="hljs-number">18</span>)         <span class="hljs-comment"># 通过迭代估计器数量的不同值</span><br>plt.ylabel(<span class="hljs-string">&quot;score&quot;</span>, fontsize=<span class="hljs-number">18</span>)                <span class="hljs-comment"># 可看到模型性能从82.2%提高到95.5%</span><br>plt.tick_params(labelsize=<span class="hljs-number">16</span>)                   <span class="hljs-comment"># 14后精度开始下降</span><br><br><span class="hljs-comment"># Visualize plot                                # 如果设置不同的random_state值，结果也会不同</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-3-另一种形式"><a href="#4-3-另一种形式" class="headerlink" title="4-3 另一种形式"></a>4-3 另一种形式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-keyword">from</span> sklearn.ensemble <span class="hljs-keyword">import</span> BaggingClassifier<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br>data = datasets.load_wine(as_frame=<span class="hljs-literal">True</span>)<br><br>X = data.data                                   <span class="hljs-comment"># 袋外估计可能会高估二元分类问题中的错误</span><br>y = data.target                                 <span class="hljs-comment"># 因此只能用作对其他指标的补充</span><br><br>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.25</span>, random_state=<span class="hljs-number">22</span>)<br><br>oob_model = BaggingClassifier(n_estimators=<span class="hljs-number">12</span>, oob_score=<span class="hljs-literal">True</span>, random_state=<span class="hljs-number">22</span>)<br>oob_model.fit(X_train, y_train)                 <span class="hljs-comment"># 使用袋外指标创建模型，类似于测试集</span><br><br><span class="hljs-comment"># OOB和测试集使用的样本不同，并且数据集比较小，所以在准确率上存在差异</span><br><span class="hljs-built_in">print</span>(oob_model.oob_score_)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-4-生成决策树"><a href="#4-4-生成决策树" class="headerlink" title="4-4 生成决策树"></a>4-4 生成决策树</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># import sys</span><br><span class="hljs-keyword">import</span> graphviz<br><span class="hljs-comment"># import matplotlib</span><br><span class="hljs-comment"># matplotlib.use(&#x27;Agg&#x27;)</span><br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> tree<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-comment"># from sklearn.tree import plot_tree</span><br><span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.ensemble <span class="hljs-keyword">import</span> BaggingClassifier<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br>data = datasets.load_wine(as_frame=<span class="hljs-literal">True</span>)<br><br>X = data.data<br>y = data.target<br><br>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="hljs-number">0.25</span>, random_state=<span class="hljs-number">22</span>)<br><br>oob_model = BaggingClassifier(n_estimators=<span class="hljs-number">12</span>, oob_score=<span class="hljs-literal">True</span>, random_state=<span class="hljs-number">22</span>)<br>oob_model.fit(X_train, y_train)<br><br>clf = BaggingClassifier(n_estimators=<span class="hljs-number">12</span>, oob_score=<span class="hljs-literal">True</span>, random_state=<span class="hljs-number">22</span>)<br>clf.fit(X_train, y_train)<br><br>plt.figure(figsize=(<span class="hljs-number">30</span>, <span class="hljs-number">20</span>))<br>dtree = clf.estimators_[<span class="hljs-number">0</span>]                      <span class="hljs-comment"># clf.estimators_是3个拟合决策树的列表</span><br><span class="hljs-built_in">print</span>(dtree)                                    <span class="hljs-comment"># 可以遍历列表访问每个树，这里取第一个</span><br><br><span class="hljs-comment"># plot_tree(clf.estimators_[0], feature_names = X.columns)</span><br><span class="hljs-comment"># plt.savefig(sys.stdout.buffer)</span><br><span class="hljs-comment"># sys.stdout.flush()</span><br><br>dot_data = tree.export_graphviz(dtree, filled=<span class="hljs-literal">True</span>, rounded=<span class="hljs-literal">True</span>, special_characters=<span class="hljs-literal">True</span>)<br>graph = graphviz.Source(dot_data)<br>graph.render(<span class="hljs-string">&#x27;data/visual_dtree&#x27;</span>)               <span class="hljs-comment"># 生成visual_dtree.pdf可视化决策树</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-交叉验证-建模"><a href="#5-交叉验证-建模" class="headerlink" title="5 交叉验证(建模)"></a>5 交叉验证(建模)</h1><ul>
+<li>交叉验证(建模)<ul>
+<li>在机器学习建立模型和验证模型参数时常用的办法，一般被用于评估一个机器学习模型的表现。</li>
+<li>重复使用数据，切分得到的样本，组合为不同的训练集和测试集，训练及评估模型预测的好坏。</li>
+<li>优化测试集的参数可能会导致信息泄漏，导致模型在看不见的数据上表现更差，为纠正该问题，执行交叉验证。</li>
+<li>K-Fold<ul>
+<li>首先，模型中使用的训练数据被分成了k个较小的集合，用于验证模型。</li>
+<li>然后，在k-1倍的训练集上训练模型，剩余的集合用作验证集评估模型。</li>
+</ul>
+</li>
+<li>分层K-Fold<ul>
+<li>在类别不平衡的情况下，需要一种方法来解释训练集和验证集的不平衡。</li>
+<li>对目标类别进行分层，意味着这两个集合在所有类别中所占的比例相等。</li>
+</ul>
+</li>
+<li>留一法，Leave-One-Out，简称LOO。<ul>
+<li>使k等于数据集中数据的个数，每次只使用一个作为测试集，剩下的全作为训练集。</li>
+<li>这种方法得出的结果，与训练整个测试集的期望值最为接近，但是成本也十分庞大。</li>
+</ul>
+</li>
+<li>留P法，Leave-P-Out，简称LPO。<ul>
+<li>使用样本中的某几项当做测试集，再从样本中选取某几项的可能种类称为P值。</li>
+<li>Leave-P-Out可迅速提高模型的精确度，准确的描摹大样本数据集的特征信息。</li>
+</ul>
+</li>
+<li>蒙特卡罗交叉验证，也称为Shuffle Split交叉验证。<ul>
+<li>一种非常灵活的交叉验证策略，在这种技术中，数据集被随机划分为训练集和验证集。</li>
+<li>假设100个样本，60%的样本用作训练集，20%用作测试集，剩下的20%将不被使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-1-K-Fold"><a href="#5-1-K-Fold" class="headerlink" title="5-1 K-Fold"></a>5-1 K-Fold</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier     <span class="hljs-comment"># 尝试对不同种类的鸢尾花进行分类</span><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> KFold, cross_val_score<br><br>X, y = datasets.load_iris(return_X_y=<span class="hljs-literal">True</span>)          <span class="hljs-comment"># 加载数据</span><br><br>clf = DecisionTreeClassifier(random_state=<span class="hljs-number">42</span>)       <span class="hljs-comment"># 创建并拟合模型以进行评估</span><br><br>k_folds = KFold(n_splits=<span class="hljs-number">5</span>)                         <span class="hljs-comment"># 评估模型，看在每个k-fold上的表现</span><br><br>scores = cross_val_score(clf, X, y, cv=k_folds)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Cross Validation Scores: &quot;</span>, scores)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Average CV Score: &quot;</span>, scores.mean())<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of CV Scores used in Average: &quot;</span>, <span class="hljs-built_in">len</span>(scores))<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-分层K-Fold"><a href="#5-2-分层K-Fold" class="headerlink" title="5-2 分层K-Fold"></a>5-2 分层K-Fold</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier     <span class="hljs-comment"># 尝试对不同种类的鸢尾花进行分类</span><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> StratifiedKFold, cross_val_score<br><br>X, y = datasets.load_iris(return_X_y=<span class="hljs-literal">True</span>)          <span class="hljs-comment"># 加载数据</span><br><br>clf = DecisionTreeClassifier(random_state=<span class="hljs-number">42</span>)<br><br>sk_folds = StratifiedKFold(n_splits=<span class="hljs-number">5</span>)              <span class="hljs-comment"># 折叠数保持相同</span><br><br>scores = cross_val_score(clf, X, y, cv=sk_folds)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Cross Validation Scores: &quot;</span>, scores)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Average CV Score: &quot;</span>, scores.mean())          <span class="hljs-comment"># 在确保存在分层类别时，平均CV从基本k倍增加</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of CV Scores used in Average: &quot;</span>, <span class="hljs-built_in">len</span>(scores))<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-3-留一法-LOO"><a href="#5-3-留一法-LOO" class="headerlink" title="5-3 留一法(LOO)"></a>5-3 留一法(LOO)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier     <span class="hljs-comment"># 尝试对不同种类的鸢尾花进行分类</span><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> LeaveOneOut, cross_val_score<br><br>X, y = datasets.load_iris(return_X_y=<span class="hljs-literal">True</span>)          <span class="hljs-comment"># 加载数据</span><br><br>clf = DecisionTreeClassifier(random_state=<span class="hljs-number">42</span>)       <span class="hljs-comment"># 创建并拟合模型以进行评估</span><br><br>loo = LeaveOneOut()<br><br>scores = cross_val_score(clf, X, y, cv=loo)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Cross Validation Scores: &quot;</span>, scores)          <span class="hljs-comment"># 执行交叉验证分数的数量等于数据集中观察的数量</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Average CV Score: &quot;</span>, scores.mean())          <span class="hljs-comment"># 鸢尾花数据集中有150个观测值，平均CV得分为94%</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of CV Scores used in Average: &quot;</span>, <span class="hljs-built_in">len</span>(scores))<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-4-留P验证-LPO"><a href="#5-4-留P验证-LPO" class="headerlink" title="5-4 留P验证(LPO)"></a>5-4 留P验证(LPO)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier     <span class="hljs-comment"># 尝试对不同种类的鸢尾花进行分类</span><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> LeavePOut, cross_val_score<br><br>X, y = datasets.load_iris(return_X_y=<span class="hljs-literal">True</span>)          <span class="hljs-comment"># 加载数据</span><br><br>clf = DecisionTreeClassifier(random_state=<span class="hljs-number">42</span>)       <span class="hljs-comment"># 创建并拟合模型以进行评估</span><br><br>lpo = LeavePOut(p=<span class="hljs-number">2</span>)<br><br>scores = cross_val_score(clf, X, y, cv=lpo)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Cross Validation Scores: &quot;</span>, scores)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Average CV Score: &quot;</span>, scores.mean())          <span class="hljs-comment"># 观测值数量足够多，实现了大致相同的平均CV分数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of CV Scores used in Average: &quot;</span>, <span class="hljs-built_in">len</span>(scores))<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-5-蒙特卡罗验证"><a href="#5-5-蒙特卡罗验证" class="headerlink" title="5-5 蒙特卡罗验证"></a>5-5 蒙特卡罗验证</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier     <span class="hljs-comment"># 尝试对不同种类的鸢尾花进行分类</span><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> ShuffleSplit, cross_val_score<br><br>X, y = datasets.load_iris(return_X_y=<span class="hljs-literal">True</span>)          <span class="hljs-comment"># 加载数据</span><br><br>clf = DecisionTreeClassifier(random_state=<span class="hljs-number">42</span>)       <span class="hljs-comment"># 创建并拟合模型以进行评估</span><br><br>ss = ShuffleSplit(train_size=<span class="hljs-number">0.6</span>, test_size=<span class="hljs-number">0.3</span>, n_splits=<span class="hljs-number">5</span>)<br><br>scores = cross_val_score(clf, X, y, cv=ss)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Cross Validation Scores: &quot;</span>, scores)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Average CV Score: &quot;</span>, scores.mean())<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of CV Scores used in Average: &quot;</span>, <span class="hljs-built_in">len</span>(scores))<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-AUC-ROC曲线"><a href="#6-AUC-ROC曲线" class="headerlink" title="6 AUC-ROC曲线"></a>6 AUC-ROC曲线</h1><ul>
+<li>AUC-ROC曲线<ul>
+<li>在不同阈值设置的条件下，分类问题的性能度量，ROC指概率曲线，AUC指正负类可正确分类的程度。<ul>
+<li>告诉模型能够在多大程度上区分类，AUC越高，模型越能预测0为0和1为1。</li>
+<li>类比疾病诊断模型，若AUC越高，模型对有疾病和无疾病的区分就会越好。</li>
+</ul>
+</li>
+<li>术语定义：真阳性(TP)、假阳性(FP)。<ul>
+<li>特异度(Specificity)&#x3D;TN&#x2F;(TN+FP)</li>
+<li>假阳率(FPR)&#x3D;1-Specificity&#x3D;FP&#x2F;(TN+FP)</li>
+<li>真阳率(TPR)&#x2F;召回率(Recall)&#x2F;敏感度(Sensitivity)&#x3D;TP&#x2F;(TP+FN)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-1-不平衡数据"><a href="#6-1-不平衡数据" class="headerlink" title="6-1 不平衡数据"></a>6-1 不平衡数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> accuracy_score, confusion_matrix<br><br>n = <span class="hljs-number">10000</span>                                       <span class="hljs-comment"># 假设有一个不平衡的数据集</span><br>ratio = <span class="hljs-number">.95</span>                                     <span class="hljs-comment"># 其中大部分数据都是一个值</span><br>n_0 = <span class="hljs-built_in">int</span>((<span class="hljs-number">1</span>-ratio) * n)                        <span class="hljs-comment"># 可通过预测多数类来获得模型的高精度</span><br>n_1 = <span class="hljs-built_in">int</span>(ratio * n)<br><br>y = np.array([<span class="hljs-number">0</span>] * n_0 + [<span class="hljs-number">1</span>] * n_1)<br>y_proba = np.array([<span class="hljs-number">1</span>]*n)<br>y_pred = y_proba &gt; <span class="hljs-number">.5</span><br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;accuracy score: <span class="hljs-subst">&#123;accuracy_score(y, y_pred)&#125;</span>&#x27;</span>)<br>cf_mat = confusion_matrix(y, y_pred)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Confusion matrix&#x27;</span>)<br><span class="hljs-built_in">print</span>(cf_mat)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;class 0 accuracy: <span class="hljs-subst">&#123;cf_mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]/n_0&#125;</span>&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;class 1 accuracy: <span class="hljs-subst">&#123;cf_mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]/n_1&#125;</span>&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-2-准确性评估"><a href="#6-2-准确性评估" class="headerlink" title="6-2 准确性评估"></a>6-2 准确性评估</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> accuracy_score, confusion_matrix<br><br>n = <span class="hljs-number">10000</span>                                       <span class="hljs-comment"># 假设有一个不平衡的数据集</span><br>ratio = <span class="hljs-number">.95</span>                                     <span class="hljs-comment"># 其中大部分数据都是一个值</span><br>n_0 = <span class="hljs-built_in">int</span>((<span class="hljs-number">1</span>-ratio) * n)                        <span class="hljs-comment"># 可通过预测多数类来获得模型的高精度</span><br>n_1 = <span class="hljs-built_in">int</span>(ratio * n)<br><br>y = np.array([<span class="hljs-number">0</span>] * n_0 + [<span class="hljs-number">1</span>] * n_1)<br>y_proba_1 = np.array([<span class="hljs-number">1</span>]*n)<br>y_pred_1 = y_proba_1 &gt; <span class="hljs-number">.5</span><br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;accuracy score: <span class="hljs-subst">&#123;accuracy_score(y, y_pred_1)&#125;</span>&#x27;</span>)<br>cf_mat = confusion_matrix(y, y_pred_1)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Confusion matrix&#x27;</span>)                       <span class="hljs-comment"># 虽获得了高准确性，但该模型没有提供有关数据的信息</span><br><span class="hljs-built_in">print</span>(cf_mat)                                   <span class="hljs-comment"># 在100%的时间内准确地预测了1类</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;class 0 accuracy: <span class="hljs-subst">&#123;cf_mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]/n_0&#125;</span>&#x27;</span>)  <span class="hljs-comment"># 在0%的时间内并未准确地预测到类</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;class 1 accuracy: <span class="hljs-subst">&#123;cf_mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]/n_1&#125;</span>&#x27;</span>)  <span class="hljs-comment"># 以牺牲准确性为代价</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;*****************************&#x27;</span>)          <span class="hljs-comment"># 拥有一个可在某程度上区分这两类的模型可能更好</span><br><br><span class="hljs-comment"># below are the probabilities obtained from a hypothetical model that doesn&#x27;t always predict the mode</span><br>y_proba_2 = np.array(np.random.uniform(<span class="hljs-number">0</span>, <span class="hljs-number">.7</span>, n_0).tolist() + np.random.uniform(<span class="hljs-number">.3</span>, <span class="hljs-number">1</span>, n_1).tolist())<br>y_pred_2 = y_proba_2 &gt; <span class="hljs-number">.5</span><br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;accuracy score: <span class="hljs-subst">&#123;accuracy_score(y, y_pred_2)&#125;</span>&#x27;</span>)<br>cf_mat = confusion_matrix(y, y_pred_2)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Confusion matrix&#x27;</span>)                       <span class="hljs-comment"># 第二组预测准确度分数没有第一组高</span><br><span class="hljs-built_in">print</span>(cf_mat)                                   <span class="hljs-comment"># 但每个类别的准确度更加平衡</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;class 0 accuracy: <span class="hljs-subst">&#123;cf_mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]/n_0&#125;</span>&#x27;</span>)  <span class="hljs-comment"># 准确性作为评估指标会使第一个模型评分高于第二个模型</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;class 1 accuracy: <span class="hljs-subst">&#123;cf_mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]/n_1&#125;</span>&#x27;</span>)  <span class="hljs-comment"># 在这种情况下，最好使用其他评估指标，例如AUC</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-第一个模型"><a href="#1-第一个模型" class="headerlink" title="(1) 第一个模型"></a>(1) 第一个模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># Three lines to make our compiler able to draw</span><br><span class="hljs-comment"># import sys</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment"># import matplotlib</span><br><span class="hljs-comment"># matplotlib.use(&#x27;Agg&#x27;)</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> roc_auc_score, roc_curve<br><br>n = <span class="hljs-number">10000</span>                                       <span class="hljs-comment"># 假设有一个不平衡的数据集</span><br>ratio = <span class="hljs-number">.95</span>                                     <span class="hljs-comment"># 其中大部分数据都是一个值</span><br>n_0 = <span class="hljs-built_in">int</span>((<span class="hljs-number">1</span>-ratio) * n)                        <span class="hljs-comment"># 可通过预测多数类来获得模型的高精度</span><br>n_1 = <span class="hljs-built_in">int</span>(ratio * n)<br><br>y = np.array([<span class="hljs-number">0</span>] * n_0 + [<span class="hljs-number">1</span>] * n_1)<br>y_proba_1 = np.array([<span class="hljs-number">1</span>] * n)<br>y_pred_1 = y_proba_1 &gt; <span class="hljs-number">.5</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_roc_curve</span>(<span class="hljs-params">true_y, y_prob</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    plots the roc curve based of the probabilities</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    fpr, tpr, thresholds = roc_curve(true_y, y_prob)<br>    plt.plot(fpr, tpr)<br>    plt.xlabel(<span class="hljs-string">&#x27;False Positive Rate&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;True Positive Rate&#x27;</span>)<br>    plt.show()                                  <span class="hljs-comment"># AUC分数约为0.5，意味着该模型无法区分两个类别</span><br><br><br>plot_roc_curve(y, y_proba_1)                    <span class="hljs-comment"># 曲线看起来像一条斜率为1的线</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;model 1 AUC score: <span class="hljs-subst">&#123;roc_auc_score(y, y_proba_1)&#125;</span>&#x27;</span>)<br><br><span class="hljs-comment"># Two lines to make our compiler able to draw</span><br><span class="hljs-comment"># plt.savefig(sys.stdout.buffer)</span><br><span class="hljs-comment"># sys.stdout.flush()</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-第二个模型"><a href="#2-第二个模型" class="headerlink" title="(2) 第二个模型"></a>(2) 第二个模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># Three lines to make our compiler able to draw</span><br><span class="hljs-comment"># import sys</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment"># import matplotlib</span><br><span class="hljs-comment"># matplotlib.use(&#x27;Agg&#x27;)</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> roc_auc_score, roc_curve<br><br>n = <span class="hljs-number">10000</span>                                       <span class="hljs-comment"># 假设有一个不平衡的数据集</span><br>ratio = <span class="hljs-number">.95</span>                                     <span class="hljs-comment"># 其中大部分数据都是一个值</span><br>n_0 = <span class="hljs-built_in">int</span>((<span class="hljs-number">1</span>-ratio) * n)                        <span class="hljs-comment"># 可通过预测多数类来获得模型的高精度</span><br>n_1 = <span class="hljs-built_in">int</span>(ratio * n)<br><br>y = np.array([<span class="hljs-number">0</span>] * n_0 + [<span class="hljs-number">1</span>] * n_1)<br><br><span class="hljs-comment"># below are the probabilities obtained from a hypothetical model that doesn&#x27;t always predict the mode</span><br>y_proba_2 = np.array(np.random.uniform(<span class="hljs-number">0</span>, <span class="hljs-number">.7</span>, n_0).tolist() + np.random.uniform(<span class="hljs-number">.3</span>, <span class="hljs-number">1</span>, n_1).tolist())<br>y_pred_2 = y_proba_2 &gt; <span class="hljs-number">.5</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_roc_curve</span>(<span class="hljs-params">true_y, y_prob</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    plots the roc curve based of the probabilities</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    fpr, tpr, thresholds = roc_curve(true_y, y_prob)<br>    plt.plot(fpr, tpr)<br>    plt.xlabel(<span class="hljs-string">&#x27;False Positive Rate&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;True Positive Rate&#x27;</span>)<br>    plt.show()                                  <span class="hljs-comment"># AUC分数接近1，意味着该模型有能力将两个类分开</span><br><br><br>plot_roc_curve(y, y_proba_2)                    <span class="hljs-comment"># 曲线将更靠近图表的左上角</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;model 2 AUC score: <span class="hljs-subst">&#123;roc_auc_score(y, y_proba_2)&#125;</span>&#x27;</span>)<br><br><span class="hljs-comment"># Two lines to make our compiler able to draw</span><br><span class="hljs-comment"># plt.savefig(sys.stdout.buffer)</span><br><span class="hljs-comment"># sys.stdout.flush()</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-3-类别预测概率"><a href="#6-3-类别预测概率" class="headerlink" title="6-3 类别预测概率"></a>6-3 类别预测概率</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> accuracy_score, roc_auc_score<br><br>n = <span class="hljs-number">10000</span><br>y = np.array([<span class="hljs-number">0</span>] * n + [<span class="hljs-number">1</span>] * n)<br><br>y_prob_1 = np.array(                            <span class="hljs-comment"># 有两组来自假设模型的概率</span><br>    np.random.uniform(<span class="hljs-number">.25</span>, <span class="hljs-number">.5</span>, n//<span class="hljs-number">2</span>).tolist()   <span class="hljs-comment"># 第一个在预测两个类别时，概率接近.5</span><br>    + np.random.uniform(<span class="hljs-number">.3</span>, <span class="hljs-number">.7</span>, n).tolist()     <span class="hljs-comment"># 第二个在预测两个类别时，概率接近0或1的极端值</span><br>    + np.random.uniform(<span class="hljs-number">.5</span>, <span class="hljs-number">.75</span>, n//<span class="hljs-number">2</span>).tolist()<br>)<br>y_prob_2 = np.array(<br>    np.random.uniform(<span class="hljs-number">0</span>, <span class="hljs-number">.4</span>, n//<span class="hljs-number">2</span>).tolist() +<br>    np.random.uniform(<span class="hljs-number">.3</span>, <span class="hljs-number">.7</span>, n).tolist() +<br>    np.random.uniform(<span class="hljs-number">.6</span>, <span class="hljs-number">1</span>, n//<span class="hljs-number">2</span>).tolist()<br>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;model 1 accuracy score: <span class="hljs-subst">&#123;accuracy_score(y, y_prob_1&gt;<span class="hljs-number">.5</span>)&#125;</span>&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;model 2 accuracy score: <span class="hljs-subst">&#123;accuracy_score(y, y_prob_2&gt;<span class="hljs-number">.5</span>)&#125;</span>&#x27;</span>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;model 1 AUC score: <span class="hljs-subst">&#123;roc_auc_score(y, y_prob_1)&#125;</span>&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;model 2 AUC score: <span class="hljs-subst">&#123;roc_auc_score(y, y_prob_2)&#125;</span>&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-第一个模型-1"><a href="#1-第一个模型-1" class="headerlink" title="(1) 第一个模型"></a>(1) 第一个模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># import sys</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment"># import matplotlib</span><br><span class="hljs-comment"># matplotlib.use(&#x27;Agg&#x27;)</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> roc_curve<br><br>n = <span class="hljs-number">10000</span><br>y = np.array([<span class="hljs-number">0</span>] * n + [<span class="hljs-number">1</span>] * n)<br><br>y_prob_1 = np.array(                            <span class="hljs-comment"># 有两组来自假设模型的概率</span><br>    np.random.uniform(<span class="hljs-number">.25</span>, <span class="hljs-number">.5</span>, n//<span class="hljs-number">2</span>).tolist()   <span class="hljs-comment"># 第一个在预测两个类别时，概率接近.5</span><br>    + np.random.uniform(<span class="hljs-number">.3</span>, <span class="hljs-number">.7</span>, n).tolist()     <span class="hljs-comment"># 第二个在预测两个类别时，概率接近0或1的极端值</span><br>    + np.random.uniform(<span class="hljs-number">.5</span>, <span class="hljs-number">.75</span>, n//<span class="hljs-number">2</span>).tolist()<br>)<br>y_prob_2 = np.array(<br>    np.random.uniform(<span class="hljs-number">0</span>, <span class="hljs-number">.4</span>, n // <span class="hljs-number">2</span>).tolist() +<br>    np.random.uniform(<span class="hljs-number">.3</span>, <span class="hljs-number">.7</span>, n).tolist() +<br>    np.random.uniform(<span class="hljs-number">.6</span>, <span class="hljs-number">1</span>, n // <span class="hljs-number">2</span>).tolist()<br>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_roc_curve</span>(<span class="hljs-params">true_y, y_prob</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    plots the roc curve based of the probabilities</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    fpr, tpr, thresholds = roc_curve(true_y, y_prob)<br>    plt.plot(fpr, tpr)<br>    plt.xlabel(<span class="hljs-string">&#x27;False Positive Rate&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;True Positive Rate&#x27;</span>)<br>    plt.show()<br><br><br>plot_roc_curve(y, y_prob_1)<br><br><span class="hljs-comment"># Two lines to make our compiler able to draw</span><br><span class="hljs-comment"># plt.savefig(sys.stdout.buffer)</span><br><span class="hljs-comment"># sys.stdout.flush()</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-第二个模型-1"><a href="#2-第二个模型-1" class="headerlink" title="(2) 第二个模型"></a>(2) 第二个模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># import sys</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment"># import matplotlib</span><br><span class="hljs-comment"># matplotlib.use(&#x27;Agg&#x27;)</span><br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> roc_curve<br><br>n = <span class="hljs-number">10000</span><br>y = np.array([<span class="hljs-number">0</span>] * n + [<span class="hljs-number">1</span>] * n)<br><br>y_prob_1 = np.array(                            <span class="hljs-comment"># 有两组来自假设模型的概率</span><br>    np.random.uniform(<span class="hljs-number">.25</span>, <span class="hljs-number">.5</span>, n//<span class="hljs-number">2</span>).tolist()   <span class="hljs-comment"># 第一个在预测两个类别时，概率接近.5</span><br>    + np.random.uniform(<span class="hljs-number">.3</span>, <span class="hljs-number">.7</span>, n).tolist()     <span class="hljs-comment"># 第二个在预测两个类别时，概率接近0或1的极端值</span><br>    + np.random.uniform(<span class="hljs-number">.5</span>, <span class="hljs-number">.75</span>, n//<span class="hljs-number">2</span>).tolist()<br>)<br>y_prob_2 = np.array(<br>    np.random.uniform(<span class="hljs-number">0</span>, <span class="hljs-number">.4</span>, n // <span class="hljs-number">2</span>).tolist() +<br>    np.random.uniform(<span class="hljs-number">.3</span>, <span class="hljs-number">.7</span>, n).tolist() +<br>    np.random.uniform(<span class="hljs-number">.6</span>, <span class="hljs-number">1</span>, n // <span class="hljs-number">2</span>).tolist()<br>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_roc_curve</span>(<span class="hljs-params">true_y, y_prob</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    plots the roc curve based of the probabilities</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    fpr, tpr, thresholds = roc_curve(true_y, y_prob)<br>    plt.plot(fpr, tpr)<br>    <span class="hljs-comment"># plt.xlabel(&#x27;False Positive Rate&#x27;)</span><br>    <span class="hljs-comment"># plt.ylabel(&#x27;True Positive Rate&#x27;)</span><br><br><br>fpr, tpr, thresholds = roc_curve(y, y_prob_2)<br>plt.plot(fpr, tpr)<br>plt.xlabel(<span class="hljs-string">&#x27;False Positive Rate&#x27;</span>)               <span class="hljs-comment"># 尽管两模型的准确度相似，但AUC分数高的模型更可靠</span><br>plt.ylabel(<span class="hljs-string">&#x27;True Positive Rate&#x27;</span>)                <span class="hljs-comment"># 考虑了预测概率，预测未来数据时更可能提供高准确性</span><br>plt.show()<br><br><span class="hljs-comment"># Two lines to make our compiler able to draw</span><br><span class="hljs-comment"># plt.savefig(sys.stdout.buffer)</span><br><span class="hljs-comment"># sys.stdout.flush()</span><br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
+      
+        <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">#人工智能</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python 机器学习</div>
+      <div>https://stitch-top.github.io/2021/09/04/python/python10-python-ji-qi-xue-xi/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年9月4日 22:56:36</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/07/python/python11-python-mysql/" title="Python MySQL">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python MySQL</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/02/python/python09-python-matplotlib/" title="Python Matplotlib">
+                        <span class="hidden-mobile">Python Matplotlib</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"bsRkWxXK7zLX6NWYygwknNXv-gzGzoHsz","appKey":"qqiNDCxGTOGVmiM1xAbd5pzk","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Python"
+        id="heading-a7f5f35426b927411fc9231b56382173" role="tab" data-toggle="collapse" href="#collapse-a7f5f35426b927411fc9231b56382173"
+        aria-expanded="true"
+      >
+        Python
+        <span class="list-group-count">(13)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-a7f5f35426b927411fc9231b56382173"
+           role="tabpanel" aria-labelledby="heading-a7f5f35426b927411fc9231b56382173">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2021/01/01/python/python01-python-ji-chu-yi/" title="Python 基础(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 基础(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/01/15/python/python02-python-ji-chu-er/" title="Python 基础(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 基础(二)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/02/03/python/python03-python-wen-jian-chu-li/" title="Python 文件处理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 文件处理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/01/python/python04-python-numpy-ji-chu/" title="Python NumPy 基础"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/04/06/python/python05-python-numpy-sui-ji/" title="Python NumPy 随机"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 随机</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/05/05/python/python06-python-numpy-han-shu/" title="Python NumPy 函数"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/06/08/python/python07-python-pandas/" title="Python Pandas"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Pandas</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/09/python/python08-python-scipy/" title="Python SciPy"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python SciPy</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/08/02/python/python09-python-matplotlib/" title="Python Matplotlib"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Matplotlib</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/09/04/python/python10-python-ji-qi-xue-xi/" title="Python 机器学习"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Python 机器学习</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/10/07/python/python11-python-mysql/" title="Python MySQL"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python MySQL</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/11/03/python/python12-python-mongodb/" title="Python MongoDB"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python MongoDB</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/12/10/python/python13-python-flask/" title="Python Flask"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Flask</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2023</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://cdn.staticfile.org/busuanzi/2.3.0/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/snow.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/tororo.model.json"},"display":{"position":"right","width":180,"height":230},"mobile":{"show":false,"scale":0.3},"rect":{"opacityDefault":0.7,"opacityHover":1},"log":false});</script></body>
+</html>
