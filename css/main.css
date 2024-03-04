@@ -1337,6 +1337,7 @@ figure.highlight td.code > pre {
   font-weight: bold;
 }
 .markdown-body code {
+  font-size: 90%;
   tab-size: 4;
   background-color: var(--inlinecode-bg-color);
   transition: background-color 0.2s ease-in-out;
