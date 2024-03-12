@@ -18,27 +18,26 @@
   <meta name="author" content="Dr.626">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Charles是一款代理服务器，通过成为电脑或浏览器的代理，截取请求和结果进行抓包分析，支持重发网络请求，方便后端调试。">
+    <meta name="description" content="系统平台上安装多个不同版本的MySQL数据库，每个MySQL实例都需要使用不同的端口，并确保都有自己的数据目录和配置文件。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Charles">
-<meta property="og:url" content="https://stitch-top.github.io/2022/05/10/ce-shi-gong-ju/tt03-charles/index.html">
+<meta property="og:title" content="多数据库问题">
+<meta property="og:url" content="https://stitch-top.github.io/2024/03/07/yi-wen/aa-duo-shu-ju-ku-wen-ti/index.html">
 <meta property="og:site_name" content="Dr.626">
-<meta property="og:description" content="Charles是一款代理服务器，通过成为电脑或浏览器的代理，截取请求和结果进行抓包分析，支持重发网络请求，方便后端调试。">
+<meta property="og:description" content="系统平台上安装多个不同版本的MySQL数据库，每个MySQL实例都需要使用不同的端口，并确保都有自己的数据目录和配置文件。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1526632111.jpg">
-<meta property="article:published_time" content="2022-05-10T15:48:53.000Z">
-<meta property="article:modified_time" content="2023-08-06T14:24:18.613Z">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/9314065458.jpg">
+<meta property="article:published_time" content="2024-03-07T13:10:11.000Z">
+<meta property="article:modified_time" content="2024-03-08T09:55:07.134Z">
 <meta property="article:author" content="Dr.626">
-<meta property="article:tag" content="Charles">
-<meta property="article:tag" content="HTTP代理服务器">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1526632111.jpg">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/9314065458.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Charles - Dr.626</title>
+  <title>多数据库问题 - Dr.626</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -219,7 +218,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Charles"></span>
+            <span id="subtitle" data-typed-text="多数据库问题"></span>
           
         </div>
 
@@ -235,8 +234,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-10 23:48" pubdate>
-          2022年5月10日 23:48:53
+        <time datetime="2024-03-07 21:10" pubdate>
+          2024年3月7日 21:10:11
         </time>
       </span>
     
@@ -247,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.9k 字
+          3.2k 字
         
       </span>
     
@@ -258,7 +257,7 @@
         
         
         
-          33 分钟
+          27 分钟
         
       </span>
     
@@ -320,193 +319,63 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Charles</h1>
+            <h1 style="display: none">多数据库问题</h1>
             
             <div class="markdown-body">
               
-              <p>Charles是一款代理服务器，通过成为电脑或浏览器的代理，截取请求和结果进行抓包分析，支持重发网络请求，方便后端调试。</p>
+              <p>系统平台上安装多个不同版本的MySQL数据库，每个MySQL实例都需要使用不同的端口，并确保都有自己的数据目录和配置文件。</p>
 <span id="more"></span>
 
 
 
-<h1 id="1-Charles安装"><a href="#1-Charles安装" class="headerlink" title="1 Charles安装"></a>1 Charles安装</h1><ul>
-<li>Charles安装<ul>
-<li>官网下载：<a target="_blank" rel="noopener" href="https://www.charlesproxy.com/latest-release/download.do">https://www.charlesproxy.com/latest-release/download.do</a>。</li>
-<li>由于Charles收费，安装后需注册，启动Charles&gt;Help&gt;Register Charles。<ul>
-<li>Registered Name：<a target="_blank" rel="noopener" href="https://zhile.io./">https://zhile.io。</a></li>
-<li>License Key：48891cf209c6d32bf4。</li>
-</ul>
-</li>
-<li>输入Registered Name以及License Key&gt;Register&gt;确定&gt;重新启动Charles。</li>
+<h1 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1 问题描述"></a>1 问题描述</h1><ul>
+<li>问题描述<ul>
+<li>Win10系统本地分别装有MySQL数据库三个(不同版本)，使用了端口3309、3310、3311。</li>
+<li>现在默认开启3309(MySQL官网下载安装默认)、3310(禅道)以及3311端口(JForum论坛)。</li>
+<li>3310数据库通过ZenTao管理，3311数据库通过XAMPP管理，3309数据库命令登录时报错。</li>
 </ul>
 </li>
 </ul>
-<h2 id="1-1-安装证书"><a href="#1-1-安装证书" class="headerlink" title="1-1 安装证书"></a>1-1 安装证书</h2><ul>
-<li>安装证书<ul>
-<li>Help&gt;SSL Proxying&gt;Install Charles Root Certificate&gt;安装证书&gt;本地计算机&gt;选“将所有的证书都放入下列存储”。</li>
-<li>浏览&gt;选“受信任的根证书颁发机构”&gt;确定&gt;下一页&gt;完成&gt;确定，安装好之后需要重新打开，确认下证书是否生效。</li>
-<li>Help&gt;SSL Proxying&gt;Install Charles Root Certificate&gt;证书路径&gt;如果证书状态为“该证书没有问题”，则安装成功。</li>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; mysql -uroot -p<br>Enter password: ******<br>ERROR <span class="hljs-number">2003</span> (HY000): Can&#x27;t connect to MySQL server on &#x27;localhost:<span class="hljs-number">3309</span>&#x27; (<span class="hljs-number">10061</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-原因分析"><a href="#2-原因分析" class="headerlink" title="2 原因分析"></a>2 原因分析</h1><ul>
+<li>原因分析<ul>
+<li>使用命令检查一下MySQL服务是否正常运行：<code>sc query MySQL3309</code>。</li>
+<li>显示内容说明不存在MySQL3309服务，若要使用需启动实例指定端口。</li>
 </ul>
 </li>
 </ul>
-<p><img src="/../img/Charles/Charles@001.jpg" srcset="/img/load.gif" lazyload alt="Charles安装-安装证书"></p>
-<h2 id="1-2-修改配置"><a href="#1-2-修改配置" class="headerlink" title="1-2 修改配置"></a>1-2 修改配置</h2><ul>
-<li>修改配置<ul>
-<li>安装好证书之后，使用Charles工具抓取到的HTTPS请求仍然显示为<unknow>，说明配置还有其他问题。</li>
-<li>Proxy&gt;SSL Proxying Settings&gt;点Include底部的Add&gt;Host和Port都填<code>*</code>&gt;OK&gt;重启Charles。</li>
-<li>SSL Proxying Settings还允许设置SSL访问地址，例如<code>*.com:443</code>、<code>*.cn:443</code>(这两设置允许访问大部分地址)等。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../img/Charles/Charles@002.jpg" srcset="/img/load.gif" lazyload alt="Charles安装-修改配置"></p>
-<h2 id="1-3-Charles界面"><a href="#1-3-Charles界面" class="headerlink" title="1-3 Charles界面"></a>1-3 Charles界面</h2><ul>
-<li>Charles界面<ul>
-<li>菜单栏：File、Edit、View、Proxy(用得多)、Tools(用得多)、Window、Help。</li>
-<li>工具栏(从左到右依次)<ul>
-<li>清除会话、开始&#x2F;停止抓取会话、开始&#x2F;停止SSL代理、开始&#x2F;停止限流、开始&#x2F;停止断点。</li>
-<li>依据所选内容编辑新请求、重新发送一个请求、验证会话、工具、配置(Proxy配置等)。</li>
-</ul>
-</li>
-<li>两种视图模式<ul>
-<li>Structure：树状结构显示，将网络请求按访问的域名分类。</li>
-<li>Sequence：水平结构显示，将网络请求按访问的时间排序，可修改为类似Fiddler的左右视图模式。</li>
-<li>修改为左右视图模式操作：菜单栏Edit&gt;Preferences&gt;Viewers&gt;Sequence view layout选Tall&gt;OK。</li>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; sc query MySQL3309<br>[SC] EnumQueryServicesStatus:OpenService FAILED <span class="hljs-number">1060</span>:<br><br>The specified service does <span class="hljs-keyword">not</span> <span class="hljs-keyword">exist</span> as an installed service.<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-解决方法"><a href="#3-解决方法" class="headerlink" title="3 解决方法"></a>3 解决方法</h1><ul>
+<li>解决方法<ul>
+<li>使用命令启动一个临时的MySQL实例，并且指定3309端口。</li>
+<li>启动服务后可关闭命令窗口的方法<ul>
+<li>管理员模式下打开命令窗口，以服务方式启动MySQL实例。</li>
+<li>安装MySQL3309服务并指定端口后，通过命令启动该服务。</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h4 id="1-Structure"><a href="#1-Structure" class="headerlink" title="(1) Structure"></a>(1) Structure</h4><p><img src="/../img/Charles/Charles@003.jpg" srcset="/img/load.gif" lazyload alt="Charles安装-Charles界面-Structure"></p>
-<h4 id="2-Sequence"><a href="#2-Sequence" class="headerlink" title="(2) Sequence"></a>(2) Sequence</h4><p><img src="/../img/Charles/Charles@004.jpg" srcset="/img/load.gif" lazyload alt="Charles安装-Charles界面-Sequence"></p>
-<h4 id="3-Proxy菜单"><a href="#3-Proxy菜单" class="headerlink" title="(3) Proxy菜单"></a>(3) Proxy菜单</h4><ul>
-<li>Recording Settings<ul>
-<li>Options：通过Recording Size Limit限制记录数据的大小。</li>
-<li>Include：只有与配置地址相匹配的请求才会被录制。</li>
-<li>Exclude：只有与配置地址相匹配的请求才不被录制。</li>
+<h2 id="3-1-临时启动"><a href="#3-1-临时启动" class="headerlink" title="3-1 临时启动"></a>3-1 临时启动</h2><ul>
+<li>出现了一些警告和错误信息，但MySQL服务已经启动，不影响正常连接到3309数据库。</li>
 </ul>
-</li>
-<li>Throttle Settings<ul>
-<li>在Start Throttling状态下，可通过Throttle Settings配置Charles的网速模拟配置。</li>
-<li>勾选Enable Throttling启用网速模拟配置，在Throttle Preset下选择网络类型即可。</li>
-</ul>
-</li>
-<li>Breakpoint Settings<ul>
-<li>勾选Enable Breakpoints启用断点模式，选Add，填入需监控的Scheme、Procotol、Host等信息。</li>
-<li>可以用来观察和修改请求内容，以及响应内容，但在这个过程中，需要注意请求的超时时间问题。</li>
-</ul>
-</li>
-<li>Web Interface Settings：勾选Enable web interface启用Web界面，允许匿名访问，也可配置用户名和密码。</li>
-</ul>
-<p><img src="/../img/Charles/Charles@005.jpg" srcset="/img/load.gif" lazyload alt="Charles安装-Charles界面-Proxy菜单"></p>
-<h4 id="4-Tools菜单"><a href="#4-Tools菜单" class="headerlink" title="(4) Tools菜单"></a>(4) Tools菜单</h4><p><img src="/../img/Charles/Charles@006.jpg" srcset="/img/load.gif" lazyload alt="Charles安装-Charles界面-Tools菜单"></p>
-<h1 id="2-过滤网络请求"><a href="#2-过滤网络请求" class="headerlink" title="2 过滤网络请求"></a>2 过滤网络请求</h1><ul>
-<li>过滤网络请求<ul>
-<li>通常情况下，需要对网络请求进行过滤，只监控向指定目录服务器上发送的请求。</li>
-<li>Focus过滤：在已经捕捉到的会话列表中，选中想过滤的网络请求，右击选Focus。</li>
-<li>Filter过滤：在Filter栏中填入需要过滤出来的关键字，例如服务器的地址是<a target="_blank" rel="noopener" href="https://www.csdn.net/">https://www.csdn.net/</a>，填入csdn。</li>
-<li>捕捉会话设置：菜单栏Proxy&gt;Recording Settings&gt;Include&gt;Add&gt;Protocol为https，Host为<a href="www.csdn.net">www.csdn.net</a>&gt;OK。</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-1-Focus过滤"><a href="#2-1-Focus过滤" class="headerlink" title="2-1 Focus过滤"></a>2-1 Focus过滤</h2><p><img src="/../img/Charles/Charles@007.jpg" srcset="/img/load.gif" lazyload alt="过滤网络请求-Focus过滤"></p>
-<h2 id="2-2-Filter过滤"><a href="#2-2-Filter过滤" class="headerlink" title="2-2 Filter过滤"></a>2-2 Filter过滤</h2><p><img src="/../img/Charles/Charles@008.jpg" srcset="/img/load.gif" lazyload alt="过滤网络请求-Filter过滤"></p>
-<h2 id="2-3-捕捉会话设置"><a href="#2-3-捕捉会话设置" class="headerlink" title="2-3 捕捉会话设置"></a>2-3 捕捉会话设置</h2><p><img src="/../img/Charles/Charles@009.jpg" srcset="/img/load.gif" lazyload alt="过滤网络请求-捕捉会话设置"></p>
-<h1 id="3-模拟慢速网络"><a href="#3-模拟慢速网络" class="headerlink" title="3 模拟慢速网络"></a>3 模拟慢速网络</h1><ul>
-<li>模拟慢速网络<ul>
-<li>开发时常需要模拟慢速网络或高延迟网络，以测试在移动网络下应用的表现是否正常。</li>
-<li>配置：Proxy&gt;Throttle Settings&gt;勾选Enable Throttling&gt;设置Throttle Preset的类型。</li>
-<li>完成配置后，可通过Proxy&gt;Start Throttling或快捷键Ctrl+T，来启用或停止模拟操作。</li>
-<li>关于：<a target="_blank" rel="noopener" href="https://blog.csdn.net/mao834099514/article/details/79456881">2G、3G、4G网络制式上下行频率、速率比较</a>。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../img/Charles/Charles@010.jpg" srcset="/img/load.gif" lazyload alt="模拟慢速网络"></p>
-<h1 id="4-修改返回内容"><a href="#4-修改返回内容" class="headerlink" title="4 修改返回内容"></a>4 修改返回内容</h1><ul>
-<li>修改返回内容<ul>
-<li>让服务器返回指定内容，方便调试，例如列表页面为空、数据异常、部分耗时的网络请求超时等。</li>
-<li>Charles提供了Map、Rewrite以及Breakpoints功能，都可以达到修改服务器返回指定内容的目的。<ul>
-<li>Breakpoints：断点功能，适合做一些临时性的修改。</li>
-<li>Rewrite：重写功能，适合对网络请求进行一些批量和长期的正则替换。</li>
-<li>Map：重定向功能，适合长期地将某一些请求重定向到另一个网络地址或本地文件。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-1-断点功能"><a href="#4-1-断点功能" class="headerlink" title="4-1 断点功能"></a>4-1 断点功能</h2><ul>
-<li>断点功能<ul>
-<li>会话列表中右键点击某会话，例如：<code>https://www.baidu.com</code>路径下的<code>content-search.xml</code>，然后选Breakpoints。</li>
-<li>Proxy&gt;Breakpoints Settings中断点设置完成，打开浏览器重新访问百度，Charles中将弹窗一个Breakpoints断点窗口。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../img/Charles/Charles@011.jpg" srcset="/img/load.gif" lazyload alt="修改返回内容-断点功能"></p>
-<h2 id="4-2-重写功能"><a href="#4-2-重写功能" class="headerlink" title="4-2 重写功能"></a>4-2 重写功能</h2><ul>
-<li>重写功能<ul>
-<li>例如：百度请求获取到带“百度搜索”字样的返回结果，重写设置改成了“重写测试”。</li>
-<li>当浏览器再次请求百度页面时，获取到的返回结果就是带“重写测试”字样的返回结果。</li>
-<li>Tools&gt;Rewrite Settings&gt;勾选Enable Rewrite&gt;左侧Add&gt;Name填百度搜索&gt;右下角Add&gt;填写Rewrite Rule&gt;OK。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../img/Charles/Charles@012.jpg" srcset="/img/load.gif" lazyload alt="修改返回内容-重写功能"></p>
-<h2 id="4-3-重定向功能"><a href="#4-3-重定向功能" class="headerlink" title="4-3 重定向功能"></a>4-3 重定向功能</h2><ul>
-<li>重定向功能<ul>
-<li>Map Local：重定向到本地文件中，Tools&gt;Map Local Settings&gt;Enable Map Local&gt;Add&gt;Edit Mapping&gt;OK。</li>
-<li>Map Remote：重定向到另一网络，Tools&gt;Map Remote Settings&gt;Enable Map Remote&gt;Add&gt;Edit Mapping&gt;OK。</li>
-</ul>
-</li>
-</ul>
-<h4 id="1-Local"><a href="#1-Local" class="headerlink" title="(1) Local"></a>(1) Local</h4><p><img src="/../img/Charles/Charles@013.jpg" srcset="/img/load.gif" lazyload alt="修改返回内容-重定向功能-Local"></p>
-<h4 id="2-Remote"><a href="#2-Remote" class="headerlink" title="(2) Remote"></a>(2) Remote</h4><p><img src="/../img/Charles/Charles@014.jpg" srcset="/img/load.gif" lazyload alt="修改返回内容-重定向功能-Remote"></p>
-<h1 id="5-Tools中的配置"><a href="#5-Tools中的配置" class="headerlink" title="5 Tools中的配置"></a>5 Tools中的配置</h1><ul>
-<li>Tools中的配置<ul>
-<li>黑名单的配置<ul>
-<li>不想某些请求发起，直接返回无法访问，可以使用黑名单配置，例如访问百度操作。</li>
-<li>Tools&gt;Block List Settings&gt;勾选Enable Block List&gt;Add&gt;填写Edit Location&gt;OK。</li>
-</ul>
-</li>
-<li>缓存返回数据<ul>
-<li>多用于APP数据缓存，在没有Server情况下程序也能运行，Charles菜单栏Tools&gt;Mirror Settings。</li>
-<li>勾选Enable Mirror和Only for selected locations&gt;Save to路径选择&gt;Add&gt;填写Edit Location&gt;OK。</li>
-</ul>
-</li>
-<li>修改请求地址<ul>
-<li>即DNS欺骗设置，把域名解析到一个假的IP上，不一定要使用locahost，或者127.0.0.1。</li>
-<li>Tools&gt;DNS Spoofing Settings&gt;Enable DNS Spoofing&gt;Add&gt;填写Edit DNS Spoof&gt;OK。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-1-黑名单的配置"><a href="#5-1-黑名单的配置" class="headerlink" title="5-1 黑名单的配置"></a>5-1 黑名单的配置</h2><p><img src="/../img/Charles/Charles@015.jpg" srcset="/img/load.gif" lazyload alt="Tools中的配置-黑名单的配置"></p>
-<h2 id="5-2-缓存返回数据"><a href="#5-2-缓存返回数据" class="headerlink" title="5-2 缓存返回数据"></a>5-2 缓存返回数据</h2><p><img src="/../img/Charles/Charles@016.jpg" srcset="/img/load.gif" lazyload alt="Tools中的配置-缓存返回数据"></p>
-<h2 id="5-3-修改请求地址"><a href="#5-3-修改请求地址" class="headerlink" title="5-3 修改请求地址"></a>5-3 修改请求地址</h2><p><img src="/../img/Charles/Charles@017.jpg" srcset="/img/load.gif" lazyload alt="Tools中的配置-修改请求地址"></p>
-<h1 id="6-PC与移动端抓包"><a href="#6-PC与移动端抓包" class="headerlink" title="6 PC与移动端抓包"></a>6 PC与移动端抓包</h1><ul>
-<li>PC与移动端抓包<ul>
-<li>PC端：确保Charles处于Start Recording状态，勾选Proxy&gt;Windows Prcsoxy。</li>
-<li>移动端：通过把网络委托给Charles工具进行代理，与服务端对话。<ul>
-<li>手机和电脑需在一个局域网内，不一定非要同个IP段，只要是在同一个路由器下即可。</li>
-<li>电脑端设置<ul>
-<li>确保电脑防火墙已经关闭，如果不抓取电脑上的请求，可以取消勾选Proxy&gt;Windows Proxy。</li>
-<li>代理设置：Proxy&gt;Proxy Settings&gt;Port默认8888，勾选Enable transparent HTTP proxying。</li>
-</ul>
-</li>
-<li>移动端设置<ul>
-<li>Help&gt;SSL Proxying&gt;Install Charles Root Certificate on a Mobile Device or Remote Browser。</li>
-<li>手机WiFi的代理设置：连接的WiFi设为手动代理，输入主机名(电脑IP)和端口(默认填写8888)。</li>
-<li>如果是IOS，则在手机中打开浏览器，地址栏输入“chls.pro&#x2F;ssl”下载证书，再进行证书的安装。</li>
-<li>如果是安卓，那么直接等待Charles页面弹窗，提示允许代理的操作，再点击Allow按钮就可以了。</li>
-<li>如果不小心点了Deny按钮，则Proxy&gt;Access Control Settings&gt;在IP Range中Add手机的IP&gt;OK。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="6-1-代理设置"><a href="#6-1-代理设置" class="headerlink" title="6-1 代理设置"></a>6-1 代理设置</h2><p><img src="/../img/Charles/Charles@018.jpg" srcset="/img/load.gif" lazyload alt="PC与移动端抓包-代理设置"></p>
-<h2 id="6-2-安装证书"><a href="#6-2-安装证书" class="headerlink" title="6-2 安装证书"></a>6-2 安装证书</h2><p><img src="/../img/Charles/Charles@019.jpg" srcset="/img/load.gif" lazyload alt="PC与移动端抓包-安装证书"></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; mysqld --console --port=<span class="hljs-number">3309</span><br><span class="hljs-function">mysqld: <span class="hljs-title">Can</span>&#x27;<span class="hljs-title">t</span> <span class="hljs-title">open</span> <span class="hljs-title">shared</span> <span class="hljs-title">library</span> &#x27;<span class="hljs-title">D</span>:\<span class="hljs-title">Program</span>\<span class="hljs-title">MySQL</span>\<span class="hljs-title">database</span>\<span class="hljs-title">lib</span>\<span class="hljs-title">plugin</span>\<span class="hljs-title">component_reference_cache.dll</span>&#x27; (<span class="hljs-title">errno</span>: 126 找不到指定的模块。)</span><br><span class="hljs-function"><span class="hljs-title">mysqld</span>: <span class="hljs-title">Cannot</span> <span class="hljs-title">load</span> <span class="hljs-title">component</span> <span class="hljs-title">from</span> <span class="hljs-title">specified</span> <span class="hljs-title">URN</span>: &#x27;<span class="hljs-title">file</span>://<span class="hljs-title">component_reference_cache</span>&#x27;.</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:30.901507<span class="hljs-title">Z</span> 0 [<span class="hljs-title">Warning</span>] [<span class="hljs-title">MY</span>-010918] [<span class="hljs-title">Server</span>] &#x27;<span class="hljs-title">default_authentication_plugin</span>&#x27; <span class="hljs-title">is</span> <span class="hljs-title">deprecated</span> <span class="hljs-title">and</span> <span class="hljs-title">will</span> <span class="hljs-title">be</span> <span class="hljs-title">removed</span> <span class="hljs-title">in</span> <span class="hljs-title">a</span> <span class="hljs-title">future</span> <span class="hljs-title">release</span>. <span class="hljs-title">Please</span> <span class="hljs-title">use</span> <span class="hljs-title">authentication_policy</span> <span class="hljs-title">instead</span>.</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:30.901542<span class="hljs-title">Z</span> 0 [<span class="hljs-title">System</span>] [<span class="hljs-title">MY</span>-010116] [<span class="hljs-title">Server</span>] <span class="hljs-title">D</span>:\<span class="hljs-title">Program</span>\<span class="hljs-title">MySQL</span>\<span class="hljs-title">bin</span>\<span class="hljs-title">mysqld.exe</span> (<span class="hljs-title">mysqld</span> 8.0.33) <span class="hljs-title">starting</span> <span class="hljs-title">as</span> <span class="hljs-title">process</span> 12044</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:30.902373<span class="hljs-title">Z</span> 0 [<span class="hljs-title">ERROR</span>] [<span class="hljs-title">MY</span>-010338] [<span class="hljs-title">Server</span>] <span class="hljs-title">Can</span>&#x27;<span class="hljs-title">t</span> <span class="hljs-title">find</span> <span class="hljs-title">error</span>-<span class="hljs-title">message</span> <span class="hljs-title">file</span> &#x27;<span class="hljs-title">D</span>:\<span class="hljs-title">Program</span>\<span class="hljs-title">MySQL</span>\<span class="hljs-title">database</span>\<span class="hljs-title">share</span>\<span class="hljs-title">errmsg.sys</span>&#x27;. <span class="hljs-title">Check</span> <span class="hljs-title">error</span>-<span class="hljs-title">message</span> <span class="hljs-title">file</span> <span class="hljs-title">location</span> <span class="hljs-title">and</span> &#x27;<span class="hljs-title">lc</span>-<span class="hljs-title">messages</span>-<span class="hljs-title">dir</span>&#x27; <span class="hljs-title">configuration</span> <span class="hljs-title">directive</span>.</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:30.915917<span class="hljs-title">Z</span> 0 [<span class="hljs-title">Warning</span>] [<span class="hljs-title">MY</span>-013242] [<span class="hljs-title">Server</span>] --<span class="hljs-title">character</span>-<span class="hljs-title">set</span>-<span class="hljs-title">server</span>: &#x27;<span class="hljs-title">utf8</span>&#x27; <span class="hljs-title">is</span> <span class="hljs-title">currently</span> <span class="hljs-title">an</span> <span class="hljs-title">alias</span> <span class="hljs-title">for</span> <span class="hljs-title">the</span> <span class="hljs-title">character</span> <span class="hljs-title">set</span> <span class="hljs-title">UTF8MB3</span>, <span class="hljs-title">but</span> <span class="hljs-title">will</span> <span class="hljs-title">be</span> <span class="hljs-title">an</span> <span class="hljs-title">alias</span> <span class="hljs-title">for</span> <span class="hljs-title">UTF8MB4</span> <span class="hljs-title">in</span> <span class="hljs-title">a</span> <span class="hljs-title">future</span> <span class="hljs-title">release</span>. <span class="hljs-title">Please</span> <span class="hljs-title">consider</span> <span class="hljs-title">using</span> <span class="hljs-title">UTF8MB4</span> <span class="hljs-title">in</span> <span class="hljs-title">order</span> <span class="hljs-title">to</span> <span class="hljs-title">be</span> <span class="hljs-title">unambiguous</span>.</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:30.966490<span class="hljs-title">Z</span> 1 [<span class="hljs-title">System</span>] [<span class="hljs-title">MY</span>-013576] [<span class="hljs-title">InnoDB</span>] <span class="hljs-title">InnoDB</span> <span class="hljs-title">initialization</span> <span class="hljs-title">has</span> <span class="hljs-title">started</span>.</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:31.514097<span class="hljs-title">Z</span> 1 [<span class="hljs-title">System</span>] [<span class="hljs-title">MY</span>-013577] [<span class="hljs-title">InnoDB</span>] <span class="hljs-title">InnoDB</span> <span class="hljs-title">initialization</span> <span class="hljs-title">has</span> <span class="hljs-title">ended</span>.</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:31.859777<span class="hljs-title">Z</span> 0 [<span class="hljs-title">Warning</span>] [<span class="hljs-title">MY</span>-013829] [<span class="hljs-title">Server</span>] <span class="hljs-title">Missing</span> <span class="hljs-title">data</span> <span class="hljs-title">directory</span> <span class="hljs-title">for</span> <span class="hljs-title">ICU</span> <span class="hljs-title">regular</span> <span class="hljs-title">expressions</span>: <span class="hljs-title">D</span>:\<span class="hljs-title">Program</span>\<span class="hljs-title">MySQL</span>\<span class="hljs-title">database</span>\<span class="hljs-title">lib</span>\<span class="hljs-title">private</span>\.</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:31.906995<span class="hljs-title">Z</span> 0 [<span class="hljs-title">Warning</span>] [<span class="hljs-title">MY</span>-010068] [<span class="hljs-title">Server</span>] <span class="hljs-title">CA</span> <span class="hljs-title">certificate</span> <span class="hljs-title">ca.pem</span> <span class="hljs-title">is</span> <span class="hljs-title">self</span> <span class="hljs-title">signed</span>.</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:31.907154<span class="hljs-title">Z</span> 0 [<span class="hljs-title">System</span>] [<span class="hljs-title">MY</span>-013602] [<span class="hljs-title">Server</span>] <span class="hljs-title">Channel</span> <span class="hljs-title">mysql_main</span> <span class="hljs-title">configured</span> <span class="hljs-title">to</span> <span class="hljs-title">support</span> <span class="hljs-title">TLS</span>. <span class="hljs-title">Encrypted</span> <span class="hljs-title">connections</span> <span class="hljs-title">are</span> <span class="hljs-title">now</span> <span class="hljs-title">supported</span> <span class="hljs-title">for</span> <span class="hljs-title">this</span> <span class="hljs-title">channel</span>.</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:31.970244<span class="hljs-title">Z</span> 0 [<span class="hljs-title">System</span>] [<span class="hljs-title">MY</span>-011323] [<span class="hljs-title">Server</span>] <span class="hljs-title">X</span> <span class="hljs-title">Plugin</span> <span class="hljs-title">ready</span> <span class="hljs-title">for</span> <span class="hljs-title">connections</span>. <span class="hljs-title">Bind</span>-<span class="hljs-title">address</span>: &#x27;::&#x27; <span class="hljs-title">port</span>: 33060</span><br><span class="hljs-function">2024-03-07<span class="hljs-title">T03</span>:29:31.970286<span class="hljs-title">Z</span> 0 [<span class="hljs-title">System</span>] [<span class="hljs-title">MY</span>-010931] [<span class="hljs-title">Server</span>] <span class="hljs-title">D</span>:\<span class="hljs-title">Program</span>\<span class="hljs-title">MySQL</span>\<span class="hljs-title">bin</span>\<span class="hljs-title">mysqld.exe</span>: <span class="hljs-title">ready</span> <span class="hljs-title">for</span> <span class="hljs-title">connections</span>. <span class="hljs-title">Version</span>: &#x27;8.0.33&#x27;  <span class="hljs-title">socket</span>: &#x27;&#x27;  <span class="hljs-title">port</span>: 3309  <span class="hljs-title">MySQL</span> <span class="hljs-title">Community</span> <span class="hljs-title">Server</span> - <span class="hljs-title">GPL</span>.</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2-自动启动"><a href="#3-2-自动启动" class="headerlink" title="3-2 自动启动"></a>3-2 自动启动</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; mysqld --install MySQL3309 --port=<span class="hljs-number">3309</span><br>&lt;!-- 出现该提示信息，说明未使用管理员模式打开命令窗口 --&gt;<br>Install/Remove of the Service Denied!<br><br>&gt; mysqld --install MySQL3309 --port=<span class="hljs-number">3309</span><br>&lt;!-- 成功安装MySQL3309服务，并指定<span class="hljs-number">3309</span>端口的提示信息 --&gt;<br>Service successfully installed.<br><br>&lt;!-- 成功安装并指定端口后，通过命令启动MySQL3309服务 --&gt;<br>&gt; <span class="hljs-built_in">net</span> <span class="hljs-built_in">start</span> MySQL3309<br>The MySQL3309 service is starting.<br>The MySQL3309 service was started successfully.<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-卸载服务"><a href="#4-卸载服务" class="headerlink" title="4 卸载服务"></a>4 卸载服务</h1><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&lt;!-- 卸载前需要先停止服务 --&gt;<br>&gt; <span class="hljs-built_in">net</span> stop MySQL3309<br>The MySQL3309 service is stopping.<br>The MySQL3309 service was stopped successfully.<br><br>&lt;!-- 然后通过命令卸载服务 --&gt;<br>&gt; mysqld --remove MySQL3309<br>Service successfully removed.<br></code></pre></td></tr></table></figure>
+
+
 
               
             </div>
@@ -524,7 +393,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" class="category-chain-item">测试工具</a>
+  <a href="/categories/%E9%80%B8%E6%96%87/" class="category-chain-item">逸文</a>
   
   
 
@@ -539,9 +408,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Charles/">#Charles</a>
-      
-        <a href="/tags/HTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">#HTTP代理服务器</a>
+        <a href="/tags/MySQL/">#MySQL</a>
       
     </div>
   
@@ -553,8 +420,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Charles</div>
-      <div>https://stitch-top.github.io/2022/05/10/ce-shi-gong-ju/tt03-charles/</div>
+      <div>多数据库问题</div>
+      <div>https://stitch-top.github.io/2024/03/07/yi-wen/aa-duo-shu-ju-ku-wen-ti/</div>
     </div>
     <div class="license-meta">
       
@@ -566,7 +433,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年5月10日 23:48:53</div>
+          <div>2024年3月7日 21:10:11</div>
         </div>
       
       
@@ -608,18 +475,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/21/ce-shi-gong-ju/tt04-postman/" title="Postman">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Postman</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/02/ce-shi-gong-ju/tt02-fiddler/" title="Fiddler">
-                        <span class="hidden-mobile">Fiddler</span>
+                      <a href="/2024/03/02/ce-shi-kuang-jia/tf05-unittest-zi-bao-mock/" title="UnitTest 子包 Mock">
+                        <span class="hidden-mobile">UnitTest 子包 Mock</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -680,17 +541,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="测试工具"
-        id="heading-7e2f62602068bab6246b886d7866dc56" role="tab" data-toggle="collapse" href="#collapse-7e2f62602068bab6246b886d7866dc56"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="逸文"
+        id="heading-901318e204bd3b852ef871c2dd7e3a7d" role="tab" data-toggle="collapse" href="#collapse-901318e204bd3b852ef871c2dd7e3a7d"
         aria-expanded="true"
       >
-        测试工具
-        <span class="list-group-count">(7)</span>
+        逸文
+        <span class="list-group-count">(1)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-7e2f62602068bab6246b886d7866dc56"
-           role="tabpanel" aria-labelledby="heading-7e2f62602068bab6246b886d7866dc56">
+      <div class="category-collapse collapse show" id="collapse-901318e204bd3b852ef871c2dd7e3a7d"
+           role="tabpanel" aria-labelledby="heading-901318e204bd3b852ef871c2dd7e3a7d">
         
         
           
@@ -699,64 +560,10 @@
     
       
       
-        <a href="/2022/01/05/ce-shi-gong-ju/tt01-jmeter/" title="JMeter"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">JMeter</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/03/02/ce-shi-gong-ju/tt02-fiddler/" title="Fiddler"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Fiddler</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/05/10/ce-shi-gong-ju/tt03-charles/" title="Charles"
+        <a href="/2024/03/07/yi-wen/aa-duo-shu-ju-ku-wen-ti/" title="多数据库问题"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">Charles</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/07/21/ce-shi-gong-ju/tt04-postman/" title="Postman"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Postman</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/09/02/ce-shi-gong-ju/tt05-adb-ming-ling-xiang-jie/" title="ADB 命令详解"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">ADB 命令详解</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/11/10/ce-shi-gong-ju/tt06-f12-kai-fa-zhe-gong-ju/" title="F12 开发者工具"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">F12 开发者工具</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2024/01/11/ce-shi-gong-ju/tt07-ffmpeg-gong-ju/" title="FFmpeg 工具"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">FFmpeg 工具</span>
+          <span class="category-post">多数据库问题</span>
         </a>
       
     
