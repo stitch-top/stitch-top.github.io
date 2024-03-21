@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🤔 行内标签    primary default info success warning danger   Go Java PHP C++ C# HTML Python JavaScript    香蕉 蜜柚 葡萄 橘子 火龙果 苹果 水蜜桃 哈密瓜      🤔 便签                primary                         secondary">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo小组件">
+<meta property="og:url" content="https://stitch-top.github.io/laboratory/plugin.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="🤔 行内标签    primary default info success warning danger   Go Java PHP C++ C# HTML Python JavaScript    香蕉 蜜柚 葡萄 橘子 火龙果 苹果 水蜜桃 哈密瓜      🤔 便签                primary                         secondary">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.4kbizhi.com/d/file/2020/08/10/small110247OXXIX1597028567.jpg">
+<meta property="og:image" content="https://p1.itc.cn/q_70/images03/20220305/94f51b9e66ec48e09bf0c07333e46d6c.png">
+<meta property="og:image" content="https://img0.baidu.com/it/u=2975217781,847615269&fm=253&fmt=auto&app=138&f=JPEG?w=855&h=500">
+<meta property="og:image" content="https://img0.baidu.com/it/u=134513973,1687172943&fm=253&fmt=auto&app=138&f=JPEG?w=888&h=500">
+<meta property="og:image" content="https://cdn.max-c.com/heybox/dailynews/img/df220242f982b99a5e33292bae23cb00.png?imageMogr2/format/jpg">
+<meta property="article:published_time" content="2024-03-21T07:58:49.161Z">
+<meta property="article:modified_time" content="2024-03-21T07:58:49.161Z">
+<meta property="article:author" content="Dr.626">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.4kbizhi.com/d/file/2020/08/10/small110247OXXIX1597028567.jpg">
+  
+  
+  
+  <title>Hexo小组件 - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"bsRkWxXK7zLX6NWYygwknNXv-gzGzoHsz","app_key":"qqiNDCxGTOGVmiM1xAbd5pzk","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-2.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hexo小组件"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <h3 align="center">🤔 <b>行内标签</b></h3>
+
+<hr>
+<p align="center">
+<span class="label label-primary">primary</span>
+<span class="label label-default">default</span>
+<span class="label label-info">info</span>
+<span class="label label-success">success</span>
+<span class="label label-warning">warning</span>
+<span class="label label-danger">danger</span> <br><br>
+
+<span class="label label-info">Go</span>
+<span class="label label-default">Java</span>
+<span class="label label-warning">PHP</span>
+<span class="label label-success">C++</span>
+<span class="label label-info">C#</span>
+<span class="label label-danger">HTML</span>
+<span class="label label-primary">Python</span>
+<span class="label label-warning">JavaScript</span> <br><br>
+
+
+<span class="label label-default">香蕉</span>
+<span class="label label-info">蜜柚</span>
+<span class="label label-success">葡萄</span>
+<span class="label label-warning">橘子</span>
+<span class="label label-danger">火龙果</span>
+<span class="label label-info">苹果</span>
+<span class="label label-warning">水蜜桃</span>
+<span class="label label-primary">哈密瓜</span>
+</p>
+
+<!-- *** -->
+
+<p><br><br><br></p>
+<h3 align="center">🤔 <b>便签</b></h3>
+
+<hr>
+<div class="note note-primary">
+            <p>primary</p>
+          </div>
+<div class="note note-secondary">
+            <p>secondary</p>
+          </div>
+<div class="note note-success">
+            <p>success</p>
+          </div>
+<div class="note note-danger">
+            <p>danger</p>
+          </div>
+<div class="note note-warning">
+            <p>warning</p>
+          </div>
+<div class="note note-info">
+            <p>info</p>
+          </div>
+<div class="note note-light">
+            <p>light</p>
+          </div>
+
+<!-- *** -->
+
+<p><br><br><br></p>
+<h3 align="center">🤔 <b>组图</b></h3>
+
+<hr>
+<div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://www.4kbizhi.com/d/file/2020/08/10/small110247OXXIX1597028567.jpg" alt="风景"></div><div class="group-image-wrap"><img src="https://p1.itc.cn/q_70/images03/20220305/94f51b9e66ec48e09bf0c07333e46d6c.png" alt="风景"></div><div class="group-image-wrap"><img src="https://img0.baidu.com/it/u=2975217781,847615269&fm=253&fmt=auto&app=138&f=JPEG?w=855&h=500" alt="风景"></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://img0.baidu.com/it/u=134513973,1687172943&fm=253&fmt=auto&app=138&f=JPEG?w=888&h=500" alt="星空"></div><div class="group-image-wrap"><img src="https://cdn.max-c.com/heybox/dailynews/img/df220242f982b99a5e33292bae23cb00.png?imageMogr2/format/jpg" alt="星空"></div></div></div>
+
+<!-- *** -->
+
+<p><br><br><br></p>
+<h3 align="center">🤔 <b>折线图</b></h3>
+
+<hr>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Powershell">npm install hexo<span class="hljs-literal">-tag-chart</span> <span class="hljs-literal">--save</span><br></code></pre></td></tr></table></figure>
+
+<div style="width: 90%;margin: 0 auto">
+    <canvas id="chart658" style="height: 300px"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script type="text/javascript">
+    var ctx = document.getElementById('chart658').getContext('2d');
+    var options =     {
+    type: 'line',
+    data: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [{
+        label: '覆盖率',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 5, 2, 20, 30, 45]
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+        display: true,
+        text: 'Chart.js Line Chart'
+        }
+    }
+};
+    new Chart(ctx, options);
+</script>
+
+<!-- *** -->
+
+<p><br><br><br></p>
+<h3 align="center">🤔 <b>graphviz图</b></h3>
+
+<hr>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Powershell">npm i hexo<span class="hljs-literal">-graphviz-tag</span><br></code></pre></td></tr></table></figure>
+
+<div style="margin: 0 0 20px;">
+                    <div style="max-width: 500px; margin: 0 auto;">
+                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %0 Pages: 1 -->
+<svg 
+ viewBox="0.00 0.00 332.00 44.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 40)">
+<title></title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-40 328,-40 328,4 -4,4"/>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<ellipse fill="none" stroke="#000000" cx="18" cy="-18" rx="18" ry="18"/>
+<text text-anchor="middle" x="18" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- b -->
+<g id="node2" class="node">
+<title>b</title>
+<ellipse fill="none" stroke="#000000" cx="90" cy="-18" rx="18" ry="18"/>
+<text text-anchor="middle" x="90" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- a&#45;&gt;b -->
+<g id="edge1" class="edge">
+<title>a&#45;&gt;b</title>
+<path fill="none" stroke="#000000" d="M36.1686,-18C43.869,-18 53.0257,-18 61.5834,-18"/>
+<polygon fill="#000000" stroke="#000000" points="61.5868,-21.5001 71.5867,-18 61.5867,-14.5001 61.5868,-21.5001"/>
+</g>
+<!-- c -->
+<g id="node3" class="node">
+<title>c</title>
+<ellipse fill="none" stroke="#000000" cx="162" cy="-18" rx="18" ry="18"/>
+<text text-anchor="middle" x="162" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- b&#45;&gt;c -->
+<g id="edge2" class="edge">
+<title>b&#45;&gt;c</title>
+<path fill="none" stroke="#000000" d="M108.1686,-18C115.869,-18 125.0257,-18 133.5834,-18"/>
+<polygon fill="#000000" stroke="#000000" points="133.5868,-21.5001 143.5867,-18 133.5867,-14.5001 133.5868,-21.5001"/>
+</g>
+<!-- d -->
+<g id="node4" class="node">
+<title>d</title>
+<ellipse fill="none" stroke="#000000" cx="234" cy="-18" rx="18" ry="18"/>
+<text text-anchor="middle" x="234" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">d</text>
+</g>
+<!-- c&#45;&gt;d -->
+<g id="edge3" class="edge">
+<title>c&#45;&gt;d</title>
+<path fill="none" stroke="#000000" d="M180.1686,-18C187.869,-18 197.0257,-18 205.5834,-18"/>
+<polygon fill="#000000" stroke="#000000" points="205.5868,-21.5001 215.5867,-18 205.5867,-14.5001 205.5868,-21.5001"/>
+</g>
+<!-- e -->
+<g id="node5" class="node">
+<title>e</title>
+<ellipse fill="none" stroke="#000000" cx="306" cy="-18" rx="18" ry="18"/>
+<text text-anchor="middle" x="306" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">e</text>
+</g>
+<!-- d&#45;&gt;e -->
+<g id="edge4" class="edge">
+<title>d&#45;&gt;e</title>
+<path fill="none" stroke="#000000" d="M252.1686,-18C259.869,-18 269.0257,-18 277.5834,-18"/>
+<polygon fill="#000000" stroke="#000000" points="277.5868,-21.5001 287.5867,-18 277.5867,-14.5001 277.5868,-21.5001"/>
+</g>
+</g>
+</svg>
+
+                    <div style="text-align: center;margin: -8px 0 10px;color: #858585;"></div>
+                    </div>
+                    
+                </div> <br><br>
+
+<div style="margin: 0 0 20px;">
+                    <div style="max-width: 500px; margin: 0 auto;">
+                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: %0 Pages: 1 -->
+<svg 
+ viewBox="0.00 0.00 260.00 144.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 140)">
+<title>有向图2</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-140 256,-140 256,4 -4,4"/>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<ellipse fill="none" stroke="#000000" cx="18" cy="-64" rx="18" ry="18"/>
+<text text-anchor="middle" x="18" y="-59.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- b -->
+<g id="node2" class="node">
+<title>b</title>
+<ellipse fill="none" stroke="#000000" cx="90" cy="-64" rx="18" ry="18"/>
+<text text-anchor="middle" x="90" y="-59.8" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- a&#45;&gt;b -->
+<g id="edge1" class="edge">
+<title>a&#45;&gt;b</title>
+<path fill="none" stroke="#000000" d="M36.1686,-64C43.869,-64 53.0257,-64 61.5834,-64"/>
+<polygon fill="#000000" stroke="#000000" points="61.5868,-67.5001 71.5867,-64 61.5867,-60.5001 61.5868,-67.5001"/>
+</g>
+<!-- c -->
+<g id="node4" class="node">
+<title>c</title>
+<ellipse fill="none" stroke="#000000" cx="234" cy="-18" rx="18" ry="18"/>
+<text text-anchor="middle" x="234" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- a&#45;&gt;c -->
+<g id="edge6" class="edge">
+<title>a&#45;&gt;c</title>
+<path fill="none" stroke="#000000" d="M33.576,-54.7897C44.1076,-48.9234 58.5043,-41.5902 72,-37 117.0421,-21.6802 172.7377,-18.2852 205.7037,-17.7613"/>
+<polygon fill="#000000" stroke="#000000" points="205.9917,-21.2592 215.9639,-17.6806 205.9366,-14.2594 205.9917,-21.2592"/>
+</g>
+<!-- d -->
+<g id="node3" class="node">
+<title>d</title>
+<ellipse fill="none" stroke="#000000" cx="162" cy="-118" rx="18" ry="18"/>
+<text text-anchor="middle" x="162" y="-113.8" font-family="Times,serif" font-size="14.00" fill="#000000">d</text>
+</g>
+<!-- b&#45;&gt;d -->
+<g id="edge2" class="edge">
+<title>b&#45;&gt;d</title>
+<path fill="none" stroke="#000000" d="M104.5703,-74.9277C114.5246,-82.3934 127.9158,-92.4368 139.2632,-100.9474"/>
+<polygon fill="#000000" stroke="#000000" points="137.3514,-103.8885 147.4514,-107.0885 141.5514,-98.2885 137.3514,-103.8885"/>
+</g>
+<!-- e -->
+<g id="node5" class="node">
+<title>e</title>
+<ellipse fill="none" stroke="#000000" cx="162" cy="-64" rx="18" ry="18"/>
+<text text-anchor="middle" x="162" y="-59.8" font-family="Times,serif" font-size="14.00" fill="#000000">e</text>
+</g>
+<!-- b&#45;&gt;e -->
+<g id="edge7" class="edge">
+<title>b&#45;&gt;e</title>
+<path fill="none" stroke="#000000" d="M108.1686,-64C115.869,-64 125.0257,-64 133.5834,-64"/>
+<polygon fill="#000000" stroke="#000000" points="133.5868,-67.5001 143.5867,-64 133.5867,-60.5001 133.5868,-67.5001"/>
+</g>
+<!-- d&#45;&gt;a -->
+<g id="edge4" class="edge">
+<title>d&#45;&gt;a</title>
+<path fill="none" stroke="#000000" d="M144.4444,-113.6929C126.0811,-108.9666 96.5658,-100.7422 72,-91 62.1653,-87.0998 51.691,-82.0777 42.6105,-77.4248"/>
+<polygon fill="#000000" stroke="#000000" points="44.219,-74.3162 33.7373,-72.772 40.9682,-80.5157 44.219,-74.3162"/>
+</g>
+<!-- d&#45;&gt;c -->
+<g id="edge5" class="edge">
+<title>d&#45;&gt;c</title>
+<path fill="none" stroke="#000000" d="M172.6238,-103.2447C184.4287,-86.849 203.6404,-60.1661 217.4264,-41.0189"/>
+<polygon fill="#000000" stroke="#000000" points="220.3299,-42.9763 223.3326,-32.8159 214.6491,-38.8862 220.3299,-42.9763"/>
+</g>
+<!-- c&#45;&gt;b -->
+<g id="edge3" class="edge">
+<title>c&#45;&gt;b</title>
+<path fill="none" stroke="#000000" d="M216.0452,-20.4069C197.6131,-23.1961 168.2743,-28.5264 144,-37 134.0113,-40.4868 123.5044,-45.4215 114.4409,-50.1203"/>
+<polygon fill="#000000" stroke="#000000" points="112.7593,-47.0505 105.6005,-54.8608 116.0674,-53.2195 112.7593,-47.0505"/>
+</g>
+</g>
+</svg>
+
+                    <div style="text-align: center;margin: -8px 0 10px;color: #858585;">有向图2</div>
+                    </div>
+                    
+                </div>
+
+<!-- *** -->
+
+<p><br><br><br></p>
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2024</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
