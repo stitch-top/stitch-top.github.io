@@ -9,3 +9,8 @@ body {
     font-family: "Aa漫语手写体" !important;
     font-weight: bold;
 }
+
+/* 隐藏 valine 的 powered by */
+.vpower.txt-right {
+    display: none;
+}
