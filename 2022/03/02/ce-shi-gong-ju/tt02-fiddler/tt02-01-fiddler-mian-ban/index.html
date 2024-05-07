@@ -18,20 +18,20 @@
   <meta name="author" content="Dr.626">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Fiddler是一个HTTP的调试代理工具，以代理服务器的方式，监听系统的HTTP网络数据流动，还能设置断点，用于抓包。">
+    <meta name="description" content="🍕 Fiddler是一个HTTP的调试代理工具，以代理服务器的方式，监听系统的HTTP网络数据流动，还能设置断点，用于抓包。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fiddler 面板">
 <meta property="og:url" content="https://stitch-top.github.io/2022/03/02/ce-shi-gong-ju/tt02-fiddler/tt02-01-fiddler-mian-ban/index.html">
 <meta property="og:site_name" content="Dr.626">
-<meta property="og:description" content="Fiddler是一个HTTP的调试代理工具，以代理服务器的方式，监听系统的HTTP网络数据流动，还能设置断点，用于抓包。">
+<meta property="og:description" content="🍕 Fiddler是一个HTTP的调试代理工具，以代理服务器的方式，监听系统的HTTP网络数据流动，还能设置断点，用于抓包。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1675421003.jpg">
 <meta property="article:published_time" content="2022-03-02T14:37:55.000Z">
-<meta property="article:modified_time" content="2024-04-17T07:12:12.541Z">
+<meta property="article:modified_time" content="2024-05-06T06:17:38.414Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="测试工具">
 <meta property="article:tag" content="Fiddler">
-<meta property="article:tag" content="HTTP调试代理工具">
+<meta property="article:tag" content="HTTP调试代理">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1675421003.jpg">
   
@@ -359,7 +359,7 @@
             
             <div class="markdown-body">
               
-              <p>Fiddler是一个HTTP的调试代理工具，以代理服务器的方式，监听系统的HTTP网络数据流动，还能设置断点，用于抓包。</p>
+              <p>🍕 Fiddler是一个HTTP的调试代理工具，以代理服务器的方式，监听系统的HTTP网络数据流动，还能设置断点，用于抓包。</p>
 <span id="more"></span>
 
 
@@ -427,7 +427,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="1-请求报文"><a href="#1-请求报文" class="headerlink" title="(1) 请求报文"></a>(1) 请求报文</h4><ul>
+<h3 id="1-请求报文"><a href="#1-请求报文" class="headerlink" title="(1) 请求报文"></a>(1) 请求报文</h3><ul>
 <li>HTTP的请求报文是指从客户端发送给服务器的报文。</li>
 <li>组成<ul>
 <li>请求行：请求方法 + 空格 + 请求URL + 空格 + HTTP协议版本。<ul>
@@ -450,7 +450,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@004.png" srcset="/img/load.gif" lazyload alt="Fiddler-HTTP协议-请求报文"></p>
-<h4 id="2-响应报文"><a href="#2-响应报文" class="headerlink" title="(2) 响应报文"></a>(2) 响应报文</h4><ul>
+<h3 id="2-响应报文"><a href="#2-响应报文" class="headerlink" title="(2) 响应报文"></a>(2) 响应报文</h3><ul>
 <li>HTTP的响应报文是指客户端发起HTTP请求后，服务器响应给客户端的报文。</li>
 <li>组成<ul>
 <li>状态行：响应行，HTTP协议版本 + 空格 + 状态码 + 空格 + 状态码描述。<ul>
@@ -473,7 +473,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@005.png" srcset="/img/load.gif" lazyload alt="Fiddler-HTTP协议-响应报文"></p>
-<h4 id="3-URL组成"><a href="#3-URL组成" class="headerlink" title="(3) URL组成"></a>(3) URL组成</h4><ul>
+<h3 id="3-URL组成"><a href="#3-URL组成" class="headerlink" title="(3) URL组成"></a>(3) URL组成</h3><ul>
 <li>URL举例：<u>https</u>:&#x2F;&#x2F;<u>kaifa.baidu.com</u>&#x2F;<u>searchPage</u>?<u>wd&#x3D;fiddler&amp;hmsr&#x3D;aladdin</u>。</li>
 <li>协议：协议类型，常见的有HTTP、HTTPS、FTP、SFTP、SMTP、POP3等，这里是HTTPS，与IP地址用<code>://</code>分隔。</li>
 <li>IP地址：要访问的Web服务器的IP地址或主机名称，这里是kaifa.baidu.com，与端口号用<code>:</code>分隔，例如<a href="127.0.0.1:99">127.0.0.1:99</a>。</li>
@@ -500,24 +500,24 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@006.png" srcset="/img/load.gif" lazyload alt="工具面板-WinConfig"></p>
-<h4 id="1-Comment"><a href="#1-Comment" class="headerlink" title="(1) Comment"></a>(1) Comment</h4><ul>
+<h3 id="1-Comment"><a href="#1-Comment" class="headerlink" title="(1) Comment"></a>(1) Comment</h3><ul>
 <li>测试人员在使用Fiddler测试API接口时，可以通过Comment注释功能直接将存在问题的请求添加注释。</li>
 <li>当所有接口都测试完成后，将当前所有的session保存为一个*.saz文件，方便发送给开发人员排查问题。</li>
 <li>选中存在问题的session会话，点击<img src="/../img/Fiddler/TPicon/TPicon@003.png" srcset="/img/load.gif" lazyload alt="工具面板-Comment">，填写存在的问题备注后，点击OK。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@007.png" srcset="/img/load.gif" lazyload alt="工具面板-Comment"></p>
-<h4 id="2-Replay"><a href="#2-Replay" class="headerlink" title="(2) Replay"></a>(2) Replay</h4><ul>
+<h3 id="2-Replay"><a href="#2-Replay" class="headerlink" title="(2) Replay"></a>(2) Replay</h3><ul>
 <li>选中当前存在的一个session会话，点击<img src="/../img/Fiddler/TPicon/TPicon@004.png" srcset="/img/load.gif" lazyload alt="工具面板-Replay">，可以向服务器重新发送一次选中的session请求。</li>
 <li>快捷键<code>CTRL + Replay</code>重新发送一次请求，而不包含任何条件的请求头，例如：If-None-Match等。</li>
 <li>快捷键<code>Shift + Replay</code>弹窗要求指定每个请求应被重新发送的次数，默认5次，OK后重新发送5次请求。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@008.png" srcset="/img/load.gif" lazyload alt="工具面板-Replay"></p>
-<h4 id="3-Remove"><a href="#3-Remove" class="headerlink" title="(3) Remove"></a>(3) Remove</h4><ul>
+<h3 id="3-Remove"><a href="#3-Remove" class="headerlink" title="(3) Remove"></a>(3) Remove</h3><ul>
 <li>点击<img src="/../img/Fiddler/TPicon/TPicon@005.png" srcset="/img/load.gif" lazyload alt="工具面板-Remove">，选对应选项，可删除列表中对应的会话。</li>
 <li>选项说明<ul>
 <li>Remove all：删除列表中的所有会话。</li>
-<li>Images：删除列表中的所有图像类会话。</li>
-<li>CONNECTs：删除列表中的所有CONNECT通道。</li>
+<li>Images：删除列表中所有图像类会话。</li>
+<li>CONNECTs：删除列表中所有CONNECT通道。</li>
 <li>Non-200s：删除列表中所有HTTP响应码非200的会话。</li>
 <li>Non-Browser：删除列表中所有不是来自浏览器的会话。</li>
 <li>Complete &amp; Unmarked：删除列表中所有状态为正常结束或异常终止，没被标记且Comments没内容的会话。</li>
@@ -526,11 +526,11 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@009.png" srcset="/img/load.gif" lazyload alt="工具面板-Remove"></p>
-<h4 id="4-Go"><a href="#4-Go" class="headerlink" title="(4) Go"></a>(4) Go</h4><ul>
+<h3 id="4-Go"><a href="#4-Go" class="headerlink" title="(4) Go"></a>(4) Go</h3><ul>
 <li>点击<img src="/../img/Fiddler/TPicon/TPicon@006.png" srcset="/img/load.gif" lazyload alt="工具面板-Go">，可以恢复执行在Request请求，或Response响应断点处暂停的所有会话。</li>
 <li>默认情况下直接点击会恢复所有会话的运行，快捷键<code>Shift + Go</code>仅恢复选中的会话。</li>
 </ul>
-<h4 id="5-Stream"><a href="#5-Stream" class="headerlink" title="(5) Stream"></a>(5) Stream</h4><ul>
+<h3 id="5-Stream"><a href="#5-Stream" class="headerlink" title="(5) Stream"></a>(5) Stream</h3><ul>
 <li>点击<img src="/../img/Fiddler/TPicon/TPicon@007.png" srcset="/img/load.gif" lazyload alt="工具面板-Stream">，开启Streaming Mode流模式。<ul>
 <li>Fiddler一旦从远程服务器拿到了响应，会立即返回响应给客户端，这对于较低网络时间设定来说是非常重要的。</li>
 <li>多数浏览器会在尚未完全下载HTML页时进行解析且并行下载所需资源，即使远程服务器还未完全传输该HTML。</li>
@@ -549,21 +549,21 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@010.png" srcset="/img/load.gif" lazyload alt="工具面板-Stream"></p>
-<h4 id="6-Decode"><a href="#6-Decode" class="headerlink" title="(6) Decode"></a>(6) Decode</h4><ul>
+<h3 id="6-Decode"><a href="#6-Decode" class="headerlink" title="(6) Decode"></a>(6) Decode</h3><ul>
 <li>点击<img src="/../img/Fiddler/TPicon/TPicon@008.png" srcset="/img/load.gif" lazyload alt="工具面板-Decode">，直接对所有响应进行解码。</li>
 <li>解码没有开启前，Fiddler右侧监控面板中可能提示“Response body is encoded. Click to decode”。</li>
 <li>该提示说明当前响应的session会话已被编码，点击该提示信息可对当前响应的session会话进行解码。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@011.png" srcset="/img/load.gif" lazyload alt="工具面板-Decode"></p>
-<h4 id="7-Keep"><a href="#7-Keep" class="headerlink" title="(7) Keep"></a>(7) Keep</h4><ul>
+<h3 id="7-Keep"><a href="#7-Keep" class="headerlink" title="(7) Keep"></a>(7) Keep</h3><ul>
 <li>Fiddler的Web请求列表非无限，因此提供了保留会话Keep操作，可以让Web请求列表实时保持指定的session会话个数。</li>
 <li>点击<img src="/../img/Fiddler/TPicon/TPicon@009.png" srcset="/img/load.gif" lazyload alt="工具面板-Keep">，选All sessions，保持所有的Web请求，选对应个数sessions，则保持对应个数的Web请求。</li>
 </ul>
-<h4 id="8-Any-Process"><a href="#8-Any-Process" class="headerlink" title="(8) Any Process"></a>(8) Any Process</h4><ul>
+<h3 id="8-Any-Process"><a href="#8-Any-Process" class="headerlink" title="(8) Any Process"></a>(8) Any Process</h3><ul>
 <li>默认情况下Fiddler将抓取所有进程的HTTP请求或响应，这会导致Web请求列表快速刷新，不方便查找所需的Web请求。</li>
 <li>Any Process可以用来定位抓包，点击<img src="/../img/Fiddler/TPicon/TPicon@010.png" srcset="/img/load.gif" lazyload alt="工具面板-Any Process">，鼠标不放，将十字图标拖拽到指定进程的窗口中，右击则取消。</li>
 </ul>
-<h4 id="9-Find"><a href="#9-Find" class="headerlink" title="(9) Find"></a>(9) Find</h4><ul>
+<h3 id="9-Find"><a href="#9-Find" class="headerlink" title="(9) Find"></a>(9) Find</h3><ul>
 <li>点击<img src="/../img/Fiddler/TPicon/TPicon@011.png" srcset="/img/load.gif" lazyload alt="工具面板-Find">，支持依据查询条件快速查找会话列表请求，Find Sessions界面如下。</li>
 <li>Find：输入需要查找的内容，例如baidu.com，查找所有包含baidu.com内容的请求。</li>
 <li>Options<ul>
@@ -571,8 +571,8 @@
 <li>Examine：标头和正文、仅标头、仅正文，这三个选项中进行检查匹配。</li>
 <li>Match case(匹配时区分大小写)，Regular Expression(可使用正则匹配)。</li>
 <li>Search binaries(搜索二进制)，Decode compressed content(解码压缩内容)。</li>
-<li>Search only selected Sessions(仅搜索所选的会话)，Select matches(搜索匹配)。</li>
-<li>Unmark old results(取消标记旧结果)，Result Highlight(匹配请求使用的高亮颜色)。</li>
+<li>Search only selected sessions(仅搜索所选的会话)，Select matches(搜索匹配)。</li>
+<li>Unmark old results(取消标记旧结果)，Result Highlight(匹配请求使用的高亮色)。</li>
 </ul>
 </li>
 </ul>
@@ -605,7 +605,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="1-Clear-Cache"><a href="#1-Clear-Cache" class="headerlink" title="(1) Clear Cache"></a>(1) Clear Cache</h4><ul>
+<h3 id="1-Clear-Cache"><a href="#1-Clear-Cache" class="headerlink" title="(1) Clear Cache"></a>(1) Clear Cache</h3><ul>
 <li>点击<img src="/../img/Fiddler/TPicon/TPicon@016.png" srcset="/img/load.gif" lazyload alt="工具面板-Clear Cache">，清除WinINET缓存，快捷键<code>Ctrl + Clear Cache</code>删除持久性Cookies。</li>
 <li>WinINET缓存，分为文件缓存和URL缓存。<ul>
 <li>Microsoft Windows操作系统中Internet Explorer和一些应用程序如Outlook，使用的一种缓存机制。</li>
@@ -621,16 +621,16 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@013.png" srcset="/img/load.gif" lazyload alt="工具面板-Clear Cache"></p>
-<h4 id="2-TextWizard"><a href="#2-TextWizard" class="headerlink" title="(2) TextWizard"></a>(2) TextWizard</h4><ul>
+<h3 id="2-TextWizard"><a href="#2-TextWizard" class="headerlink" title="(2) TextWizard"></a>(2) TextWizard</h3><ul>
 <li>用来对文本进行编码和解码，支持多种编码，有Base64、Base64URL、URLEncode、URLDecode、SHA256等。</li>
 <li>例如：使用MD5对字符串“Hello Fiddler!”进行编码，点击<img src="/../img/Fiddler/TPicon/TPicon@017.png" srcset="/img/load.gif" lazyload alt="工具面板-TextWizard">，打开TextWizard工具，操作如下。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@014.png" srcset="/img/load.gif" lazyload alt="工具面板-TextWizard"></p>
-<h4 id="3-Tearoff"><a href="#3-Tearoff" class="headerlink" title="(3) Tearoff"></a>(3) Tearoff</h4><ul>
+<h3 id="3-Tearoff"><a href="#3-Tearoff" class="headerlink" title="(3) Tearoff"></a>(3) Tearoff</h3><ul>
 <li>点击<img src="/../img/Fiddler/TPicon/TPicon@018.png" srcset="/img/load.gif" lazyload alt="工具面板-Tearoff">，支持将监控面板以窗口浮动形式进行显示。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@015.png" srcset="/img/load.gif" lazyload alt="工具面板-Tearoff"></p>
-<h4 id="4-Online"><a href="#4-Online" class="headerlink" title="(4) Online"></a>(4) Online</h4><ul>
+<h3 id="4-Online"><a href="#4-Online" class="headerlink" title="(4) Online"></a>(4) Online</h3><ul>
 <li>将鼠标移动到<img src="/../img/Fiddler/TPicon/TPicon@019.png" srcset="/img/load.gif" lazyload alt="工具面板-Online">，将显示当前机器的网络信息，有IP地址、MAC地址等。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@016.png" srcset="/img/load.gif" lazyload alt="工具面板-Online"></p>
@@ -677,11 +677,11 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@018.png" srcset="/img/load.gif" lazyload alt="监控面板-Statistics"></p>
-<h4 id="1-单会话"><a href="#1-单会话" class="headerlink" title="(1) 单会话"></a>(1) 单会话</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs Markdown">Request Count:  1 ------------------------------------ 选中会话的个数<br>Bytes Sent:     2,047   (headers:2,047; body:0) ------ HTTP请求头和请求体中向外发送的字节总数<br>Bytes Received: 96,052  (headers:794; body:95,258) --- HTTP请求头和请求体中接收到的所有字节数<br><br><span class="hljs-section">ACTUAL PERFORMANCE ----------------------------------- 请求实际执行情况</span><br><span class="hljs-section">--------------</span><br>ClientConnected:      11:35:43.234<br>ClientBeginRequest:   11:35:43.346<br>GotRequestHeaders:    11:35:43.346<br>ClientDoneRequest:    11:35:43.346<br>Determine Gateway:    0ms<br>DNS Lookup:           0ms ------------ 选中会话解析DNS所花费的时间的总和，DNS缓存或所有连接都已建立，则不需要DNS解析<br>TCP/IP Connect:       0ms ------------ 选中会话建立TCP/IP连接所花费的时间总和，所有请求都已建立连接，则不需要TCP/IP连接<br>HTTPS Handshake:      0ms ------------ 选中会话在HTTPS握手上所花费的时间总和<br>ServerConnected:      11:35:43.262 --- 所有会话都是HTTP，不需解密，或都发生在已建立安全信任的连接上，则不存在HTTPS握手<br>FiddlerBeginRequest:  11:35:43.346<br>ServerGotRequest:     11:35:43.347<br>ServerBeginResponse:  11:35:43.366<br>GotResponseHeaders:   11:35:43.366<br>ServerDoneResponse:   11:35:43.421<br>ClientBeginResponse:  11:35:43.421<br>ClientDoneResponse:   11:35:43.421<br><br>  Overall Elapsed:  0:00:00.074 ---------------------- 已用总时间<br><br><span class="hljs-section">RESPONSE BYTES (by Content-Type) --------------------- 响应字节数(按Content-Type分组统计)</span><br><span class="hljs-section">--------------</span><br>text/html: 95,258<br>~headers~: 794<br><br><br><span class="hljs-section">ESTIMATED WORLDWIDE PERFORMANCE ---------------------- 选中的流量在不同地区和连接方式下所需时间的初步估计</span><br><span class="hljs-section">--------------</span><br>The following are VERY rough estimates of download times when hitting servers based in Seattle.<br><br>US West Coast (Modem - 6KB/sec) ---------------------- 该值是根据选中会话的个数和大小计算的<br>  RTT:      0.10s<br>  Elapsed:  16.10s<br><br>Japan / Northern Europe (Modem) ---------------------- 实际网络性能受多因素影响，因而该值可能不准确<br>  RTT:      0.15s<br>  Elapsed:  16.15s<br><br>China (Modem)<br>  RTT:      0.45s<br>  Elapsed:  16.45s<br><br>US West Coast (DSL - 30KB/sec)<br>  RTT:      0.10s<br>  Elapsed:  3.10s<br><br>Japan / Northern Europe (DSL)<br>  RTT:      0.15s<br>  Elapsed:  3.15s<br><br>China (DSL)<br>  RTT:      0.45s<br>  Elapsed:  3.45s<br><br><span class="hljs-strong">____</span><span class="hljs-strong">____</span><span class="hljs-strong">____</span><span class="hljs-strong">____</span><br>Learn more about HTTP performance at http://fiddler2.com/r/?HTTPPERF<br></code></pre></td></tr></table></figure>
+<h3 id="1-单会话"><a href="#1-单会话" class="headerlink" title="(1) 单会话"></a>(1) 单会话</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs Markdown">Request Count:  1 ------------------------------------ 选中会话的个数<br>Bytes Sent:     2,047   (headers:2,047; body:0) ------ HTTP请求头和请求体中向外发送的字节总数<br>Bytes Received: 96,052  (headers:794; body:95,258) --- HTTP请求头和请求体中接收到的所有字节数<br><br><span class="hljs-section">ACTUAL PERFORMANCE ----------------------------------- 请求实际执行情况</span><br><span class="hljs-section">--------------</span><br>ClientConnected:      11:35:43.234<br>ClientBeginRequest:   11:35:43.346<br>GotRequestHeaders:    11:35:43.346<br>ClientDoneRequest:    11:35:43.346<br>Determine Gateway:    0ms<br>DNS Lookup:           0ms ------------ 选中会话解析DNS所花费的时间的总和，DNS缓存或所有连接都已建立，则不需要DNS解析<br>TCP/IP Connect:       0ms ------------ 选中会话建立TCP/IP连接所花费的时间总和，所有请求都已建立连接，则不需要TCP/IP连接<br>HTTPS Handshake:      0ms ------------ 选中会话在HTTPS握手上所花费的时间总和<br>ServerConnected:      11:35:43.262 --- 所有会话都是HTTP，不需解密，或都发生在已建立安全信任的连接上，则不存在HTTPS握手<br>FiddlerBeginRequest:  11:35:43.346<br>ServerGotRequest:     11:35:43.347<br>ServerBeginResponse:  11:35:43.366<br>GotResponseHeaders:   11:35:43.366<br>ServerDoneResponse:   11:35:43.421<br>ClientBeginResponse:  11:35:43.421<br>ClientDoneResponse:   11:35:43.421<br><br>  Overall Elapsed:  0:00:00.074 ---------------------- 已用总时间<br><br><span class="hljs-section">RESPONSE BYTES (by Content-Type) --------------------- 响应字节数(按Content-Type分组统计)</span><br><span class="hljs-section">--------------</span><br>text/html: 95,258<br>~headers~: 794<br><br><br><span class="hljs-section">ESTIMATED WORLDWIDE PERFORMANCE ---------------------- 选中的流量在不同地区和连接方式下所需时间的初步估计</span><br><span class="hljs-section">--------------</span><br>The following are VERY rough estimates of download times when hitting servers based in Seattle.<br><br>US West Coast (Modem - 6KB/sec) ---------------------- 该值是根据选中会话的个数和大小计算的<br>  RTT:      0.10s<br>  Elapsed:  16.10s<br><br>Japan / Northern Europe (Modem) ---------------------- 实际网络性能受多因素影响，因而该值可能不准确<br>  RTT:      0.15s<br>  Elapsed:  16.15s<br><br>China (Modem)<br>  RTT:      0.45s<br>  Elapsed:  16.45s<br><br>US West Coast (DSL - 30KB/sec)<br>  RTT:      0.10s<br>  Elapsed:  3.10s<br><br>Japan / Northern Europe (DSL)<br>  RTT:      0.15s<br>  Elapsed:  3.15s<br><br>China (DSL)<br>  RTT:      0.45s<br>  Elapsed:  3.45s<br><br><span class="hljs-strong">____</span><span class="hljs-strong">____</span><span class="hljs-strong">____</span><span class="hljs-strong">____</span><br>Learn more about HTTP performance at http://fiddler2.com/r/?HTTPPERF<br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="2-单通道"><a href="#2-单通道" class="headerlink" title="(2) 单通道"></a>(2) 单通道</h4><ul>
+<h3 id="2-单通道"><a href="#2-单通道" class="headerlink" title="(2) 单通道"></a>(2) 单通道</h3><ul>
 <li>单个CONNECT通道，会显示在该通道上发送和接收的字节数，除非配置为HTTPS加密方式。</li>
 <li>配置为HTTPS加密方式的情况下，需在Web会话列表已解密的HTTPS会话中查看字节数信息。</li>
 </ul>
@@ -707,9 +707,9 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@019.png" srcset="/img/load.gif" lazyload alt="监控面板-Inspectors"></p>
-<h4 id="1-Inspector-Properties"><a href="#1-Inspector-Properties" class="headerlink" title="(1) Inspector Properties"></a>(1) Inspector Properties</h4><p><img src="/../img/Fiddler/Fiddler@020.png" srcset="/img/load.gif" lazyload alt="监控面板-Inspectors-Inspector Properties"></p>
-<h4 id="2-Hide-Inspector"><a href="#2-Hide-Inspector" class="headerlink" title="(2) Hide Inspector"></a>(2) Hide Inspector</h4><p><img src="/../img/Fiddler/Fiddler@021.png" srcset="/img/load.gif" lazyload alt="监控面板-Inspectors-Hide Inspector"></p>
-<h4 id="3-Hide-Inspector恢复"><a href="#3-Hide-Inspector恢复" class="headerlink" title="(3) Hide Inspector恢复"></a>(3) Hide Inspector恢复</h4><ul>
+<h3 id="1-Inspector-Properties"><a href="#1-Inspector-Properties" class="headerlink" title="(1) Inspector Properties"></a>(1) Inspector Properties</h3><p><img src="/../img/Fiddler/Fiddler@020.png" srcset="/img/load.gif" lazyload alt="监控面板-Inspectors-Inspector Properties"></p>
+<h3 id="2-Hide-Inspector"><a href="#2-Hide-Inspector" class="headerlink" title="(2) Hide Inspector"></a>(2) Hide Inspector</h3><p><img src="/../img/Fiddler/Fiddler@021.png" srcset="/img/load.gif" lazyload alt="监控面板-Inspectors-Hide Inspector"></p>
+<h3 id="3-Hide-Inspector恢复"><a href="#3-Hide-Inspector恢复" class="headerlink" title="(3) Hide Inspector恢复"></a>(3) Hide Inspector恢复</h3><ul>
 <li>菜单栏-&gt;View-&gt;Tabs-&gt;Preferences&gt;fiddler.inspectors.hidelist的value改为True或False，保存后重启。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@022.png" srcset="/img/load.gif" lazyload alt="监控面板-Inspectors-Hide Inspector恢复"></p>
@@ -744,7 +744,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@023.png" srcset="/img/load.gif" lazyload alt="监控面板-AutoResponder"></p>
-<h4 id="1-Rule-Editor"><a href="#1-Rule-Editor" class="headerlink" title="(1) Rule Editor"></a>(1) Rule Editor</h4><ul>
+<h3 id="1-Rule-Editor"><a href="#1-Rule-Editor" class="headerlink" title="(1) Rule Editor"></a>(1) Rule Editor</h3><ul>
 <li>底部的Rule Editor用来调整规则的匹配条件和返回，Test支持根据选中的样本URI测试匹配条件。<ul>
 <li>URL Pattern：设置匹配公式。</li>
 <li>Test URL：设置测试的网址。</li>
@@ -787,7 +787,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@024.png" srcset="/img/load.gif" lazyload alt="监控面板-AutoResponder-Rule Editor"></p>
-<h4 id="2-Rule右键菜单"><a href="#2-Rule右键菜单" class="headerlink" title="(2) Rule右键菜单"></a>(2) Rule右键菜单</h4><ul>
+<h3 id="2-Rule右键菜单"><a href="#2-Rule右键菜单" class="headerlink" title="(2) Rule右键菜单"></a>(2) Rule右键菜单</h3><ul>
 <li>Remote(移除规则)、Promote(将选中的规则向上移动)、Demote(将选中的规则向下移动)。</li>
 <li>Clone(克隆一个选中的规则到规则框中)、Set Latency(设置响应的延迟时间，单位为毫秒)。</li>
 <li>Set Comments(设置注释来提示当前规则的作用)、Edit Response(编辑当前规则设置的响应文件)。</li>
@@ -796,7 +796,7 @@
 <li>Export All(导出当前规则为farx的文件)。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@025.png" srcset="/img/load.gif" lazyload alt="监控面板-AutoResponder-Rule右键菜单"></p>
-<h4 id="3-访问新浪实战"><a href="#3-访问新浪实战" class="headerlink" title="(3) 访问新浪实战"></a>(3) 访问新浪实战</h4><ul>
+<h3 id="3-访问新浪实战"><a href="#3-访问新浪实战" class="headerlink" title="(3) 访问新浪实战"></a>(3) 访问新浪实战</h3><ul>
 <li>建立一个规则，访问新浪官网，使其返回的是百度搜索页面。<ul>
 <li>访问<a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a>，复制源码保存为本地baidu.html文件，浏览器事先打开<a target="_blank" rel="noopener" href="https://www.sina.com.cn/">新浪网</a>，确保Fiddler正常抓包。</li>
 <li>会话面板选中新浪网的请求会话-&gt;AutoResponder-&gt;Add Rule-&gt;Rule Editor第二行Find a File。</li>
@@ -812,7 +812,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="1-Parsed"><a href="#1-Parsed" class="headerlink" title="(1) Parsed"></a>(1) Parsed</h4><ul>
+<h3 id="1-Parsed"><a href="#1-Parsed" class="headerlink" title="(1) Parsed"></a>(1) Parsed</h3><ul>
 <li>支持为每个请求组件使用独立的输入框构建请求。<ul>
 <li>HTTP方法：GET、POST、PUT、HEAD、TRACE、DELETE等。</li>
 <li>请求的绝对URL，必须以<code>http://</code>、<code>https://</code>或<code>ftp://</code>开头。</li>
@@ -822,7 +822,7 @@
 <li>若当前的请求方法不支持请求体，例如GET方法，则在请求体输入框输入文本时会显示红色背景。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@027.png" srcset="/img/load.gif" lazyload alt="监控面板-Composer-Parsed"></p>
-<h4 id="2-Upload-file"><a href="#2-Upload-file" class="headerlink" title="(2) Upload file"></a>(2) Upload file</h4><ul>
+<h3 id="2-Upload-file"><a href="#2-Upload-file" class="headerlink" title="(2) Upload file"></a>(2) Upload file</h3><ul>
 <li>Parsed选项卡上有一个Upload file上传文件按钮。</li>
 <li>请求方法是PUT只能选一个文件，请求方法是POST则可以选多个文件。</li>
 <li>上传文件后(指定PUT或POST)，Composer可创建包含适当格式的请求。<ul>
@@ -833,17 +833,17 @@
 <li>请求执行时，请求体中的所有<code>@INCLUDE</code>引用会替换成指定文件的内容。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@028.png" srcset="/img/load.gif" lazyload alt="监控面板-Composer-Upload file"></p>
-<h4 id="3-Raw"><a href="#3-Raw" class="headerlink" title="(3) Raw"></a>(3) Raw</h4><ul>
+<h3 id="3-Raw"><a href="#3-Raw" class="headerlink" title="(3) Raw"></a>(3) Raw</h3><ul>
 <li>提供了简单的文本框，可以在该文本框中输入合适的HTTP请求。</li>
 <li>如果输入的请求文本格式不对，点击Execute按钮不会发起请求。</li>
 <li>Raw选项卡使用较少，多以Parsed选项卡为准。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@029.png" srcset="/img/load.gif" lazyload alt="监控面板-Composer-Raw"></p>
-<h4 id="4-Scratchpad"><a href="#4-Scratchpad" class="headerlink" title="(4) Scratchpad"></a>(4) Scratchpad</h4><ul>
+<h3 id="4-Scratchpad"><a href="#4-Scratchpad" class="headerlink" title="(4) Scratchpad"></a>(4) Scratchpad</h3><ul>
 <li>用于存储请求集合，如果要发出请求，选择对应的请求文本，并点击Execute按钮执行即可。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@030.png" srcset="/img/load.gif" lazyload alt="监控面板-Composer-Scratchpad"></p>
-<h4 id="5-Options"><a href="#5-Options" class="headerlink" title="(5) Options"></a>(5) Options</h4><ul>
+<h3 id="5-Options"><a href="#5-Options" class="headerlink" title="(5) Options"></a>(5) Options</h3><ul>
 <li>Inspect Session：勾选该项，点击Execute按钮执行请求时会跳转到Inspectors选项卡，可查看请求结果。</li>
 <li>Fix Content- Length header<ul>
 <li>控制Composer是否自动添加或修改Content-Length请求头，表示请求体的大小。</li>
@@ -869,7 +869,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@031.png" srcset="/img/load.gif" lazyload alt="监控面板-Composer-Options"></p>
-<h4 id="6-序列化请求"><a href="#6-序列化请求" class="headerlink" title="(6) 序列化请求"></a>(6) 序列化请求</h4><ul>
+<h3 id="6-序列化请求"><a href="#6-序列化请求" class="headerlink" title="(6) 序列化请求"></a>(6) 序列化请求</h3><ul>
 <li>模拟某些场景，发送多个请求，这些请求除了某个有序的数字外，其他完全相同。</li>
 <li>例如Flask实现的一个简单网页展示图片信息程序，图片名称基本一致，序号不同。</li>
 <li>利用Fiddler的发送序列化请求，逐一访问image-001.png到image-007.png的图片。<ul>
@@ -881,15 +881,15 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@032.png" srcset="/img/load.gif" lazyload alt="监控面板-Composer-序列化请求"></p>
-<h5 id="✧-程序目录"><a href="#✧-程序目录" class="headerlink" title="✧ 程序目录"></a>✧ 程序目录</h5><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Markdown"><span class="hljs-bullet">-</span> /static<br><span class="hljs-bullet">  -</span> /images<br><span class="hljs-bullet">    -</span> image-001.png<br><span class="hljs-bullet">    -</span> image-002.png<br><span class="hljs-bullet">    -</span> image-003.png<br><span class="hljs-bullet">    -</span> image-004.png<br><span class="hljs-bullet">    -</span> image-005.png<br><span class="hljs-bullet">    -</span> image-006.png<br><span class="hljs-bullet">    -</span> image-007.png<br><span class="hljs-bullet">-</span> /templates<br><span class="hljs-bullet">  -</span> image.html<br><span class="hljs-bullet">-</span> image.py                                                    # 命令窗口执行python image.py<br></code></pre></td></tr></table></figure>
+<h4 id="✧-程序目录"><a href="#✧-程序目录" class="headerlink" title="✧ 程序目录"></a>✧ 程序目录</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Markdown"><span class="hljs-bullet">-</span> /static<br><span class="hljs-bullet">  -</span> /images<br><span class="hljs-bullet">    -</span> image-001.png<br><span class="hljs-bullet">    -</span> image-002.png<br><span class="hljs-bullet">    -</span> image-003.png<br><span class="hljs-bullet">    -</span> image-004.png<br><span class="hljs-bullet">    -</span> image-005.png<br><span class="hljs-bullet">    -</span> image-006.png<br><span class="hljs-bullet">    -</span> image-007.png<br><span class="hljs-bullet">-</span> /templates<br><span class="hljs-bullet">  -</span> image.html<br><span class="hljs-bullet">-</span> image.py                                                    # 命令窗口执行python image.py<br></code></pre></td></tr></table></figure>
 
 
 
-<h5 id="✧-image-py"><a href="#✧-image-py" class="headerlink" title="✧ image.py"></a>✧ image.py</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, render_template, url_for, send_file<br><br>app = Flask(__name__)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_metadata</span>(<span class="hljs-params">file_path</span>):<br>    size = os.path.getsize(file_path)                         <span class="hljs-comment"># 获取文件大小，单位字节</span><br>    mtime = os.path.getmtime(file_path)                       <span class="hljs-comment"># 获取文件最近修改时间</span><br>    modified_time = datetime.datetime.fromtimestamp(mtime).strftime(<span class="hljs-string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)<br>    ctime = os.path.getctime(file_path)                       <span class="hljs-comment"># 获取文件创建时间</span><br>    created_time = datetime.datetime.fromtimestamp(ctime).strftime(<span class="hljs-string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)<br>    <span class="hljs-keyword">return</span> size, modified_time, created_time<br><br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">index</span>():<br>    image_names = [<span class="hljs-string">&#x27;image-001.png&#x27;</span>, <span class="hljs-string">&#x27;image-002.png&#x27;</span>, <span class="hljs-string">&#x27;image-003.png&#x27;</span>,<br>                   <span class="hljs-string">&#x27;image-004.png&#x27;</span>, <span class="hljs-string">&#x27;image-005.png&#x27;</span>, <span class="hljs-string">&#x27;image-006.png&#x27;</span>,<br>                   <span class="hljs-string">&#x27;image-007.png&#x27;</span>]<br>    image_info_list = []                                      <span class="hljs-comment"># 获取所有图片文件的元数据</span><br>    <span class="hljs-keyword">for</span> image_name <span class="hljs-keyword">in</span> image_names:<br>        file_path = os.path.join(app.static_folder, <span class="hljs-string">&#x27;images&#x27;</span>, image_name)<br>        size, modified_time, created_time = get_metadata(file_path)<br>        show_image = url_for(<span class="hljs-string">&#x27;show_image&#x27;</span>, image_name=image_name)<br>        image_info_list.append(&#123;<span class="hljs-string">&#x27;name&#x27;</span>: image_name,<br>                                <span class="hljs-string">&#x27;modified_time&#x27;</span>: modified_time,<br>                                <span class="hljs-string">&#x27;created_time&#x27;</span>: created_time,<br>                                <span class="hljs-string">&#x27;size&#x27;</span>: size,<br>                                <span class="hljs-string">&#x27;show_image&#x27;</span>: show_image&#125;)<br>    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&#x27;image.html&#x27;</span>, image_info_list=image_info_list)<br><br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/image/&lt;string:image_name&gt;&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">show_image</span>(<span class="hljs-params">image_name</span>):<br>    current_dir = os.path.dirname(os.path.abspath(__file__))  <span class="hljs-comment"># 确定要下载的文件路径</span><br>    file_path = current_dir + <span class="hljs-string">&#x27;\\static\\images\\&#x27;</span> + image_name<br>    <span class="hljs-built_in">print</span>(file_path)<br><br>    <span class="hljs-keyword">if</span> os.path.isfile(file_path):                             <span class="hljs-comment"># 如果该文件存在，则返回它</span><br>        _, ext = os.path.splitext(file_path)                  <span class="hljs-comment"># 确定文件的扩展名和MIME类型</span><br>        mime_type = &#123;<br>            <span class="hljs-string">&#x27;.png&#x27;</span>: <span class="hljs-string">&#x27;image/png&#x27;</span>,<br>            <span class="hljs-string">&#x27;.jpg&#x27;</span>: <span class="hljs-string">&#x27;image/jpeg&#x27;</span>,<br>            <span class="hljs-string">&#x27;.gif&#x27;</span>: <span class="hljs-string">&#x27;image/gif&#x27;</span><br>        &#125;.get(ext.lower(), <span class="hljs-string">&#x27;application/octet-stream&#x27;</span>)<br>        <span class="hljs-keyword">return</span> send_file(file_path, as_attachment=<span class="hljs-literal">False</span>, mimetype=mime_type)<br>    <span class="hljs-keyword">else</span>:                                                     <span class="hljs-comment"># 否则返回一个错误信息</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;center&gt;Error! The requested file does not exist.&lt;/center&gt;&#x27;</span><br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    app.run(debug=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="✧-image-py"><a href="#✧-image-py" class="headerlink" title="✧ image.py"></a>✧ image.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, render_template, url_for, send_file<br><br>app = Flask(__name__)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_metadata</span>(<span class="hljs-params">file_path</span>):<br>    size = os.path.getsize(file_path)                         <span class="hljs-comment"># 获取文件大小，单位字节</span><br>    mtime = os.path.getmtime(file_path)                       <span class="hljs-comment"># 获取文件最近修改时间</span><br>    modified_time = datetime.datetime.fromtimestamp(mtime).strftime(<span class="hljs-string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)<br>    ctime = os.path.getctime(file_path)                       <span class="hljs-comment"># 获取文件创建时间</span><br>    created_time = datetime.datetime.fromtimestamp(ctime).strftime(<span class="hljs-string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)<br>    <span class="hljs-keyword">return</span> size, modified_time, created_time<br><br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">index</span>():<br>    image_names = [<span class="hljs-string">&#x27;image-001.png&#x27;</span>, <span class="hljs-string">&#x27;image-002.png&#x27;</span>, <span class="hljs-string">&#x27;image-003.png&#x27;</span>,<br>                   <span class="hljs-string">&#x27;image-004.png&#x27;</span>, <span class="hljs-string">&#x27;image-005.png&#x27;</span>, <span class="hljs-string">&#x27;image-006.png&#x27;</span>,<br>                   <span class="hljs-string">&#x27;image-007.png&#x27;</span>]<br>    image_info_list = []                                      <span class="hljs-comment"># 获取所有图片文件的元数据</span><br>    <span class="hljs-keyword">for</span> image_name <span class="hljs-keyword">in</span> image_names:<br>        file_path = os.path.join(app.static_folder, <span class="hljs-string">&#x27;images&#x27;</span>, image_name)<br>        size, modified_time, created_time = get_metadata(file_path)<br>        show_image = url_for(<span class="hljs-string">&#x27;show_image&#x27;</span>, image_name=image_name)<br>        image_info_list.append(&#123;<span class="hljs-string">&#x27;name&#x27;</span>: image_name,<br>                                <span class="hljs-string">&#x27;modified_time&#x27;</span>: modified_time,<br>                                <span class="hljs-string">&#x27;created_time&#x27;</span>: created_time,<br>                                <span class="hljs-string">&#x27;size&#x27;</span>: size,<br>                                <span class="hljs-string">&#x27;show_image&#x27;</span>: show_image&#125;)<br>    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&#x27;image.html&#x27;</span>, image_info_list=image_info_list)<br><br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/image/&lt;string:image_name&gt;&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">show_image</span>(<span class="hljs-params">image_name</span>):<br>    current_dir = os.path.dirname(os.path.abspath(__file__))  <span class="hljs-comment"># 确定要下载的文件路径</span><br>    file_path = current_dir + <span class="hljs-string">&#x27;\\static\\images\\&#x27;</span> + image_name<br>    <span class="hljs-built_in">print</span>(file_path)<br><br>    <span class="hljs-keyword">if</span> os.path.isfile(file_path):                             <span class="hljs-comment"># 如果该文件存在，则返回它</span><br>        _, ext = os.path.splitext(file_path)                  <span class="hljs-comment"># 确定文件的扩展名和MIME类型</span><br>        mime_type = &#123;<br>            <span class="hljs-string">&#x27;.png&#x27;</span>: <span class="hljs-string">&#x27;image/png&#x27;</span>,<br>            <span class="hljs-string">&#x27;.jpg&#x27;</span>: <span class="hljs-string">&#x27;image/jpeg&#x27;</span>,<br>            <span class="hljs-string">&#x27;.gif&#x27;</span>: <span class="hljs-string">&#x27;image/gif&#x27;</span><br>        &#125;.get(ext.lower(), <span class="hljs-string">&#x27;application/octet-stream&#x27;</span>)<br>        <span class="hljs-keyword">return</span> send_file(file_path, as_attachment=<span class="hljs-literal">False</span>, mimetype=mime_type)<br>    <span class="hljs-keyword">else</span>:                                                     <span class="hljs-comment"># 否则返回一个错误信息</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;center&gt;Error! The requested file does not exist.&lt;/center&gt;&#x27;</span><br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    app.run(debug=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
 
 
 
-<h5 id="✧-image-html"><a href="#✧-image-html" class="headerlink" title="✧ image.html"></a>✧ image.html</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs Html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>图片展示<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;&#123;&#123; url_for(&#x27;static&#x27;, filename=&#x27;css/gallery.css&#x27;) &#125;&#125;&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-center&quot;</span>&gt;</span>Image Gallery<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;table table-striped&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span><br>          <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-center&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Image Name<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Last Modified Time<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Created Time<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>File Size<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Show Link<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>          <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span><br>          &#123;% for image_info in image_info_list %&#125;<br>            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-center&quot;</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>&#123;&#123; image_info[&#x27;name&#x27;] &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>&#123;&#123; image_info[&#x27;modified_time&#x27;] &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>&#123;&#123; image_info[&#x27;created_time&#x27;] &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>&#123;&#123; image_info[&#x27;size&#x27;] &#125;&#125; bytes<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;&#123;&#123; url_for(&#x27;show_image&#x27;, image_name=image_info[&#x27;name&#x27;]) &#125;&#125;&quot;</span>&gt;</span>Show<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br>              <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>          &#123;% endfor %&#125;<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h4 id="✧-image-html"><a href="#✧-image-html" class="headerlink" title="✧ image.html"></a>✧ image.html</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs Html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>图片展示<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;&#123;&#123; url_for(&#x27;static&#x27;, filename=&#x27;css/gallery.css&#x27;) &#125;&#125;&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-center&quot;</span>&gt;</span>Image Gallery<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;table table-striped&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span><br>          <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-center&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Image Name<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Last Modified Time<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Created Time<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>File Size<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Show Link<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><br>          <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span><br>          &#123;% for image_info in image_info_list %&#125;<br>            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-center&quot;</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>&#123;&#123; image_info[&#x27;name&#x27;] &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>&#123;&#123; image_info[&#x27;modified_time&#x27;] &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>&#123;&#123; image_info[&#x27;created_time&#x27;] &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>&#123;&#123; image_info[&#x27;size&#x27;] &#125;&#125; bytes<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>              <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;&#123;&#123; url_for(&#x27;show_image&#x27;, image_name=image_info[&#x27;name&#x27;]) &#125;&#125;&quot;</span>&gt;</span>Show<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br>              <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><br>          &#123;% endfor %&#125;<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -906,19 +906,19 @@
 
 
 
-<h4 id="1-连接客户端"><a href="#1-连接客户端" class="headerlink" title="(1) 连接客户端"></a>(1) 连接客户端</h4><ul>
+<h3 id="1-连接客户端"><a href="#1-连接客户端" class="headerlink" title="(1) 连接客户端"></a>(1) 连接客户端</h3><ul>
 <li>管理员身份运行Fiddler-&gt;Orchestra-&gt;点Start启动监听-&gt;配置Orchestra客户端，访问<a target="_blank" rel="noopener" href="http://localhost:8800/">http://localhost:8800</a>。</li>
 <li>Orchestra Connection-&gt;IP Address为127.0.0.1，Port为3636，Private key即Fiddler中的密钥-&gt;点击Connect。</li>
 <li>Fiddler与Orchestra客户端连接成功，则Private key无法修改，Connect变Disconnect，Orchestra界面显示连接详细。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@033.png" srcset="/img/load.gif" lazyload alt="监控面板-Orchestra-连接客户端"></p>
-<h4 id="2-配置证书下载"><a href="#2-配置证书下载" class="headerlink" title="(2) 配置证书下载"></a>(2) 配置证书下载</h4><ul>
+<h3 id="2-配置证书下载"><a href="#2-配置证书下载" class="headerlink" title="(2) 配置证书下载"></a>(2) 配置证书下载</h3><ul>
 <li><a target="_blank" rel="noopener" href="http://localhost:8800/">http://localhost:8800</a>-&gt;HTTPS Root Certificate-&gt;Generate root certificate as PKCS#12 file-&gt;创建及下载证书。</li>
 <li>将下载的证书<code>fiddler-orchestra-root-certificate.p12</code>存放到指定位置-&gt;HTTPS Root Certificate页面进行加载。</li>
 <li>点击Load root certificate from PKCS#12 file-&gt;页面的顶部将显示<code>Success：HTTPS root certificate is loaded</code>。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@034.png" srcset="/img/load.gif" lazyload alt="监控面板-Orchestra-配置证书下载"></p>
-<h4 id="3-启动全部服务"><a href="#3-启动全部服务" class="headerlink" title="(3) 启动全部服务"></a>(3) 启动全部服务</h4><ul>
+<h3 id="3-启动全部服务"><a href="#3-启动全部服务" class="headerlink" title="(3) 启动全部服务"></a>(3) 启动全部服务</h3><ul>
 <li>启动全部服务：Proxy-&gt;勾选Allow remote clients to connect-&gt;Start。</li>
 <li>HTTP Reverse Proxy-&gt;勾选Allow remote clients to connect-&gt;Start。</li>
 <li>HTTPS Reverse Proxy-&gt;<code>File path</code>输入证书<code>fiddler-orchestra-root-certificate.p12</code>的路径-&gt;Start。</li>
@@ -945,7 +945,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="4-与手机端连接"><a href="#4-与手机端连接" class="headerlink" title="(4) 与手机端连接"></a>(4) 与手机端连接</h4><ul>
+<h3 id="4-与手机端连接"><a href="#4-与手机端连接" class="headerlink" title="(4) 与手机端连接"></a>(4) 与手机端连接</h3><ul>
 <li>点击Fiddler Orchestra Beta选项卡中的Download Fiddler Orchestra client for Android，下载安装到手机端。</li>
 <li>Fiddler-&gt;菜单栏-&gt;Tools-&gt;Options-&gt;Connections选项中的Allow remote computers to connect保持勾选。</li>
 <li>Fiddler Orchestra Beta客户端与手机端建立连接，要求客户端和手机端在同一局域网内(使用相同WiFi网络)。</li>
@@ -969,13 +969,13 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@035.png" srcset="/img/load.gif" lazyload alt="监控面板-FiddlerScript"></p>
-<h4 id="1-语言模式"><a href="#1-语言模式" class="headerlink" title="(1) 语言模式"></a>(1) 语言模式</h4><ul>
+<h3 id="1-语言模式"><a href="#1-语言模式" class="headerlink" title="(1) 语言模式"></a>(1) 语言模式</h3><ul>
 <li>FiddlerScript有C#和JScript.NET这两种开发语言模式，可依据偏好设置。</li>
 <li>切换语言：菜单栏-&gt;Tools-&gt;Options-&gt;Scripting-&gt;Language一栏可选。</li>
 <li>对应Fiddler安装目录Scripts文件夹中的SampleRules.cs(C#)和SampleRules.js(JScript.NET)。</li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@036.png" srcset="/img/load.gif" lazyload alt="监控面板-FiddlerScript-语言模式"></p>
-<h4 id="2-编辑模式"><a href="#2-编辑模式" class="headerlink" title="(2) 编辑模式"></a>(2) 编辑模式</h4><ul>
+<h3 id="2-编辑模式"><a href="#2-编辑模式" class="headerlink" title="(2) 编辑模式"></a>(2) 编辑模式</h3><ul>
 <li>监控面板的FiddlerScript选项卡，支持文本编辑，<code>Save Script</code>保存文本。</li>
 <li>菜单栏-&gt;Rules-&gt;Customize Rules-&gt;弹窗Fiddler ScriptEditor进行编辑。</li>
 <li>若脚本写错，或改乱无法正确保存，可在菜单栏-&gt;Tools-&gt;Reset Script重置脚本内容。</li>
@@ -1020,7 +1020,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@039.png" srcset="/img/load.gif" lazyload alt="监控面板-Filters"></p>
-<h4 id="1-Hosts"><a href="#1-Hosts" class="headerlink" title="(1) Hosts"></a>(1) Hosts</h4><ul>
+<h3 id="1-Hosts"><a href="#1-Hosts" class="headerlink" title="(1) Hosts"></a>(1) Hosts</h3><ul>
 <li>区域过滤(Zone Filter)<ul>
 <li>Show only Intranet Hosts：只列出属于局域网的会话。</li>
 <li>Show only Internet Hosts：只列出属于互联网的会话。</li>
@@ -1037,14 +1037,14 @@
 <li>若想看根目录<code>xxx.com</code>下的数据流，将通配符改成<code>*xxx.com</code>的形式，多个host用分号隔开。</li>
 </ul>
 <p><img src="/../img/Fiddler/CPicon/CPicon@001.png" srcset="/img/load.gif" lazyload alt="监控面板-Filters-Hosts"></p>
-<h4 id="2-Client-Process"><a href="#2-Client-Process" class="headerlink" title="(2) Client Process"></a>(2) Client Process</h4><ul>
+<h3 id="2-Client-Process"><a href="#2-Client-Process" class="headerlink" title="(2) Client Process"></a>(2) Client Process</h3><ul>
 <li>客户端进程用于控制进程的数据流，应用程序只有和Fiddler运行在相同的主机时才能做出判断。</li>
 <li>Show only traffic from：只显示选中进程下的数据流(注意：下拉列表包含了当前系统中，正在运行的所有进程)。</li>
 <li>Show only Internet Explorer：只显示进程名以IE开头，或请求的User-Agent包含<code>compatible; MSIE</code>的数据流。</li>
 <li>Hide traffic from Service Host：隐藏来自进程<code>svchost.exe</code>的数据流，该进程是一个系统进程。</li>
 </ul>
 <p><img src="/../img/Fiddler/CPicon/CPicon@002.png" srcset="/img/load.gif" lazyload alt="监控面板-Filters-Client Process"></p>
-<h4 id="3-Request-Headers"><a href="#3-Request-Headers" class="headerlink" title="(3) Request Headers"></a>(3) Request Headers</h4><ul>
+<h3 id="3-Request-Headers"><a href="#3-Request-Headers" class="headerlink" title="(3) Request Headers"></a>(3) Request Headers</h3><ul>
 <li>Show only if URL contains：支持基于URL隐藏请求，仅显示感兴趣的请求。</li>
 <li>Hide if URL contains<ul>
 <li>支持基于URL显示请求，仅隐藏某些请求，可以使用前缀<code>EXACT</code>来限定大小写敏感。</li>
@@ -1056,7 +1056,7 @@
 <li>Set request header：支持创建指定名称和取值的HTTP请求头，或将请求头更新为指定的取值。</li>
 </ul>
 <p><img src="/../img/Fiddler/CPicon/CPicon@003.png" srcset="/img/load.gif" lazyload alt="监控面板-Filters-Request Headers"></p>
-<h4 id="4-Breakpoints"><a href="#4-Breakpoints" class="headerlink" title="(4) Breakpoints"></a>(4) Breakpoints</h4><ul>
+<h3 id="4-Breakpoints"><a href="#4-Breakpoints" class="headerlink" title="(4) Breakpoints"></a>(4) Breakpoints</h3><ul>
 <li>断点选项框支持对包含给定属性的请求或响应设置断点。</li>
 <li>Break request on POST：为所有的POST请求设置断点。</li>
 <li>Break request on GET with query string：为所有方法为GET且URL包含查询串的请求设置断点。</li>
@@ -1068,7 +1068,7 @@
 <li>Break response on Content-Type：为所有响应头Content-Type中包含指定文本的响应设置断点。</li>
 </ul>
 <p><img src="/../img/Fiddler/CPicon/CPicon@004.png" srcset="/img/load.gif" lazyload alt="监控面板-Filters-Breakpoints"></p>
-<h4 id="5-Response-Status-Code"><a href="#5-Response-Status-Code" class="headerlink" title="(5) Response Status Code"></a>(5) Response Status Code</h4><ul>
+<h3 id="5-Response-Status-Code"><a href="#5-Response-Status-Code" class="headerlink" title="(5) Response Status Code"></a>(5) Response Status Code</h3><ul>
 <li>Hide success(2xx)：隐藏状态码在200到299之间的响应。</li>
 <li>Hide non-2xx：指隐藏状态码不在200到299之间的响应。</li>
 <li>Hide Authentication demands(401,407)：隐藏状态码为401，和407的响应。</li>
@@ -1076,7 +1076,7 @@
 <li>Hide Not Modified(304)：隐藏请求中状态码为304的响应，表示客户端缓存的实体是有效的。</li>
 </ul>
 <p><img src="/../img/Fiddler/CPicon/CPicon@005.png" srcset="/img/load.gif" lazyload alt="监控面板-Filters-Response Status Code"></p>
-<h4 id="6-Response-Type-and-Size"><a href="#6-Response-Type-and-Size" class="headerlink" title="(6) Response Type and Size"></a>(6) Response Type and Size</h4><ul>
+<h3 id="6-Response-Type-and-Size"><a href="#6-Response-Type-and-Size" class="headerlink" title="(6) Response Type and Size"></a>(6) Response Type and Size</h3><ul>
 <li>下拉框选项<ul>
 <li>Show all Content-Types(显示所有响应，不过滤)、Show only IMAGE&#x2F;*(只显示图片类型的响应)。</li>
 <li>Show only HTML(只显示HTML文档的响应)、Show only TEXT&#x2F;CSS(只显示CSS层叠样式表的响应)。</li>
@@ -1096,7 +1096,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/CPicon/CPicon@006.png" srcset="/img/load.gif" lazyload alt="监控面板-Filters-Response Type and Size"></p>
-<h4 id="7-Response-Headers"><a href="#7-Response-Headers" class="headerlink" title="(7) Response Headers"></a>(7) Response Headers</h4><ul>
+<h3 id="7-Response-Headers"><a href="#7-Response-Headers" class="headerlink" title="(7) Response Headers"></a>(7) Response Headers</h3><ul>
 <li>Flag responses that set cookies：以粗体显示所有响应头包含Set-Cookie的响应。</li>
 <li>Flag responses with headers：支持指定HTTP响应头名称，如果响应中该HTTP头存在，以粗体显示。</li>
 <li>Delete response headers：支持指定HTTP响应头名称，如果存在该响应头名称，会从响应头中删去。</li>
@@ -1134,7 +1134,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/Fiddler@040.png" srcset="/img/load.gif" lazyload alt="监控面板-TimeLine-传输时间轴"></p>
-<h4 id="1-传输时间轴"><a href="#1-传输时间轴" class="headerlink" title="(1) 传输时间轴"></a>(1) 传输时间轴</h4><ul>
+<h3 id="1-传输时间轴"><a href="#1-传输时间轴" class="headerlink" title="(1) 传输时间轴"></a>(1) 传输时间轴</h3><ul>
 <li>每行显示一个会话，最左边是文件名，将鼠标放到任意行上方，底部的状态栏将显示该项的更多信息。</li>
 <li>双击某行会跳转到Inspectors选项卡，显示该会话的详细信息。</li>
 <li>如果双击的同时按SHIFT键，会在新的窗口显示该会话的信息。</li>
@@ -1155,10 +1155,10 @@
 </ul>
 </li>
 </ul>
-<h5 id="✧-缓存模式"><a href="#✧-缓存模式" class="headerlink" title="✧ 缓存模式"></a>✧ 缓存模式</h5><p><img src="/../img/Fiddler/GMico/GMico@001.png" srcset="/img/load.gif" lazyload alt="监控面板-TimeLine-传输时间轴-缓存模式"></p>
-<h5 id="✧-流模式"><a href="#✧-流模式" class="headerlink" title="✧ 流模式"></a>✧ 流模式</h5><p><img src="/../img/Fiddler/GMico/GMico@002.png" srcset="/img/load.gif" lazyload alt="监控面板-TimeLine-传输时间轴-流模式"></p>
-<h5 id="✧-图标说明"><a href="#✧-图标说明" class="headerlink" title="✧ 图标说明"></a>✧ 图标说明</h5><p><img src="/../img/Fiddler/GMico/GMico@003.png" srcset="/img/load.gif" lazyload alt="监控面板-TimeLine-传输时间轴-图标说明"></p>
-<h4 id="2-客户端管道"><a href="#2-客户端管道" class="headerlink" title="(2) 客户端管道"></a>(2) 客户端管道</h4><ul>
+<h4 id="✧-缓存模式"><a href="#✧-缓存模式" class="headerlink" title="✧ 缓存模式"></a>✧ 缓存模式</h4><p><img src="/../img/Fiddler/GMico/GMico@001.png" srcset="/img/load.gif" lazyload alt="监控面板-TimeLine-传输时间轴-缓存模式"></p>
+<h4 id="✧-流模式"><a href="#✧-流模式" class="headerlink" title="✧ 流模式"></a>✧ 流模式</h4><p><img src="/../img/Fiddler/GMico/GMico@002.png" srcset="/img/load.gif" lazyload alt="监控面板-TimeLine-传输时间轴-流模式"></p>
+<h4 id="✧-图标说明"><a href="#✧-图标说明" class="headerlink" title="✧ 图标说明"></a>✧ 图标说明</h4><p><img src="/../img/Fiddler/GMico/GMico@003.png" srcset="/img/load.gif" lazyload alt="监控面板-TimeLine-传输时间轴-图标说明"></p>
+<h3 id="2-客户端管道"><a href="#2-客户端管道" class="headerlink" title="(2) 客户端管道"></a>(2) 客户端管道</h3><ul>
 <li>Client Pipe Map模式下，显示每个时间轴的客户端进程和Fiddler之间的连接。</li>
 <li>左侧显示连接标识符，包括：进程名称、进程ID、客户端的端口号。<ul>
 <li>例如：连接标识符360se:7668(p58566)，客户端为360se，进程编号7668，端口号58566。</li>
@@ -1167,7 +1167,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/GMico/GMico@004.png" srcset="/img/load.gif" lazyload alt="监控面板-TimeLine-客户端管道"></p>
-<h4 id="3-服务端管道"><a href="#3-服务端管道" class="headerlink" title="(3) 服务端管道"></a>(3) 服务端管道</h4><ul>
+<h3 id="3-服务端管道"><a href="#3-服务端管道" class="headerlink" title="(3) 服务端管道"></a>(3) 服务端管道</h3><ul>
 <li>Server Pipe Map模式下，显示每个时间轴的Fiddler和上游服务器之间的连接。</li>
 <li>左侧显示连接标识符，包括：Fiddler端的端口号、目标主机名。<ul>
 <li>例如：p58571-&gt;localhost:4000，Fiddler使用端口58571连接到localhost的4000端口。</li>
@@ -1176,7 +1176,7 @@
 </li>
 </ul>
 <p><img src="/../img/Fiddler/GMico/GMico@005.png" srcset="/img/load.gif" lazyload alt="监控面板-TimeLine-服务端管道"></p>
-<h4 id="4-做性能分析"><a href="#4-做性能分析" class="headerlink" title="(4) 做性能分析"></a>(4) 做性能分析</h4><ul>
+<h3 id="4-做性能分析"><a href="#4-做性能分析" class="headerlink" title="(4) 做性能分析"></a>(4) 做性能分析</h3><ul>
 <li>时间轴是一种对应用程序使用网络的富信息视图表示。<ul>
 <li>依据条形栏的长短可以找出响应快慢的请求：越短响应越快，越长响应越慢。</li>
 <li>浏览器开启线程数有限，默认请求数为6个，由于连接限制也会带来性能瓶颈。</li>
@@ -1442,7 +1442,7 @@
       
         <a href="/tags/Fiddler/">#Fiddler</a>
       
-        <a href="/tags/HTTP%E8%B0%83%E8%AF%95%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/">#HTTP调试代理工具</a>
+        <a href="/tags/HTTP%E8%B0%83%E8%AF%95%E4%BB%A3%E7%90%86/">#HTTP调试代理</a>
       
     </div>
   
