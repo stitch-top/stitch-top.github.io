@@ -18,20 +18,20 @@
   <meta name="author" content="Dr.626">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Android Debug Bridge是一种允许模拟器或已连接的Android设备进行通信的命令行工具，可为各种设备操作提供便利。">
+    <meta name="description" content="🍕 Android Debug Bridge是一种允许模拟器或已连接的Android设备进行通信的命令行工具，可为各种设备操作提供便利。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ADB 实用命令">
 <meta property="og:url" content="https://stitch-top.github.io/2022/09/02/ce-shi-gong-ju/tt05-adb-diao-shi-gong-ju/tt05-01-adb-shi-yong-ming-ling/index.html">
 <meta property="og:site_name" content="Dr.626">
-<meta property="og:description" content="Android Debug Bridge是一种允许模拟器或已连接的Android设备进行通信的命令行工具，可为各种设备操作提供便利。">
+<meta property="og:description" content="🍕 Android Debug Bridge是一种允许模拟器或已连接的Android设备进行通信的命令行工具，可为各种设备操作提供便利。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1859652140.jpg">
 <meta property="article:published_time" content="2022-09-02T15:21:00.000Z">
-<meta property="article:modified_time" content="2024-04-17T07:11:53.756Z">
+<meta property="article:modified_time" content="2024-05-14T07:17:51.588Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="测试工具">
 <meta property="article:tag" content="ADB">
-<meta property="article:tag" content="Android调试工具">
+<meta property="article:tag" content="Android调试">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1859652140.jpg">
   
@@ -278,7 +278,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.9k 字
+          13k 字
         
       </span>
     
@@ -289,7 +289,7 @@
         
         
         
-          75 分钟
+          105 分钟
         
       </span>
     
@@ -359,7 +359,7 @@
             
             <div class="markdown-body">
               
-              <p>Android Debug Bridge是一种允许模拟器或已连接的Android设备进行通信的命令行工具，可为各种设备操作提供便利。</p>
+              <p>🍕 Android Debug Bridge是一种允许模拟器或已连接的Android设备进行通信的命令行工具，可为各种设备操作提供便利。</p>
 <span id="more"></span>
 
 
@@ -385,14 +385,23 @@
 </ul>
 </li>
 </ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb <span class="hljs-built_in">help</span><br>Android Debug Bridge version <span class="hljs-number">1</span>.<span class="hljs-number">0</span>.<span class="hljs-number">41</span><br>Version <span class="hljs-number">31</span>.<span class="hljs-number">0</span>.<span class="hljs-number">3</span>-<span class="hljs-number">7562133</span><br>Installed as D:\...\adb.exe<br><br>global options:<br> -a         listen on all network interfaces, <span class="hljs-keyword">not</span> just localhost<br> -d         use USB device (error <span class="hljs-keyword">if</span> multiple devices connected)<br> -e         use TCP/IP device (error <span class="hljs-keyword">if</span> multiple TCP/IP devices available)<br> -s SERIAL  use device with given serial (overrides $ANDROID_SERIAL)<br> -t ID      use device with given transport id<br> -H         name of adb server host [default=localhost]<br> -P         port of adb server [default=<span class="hljs-number">5037</span>]<br> -L SOCKET  listen on given socket <span class="hljs-keyword">for</span> adb server [default=tcp:localhost:<span class="hljs-number">5037</span>]<br><br>general commands:<br> ...<br><span class="hljs-function"></span><br><span class="hljs-function">usb:</span><br><span class="hljs-function"> <span class="hljs-title">attach</span>                   <span class="hljs-title">attach</span> <span class="hljs-title">a</span> <span class="hljs-title">detached</span> <span class="hljs-title">USB</span> <span class="hljs-title">device</span></span><br><span class="hljs-function"> <span class="hljs-title">detach</span>                   <span class="hljs-title">detach</span> <span class="hljs-title">from</span> <span class="hljs-title">a</span> <span class="hljs-title">USB</span> <span class="hljs-title">device</span> <span class="hljs-title">to</span> <span class="hljs-title">allow</span> <span class="hljs-title">use</span> <span class="hljs-title">by</span> <span class="hljs-title">other</span> <span class="hljs-title">processes</span></span><br><span class="hljs-function"><span class="hljs-title">environment</span> <span class="hljs-title">variables</span>:</span><br><span class="hljs-function"> $<span class="hljs-title">ADB_TRACE</span></span><br><span class="hljs-function">     <span class="hljs-title">comma</span>-<span class="hljs-title">separated</span> <span class="hljs-title">list</span> <span class="hljs-title">of</span> <span class="hljs-title">debug</span> <span class="hljs-title">info</span> <span class="hljs-title">to</span> <span class="hljs-title">log</span>:</span><br><span class="hljs-function">     <span class="hljs-title">all</span>,<span class="hljs-title">adb</span>,<span class="hljs-title">sockets</span>,<span class="hljs-title">packets</span>,<span class="hljs-title">rwx</span>,<span class="hljs-title">usb</span>,<span class="hljs-title">sync</span>,<span class="hljs-title">sysdeps</span>,<span class="hljs-title">transport</span>,<span class="hljs-title">jdwp</span></span><br><span class="hljs-function"> $<span class="hljs-title">ADB_VENDOR_KEYS</span>         <span class="hljs-title">colon</span>-<span class="hljs-title">separated</span> <span class="hljs-title">list</span> <span class="hljs-title">of</span> <span class="hljs-title">keys</span> (<span class="hljs-title">files</span> <span class="hljs-title">or</span> <span class="hljs-title">directories</span>)</span><br><span class="hljs-function"> $<span class="hljs-title">ANDROID_SERIAL</span>          <span class="hljs-title">serial</span> <span class="hljs-title">number</span> <span class="hljs-title">to</span> <span class="hljs-title">connect</span> <span class="hljs-title">to</span> (<span class="hljs-title">see</span> -<span class="hljs-title">s</span>)</span><br><span class="hljs-function"> $<span class="hljs-title">ANDROID_LOG_TAGS</span>        <span class="hljs-title">tags</span> <span class="hljs-title">to</span> <span class="hljs-title">be</span> <span class="hljs-title">used</span> <span class="hljs-title">by</span> <span class="hljs-title">logcat</span> (<span class="hljs-title">see</span> <span class="hljs-title">logcat</span> --<span class="hljs-title">help</span>)</span><br><span class="hljs-function"> $<span class="hljs-title">ADB_LOCAL_TRANSPORT_MAX_PORT</span> <span class="hljs-title">max</span> <span class="hljs-title">emulator</span> <span class="hljs-title">scan</span> <span class="hljs-title">port</span> (<span class="hljs-title">default</span> 5585, 16 <span class="hljs-title">emus</span>)</span><br><span class="hljs-function"> $<span class="hljs-title">ADB_MDNS_AUTO_CONNECT</span>   <span class="hljs-title">comma</span>-<span class="hljs-title">separated</span> <span class="hljs-title">list</span> <span class="hljs-title">of</span> <span class="hljs-title">mdns</span> <span class="hljs-title">services</span> <span class="hljs-title">to</span> <span class="hljs-title">allow</span> <span class="hljs-title">auto</span>-<span class="hljs-title">connect</span> (<span class="hljs-title">default</span> <span class="hljs-title">adb</span>-<span class="hljs-title">tls</span>-<span class="hljs-title">connect</span>)</span><br></code></pre></td></tr></table></figure>
+
+
+
 <h2 id="1-2-调试模式"><a href="#1-2-调试模式" class="headerlink" title="1-2 调试模式"></a>1-2 调试模式</h2><ul>
 <li>调试模式<ul>
 <li>使用USB将PC端和Android手机设备连接，再将手机设备的USB调试模式打开，不同型号手机调试模式位置不同。</li>
 <li>模拟器：Android Studio Emulator(官方)、Genymotion(国外软件)、网易mumu、雷电、夜神、逍遥等第三方模拟器。</li>
 <li>手机设备的调试模式开启后，打开PC端的命令行窗口中，输入<code>adb devices</code>，回车确认PC端是否正常连接手机设备。</li>
+<li>5037端口为adb的默认端口，若5037端口被占用，使用Adb时会因找不到设备而困扰，提供以下解决端口占用的思路。</li>
 </ul>
 </li>
 </ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; netstat -aon | <span class="hljs-built_in">findstr</span> <span class="hljs-number">5037</span>                # 找到使用该端口的进程PID<br>TCP    <span class="hljs-number">127</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>:<span class="hljs-number">5037</span>         <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>:<span class="hljs-number">0</span>              LISTENING       <span class="hljs-number">14216</span><br><br>&gt; tasklist /fi &quot;PID eq <span class="hljs-number">14216</span>&quot;                # 通过PID找到对应的进程名<br><br>Image Name                     PID Session Name        Session#    Mem Usage<br>========================= ======== ================ =========== ============<br>adb.exe                      <span class="hljs-number">14216</span> Console                    <span class="hljs-number">1</span>     <span class="hljs-number">11</span>,<span class="hljs-number">172</span> K<br><br>&gt; <span class="hljs-built_in">taskkill</span> /pid <span class="hljs-number">14216</span> /f                     # 使用命令终止该命令的运行<br><span class="hljs-function">SUCCESS: <span class="hljs-title">The</span> <span class="hljs-title">process</span> <span class="hljs-title">with</span> <span class="hljs-title">PID</span> 14216 <span class="hljs-title">has</span> <span class="hljs-title">been</span> <span class="hljs-title">terminated</span>.</span><br></code></pre></td></tr></table></figure>
+
+
+
 <h1 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2 常用命令"></a>2 常用命令</h1><ul>
 <li>常用命令<ul>
 <li>单一设备的adb命令语法：<code>adb &lt;command&gt;</code>。</li>
@@ -406,11 +415,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-1-帮助信息"><a href="#2-1-帮助信息" class="headerlink" title="2-1 帮助信息"></a>2-1 帮助信息</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb <span class="hljs-built_in">help</span>                           # 显示adb的版本和帮助信息<br>adb --<span class="hljs-built_in">help</span>                         # 显示adb的版本和帮助信息<br>adb version                        # 查看adb的版本信息<br></code></pre></td></tr></table></figure>
+<h2 id="2-1-帮助信息"><a href="#2-1-帮助信息" class="headerlink" title="2-1 帮助信息"></a>2-1 帮助信息</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb <span class="hljs-built_in">help</span>                                    # 显示adb的版本和帮助信息<br>&gt; adb --<span class="hljs-built_in">help</span>                                  # 显示adb的版本和帮助信息<br>&gt; adb version                                 # 查看adb的版本信息<br>Android Debug Bridge version <span class="hljs-number">1</span>.<span class="hljs-number">0</span>.<span class="hljs-number">41</span><br>Version <span class="hljs-number">31</span>.<span class="hljs-number">0</span>.<span class="hljs-number">3</span>-<span class="hljs-number">7562133</span><br>Installed as D:\...\adb.exe<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="2-2-开关服务"><a href="#2-2-开关服务" class="headerlink" title="2-2 开关服务"></a>2-2 开关服务</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb <span class="hljs-built_in">start</span>-server                   # 开启adb服务，一般无需执行此命令，运行时发现Server未启动会自动调起<br>adb -P &lt;port&gt; <span class="hljs-built_in">start</span>-server         # 指定Server网络端口启动服务，默认端口为<span class="hljs-number">5037</span><br>adb kill-server                    # 关掉adb服务<br></code></pre></td></tr></table></figure>
+<h2 id="2-2-开关服务"><a href="#2-2-开关服务" class="headerlink" title="2-2 开关服务"></a>2-2 开关服务</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb <span class="hljs-built_in">start</span>-server                            # 开启adb服务，无需执行此命令，运行时发现Server未启动会自动调起<br>* daemon <span class="hljs-keyword">not</span> running; starting now <span class="hljs-built_in">at</span> tcp:<span class="hljs-number">5037</span><br>* daemon started successfully<br><br>&gt; adb -P <span class="hljs-number">5037</span> <span class="hljs-built_in">start</span>-server                    # 指定Server网络端口启动服务，默认端口为<span class="hljs-number">5037</span><br>&gt; adb kill-server                             # 关掉adb服务<br></code></pre></td></tr></table></figure>
 
 
 
@@ -439,7 +448,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb root                           # root权限运行adbd<br>adb devices                        # 查询已连接的设备或模拟器列表<br>adb devices -l                     # 查询已连接的设备或模拟器具体信息<br>adb get-state                      # 返回设备或模拟器的连接状态信息<br></code></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb root                                   # root权限运行adbd<br>&gt; adb devices                                # 查询已连接的设备或模拟器列表<br>List of devices attached<br>xxxxxxxxxxxxxxx device<br><br>&gt; adb devices -l                             # 查询已连接的设备或模拟器具体信息<br>List of devices attached<br>xxxxxxxxxxxxxxx device product:PD2123 model:V2123A device:PD2123 transport_id:<span class="hljs-number">1</span><br><br>&gt; adb get-state                              # 返回设备或模拟器的连接状态信息<br>device<br></code></pre></td></tr></table></figure>
 
 
 
@@ -460,250 +469,84 @@
 </ul>
 </li>
 <li>多个设备的adb命令语法：<code>adb -s &lt;serial-number&gt; install &lt;apk-file&gt;</code>。</li>
-<li>安装状态：Success(成功)、Failure(失败，对应的失败输出代码，如下所示)。<table>
-<thead>
-<tr>
-<th align="left">输出代码类型&gt;&gt;&gt;参看“<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhonglunshun/article/details/78362439">玩转ADB命令</a>”</th>
-<th align="left">说明及解决办法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>INSTALL_FAILED_DEXOPT</code></td>
-<td align="left">dex优化验证失败，或空间不足</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_OLDER_SDK</code></td>
-<td align="left">设备系统版本低于应用要求</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_NEWER_SDK</code></td>
-<td align="left">设备系统版本高于应用要求</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_TEST_ONLY</code></td>
-<td align="left">应用是test-only的，但安装时没有指定-t参数</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_TEST_ONLY</code></td>
-<td align="left">APK文件是使用Android Studio直接RUN编译出来的文件(通过Gradle的assembleDebug或assembleRelease重新编译，或 Generate Signed APK)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_INVALID_APK</code></td>
-<td align="left">无效的APK文件</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_INVALID_URI</code></td>
-<td align="left">无效的APK文件名(确保APK文件名里无中文)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_UID_CHANGED</code></td>
-<td align="left">安装过该应用，与本次分配的UID不一致(清除以前安装过的残留文件)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_INTERNAL_ERROR</code></td>
-<td align="left">因系统问题安装失败</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_NO_SHARED_USER</code></td>
-<td align="left">请求的共享用户不存在</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_ALREADY_EXISTS</code></td>
-<td align="left">应用已存在或没卸载干净(install时使用-r参数，或先uninstall再安装)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_USER_RESTRICTED</code></td>
-<td align="left">用户被限制安装应用</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_MISSING_FEATURE</code></td>
-<td align="left">应用使用了设备不可用的功能</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_PACKAGE_CHANGED</code></td>
-<td align="left">应用与调用程序期望的不一致</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_CONTAINER_ERROR</code></td>
-<td align="left">sdcard访问失败(确认sdcard可用，或安装到内置存储)，应用签名与ROM签名一致，被当作内置应用(打包时不与ROM使用相同签名)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_NO_MATCHING_ABIS</code></td>
-<td align="left">包含设备的应用程序二进制接口不支持的native code</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_VERSION_DOWNGRADE</code></td>
-<td align="left">已安装了该应用的更高版本(使用-d参数)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_ACWF_INCOMPATIBLE</code></td>
-<td align="left">应用程序与设备不兼容</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_DUPLICATE_PACKAGE</code></td>
-<td align="left">已存在同名程序</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_MEDIA_UNAVAILABLE</code></td>
-<td align="left">安装位置不可用(一般为sdcard，确认sdcard可用或安装到内置存储)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_UPDATE_INCOMPATIBLE</code></td>
-<td align="left">安装过同名应用卸载时数据未移除，或已安装该应用但签名不一致(先卸载再安装)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_INSUFFICIENT_STORAGE</code></td>
-<td align="left">空间不足(清理空间)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_VERIFICATION_TIMEOUT</code></td>
-<td align="left">验证安装包超时</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_VERIFICATION_FAILURE</code></td>
-<td align="left">验证安装包失败</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_DUPLICATE_PERMISSION</code></td>
-<td align="left">尝试定义一个已存在的权限名称</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_CONFLICTING_PROVIDER</code></td>
-<td align="left">设备里已存在与应用同名的content provider</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_CPU_ABI_INCOMPATIBLE</code></td>
-<td align="left">包含不兼容设备CPU应用程序二进制接口的native code</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_MISSING_SHARED_LIBRARY</code></td>
-<td align="left">安装包使用了设备上不可用的共享库</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_REPLACE_COULDNT_DELETE</code></td>
-<td align="left">替换时无法删除</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_SHARED_USER_INCOMPATIBLE</code></td>
-<td align="left">请求的共享用户存在，但签名不一致</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_INVALID_INSTALL_LOCATION</code></td>
-<td align="left">不能安装到指定位置(切换安装位置，添加或删除-s参数)，应用签名与ROM签名一致，被当作内置应用(打包时不与ROM使用相同签名)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_FAILED_PERMISSION_MODEL_DOWNGRADE</code></td>
-<td align="left">已安装target SDK支持运行时权限的同名应用，要安装的版本不支持运行时权限</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_CANCELED_BY_USER</code></td>
-<td align="left">应用安装需在设备上确认，但未操作设备或点了取消(在设备上同意安装)</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_NOT_APK</code></td>
-<td align="left">指定路径不是文件，或不是以.apk结尾</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_BAD_MANIFEST</code></td>
-<td align="left">无法解析的AndroidManifest.xml文件</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_MANIFEST_EMPTY</code></td>
-<td align="left">在manifest文件里找不到，则找可操作标签instrumentation或application</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_NO_CERTIFICATES</code></td>
-<td align="left">安装包没有签名</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_BAD_PACKAGE_NAME</code></td>
-<td align="left">manifest文件里没有或使用了无效包名</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_MANIFEST_MALFORMED</code></td>
-<td align="left">解析manifest文件时遇到结构性错误</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_BAD_SHARED_USER_ID</code></td>
-<td align="left">manifest文件里指定了无效的共享用户ID</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_UNEXPECTED_EXCEPTION</code></td>
-<td align="left">解析器遇到异常</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_CERTIFICATE_ENCODING</code></td>
-<td align="left">解析APK文件时遇到CertificateEncodingException</td>
-</tr>
-<tr>
-<td align="left"><code>INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES</code></td>
-<td align="left">已安装该应用，且签名与APK文件不一致(先卸载再安装)</td>
-</tr>
-<tr>
-<td align="left"><code>does not contain AndroidManifest.xml</code></td>
-<td align="left">无效的APK文件</td>
-</tr>
-<tr>
-<td align="left"><code>is not a valid zip file</code></td>
-<td align="left">无效的APK文件</td>
-</tr>
-<tr>
-<td align="left"><code>Offline</code></td>
-<td align="left">设备未连接成功(先将设备与adb连接成功)</td>
-</tr>
-<tr>
-<td align="left"><code>unauthorized</code></td>
-<td align="left">设备未授权允许调试</td>
-</tr>
-<tr>
-<td align="left"><code>protocol failure</code></td>
-<td align="left">设备已断开连接(先将设备与adb连接成功)</td>
-</tr>
-<tr>
-<td align="left"><code>Unknown option: -s</code></td>
-<td align="left">Android2.2以下不支持安装到sdcard(不使用-s参数)</td>
-</tr>
-<tr>
-<td align="left"><code>error: device not found</code></td>
-<td align="left">没有连接成功的设备(先将设备与adb连接成功)</td>
-</tr>
-<tr>
-<td align="left"><code>No space left on device</code></td>
-<td align="left">空间不足(清理空间)</td>
-</tr>
-<tr>
-<td align="left"><code>Permission denied...sdcard...</code></td>
-<td align="left">sdcard不可用</td>
-</tr>
-<tr>
-<td align="left"><code>signatures do not match the previously installed version; ignoring!</code></td>
-<td align="left">已安装该应用且签名不一致(先卸载再安装)</td>
-</tr>
-</tbody></table>
+<li>安装状态：Success(成功)、Failure(失败，对应的失败输出代码，如下所示)。<ul>
+<li><code>INSTALL_FAILED_INSUFFICIENT_STORAGE</code>·············空间不足</li>
+<li><code>INSTALL_FAILED_INVALID_APK</code>······················无效的APK文件</li>
+<li><code>INSTALL_FAILED_DUPLICATE_PACKAGE</code>················已存在同名程序</li>
+<li><code>INSTALL_FAILED_MEDIA_UNAVAILABLE</code>················安装位置不可用</li>
+<li><code>INSTALL_FAILED_VERIFICATION_TIMEOUT</code>·············验证安装包超时</li>
+<li><code>INSTALL_FAILED_VERIFICATION_FAILURE</code>·············验证安装包失败</li>
+<li><code>INSTALL_FAILED_REPLACE_COULDNT_DELETE</code>···········替换时无法删除</li>
+<li><code>INSTALL_FAILED_USER_RESTRICTED</code>··················用户被限制安装应用</li>
+<li><code>INSTALL_FAILED_TEST_ONLY</code>························应用是test-only的，安装时未指定-t参数</li>
+<li><code>INSTALL_FAILED_INVALID_URI</code>······················无效的APK文件名，确保APK文件名无中文</li>
+<li><code>INSTALL_FAILED_UID_CHANGED</code>······················安装过该应用了，与本次分配的UID不一致</li>
+<li><code>INSTALL_FAILED_INTERNAL_ERROR</code>···················因系统问题而安装失败</li>
+<li><code>INSTALL_FAILED_NO_SHARED_USER</code>···················请求的共享用户不存在</li>
+<li><code>INSTALL_FAILED_VERSION_DOWNGRADE</code>················已安装应用的更高版本</li>
+<li><code>INSTALL_FAILED_ACWF_INCOMPATIBLE</code>················应用程序与设备不兼容</li>
+<li><code>INSTALL_FAILED_ALREADY_EXISTS</code>···················应用已存在，或没卸载干净</li>
+<li><code>INSTALL_FAILED_OLDER_SDK</code>························设备系统版本低于应用要求</li>
+<li><code>INSTALL_FAILED_NEWER_SDK</code>························设备系统版本高于应用要求</li>
+<li><code>INSTALL_FAILED_MISSING_FEATURE</code>··················应用使用了设备不可用的功能</li>
+<li><code>INSTALL_FAILED_PACKAGE_CHANGED</code>··················应用与调用程序期望的不一致</li>
+<li><code>INSTALL_FAILED_DEXOPT</code>···························dex优化验证失败，或空间不足</li>
+<li><code>INSTALL_FAILED_DUPLICATE_PERMISSION</code>·············尝试定义一个已存在的权限名称</li>
+<li><code>INSTALL_FAILED_PERMISSION_MODEL_DOWNGRADE</code>·······要安装的版本不支持运行时权限</li>
+<li><code>INSTALL_FAILED_CONFLICTING_PROVIDER</code>·············设备里已存在与应用同名的content provider</li>
+<li><code>INSTALL_FAILED_CONTAINER_ERROR</code>··················sdcard访问失败，应用签名与ROM一致被当作内置应用</li>
+<li><code>INSTALL_FAILED_CPU_ABI_INCOMPATIBLE</code>·············包含不兼容设备CPU应用程序二进制接口的native code</li>
+<li><code>INSTALL_FAILED_NO_MATCHING_ABIS</code>·················包含该设备的应用程序二进制接口不支持的native code</li>
+<li><code>INSTALL_FAILED_MISSING_SHARED_LIBRARY</code>···········安装包使用了设备上不可用的共享库</li>
+<li><code>INSTALL_FAILED_SHARED_USER_INCOMPATIBLE</code>·········请求的共享用户存在，但签名不一致</li>
+<li><code>INSTALL_FAILED_UPDATE_INCOMPATIBLE</code>··············安装过应用卸载时数据未移除或已安装应用但签名不一致</li>
+<li><code>INSTALL_FAILED_INVALID_INSTALL_LOCATION</code>·········不能安装指定位置，应用签名与ROM一致被当作内置应用</li>
+<li><code>INSTALL_CANCELED_BY_USER</code>························应用安装需在设备上确认，但未操作设备或点了取消</li>
+<li><code>INSTALL_PARSE_FAILED_BAD_MANIFEST</code>···············无法解析的AndroidManifest.xml文件</li>
+<li><code>INSTALL_PARSE_FAILED_NOT_APK</code>····················指定路径不是文件，或不是以.apk结尾</li>
+<li><code>INSTALL_PARSE_FAILED_UNEXPECTED_EXCEPTION</code>·······解析器遇到异常</li>
+<li><code>INSTALL_PARSE_FAILED_NO_CERTIFICATES</code>············安装包没有签名</li>
+<li><code>INSTALL_PARSE_FAILED_MANIFEST_MALFORMED</code>·········解析manifest文件时遇到结构性错误</li>
+<li><code>INSTALL_PARSE_FAILED_BAD_PACKAGE_NAME</code>···········manifest文件里没有或使用了无效包名</li>
+<li><code>INSTALL_PARSE_FAILED_BAD_SHARED_USER_ID</code>·········manifest文件里指定了无效的共享用户ID</li>
+<li><code>INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES</code>··已安装该应用，且签名与APK文件不一致</li>
+<li><code>INSTALL_PARSE_FAILED_CERTIFICATE_ENCODING</code>·······解析APK文件时遇到CertificateEncodingException</li>
+<li><code>INSTALL_PARSE_FAILED_MANIFEST_EMPTY</code>·············manifest里找不到，找instrumentation或application</li>
+<li><code>Permission denied...sdcard...</code>···················sdcard不可用</li>
+<li><code>does not contain AndroidManifest.xml</code>············无效的APK文件</li>
+<li><code>is not a valid zip file</code>·························无效的APK文件</li>
+<li><code>No space left on device</code>·························空间不足(清理空间)</li>
+<li><code>unauthorized</code>····································设备未授权允许调试</li>
+<li><code>Offline</code>·········································设备未连接成功(先将设备与adb连接成功)</li>
+<li><code>protocol failure</code>································设备已断开连接(先将设备与adb连接成功)</li>
+<li><code>error: device not found</code>·························没有连接成功的设备(先将设备与adb连接成功)</li>
+<li><code>Unknown option: -s</code>······························Android2.2以下不支持安装到sdcard(不使用-s参数)</li>
+<li><code>signatures do not match the previously installed version; ignoring!</code>：已安装该应用并且签名不一致。</li>
+</ul>
 </li>
 </ul>
 </li>
 </ul>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb install -d demo.apk            # 允许降级覆盖安装demo.apk<br>adb install -g demo.apk            # 授予demo.apk所有运行时权限<br>adb install -t demo.apk            # 允许安装指定android:testOnly=&quot;true&quot;的应用<br></code></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb install -d demo-<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">8</span>.apk               # 允许降级覆盖安装demo-<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">8</span>.apk<br>Performing Streamed Install                   # 手机将弹窗安装确认，确认后才可以安装<br>Success<br><br>&gt; adb install -g demo-<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">9</span>.apk               # 授予demo-<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">9</span>.apk所有运行时权限<br>&gt; adb install -t demo-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">0</span>.apk               # 允许安装指定android:testOnly=&quot;true&quot;的应用<br></code></pre></td></tr></table></figure>
 
 
 
 <h2 id="2-5-日志打印"><a href="#2-5-日志打印" class="headerlink" title="2-5 日志打印"></a>2-5 日志打印</h2><ul>
 <li>日志打印<ul>
-<li>Android系统的日志分为两部分，底层的Linux内核日志输出到&#x2F;proc&#x2F;kmsg，Android的日志输出到&#x2F;dev&#x2F;log。</li>
+<li>Android系统的日志分为两部分，底层的Linux内核日志输出到&#x2F;proc&#x2F;kmsg，安卓的日志则输出到&#x2F;dev&#x2F;log。</li>
 <li>查看设备属性的基本命令格式：<code>adb logcat [option] [filter-specs]</code>，<code>Ctrl + C</code>可以停止日志监控。</li>
 <li>级别过滤：<code>adb logcat [filter-specs]</code>，MacOS用<code>adb logcat &quot;*:W&quot;</code>，否则报错<code>no matches found: *:W</code>。<ul>
 <li><code>*:V</code>：过滤只显示(开发产品中的调试信息)Verbose及以上级别(优先级最低)。</li>
 <li><code>*:D</code>：过滤只显示(发布产品中的调试信息)Debug及以上级别。</li>
-<li><code>*:I</code>：过滤只显示(一般提示性的信息)Info及以上级别。</li>
+<li><code>*:I</code>：过滤只显示(提示性的信息)Info及以上级别。</li>
 <li><code>*:W</code>：过滤只显示(警告信息)Warning及以上级别。</li>
-<li><code>*:E</code>：过滤只显示(错误信息)Error及以上级别。</li>
-<li><code>*:F</code>：过滤只显示Fatal及以上级别。</li>
-<li><code>*:S</code>：过滤只显示Silent及以上级别(优先级最高，什么也不输出)。</li>
+<li><code>*:E</code>：过滤只显示(一般的错误信息)Error及以上级别。</li>
+<li><code>*:F</code>：过滤只显示(严重的错误消息)Fatal及以上级别。</li>
+<li><code>*:S</code>：过滤只显示(不输出任何消息)Silent及以上级别(优先级最高)。</li>
 </ul>
 </li>
-<li>tag和级别过滤：<code>adb logcat [tag:level] ... [tag:level]</code>。</li>
-<li>格式化输出：<code>adb logcat -v &lt;format&gt;</code>，format指定日志输出的格式，默认为brief。<ul>
+<li>tag和级别过滤：<code>adb logcat [tag:level] ... [tag:level] [tag:level]</code>。</li>
+<li>格式输出：<code>adb logcat -v &lt;format&gt;</code>，format指定日志输出格式，默认brief。<ul>
 <li>raw：<code>&lt;message&gt;</code>。</li>
 <li>tag：<code>&lt;priority&gt;/&lt;tag&gt;: &lt;message&gt;</code>。</li>
 <li>process：<code>&lt;priority&gt;(&lt;pid&gt;) &lt;message&gt;</code>。</li>
@@ -725,26 +568,26 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb logcat *:W                    # 输出Warning、Error、Fatal和Silent日志<br>adb logcat ActivityManager:I *:S  # 输出ActivityManager的Info及其他tag的Silent以上级别日志<br>adb logcat -v <span class="hljs-built_in">time</span>                # 打印时间<br>adb logcat -v <span class="hljs-built_in">color</span>               # 使用不同的颜色来显示每个优先级<br>adb logcat -v long *:S            # 以long格式输出tag的Silent以上级别日志<br>adb logcat &gt; log.log              # 保存日志到PC端的log.log文件中<br>adb logcat -c                     # 清空已存在的日志<br>adb logcat -d                     # 将日志显示在控制台<br>adb logcat -f &lt;file-<span class="hljs-built_in">path</span>&gt;         # 将日志输出到文件<br>adb logcat -g                     # 打印指定日志缓冲区的大小<br></code></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb logcat *:W                             # 输出Warning、Error、Fatal和Silent日志<br>&gt; adb logcat -v <span class="hljs-built_in">time</span>                         # 打印时间<br>&gt; adb logcat -v <span class="hljs-built_in">color</span>                        # 使用不同的颜色来显示每个优先级<br>&gt; adb logcat -v long *:S                     # 以long格式输出tag的Silent以上级别日志<br>--------- beginning of crash                 # 从这里开始是与崩溃相关的日志消息<br>--------- beginning of system                # 从这里开始是系统日志消息<br>--------- beginning of main                  # 从这里开始是应用程序的主要日志消息<br><br>&gt; adb logcat ActivityManager:I *:S           # 输出ActivityManager的Info及其他tag的Silent以上级别日志<br>&gt; adb logcat &gt; log.log                       # 保存日志到PC端的log.log文件中，CTRL+C暂停输出<br>&gt; adb logcat -d                              # 将日志显示在控制台，CTRL+C暂停输出<br>&gt; adb logcat -c                              # 清空已存在的日志<br>&gt; adb logcat -f &lt;file-<span class="hljs-built_in">path</span>&gt;                  # 将日志输出到文件，可能出现文件系统是只读模式(不推荐)<br><span class="hljs-function">logcat: <span class="hljs-title">Couldn</span>&#x27;<span class="hljs-title">t</span> <span class="hljs-title">open</span> <span class="hljs-title">output</span> <span class="hljs-title">file</span>: <span class="hljs-title">Read</span>-<span class="hljs-title">only</span> <span class="hljs-title">file</span> <span class="hljs-title">system</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">&gt; <span class="hljs-title">adb</span> <span class="hljs-title">logcat</span> -<span class="hljs-title">g</span>                              # 打印指定日志缓冲区的大小</span><br><span class="hljs-function"><span class="hljs-title">main</span>: <span class="hljs-title">ring</span> <span class="hljs-title">buffer</span> <span class="hljs-title">is</span> 4 <span class="hljs-title">MiB</span> (3 <span class="hljs-title">MiB</span> <span class="hljs-title">consumed</span>), <span class="hljs-title">max</span> <span class="hljs-title">entry</span> <span class="hljs-title">is</span> 5120 <span class="hljs-title">B</span>, <span class="hljs-title">max</span> <span class="hljs-title">payload</span> <span class="hljs-title">is</span> 4068 <span class="hljs-title">B</span></span><br><span class="hljs-function"><span class="hljs-title">system</span>: <span class="hljs-title">ring</span> <span class="hljs-title">buffer</span> <span class="hljs-title">is</span> 4 <span class="hljs-title">MiB</span> (3 <span class="hljs-title">MiB</span> <span class="hljs-title">consumed</span>), <span class="hljs-title">max</span> <span class="hljs-title">entry</span> <span class="hljs-title">is</span> 5120 <span class="hljs-title">B</span>, <span class="hljs-title">max</span> <span class="hljs-title">payload</span> <span class="hljs-title">is</span> 4068 <span class="hljs-title">B</span></span><br><span class="hljs-function"><span class="hljs-title">crash</span>: <span class="hljs-title">ring</span> <span class="hljs-title">buffer</span> <span class="hljs-title">is</span> 1 <span class="hljs-title">MiB</span> (918 <span class="hljs-title">KiB</span> <span class="hljs-title">consumed</span>), <span class="hljs-title">max</span> <span class="hljs-title">entry</span> <span class="hljs-title">is</span> 5120 <span class="hljs-title">B</span>, <span class="hljs-title">max</span> <span class="hljs-title">payload</span> <span class="hljs-title">is</span> 4068 <span class="hljs-title">B</span></span><br><span class="hljs-function"><span class="hljs-title">kernel</span>: <span class="hljs-title">ring</span> <span class="hljs-title">buffer</span> <span class="hljs-title">is</span> 1 <span class="hljs-title">MiB</span> (0 <span class="hljs-title">B</span> <span class="hljs-title">consumed</span>), <span class="hljs-title">max</span> <span class="hljs-title">entry</span> <span class="hljs-title">is</span> 5120 <span class="hljs-title">B</span>, <span class="hljs-title">max</span> <span class="hljs-title">payload</span> <span class="hljs-title">is</span> 4068 <span class="hljs-title">B</span></span><br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="2-6-文件传送"><a href="#2-6-文件传送" class="headerlink" title="2-6 文件传送"></a>2-6 文件传送</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb uninstall [-k] &lt;package-name&gt;  # 卸载应用，-k参数可选，表示卸载应用但保留数据和缓存目录<br>adb pull &lt;remote&gt; [local]          # 将移动设备中的文件传送到PC上，remote是移动设备路径，local是PC路径<br>adb push &lt;local&gt; &lt;remote&gt;          # 将PC中的文件传送到移动设备端，local是PC路径，remote是移动设备路径<br></code></pre></td></tr></table></figure>
+<h2 id="2-6-文件传送"><a href="#2-6-文件传送" class="headerlink" title="2-6 文件传送"></a>2-6 文件传送</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb uninstall [-k] &lt;package-name&gt;           # 卸载应用，-k参数可选，表示卸载应用但保留数据和缓存目录<br>&gt; adb pull &lt;remote&gt; [local]                   # 将移动设备中的文件传送到PC上，remote是移动设备路径，local是PC路径<br>&gt; adb push &lt;local&gt; &lt;remote&gt;                   # 将PC中的文件传送到移动设备端，local是PC路径，remote是移动设备路径<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="2-7-重启命令"><a href="#2-7-重启命令" class="headerlink" title="2-7 重启命令"></a>2-7 重启命令</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb reboot recovery                # 重启到Recovery模式<br>adb reboot                         # 从Recovery重启到Android<br>adb reboot bootloader              # 重启到Fastboot模式<br></code></pre></td></tr></table></figure>
+<h2 id="2-7-重启命令"><a href="#2-7-重启命令" class="headerlink" title="2-7 重启命令"></a>2-7 重启命令</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb reboot recovery                         # 重启到Recovery模式<br>&gt; adb reboot                                  # 从Recovery重启到Android<br>&gt; adb reboot bootloader                       # 重启到Fastboot模式<br></code></pre></td></tr></table></figure>
 
 
 
 <h1 id="3-高级命令"><a href="#3-高级命令" class="headerlink" title="3 高级命令"></a>3 高级命令</h1><ul>
 <li>高级命令<ul>
 <li>Android系统是基于Linux内核开发的，支持常见的Linux命令。</li>
-<li>命令都保存在手机的&#x2F;system&#x2F;bin文件中，在adb shell里可调用。</li>
+<li>命令保存在手机的&#x2F;system&#x2F;bin文件中，在adb shell里可调用。</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb shell ls                       # PC端查看Android设备当前目录的所有内容<br>abd shell                          # 进入Android设备目录<br>ls                                 # 查看设备当前目录的所有内容<br><span class="hljs-built_in">cd</span> /system/bin                     # 进入手机的/system/bin文件中<br>ls                                 # 查看保存在手机/system/bin文件中的Linux命令<br><span class="hljs-keyword">exit</span>                               # 退出Android设备目录，回到PC端<br></code></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb shell ls                               # PC端查看Android设备当前目录的所有内容<br>acct<br>apex<br>...<br>vgc<br><br>&gt; abd shell                                  # 进入Android设备目录<br><span class="hljs-function">PD2123:/ $</span><br><span class="hljs-function"></span><br><span class="hljs-function">&gt; <span class="hljs-title">ls</span>                                         # 查看设备当前目录的所有内容</span><br><span class="hljs-function"><span class="hljs-title">acct</span>        <span class="hljs-title">config</span>         <span class="hljs-title">default.prop</span>  <span class="hljs-title">init.environ.rc</span>      <span class="hljs-title">lost</span>+<span class="hljs-title">found</span>  <span class="hljs-title">proc</span>     <span class="hljs-title">system</span></span><br><span class="hljs-function"><span class="hljs-title">apex</span>        <span class="hljs-title">d</span>              <span class="hljs-title">dev</span>           <span class="hljs-title">init.vivo.common.rc</span>  <span class="hljs-title">metadata</span>    <span class="hljs-title">product</span>  <span class="hljs-title">system_ext</span></span><br><span class="hljs-function"><span class="hljs-title">bin</span>         <span class="hljs-title">data</span>           <span class="hljs-title">etc</span>           <span class="hljs-title">init.vivo.rc</span>         <span class="hljs-title">mnt</span>         <span class="hljs-title">sdcard</span>   <span class="hljs-title">vendor</span></span><br><span class="hljs-function"><span class="hljs-title">bugreports</span>  <span class="hljs-title">data_mirror</span>    <span class="hljs-title">factory</span>       <span class="hljs-title">init.vivo.soc.rc</span>     <span class="hljs-title">odm</span>         <span class="hljs-title">storage</span>  <span class="hljs-title">vgc</span></span><br><span class="hljs-function"><span class="hljs-title">cache</span>       <span class="hljs-title">debug_ramdisk</span>  <span class="hljs-title">init</span>          <span class="hljs-title">linkerconfig</span>         <span class="hljs-title">oem</span>         <span class="hljs-title">sys</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">&gt; <span class="hljs-title">cd</span> /<span class="hljs-title">system</span>/<span class="hljs-title">bin</span>                             # 进入手机的/<span class="hljs-title">system</span>/<span class="hljs-title">bin</span>文件中</span><br><span class="hljs-function">&gt; <span class="hljs-title">ls</span>                                         # 查看保存在手机/<span class="hljs-title">system</span>/<span class="hljs-title">bin</span>文件中的<span class="hljs-title">Linux</span>命令</span><br><span class="hljs-function">&gt; <span class="hljs-title">exit</span>                                       # 退出<span class="hljs-title">Android</span>设备目录，回到<span class="hljs-title">PC</span>端</span><br></code></pre></td></tr></table></figure>
 
 
 
@@ -764,15 +607,15 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb shell pm list packages                    # 列出系统应用<br>adb shell pm list packages -s                 # 列出系统应用<br>adb shell pm list packages -<span class="hljs-number">3</span>                 # 列出第三方应用<br>adb shell pm list packages test               # 查看包名包含字符串test的应用列表<br>adb shell pm list packages | grep test        # 使用grep过滤包名包含字符串test的应用列表<br>adb shell pm clear &lt;package-name&gt;             # 清除应用数据及缓存<br></code></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb shell pm list packages                 # 列出系统应用<br><span class="hljs-function">package:<span class="hljs-title">com.vivo.weather.provider</span></span><br><span class="hljs-function"><span class="hljs-title">package:com</span>.<span class="hljs-title">vivo.carlauncher</span></span><br><span class="hljs-function">...</span><br><span class="hljs-function"><span class="hljs-title">package:com</span>.<span class="hljs-title">qiyi.video</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">&gt; <span class="hljs-title">adb</span> <span class="hljs-title">shell</span> <span class="hljs-title">pm</span> <span class="hljs-title">list</span> <span class="hljs-title">packages</span> -<span class="hljs-title">s</span>              # 列出系统应用</span><br><span class="hljs-function">&gt; <span class="hljs-title">adb</span> <span class="hljs-title">shell</span> <span class="hljs-title">pm</span> <span class="hljs-title">list</span> <span class="hljs-title">packages</span> -3              # 列出第三方应用</span><br><span class="hljs-function">&gt; <span class="hljs-title">adb</span> <span class="hljs-title">shell</span> <span class="hljs-title">pm</span> <span class="hljs-title">list</span> <span class="hljs-title">packages</span> <span class="hljs-title">vivo</span>            # 查看包名包含字符串<span class="hljs-title">vivo</span>的应用列表</span><br><span class="hljs-function">&gt; <span class="hljs-title">adb</span> <span class="hljs-title">shell</span> <span class="hljs-title">pm</span> <span class="hljs-title">list</span> <span class="hljs-title">packages</span> | <span class="hljs-title">grep</span> <span class="hljs-title">vivo</span>     # 过滤包名包含字符串<span class="hljs-title">vivo</span>的应用列表(<span class="hljs-title">Linux</span>)</span><br><span class="hljs-function">&gt; <span class="hljs-title">adb</span> <span class="hljs-title">shell</span> <span class="hljs-title">pm</span> <span class="hljs-title">list</span> <span class="hljs-title">packages</span> | <span class="hljs-title">findstr</span> <span class="hljs-title">vivo</span>  # 过滤包名包含字符串<span class="hljs-title">vivo</span>的应用列表(<span class="hljs-title">Win</span>)</span><br><span class="hljs-function">&gt; <span class="hljs-title">adb</span> <span class="hljs-title">shell</span> <span class="hljs-title">pm</span> <span class="hljs-title">clear</span> &lt;<span class="hljs-title">package</span>-<span class="hljs-title">name</span>&gt;          # 清除应用数据及缓存</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h1 id="5-设备信息"><a href="#5-设备信息" class="headerlink" title="5 设备信息"></a>5 设备信息</h1><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb shell getprop ro.product.model           # 查看设备型号<br>adb shell getprop ro.build.version.release   # 查看Android系统版本<br>adb shell dumpsys wifi                       # 查看无限网络信息<br>adb shell dumpsys power                      # 查看电源管理相关信息<br>adb shell dumpsys battery                    # 查看电池状况，scale指最大电量，level指当前电量<br>adb shell dumpsys cpuinfo                    # 查看当前设备CPU使用情况，获取的是一段时间的均值<br>adb shell dumpsys meminfo                    # 查看进程占用情况，即内存信息<br>adb shell dumpsys window displays            # 查看显示屏参数<br>adb shell wm size                            # 查看屏幕分辨率<br>adb shell wm density                         # 查看屏幕密度<br>adb shell settings get secure android_id     # 查看android_id<br>adb shell ifconfig &quot;| grep Mask&quot;             # 查看手机IP地址<br>adb shell cat /proc/cpuinfo                  # 查看CPU使用情况<br>adb shell cat /proc/meminfo                  # 查看内存信息，MemTotal设备总内存，MemFree当前空闲内存<br>adb shell df                                 # 获取Android系统各个分区的相关信息<br></code></pre></td></tr></table></figure>
+<h1 id="5-设备信息"><a href="#5-设备信息" class="headerlink" title="5 设备信息"></a>5 设备信息</h1><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb shell getprop ro.product.model         # 查看设备型号<br>&gt; adb shell getprop ro.build.version.release # 查看Android系统版本<br>&gt; adb shell dumpsys wifi                     # 查看无限网络信息<br>&gt; adb shell dumpsys power                    # 查看电源管理相关信息<br>&gt; adb shell dumpsys battery                  # 查看电池状况，scale指最大电量，level指当前电量<br>&gt; adb shell dumpsys cpuinfo                  # 查看当前设备CPU使用情况，获取的是一段时间的均值<br>&gt; adb shell dumpsys meminfo                  # 查看进程占用情况，即内存信息<br>&gt; adb shell dumpsys window displays          # 查看显示屏参数<br>&gt; adb shell wm size                          # 查看屏幕分辨率<br>&gt; adb shell wm density                       # 查看屏幕密度<br>&gt; adb shell settings get secure android_id   # 查看android_id<br>&gt; adb shell ifconfig &quot;| grep Mask&quot;           # 查看手机IP地址<br>&gt; adb shell cat /proc/cpuinfo                # 查看CPU使用情况<br>&gt; adb shell cat /proc/meminfo                # 查看内存信息，MemTotal设备总内存，MemFree当前空闲内存<br>&gt; adb shell df                               # 获取Android系统各个分区的相关信息<br></code></pre></td></tr></table></figure>
 
 
 
-<h1 id="6-实用功能"><a href="#6-实用功能" class="headerlink" title="6 实用功能"></a>6 实用功能</h1><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">adb exec-out screencap -p &gt; sc.png            # 截图保存到电脑，如果adb版本较老，则无法使用exec-out命令<br>adb shell screencap -p /sdcard/sc.png         # 截图保存到设备里<br>adb shell screenrecord /sdcard/filename.mp4   # 录制屏幕以mp4格式保存到/sdcard，Ctrl+C停止录屏<br>adb shell monkey -p &lt;package-name&gt; -v <span class="hljs-number">500</span>     # Monkey压力测试，向包名指定的应用程序发送<span class="hljs-number">500</span>个伪随机事件<br>adb shell ps                                  # 进程，USER所属用户，PID进程ID，PPID父进程ID，NAME进程名<br>adb shell top                                 # 实时资源占用，PR优先级，S进程状态(R/S/T/Z)，#THR线程数<br></code></pre></td></tr></table></figure>
+<h1 id="6-实用功能"><a href="#6-实用功能" class="headerlink" title="6 实用功能"></a>6 实用功能</h1><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Cmd">&gt; adb exec-out screencap -p &gt; sc.png          # 截图保存到电脑，如果adb版本较老，则无法使用exec-out命令<br>&gt; adb shell screencap -p /sdcard/sc.png       # 截图保存到设备里<br>&gt; adb shell screenrecord /sdcard/filename.mp4 # 录制屏幕以mp4格式保存到/sdcard，Ctrl+C停止录屏<br>&gt; adb shell monkey -p &lt;package-name&gt; -v <span class="hljs-number">500</span>   # Monkey压力测试，向包名指定的应用程序发送<span class="hljs-number">500</span>个伪随机事件<br>&gt; adb shell ps                                # 进程，USER所属用户，PID进程ID，PPID父进程ID，NAME进程名<br>&gt; adb shell top                               # 实时资源占用，PR优先级，S进程状态(R/S/T/Z)，#THR线程数<br></code></pre></td></tr></table></figure>
 
 
 
@@ -818,7 +661,7 @@
       
         <a href="/tags/ADB/">#ADB</a>
       
-        <a href="/tags/Android%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/">#Android调试工具</a>
+        <a href="/tags/Android%E8%B0%83%E8%AF%95/">#Android调试</a>
       
     </div>
   
