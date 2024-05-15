@@ -18,16 +18,16 @@
   <meta name="author" content="Dr.626">
   <meta name="keywords" content="">
   
-    <meta name="description" content="MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为Web应用提供可扩展的高性能数据存储解决方案。">
+    <meta name="description" content="🍦 MongoDB是基于分布式文件存储的数据库，由C++语言编写，旨在为Web应用提供可扩展的高性能数据存储解决方案。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python MongoDB">
 <meta property="og:url" content="https://stitch-top.github.io/2021/11/03/python/python12-python-mongodb/index.html">
 <meta property="og:site_name" content="Dr.626">
-<meta property="og:description" content="MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为Web应用提供可扩展的高性能数据存储解决方案。">
+<meta property="og:description" content="🍦 MongoDB是基于分布式文件存储的数据库，由C++语言编写，旨在为Web应用提供可扩展的高性能数据存储解决方案。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1529632145.jpg">
 <meta property="article:published_time" content="2021-11-03T14:50:12.000Z">
-<meta property="article:modified_time" content="2024-03-08T09:53:56.586Z">
+<meta property="article:modified_time" content="2024-05-15T09:01:12.127Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="MongoDB">
 <meta name="twitter:card" content="summary_large_image">
@@ -357,17 +357,17 @@
             
             <div class="markdown-body">
               
-              <p>MongoDB是一个基于分布式文件存储的数据库，由C++语言编写，旨在为Web应用提供可扩展的高性能数据存储解决方案。</p>
+              <p>🍦 MongoDB是基于分布式文件存储的数据库，由C++语言编写，旨在为Web应用提供可扩展的高性能数据存储解决方案。</p>
 <span id="more"></span>
 
 
 
 <h1 id="1-MongoDB"><a href="#1-MongoDB" class="headerlink" title="1 MongoDB"></a>1 MongoDB</h1><ul>
 <li>MongoDB<ul>
-<li>Python需要MongoDB驱动程序，用以访问MongoDB数据库，使用PyMongo驱动程序。</li>
+<li>Python需要MongoDB驱动程序用以访问MongoDB数据库，使用PyMongo驱动程序。</li>
 <li>使用PIP进行下载并安装驱动，命令窗口输入：<code>python -m pip install pymongo</code>。</li>
 <li>命令窗口下进入Python交互界面，输入<code>import pymongo</code>回车，没报错说明成功安装。</li>
-<li>下载安装并配置MongoDB，参看“<a target="_blank" rel="noopener" href="https://blog.csdn.net/yuan2019035055/article/details/123031732">MongoDB数据库入门到精通看这一篇就够了</a>”。</li>
+<li>下载安装并配置MongoDB，可以参看“<a target="_blank" rel="noopener" href="https://blog.csdn.net/yuan2019035055/article/details/123031732">MongoDB数据库入门到精通看这一篇就够了</a>”。</li>
 </ul>
 </li>
 </ul>
@@ -379,7 +379,7 @@
 
 
 
-<h2 id="1-3-查集合方法"><a href="#1-3-查集合方法" class="headerlink" title="1-3 查集合方法"></a>1-3 查集合方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]          <span class="hljs-comment"># 创建mydatabase数据库</span><br><span class="hljs-comment"># collists = mydbs.collection_names()   # 旧版使用</span><br>collists = mydbs.list_collection_names()<br><br><span class="hljs-built_in">print</span>(collists)                         <span class="hljs-comment"># 返回集合列表</span><br><span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;customers&#x27;</span> <span class="hljs-keyword">in</span> collists:             <span class="hljs-comment"># 按名称查询特定集合</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;The collection &quot;customers&quot; exists.&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="1-3-查集合方法"><a href="#1-3-查集合方法" class="headerlink" title="1-3 查集合方法"></a>1-3 查集合方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pymongo<br><br>myclient = pymongo.MongoClient(<span class="hljs-string">&#x27;mongodb://localhost:27017/&#x27;</span>)<br>mydbs = myclient[<span class="hljs-string">&#x27;mydatabase&#x27;</span>]         <span class="hljs-comment"># 创建mydatabase数据库</span><br><span class="hljs-comment"># collists = mydbs.collection_names()  # 旧版使用</span><br>collists = mydbs.list_collection_names()<br><br><span class="hljs-built_in">print</span>(collists)                        <span class="hljs-comment"># 返回集合列表</span><br><span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;customers&#x27;</span> <span class="hljs-keyword">in</span> collists:            <span class="hljs-comment"># 按名称查询特定集合</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;The collection &quot;customers&quot; exists.&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
 
 
