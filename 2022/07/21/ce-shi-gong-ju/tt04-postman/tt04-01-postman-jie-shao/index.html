@@ -18,20 +18,20 @@
   <meta name="author" content="Dr.626">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Postman是一个简单的接口测试工具，被广泛应用于API设计、构建、测试等工作环节，也同样适用于API安全测试和管理。">
+    <meta name="description" content="🍕 Postman是一个简单的接口测试工具，被广泛应用于API设计、构建、测试等工作环节，同样适用于API安全测试和管理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Postman 介绍">
 <meta property="og:url" content="https://stitch-top.github.io/2022/07/21/ce-shi-gong-ju/tt04-postman/tt04-01-postman-jie-shao/index.html">
 <meta property="og:site_name" content="Dr.626">
-<meta property="og:description" content="Postman是一个简单的接口测试工具，被广泛应用于API设计、构建、测试等工作环节，也同样适用于API安全测试和管理。">
+<meta property="og:description" content="🍕 Postman是一个简单的接口测试工具，被广泛应用于API设计、构建、测试等工作环节，同样适用于API安全测试和管理。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1254263210.jpg">
 <meta property="article:published_time" content="2022-07-21T13:50:23.000Z">
-<meta property="article:modified_time" content="2024-04-17T07:11:00.384Z">
+<meta property="article:modified_time" content="2024-05-16T09:03:08.813Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="测试工具">
-<meta property="article:tag" content="Postman">
-<meta property="article:tag" content="接口测试">
+<meta property="article:tag" content="日志调试">
+<meta property="article:tag" content="集合测试">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1254263210.jpg">
   
@@ -359,7 +359,7 @@
             
             <div class="markdown-body">
               
-              <p>Postman是一个简单的接口测试工具，被广泛应用于API设计、构建、测试等工作环节，也同样适用于API安全测试和管理。</p>
+              <p>🍕 Postman是一个简单的接口测试工具，被广泛应用于API设计、构建、测试等工作环节，同样适用于API安全测试和管理。</p>
 <span id="more"></span>
 
 
@@ -407,8 +407,8 @@
 <p><img src="/../img/Postman/Postman@002.jpg" srcset="/img/load.gif" lazyload alt="Postman"></p>
 <h2 id="2-1-前置脚本"><a href="#2-1-前置脚本" class="headerlink" title="2-1 前置脚本"></a>2-1 前置脚本</h2><ul>
 <li>前置脚本<ul>
-<li>即在Pre-requests Script中编写的JavaScript脚本，请求发送之前，会先执行该前置脚本。</li>
-<li>接口测试时该功能非常有用，对于一些复杂场景，也支持使用前置脚本处理后再请求接口。</li>
+<li>即在Pre-request Script中编写的JavaScript脚本，请求发送之前，会先执行该前置脚本。</li>
+<li>接口测试时该功能非常有用，对于一些复杂场景也支持使用前置脚本处理后再请求接口。</li>
 </ul>
 </li>
 </ul>
@@ -444,7 +444,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="1-状态行"><a href="#1-状态行" class="headerlink" title="(1) 状态行"></a>(1) 状态行</h4><ul>
+<h3 id="1-状态行"><a href="#1-状态行" class="headerlink" title="(1) 状态行"></a>(1) 状态行</h3><ul>
 <li>断言状态码：<code>Status code: code is 200</code>。</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">// pm代表Postman的一个实例，test()是Postman实例的一个方法，有以下两个参数</span><br><span class="hljs-comment">// 参数一：断言结束后给出的文字提示(可自定义修改)</span><br><span class="hljs-comment">// 参数二：匿名函数</span><br><br>pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Status code is 200&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 响应结果中应该包含状态码200</span><br>    pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">status</span>(<span class="hljs-number">200</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
@@ -456,14 +456,14 @@
 
 
 
-<h4 id="2-响应头"><a href="#2-响应头" class="headerlink" title="(2) 响应头"></a>(2) 响应头</h4><ul>
+<h3 id="2-响应头"><a href="#2-响应头" class="headerlink" title="(2) 响应头"></a>(2) 响应头</h3><ul>
 <li>断言响应头：<code>Response headers: Content-Type header check</code>。</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Content-Type is present&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 断言响应头包含Content-Type</span><br>    pm.<span class="hljs-property">response</span>.<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">header</span>(<span class="hljs-string">&quot;Content-Type&quot;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="3-响应体"><a href="#3-响应体" class="headerlink" title="(3) 响应体"></a>(3) 响应体</h4><ul>
+<h3 id="3-响应体"><a href="#3-响应体" class="headerlink" title="(3) 响应体"></a>(3) 响应体</h3><ul>
 <li>断言响应体包含字符串：<code>Response body: Contains string</code>。</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Body matches string&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 获取响应体包含字符串string_you_want_to_search</span><br>    pm.<span class="hljs-title function_">expect</span>(pm.<span class="hljs-property">response</span>.<span class="hljs-title function_">text</span>()).<span class="hljs-property">to</span>.<span class="hljs-title function_">include</span>(<span class="hljs-string">&quot;string_you_want_to_search&quot;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
@@ -480,7 +480,7 @@
 
 
 
-<h4 id="4-响应时间"><a href="#4-响应时间" class="headerlink" title="(4) 响应时间"></a>(4) 响应时间</h4><ul>
+<h3 id="4-响应时间"><a href="#4-响应时间" class="headerlink" title="(4) 响应时间"></a>(4) 响应时间</h3><ul>
 <li>断言响应时间，一般用于性能测试：<code>Response time is less than 200ms</code>。</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">pm.<span class="hljs-title function_">test</span>(<span class="hljs-string">&quot;Response time is less than 200ms&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 断言响应时间小于200ms</span><br>    pm.<span class="hljs-title function_">expect</span>(pm.<span class="hljs-property">response</span>.<span class="hljs-property">responseTime</span>).<span class="hljs-property">to</span>.<span class="hljs-property">be</span>.<span class="hljs-title function_">below</span>(<span class="hljs-number">200</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
@@ -512,8 +512,8 @@
 
 
 
-<h4 id="1-环境变量"><a href="#1-环境变量" class="headerlink" title="(1) 环境变量"></a>(1) 环境变量</h4><p><img src="/../img/Postman/Postman@005.jpg" srcset="/img/load.gif" lazyload alt="Postman-变量设置-环境变量"></p>
-<h4 id="2-集合变量"><a href="#2-集合变量" class="headerlink" title="(2) 集合变量"></a>(2) 集合变量</h4><p><img src="/../img/Postman/Postman@006.jpg" srcset="/img/load.gif" lazyload alt="Postman-变量设置-集合变量"></p>
+<h3 id="1-环境变量"><a href="#1-环境变量" class="headerlink" title="(1) 环境变量"></a>(1) 环境变量</h3><p><img src="/../img/Postman/Postman@005.jpg" srcset="/img/load.gif" lazyload alt="Postman-变量设置-环境变量"></p>
+<h3 id="2-集合变量"><a href="#2-集合变量" class="headerlink" title="(2) 集合变量"></a>(2) 集合变量</h3><p><img src="/../img/Postman/Postman@006.jpg" srcset="/img/load.gif" lazyload alt="Postman-变量设置-集合变量"></p>
 <h1 id="3-接口关联"><a href="#3-接口关联" class="headerlink" title="3 接口关联"></a>3 接口关联</h1><ul>
 <li>接口关联<ul>
 <li>上一个接口的返回数据值，刚好是下一个接口的输入参数，这样两个接口就产生了关联。</li>
@@ -685,9 +685,9 @@
       
         <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/">#测试工具</a>
       
-        <a href="/tags/Postman/">#Postman</a>
+        <a href="/tags/%E6%97%A5%E5%BF%97%E8%B0%83%E8%AF%95/">#日志调试</a>
       
-        <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/">#接口测试</a>
+        <a href="/tags/%E9%9B%86%E5%90%88%E6%B5%8B%E8%AF%95/">#集合测试</a>
       
     </div>
   
