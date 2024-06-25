@@ -20,11 +20,11 @@
     
     <tags>
       
-      <tag>MongoDB</tag>
-      
       <tag>启动服务</tag>
       
       <tag>卸载服务</tag>
+      
+      <tag>MongoDB</tag>
       
     </tags>
     
@@ -303,6 +303,8 @@
     <tags>
       
       <tag>Python</tag>
+      
+      <tag>Selenium</tag>
       
       <tag>网页抓取</tag>
       
@@ -693,11 +695,11 @@
     
     <tags>
       
+      <tag>Matplotlib</tag>
+      
       <tag>Pandas</tag>
       
       <tag>数据分析</tag>
-      
-      <tag>Matplotlib</tag>
       
     </tags>
     
@@ -753,9 +755,9 @@
       
       <tag>NumPy</tag>
       
-      <tag>Matplotlib</tag>
-      
       <tag>Seaborn</tag>
+      
+      <tag>Matplotlib</tag>
       
     </tags>
     
