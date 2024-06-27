@@ -28,7 +28,9 @@
       
       <tag>BeanShell</tag>
       
-      <tag>Base64加解密</tag>
+      <tag>Base64加密</tag>
+      
+      <tag>Base64解密</tag>
       
     </tags>
     
@@ -55,7 +57,11 @@
       
       <tag>MongoDB</tag>
       
+      <tag>安装服务</tag>
+      
       <tag>启动服务</tag>
+      
+      <tag>停止服务</tag>
       
       <tag>卸载服务</tag>
       
@@ -90,6 +96,8 @@
       
       <tag>断言输出</tag>
       
+      <tag>函数追踪</tag>
+      
       <tag>控制台交互</tag>
       
     </tags>
@@ -117,7 +125,11 @@
       
       <tag>MySQL</tag>
       
+      <tag>安装服务</tag>
+      
       <tag>启动服务</tag>
+      
+      <tag>停止服务</tag>
       
       <tag>卸载服务</tag>
       
@@ -178,6 +190,8 @@
     <tags>
       
       <tag>测试工具</tag>
+      
+      <tag>画面拼接</tag>
       
       <tag>视频转码</tag>
       
@@ -392,6 +406,8 @@
       
       <tag>查看源码</tag>
       
+      <tag>命令交互</tag>
+      
       <tag>性能监控</tag>
       
       <tag>安全与应用</tag>
@@ -425,9 +441,11 @@
       
       <tag>文件传送</tag>
       
+      <tag>设备调试</tag>
+      
       <tag>信息查询</tag>
       
-      <tag>安装调试</tag>
+      <tag>安装应用</tag>
       
     </tags>
     
@@ -462,6 +480,8 @@
       
       <tag>接口关联</tag>
       
+      <tag>Mock服务</tag>
+      
     </tags>
     
   </entry>
@@ -492,6 +512,8 @@
       <tag>请求过滤</tag>
       
       <tag>网络模拟</tag>
+      
+      <tag>修改内容</tag>
       
       <tag>配置与抓包</tag>
       
