@@ -517,13 +517,13 @@
       
       <tag>测试工具</tag>
       
+      <tag>抓包</tag>
+      
       <tag>过滤请求</tag>
       
       <tag>网络模拟</tag>
       
       <tag>配置</tag>
-      
-      <tag>抓包</tag>
       
     </tags>
     
@@ -552,11 +552,11 @@
       
       <tag>测试工具</tag>
       
-      <tag>抓包</tag>
-      
       <tag>面板</tag>
       
       <tag>插件</tag>
+      
+      <tag>抓包</tag>
       
       <tag>命令输入</tag>
       
