@@ -1,0 +1,1278 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="FFmpeg是一款跨平台的开源音视频处理工具，可在命令行中使用，也可通过多种编程语言进行调用，如Python、Java等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FFmpeg 命令详解">
+<meta property="og:url" content="https://stitch-top.github.io/2024/01/11/ce-shi-gong-ju/tt07-ffmpeg-de-ying-yong/tt01-ffmpeg-ming-ling-xiang-jie/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="FFmpeg是一款跨平台的开源音视频处理工具，可在命令行中使用，也可通过多种编程语言进行调用，如Python、Java等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/0015241291.jpg">
+<meta property="article:published_time" content="2024-01-11T15:15:13.000Z">
+<meta property="article:modified_time" content="2024-07-19T09:20:20.499Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="视频转码">
+<meta property="article:tag" content="图像处理">
+<meta property="article:tag" content="推流">
+<meta property="article:tag" content="拉流">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/0015241291.jpg">
+  
+  
+  
+  <title>FFmpeg 命令详解 - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="FFmpeg 命令详解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-11 23:15" pubdate>
+          2024年1月11日 23:15:13
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          29k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          244 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">FFmpeg 命令详解</h1>
+            
+            <div class="markdown-body">
+              
+              <p>FFmpeg是一款跨平台的开源音视频处理工具，可在命令行中使用，也可通过多种编程语言进行调用，如Python、Java等。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-流协议"><a href="#1-流协议" class="headerlink" title="1 流协议"></a>1 流协议</h1><ul>
+<li>流协议<ul>
+<li>一种标准化的传递方法，用于分解视频为多个块，将其发送给视频播放器，播放器重新组合播放。</li>
+<li>编解码器是指视频压缩技术，即使不需要使用流协议，视频也需要使用编解码器进行编码和解码。</li>
+<li>RTMP (Real-Time Messaging Protocol)<ul>
+<li>流地址格式示例：<a href="rtmp://example.com/live/stream">rtmp:&#x2F;&#x2F;example.com&#x2F;live&#x2F;stream</a>。</li>
+<li>RTMP是一种传统的流媒体协议，通常用于实时直播。</li>
+<li>低延迟，无需缓冲，兼容性较差，不适合大规模观众。</li>
+</ul>
+</li>
+<li>WebSocket<ul>
+<li>流地址格式示例<ul>
+<li>非加密：<a href="ws://example.com/live/stream">ws:&#x2F;&#x2F;example.com&#x2F;live&#x2F;stream</a>。</li>
+<li>加密的：<a href="wss://example.com/live/stream">wss:&#x2F;&#x2F;example.com&#x2F;live&#x2F;stream</a>。</li>
+</ul>
+</li>
+<li>一种双向通信协议，适合于实时数据传输。</li>
+</ul>
+</li>
+<li>HTTP-FLV<ul>
+<li>流地址格式示例：<a target="_blank" rel="noopener" href="http://example.com/live/stream.flv%E3%80%82">http://example.com/live/stream.flv。</a></li>
+<li>基于HTTP的流媒体协议，支持实时流媒体传输，适合在线直播。</li>
+</ul>
+</li>
+<li>HLS (HTTP Live Streaming)<ul>
+<li>流地址格式示例：<a target="_blank" rel="noopener" href="https://example.com/video/stream.m3u8%E3%80%82">https://example.com/video/stream.m3u8。</a></li>
+<li>适合多种设备和操作系统，例如：移动设备、桌面浏览器、以及智能电视。</li>
+<li>兼容性强，安全性高，支持自适应比特率流，延迟较高，不适合视频采集。</li>
+<li>HLS是苹果公司推出的流媒体协议，适用于iOS设备和其他平台。</li>
+</ul>
+</li>
+<li>DASH (Dynamic Adaptive Streaming Over HTTP) &#x2F; MPEG-DASH<ul>
+<li>流地址格式示例：<a target="_blank" rel="noopener" href="https://example.com/video/stream.mpd%E3%80%82">https://example.com/video/stream.mpd。</a></li>
+<li>DASH是一种开放标准的流媒体协议，逐渐取代了MPEG-DASH。</li>
+<li>支持自适应比特率流，适应性强，可定制性高，不兼容苹果设备。</li>
+</ul>
+</li>
+<li>WebRTC (Web Real-Time Communications)<ul>
+<li>一种现代实时通信协议，用于浏览器间的实时音视频通信，通常不使用URL来传输流。</li>
+<li>适合实时视频聊天和会议应用，灵活性强，支持实时低延迟流，可能存在兼容性问题。</li>
+</ul>
+</li>
+<li>MSS (Microsoft Smooth Streaming)<ul>
+<li>流地址格式示例：<a target="_blank" rel="noopener" href="http://example.com/video/stream.ism/Manifest%E3%80%82">http://example.com/video/stream.ism/Manifest。</a></li>
+<li>微软推出的一种流媒体协议，支持自适应比特率流，已逐渐失去用户。</li>
+<li>若非Xbox用户或计划只开发Windows平台的app，否则不推荐使用MSS。</li>
+</ul>
+</li>
+<li>HDS (HTTP Dynamic Streaming)<ul>
+<li>流地址格式示例：<a target="_blank" rel="noopener" href="http://example.com/video/stream.f4m%E3%80%82">http://example.com/video/stream.f4m。</a></li>
+<li>HDS增加了码率自适应，并以高质量著称，但延迟并不如RTMP低。</li>
+<li>Adobe推出的流媒体协议，是RTMP的后继产品，依赖于Flash协议。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-FFmpeg"><a href="#2-FFmpeg" class="headerlink" title="2 FFmpeg"></a>2 FFmpeg</h1><ul>
+<li>FFmpeg<ul>
+<li>FFmpeg支持上述流媒体协议的处理和转换，可以用于流媒体的编码、解码、转码、推流和拉流等操作。</li>
+<li>官网“<a target="_blank" rel="noopener" href="https://ffmpeg.org/">https://ffmpeg.org</a>”下载，Windows安装时，需要将安装路径的bin目录设置到Path环境变量中。</li>
+<li>提供的命令行工具<ul>
+<li>ffmpeg(音视频编解码器)是FFmpeg提供的核心命令行工具，输出快品质高文件小。</li>
+<li>ffplay是以FFmpeg框架为基础，外加渲染音视频的库libSDL构建的媒体文件播放器。</li>
+<li>ffprobe是FFmpeg命令行工具中相对简单的命令工具，用于查看媒体文件格式等信息。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Powershell">sudo apt update                               <span class="hljs-comment"># 更新源，添加源</span><br>sudo <span class="hljs-built_in">add-apt</span><span class="hljs-literal">-repository</span> ppa:kirillshkrogalev/ffmpeg<span class="hljs-literal">-next</span><br>sudo apt<span class="hljs-literal">-get</span> install ffmpeg                   <span class="hljs-comment"># Ubuntu和Debian安装</span><br>sudo yum install ffmpeg                       <span class="hljs-comment"># CentOS和Fedora安装</span><br>brew install ffmpeg                           <span class="hljs-comment"># macOS安装</span><br><br>ffmpeg <span class="hljs-literal">-version</span>                               <span class="hljs-comment"># 查看安装版本</span><br>ffmpeg <span class="hljs-literal">-encoders</span>                              <span class="hljs-comment"># 查看编码器和解码器</span><br><br>ffmpeg configure <span class="hljs-literal">-encoders</span>                    <span class="hljs-comment"># 查看支持的编码器</span><br>ffmpeg configure <span class="hljs-literal">-decoders</span>                    <span class="hljs-comment"># 查看支持的解码器</span><br>ffmpeg configure <span class="hljs-literal">-protocols</span>                   <span class="hljs-comment"># 查看支持的通信协议</span><br><br>ffmpeg configure <span class="hljs-literal">--help</span>                       <span class="hljs-comment"># 查看命令帮助</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-1-安装版本"><a href="#2-1-安装版本" class="headerlink" title="2-1 安装版本"></a>2-1 安装版本</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs Powershell">ffmpeg <span class="hljs-literal">-version</span>                               <span class="hljs-comment"># 查看安装版本</span><br>ffmpeg version <span class="hljs-number">6.0</span><span class="hljs-literal">-essentials_build-www</span>.gyan.dev Copyright (c) <span class="hljs-number">2000</span><span class="hljs-literal">-2023</span> the FFmpeg developers<br>built with gcc <span class="hljs-number">12.2</span>.<span class="hljs-number">0</span> (Rev10, Built by MSYS2 project)<br>configuration: <span class="hljs-literal">--enable-gpl</span> <span class="hljs-literal">--enable-version3</span> <span class="hljs-literal">--enable-static</span> <span class="hljs-literal">--disable-w32threads</span><br> <span class="hljs-literal">--disable-autodetect</span> <span class="hljs-literal">--enable-fontconfig</span> <span class="hljs-literal">--enable-iconv</span> <span class="hljs-literal">--enable-gnutls</span> <span class="hljs-literal">--enable-libxml2</span> <br> <span class="hljs-literal">--enable-gmp</span> <span class="hljs-literal">--enable-bzlib</span> <span class="hljs-literal">--enable-lzma</span> <span class="hljs-literal">--enable-zlib</span> <span class="hljs-literal">--enable-libsrt</span> <span class="hljs-literal">--enable-libssh</span> <br> <span class="hljs-literal">--enable-libzmq</span> <span class="hljs-literal">--enable-avisynth</span> <span class="hljs-literal">--enable-sdl2</span> <span class="hljs-literal">--enable-libwebp</span> <span class="hljs-literal">--enable-libx264</span> <br> <span class="hljs-literal">--enable-libx265</span> <span class="hljs-literal">--enable-libxvid</span> <span class="hljs-literal">--enable-libaom</span> <span class="hljs-literal">--enable-libopenjpeg</span> <span class="hljs-literal">--enable-libvpx</span> <br> <span class="hljs-literal">--enable-mediafoundation</span> <span class="hljs-literal">--enable-libass</span> <span class="hljs-literal">--enable-libfreetype</span> <span class="hljs-literal">--enable-libfribidi</span> <br> <span class="hljs-literal">--enable-libvidstab</span> <span class="hljs-literal">--enable-libvmaf</span> <span class="hljs-literal">--enable-libzimg</span> <span class="hljs-literal">--enable-amf</span> <span class="hljs-literal">--enable-cuda-llvm</span> <br> <span class="hljs-literal">--enable-cuvid</span> <span class="hljs-literal">--enable-ffnvcodec</span> <span class="hljs-literal">--enable-nvdec</span> <span class="hljs-literal">--enable-nvenc</span> <span class="hljs-literal">--enable-d3d11va</span> <br> <span class="hljs-literal">--enable-dxva2</span> <span class="hljs-literal">--enable-libvpl</span> <span class="hljs-literal">--enable-libgme</span> <span class="hljs-literal">--enable-libopenmpt</span> <span class="hljs-literal">--enable-libopencore-amrwb</span> <br> <span class="hljs-literal">--enable-libmp3lame</span> <span class="hljs-literal">--enable-libtheora</span> <span class="hljs-literal">--enable-libvo-amrwbenc</span> <span class="hljs-literal">--enable-libgsm</span> <br> <span class="hljs-literal">--enable-libopencore-amrnb</span> <span class="hljs-literal">--enable-libopus</span> <span class="hljs-literal">--enable-libspeex</span> <span class="hljs-literal">--enable-libvorbis</span> <br> <span class="hljs-literal">--enable-librubberband</span><br>libavutil      <span class="hljs-number">58</span>.  <span class="hljs-number">2.100</span> / <span class="hljs-number">58</span>.  <span class="hljs-number">2.100</span><br>libavcodec     <span class="hljs-number">60</span>.  <span class="hljs-number">3.100</span> / <span class="hljs-number">60</span>.  <span class="hljs-number">3.100</span><br>libavformat    <span class="hljs-number">60</span>.  <span class="hljs-number">3.100</span> / <span class="hljs-number">60</span>.  <span class="hljs-number">3.100</span><br>libavdevice    <span class="hljs-number">60</span>.  <span class="hljs-number">1.100</span> / <span class="hljs-number">60</span>.  <span class="hljs-number">1.100</span><br>libavfilter     <span class="hljs-number">9</span>.  <span class="hljs-number">3.100</span> /  <span class="hljs-number">9</span>.  <span class="hljs-number">3.100</span><br>libswscale      <span class="hljs-number">7</span>.  <span class="hljs-number">1.100</span> /  <span class="hljs-number">7</span>.  <span class="hljs-number">1.100</span><br>libswresample   <span class="hljs-number">4</span>. <span class="hljs-number">10.100</span> /  <span class="hljs-number">4</span>. <span class="hljs-number">10.100</span><br>libpostproc    <span class="hljs-number">57</span>.  <span class="hljs-number">1.100</span> / <span class="hljs-number">57</span>.  <span class="hljs-number">1.100</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-文件播放"><a href="#2-2-文件播放" class="headerlink" title="2-2 文件播放"></a>2-2 文件播放</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Powershell">ffplay test.mp3                               <span class="hljs-comment"># 播放音频</span><br>ffplay test.pcm <span class="hljs-operator">-f</span> s16le <span class="hljs-literal">-ar</span> <span class="hljs-number">32000</span> <span class="hljs-literal">-ac</span> <span class="hljs-number">2</span>      <span class="hljs-comment"># 播放双通道32K的PCM音频数据</span><br><br>ffplay test.mp4                               <span class="hljs-comment"># 播放视频</span><br>ffplay test.mp4 <span class="hljs-literal">-loop</span> <span class="hljs-number">10</span>                      <span class="hljs-comment"># 循环播放10次视频</span><br>ffplay test.mp4 <span class="hljs-literal">-autoexit</span>                     <span class="hljs-comment"># 播放完成后自动退出</span><br>ffplay test.mp4 <span class="hljs-literal">-x</span> <span class="hljs-number">320</span> <span class="hljs-literal">-y</span> <span class="hljs-number">240</span>                 <span class="hljs-comment"># 以长320x宽240的大小播放</span><br>ffplay test.mp4 <span class="hljs-literal">-window_title</span> testplayer      <span class="hljs-comment"># 将窗口标题设置为testplayer</span><br><br><span class="hljs-comment"># ffplay的音画同步的实现方式：以音频为主时间轴、以视频为主时间轴、以外部时钟为主时间轴作为同步源</span><br>ffplay test.mp4 <span class="hljs-literal">-sync</span> audio                   <span class="hljs-comment"># 指定使用以音频为基准进行音视频同步的方式播放视频</span><br>ffplay test.mp4 <span class="hljs-literal">-sync</span> video                   <span class="hljs-comment"># 指定使用以视频为基准进行音视频同步的方式播放视频</span><br>ffplay test.mp4 <span class="hljs-literal">-sync</span> ext                     <span class="hljs-comment"># 指定使用外部时钟为基准进行音视频同步的方式播放视频</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-媒体信息"><a href="#2-3-媒体信息" class="headerlink" title="2-3 媒体信息"></a>2-3 媒体信息</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -v error：只输出错误级别的日志信息，而不输出其他级别的日志信息，例如警告(warning)、信息(info)等</span><br><br>ffprobe test.mp4                              <span class="hljs-comment"># 查看mp4文件信息</span><br><br>ffprobe test.mp4 <span class="hljs-literal">-show_format</span>                 <span class="hljs-comment"># 输出格式信息</span><br>ffprobe test.mp4 <span class="hljs-literal">-show_frames</span>                 <span class="hljs-comment"># 显示帧信息，pict_type=I说明是关键帧</span><br>ffprobe test.mp4 <span class="hljs-literal">-show_frames</span> <span class="hljs-literal">-v</span> error        <span class="hljs-comment"># key_frame=1是IDR帧，key_frame=0是Non-IDR帧</span><br><br>ffprobe test.mp4 <span class="hljs-literal">-show_streams</span>                <span class="hljs-comment"># 显示每个流的具体信息</span><br>ffprobe test.mp4 <span class="hljs-literal">-show_packets</span>                <span class="hljs-comment"># 显示包信息</span><br>ffprobe test.mp4 <span class="hljs-literal">-print_format</span> json           <span class="hljs-comment"># 以Json格式显示mp4文件信息</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-查看信息"><a href="#1-查看信息" class="headerlink" title="(1) 查看信息"></a>(1) 查看信息</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -select_streams v：表示选择所有视频流</span><br><span class="hljs-comment"># -select_streams v:0：表示选择视频流中的第一个流</span><br><span class="hljs-comment"># -count_frames：统计视频流中的帧数</span><br><span class="hljs-comment"># -show_entries stream=nb_frames：显示指定条目</span><br><span class="hljs-comment">#     nb_frames：意味着只显示视频流中的帧数</span><br><span class="hljs-comment">#     bit_rate：只显示视频流的比特率</span><br><span class="hljs-comment">#     nb_read_frames：显示已读取的帧数</span><br><span class="hljs-comment"># -show_entries frame=pkt_pts_time：获取视频帧的相关信息</span><br><span class="hljs-comment">#     pkt_pts_time：获取视频帧的显示时间戳信息</span><br><span class="hljs-comment">#     pict_type：获取视频帧的图片类型信息</span><br><span class="hljs-comment"># -of default=nokey=1:noprint_wrappers=1：指定了输出的格式，包括不显示键和不打印包装器</span><br><span class="hljs-comment"># -of csv=print_section=0：以CSV格式输出数据，但不包括标题行</span><br><span class="hljs-comment"># -skip_frame nokey：在跳过帧时不显示关键帧信息</span><br><span class="hljs-comment"># Windows命令：findstr /n &quot;I&quot; | for /f &quot;tokens=1 delims=:&quot; %a in (&#x27;findstr /n &quot;I&quot;&#x27;) do @echo %a</span><br><span class="hljs-comment"># Linux命令：grep -n I | cut -d &#x27;:&#x27; -f 1</span><br><br><span class="hljs-comment"># 查看视频总帧数</span><br>ffprobe test.mp4<br> <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v:<span class="hljs-number">0</span> <span class="hljs-literal">-count_frames</span><br> <span class="hljs-literal">-show_entries</span> stream=nb_frames <span class="hljs-literal">-of</span> default=nokey=<span class="hljs-number">1</span>:noprint_wrappers=<span class="hljs-number">1</span><br><br><span class="hljs-comment"># 查看视频比特率</span><br>ffprobe test.mp4<br> <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v:<span class="hljs-number">0</span><br> <span class="hljs-literal">-show_entries</span> stream=bit_rate <span class="hljs-literal">-of</span> default=noprint_wrappers=<span class="hljs-number">1</span>:nokey=<span class="hljs-number">1</span><br><br><span class="hljs-comment"># 查看key frame帧数</span><br>ffprobe test.mp4<br> <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v:<span class="hljs-number">0</span> <span class="hljs-literal">-count_frames</span><br> <span class="hljs-literal">-show_entries</span> stream=nb_read_frames <span class="hljs-literal">-of</span> default=nokey=<span class="hljs-number">1</span>:noprint_wrappers=<span class="hljs-number">1</span> <span class="hljs-literal">-skip_frame</span> nokey<br><br><span class="hljs-comment"># 查看key frame所在的时间(***Windows下好像显示不出来，Linux下正常)</span><br>ffprobe test.mp4<br> <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v:<span class="hljs-number">0</span> <span class="hljs-literal">-skip_frame</span> nokey<br> <span class="hljs-literal">-show_entries</span> frame=pkt_pts_time<br>ffprobe test.mp4<br> <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v:<span class="hljs-number">0</span> <span class="hljs-literal">-skip_frame</span> nokey<br> <span class="hljs-literal">-show_entries</span> frame=pkt_pts_time <span class="hljs-literal">-of</span> csv=p=<span class="hljs-number">0</span><br>ffprobe test.mp4<br> <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v:<span class="hljs-number">0</span> <span class="hljs-literal">-skip_frame</span> nokey<br> <span class="hljs-literal">-show_entries</span> frame=pkt_pts_time <span class="hljs-literal">-of</span> csv=print_section=<span class="hljs-number">0</span><br>ffprobe <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v:<span class="hljs-number">0</span> <span class="hljs-literal">-show_entries</span> frame=pkt_pts_time <span class="hljs-literal">-of</span> csv test.mp4<br><br><span class="hljs-comment"># 查看key frame分布的情况，Windows与Linux</span><br>ffprobe test.mp4 <span class="hljs-literal">-v</span> error <span class="hljs-literal">-show_frames</span> | find <span class="hljs-string">&quot;pict_type&quot;</span><br>ffprobe test.mp4 <span class="hljs-literal">-v</span> error <span class="hljs-literal">-show_frames</span> | grep pict_type<br><br><span class="hljs-comment"># 查看key frame所在的帧数，Windows与Linux(***显示内容不一样)</span><br>ffprobe test.mp4<br> <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v <span class="hljs-literal">-show_frames</span><br> <span class="hljs-literal">-show_entries</span> frame=pict_type <span class="hljs-literal">-of</span> csv | findstr /n <span class="hljs-string">&quot;I&quot;</span> |<br> <span class="hljs-keyword">for</span> /f <span class="hljs-string">&quot;tokens=1 delims=:&quot;</span> %a <span class="hljs-keyword">in</span> (<span class="hljs-string">&#x27;findstr /n &quot;I&quot;&#x27;</span>) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> %a<br>ffprobe test.mp4<br> <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v <span class="hljs-literal">-show_frames</span><br> <span class="hljs-literal">-show_entries</span> frame=pict_type <span class="hljs-literal">-of</span> csv | grep <span class="hljs-literal">-n</span> I | cut <span class="hljs-literal">-d</span> <span class="hljs-string">&#x27;:&#x27;</span> <span class="hljs-operator">-f</span> <span class="hljs-number">1</span><br><br><span class="hljs-comment"># 查看视频中关键帧所在的帧数(***Windows和Linux下显示内容不一样)</span><br>ffprobe <span class="hljs-literal">-v</span> error <span class="hljs-literal">-select_streams</span> v:<span class="hljs-number">0</span> <span class="hljs-literal">-show_entries</span> frame=pkt_pts_time,pict_type <span class="hljs-literal">-of</span> csv test.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-内容解析"><a href="#2-内容解析" class="headerlink" title="(2) 内容解析"></a>(2) 内容解析</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 查看mp4文件信息</span><br>ffprobe test.mp4<br>...<br>Input <span class="hljs-comment">#0, mov,mp4,m4a,3gp,3g2,mj2, from &#x27;test.mp4&#x27;:</span><br>  Metadata:<br>    major_brand     : isom<br>    minor_version   : <span class="hljs-number">512</span><br>    compatible_brands: isomiso2avc1mp41<br>    creation_time   : <span class="hljs-number">2023</span><span class="hljs-literal">-04-17T08</span>:<span class="hljs-number">50</span>:<span class="hljs-number">27.000000</span>Z<br>    Hw              : <span class="hljs-number">1</span><br>                    :<br>    bitRate         : <span class="hljs-number">16000000</span><br>                    :<br>    maxrate         : <span class="hljs-number">16000000</span><br>                    :<br>    te_is_reencode  : <span class="hljs-number">1</span><br>                    :<br>    encoder         : Lavf58.<span class="hljs-number">76.100</span><br>  <br>  <span class="hljs-comment"># 该视频文件的时长是31秒880毫秒，开始播放时间是0，整个文件的比特率是11745Kbit/s</span><br>  Duration: <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">31.88</span>, <span class="hljs-built_in">start</span>: <span class="hljs-number">0.000000</span>, bitrate: <span class="hljs-number">11745</span> kb/s<br><br>  <span class="hljs-comment"># 第一个流是视频流，编码格式是H264格式(封装格式为AVC1)</span><br>  <span class="hljs-comment"># 每一帧的数据表示为yuv420p，分辨率为1920x1080，这路流的比特率为11649Kbit/s，帧率为每秒钟30帧</span><br>  Stream <span class="hljs-comment">#0:0[0x1](und): Video: h264(Main)(avc1/0x31637661), yuv420p(tv, bt709, progressive),</span><br>         <span class="hljs-comment">#1920x1080 [SAR 1:1 DAR 16:9], 11649 kb/s, 30 fps, 30 tbr, 15360 tbn (default)</span><br>    Metadata:<br>      creation_time   : <span class="hljs-number">2023</span><span class="hljs-literal">-04-17T08</span>:<span class="hljs-number">50</span>:<span class="hljs-number">27.000000</span>Z<br>      handler_name    : VideoHandler<br>      vendor_id       : [<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]<br>  <br>  <span class="hljs-comment"># 第二个流是音频流，编码方式是ACC(封装格式为MP4A)</span><br>  <span class="hljs-comment"># 采用的Profile是LC规格，采样率44.1KHz，声道立体声，这路流的比特率95Kbit/s</span><br>  Stream <span class="hljs-comment">#0:1[0x2](und): Audio: aac(LC)(mp4a/0x6134706D),</span><br>         <span class="hljs-comment">#44100 Hz, stereo, fltp, 95 kb/s(default)</span><br>    Metadata:<br>      creation_time   : <span class="hljs-number">2023</span><span class="hljs-literal">-04-17T08</span>:<span class="hljs-number">50</span>:<span class="hljs-number">27.000000</span>Z<br>      handler_name    : SoundHandler<br>      vendor_id       : [<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-参数说明"><a href="#2-4-参数说明" class="headerlink" title="2-4 参数说明"></a>2-4 参数说明</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Yaml"><span class="hljs-string">-i</span>                                            <span class="hljs-comment"># 指定输入流</span><br><span class="hljs-string">-y</span>                                            <span class="hljs-comment"># 若输出流已存在，则覆盖流</span><br><span class="hljs-string">-t</span> <span class="hljs-number">60</span>                                         <span class="hljs-comment"># 指定时长为60秒</span><br><span class="hljs-comment"># 输出格式可以包括但不限于mp4、avi、mov、mkv、flv、mpeg、wmv、webm</span><br><span class="hljs-string">-f</span> <span class="hljs-string">mp4</span>                                        <span class="hljs-comment"># 指定输出格式为mp4</span><br><br><span class="hljs-string">-map</span> <span class="hljs-number">0</span>                                        <span class="hljs-comment"># 将输入文件的所有流映射到输出文件</span><br><span class="hljs-string">-map</span> <span class="hljs-number">0</span><span class="hljs-string">:v</span>                                      <span class="hljs-comment"># 指定第一个输入文件的视频流</span><br><span class="hljs-string">-map</span> <span class="hljs-number">0</span><span class="hljs-string">:a</span>                                      <span class="hljs-comment"># 指定第一个输入文件的音频流</span><br><span class="hljs-string">-map</span> <span class="hljs-number">0</span><span class="hljs-string">:v:0</span>                                    <span class="hljs-comment"># 指定视频文件的第一个视频流</span><br><span class="hljs-string">-map</span> <span class="hljs-number">0</span><span class="hljs-string">:a:0</span>                                    <span class="hljs-comment"># 指定视频文件的第一个音频流</span><br><span class="hljs-string">-map</span> [<span class="hljs-string">v</span>] <span class="hljs-string">-map</span> [<span class="hljs-string">a</span>]                             <span class="hljs-comment"># 将输入文件中的特定视频流和音频流映射到输出文件中</span><br><br><span class="hljs-comment"># 作为推流工具时一定要加上该参数，否则ffmpeg会按最高速率不停地向流媒体发送数据</span><br><span class="hljs-string">-re</span>                                           <span class="hljs-comment"># 以源文件固有帧率发送数据</span><br><span class="hljs-string">-ss</span> <span class="hljs-number">00</span><span class="hljs-string">:01:30</span>                                  <span class="hljs-comment"># 指定从输入流的00:01:30开始处理</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-视频参数"><a href="#1-视频参数" class="headerlink" title="(1) 视频参数"></a>(1) 视频参数</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Yaml"><span class="hljs-string">-s</span> <span class="hljs-string">320x240</span>                                    <span class="hljs-comment"># 指定分辨率为320x240(w*h)</span><br><span class="hljs-string">-r</span> <span class="hljs-number">30</span>                                         <span class="hljs-comment"># 指定帧速率为30帧每秒</span><br><span class="hljs-string">-b</span> <span class="hljs-string">200k</span>                                       <span class="hljs-comment"># 指定比特率为200kbit/s</span><br><br><span class="hljs-string">-an</span>                                           <span class="hljs-comment"># 去除音频流</span><br><span class="hljs-string">-vn</span>                                           <span class="hljs-comment"># 去除视频流</span><br><span class="hljs-string">-vb</span> <span class="hljs-string">200k</span>                                      <span class="hljs-comment"># 指定视频比特率为200kbit/s</span><br><br><span class="hljs-comment"># ffmpeg -encoders | findstr /i video         # Windows下查看系统支持的所有视频编码器</span><br><span class="hljs-comment"># ffmpeg -encoders | grep -i video            # Linux下查看系统支持的所有视频编码器</span><br><span class="hljs-comment"># ffmpeg -decoders | findstr /i video         # Windows下查看系统支持的所有视频解码器</span><br><span class="hljs-comment"># ffmpeg -decoders | grep -i video            # Linux下查看系统支持的所有视频解码器</span><br><span class="hljs-string">-c:v</span> <span class="hljs-string">libx264</span>                                  <span class="hljs-comment"># 指定视频编码器为libx264，解码器同理，新版</span><br><span class="hljs-string">-vcodec</span> <span class="hljs-string">libxvid</span>                               <span class="hljs-comment"># 指定视频编码器为libxvid，解码器同理，旧版</span><br><br><span class="hljs-comment"># 质量控制的取值范围在0~51之间，0代表无损，18~28代表合理，数值越大画质会越差</span><br><span class="hljs-string">-crf</span> <span class="hljs-number">23</span>                                       <span class="hljs-comment"># 用于视频编码中的质量控制</span><br><br><span class="hljs-comment"># 视频质量包括：ultrafast、superfast、veryfast、faster、fast、medium、slow、slower、veryslow</span><br><span class="hljs-comment"># 与veryslow相比，placebo以极高的编码时间为代价，只换取了大概1%的视频质量提升</span><br><span class="hljs-comment"># 针对特定类型，例如电影、动画等：slow比medium提升5%~10%，slower比slow提升5%，veryslow比slower提升3%</span><br><span class="hljs-string">-preset</span> <span class="hljs-string">medium</span>                                <span class="hljs-comment"># 指定输出的视频质量为medium，会影响文件的生成速度</span><br><br><span class="hljs-comment"># 常见比例：4:3(标准屏幕)、21:9(超宽屏)、9:16(竖屏)、2.35:1(电影院标准宽屏)、2.39:1(电影院宽屏)</span><br><span class="hljs-string">-aspect</span> <span class="hljs-number">16</span><span class="hljs-string">:9</span>                                  <span class="hljs-comment"># 指定视频高宽比为16:9(宽屏高清)</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-音频参数"><a href="#2-音频参数" class="headerlink" title="(2) 音频参数"></a>(2) 音频参数</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Yaml"><span class="hljs-comment"># 对于MP3格式，常见的比特率有128kbps、192kbps、256kbps和320kbps等，较低比特率会导致音频质量下降</span><br><span class="hljs-string">-ab</span> <span class="hljs-string">128k</span>                                      <span class="hljs-comment"># 设置音频比特率为128kbps，kbit/s与kbps等价</span><br><span class="hljs-string">-an</span>                                           <span class="hljs-comment"># 去除音频流</span><br><br><span class="hljs-string">-ar</span> <span class="hljs-number">8000</span>                                      <span class="hljs-comment"># 设置音频采样率为8000Hz</span><br><span class="hljs-string">-ac</span> <span class="hljs-number">1</span>                                         <span class="hljs-comment"># 设置为单声道，1是单声道，2是立体声</span><br><span class="hljs-string">-aq</span> <span class="hljs-number">0</span>                                         <span class="hljs-comment"># 设置音频的压缩质量，0为最高质量，9为最低质量</span><br><br><span class="hljs-comment"># ffmpeg -encoders | findstr /i audio         # Windows下查看系统支持的所有音频编码器</span><br><span class="hljs-comment"># ffmpeg -encoders | grep -i audio            # Linux下查看系统支持的所有音频编码器</span><br><span class="hljs-comment"># ffmpeg -decoders | findstr /i audio         # Windows下查看系统支持的所有音频解码器</span><br><span class="hljs-comment"># ffmpeg -decoders | grep -i audio            # Linux下查看系统支持的所有音频解码器</span><br><span class="hljs-string">-c:a</span> <span class="hljs-string">acc</span>                                      <span class="hljs-comment"># 指定音频编码器为acc，解码器同理，新版</span><br><span class="hljs-string">-acodec</span> <span class="hljs-string">mp3</span>                                   <span class="hljs-comment"># 指定音频编码器为mp3，解码器同理，旧版</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-获取信息"><a href="#3-获取信息" class="headerlink" title="3 获取信息"></a>3 获取信息</h1><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># Windows下查看本地视频信息，而不生成实际的输出文件</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-operator">-f</span> null NULL<br><span class="hljs-comment"># Windows下查看远程视频信息，而不生成实际的输出文件</span><br>ffmpeg <span class="hljs-literal">-i</span> http://<span class="hljs-number">220.161</span>.<span class="hljs-number">87.62</span>:<span class="hljs-number">8800</span>/hls/<span class="hljs-number">0</span>/index.m3u8 <span class="hljs-operator">-f</span> null NULL<br><br><span class="hljs-comment"># Linux下查看本地视频信息，而不生成实际的输出文件</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-operator">-f</span> null /dev/null<br><span class="hljs-comment"># Linux下查看远程视频信息，而不生成实际的输出文件</span><br>ffmpeg <span class="hljs-literal">-i</span> http://<span class="hljs-number">220.161</span>.<span class="hljs-number">87.62</span>:<span class="hljs-number">8800</span>/hls/<span class="hljs-number">0</span>/index.m3u8 <span class="hljs-operator">-f</span> null /dev/null<br><br><span class="hljs-comment"># 不加“-f null Null”会在最后显示“At least one output file must be specified”</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-拼接合并"><a href="#4-拼接合并" class="headerlink" title="4 拼接合并"></a>4 拼接合并</h1><ul>
+<li>拼接合并<ul>
+<li>拼接<ul>
+<li>通常指的是将多个视频文件按顺序连接在一起，形成一个长视频。</li>
+<li>在FFmpeg中，可以使用concat协议，或者filter来实现视频的拼接。</li>
+</ul>
+</li>
+<li>合并<ul>
+<li>指的是将多个视频文件合并成一个画中画或分屏的效果，也可以是将多个音频轨道合并成一个音频文件。</li>
+<li>FFmpeg中可以使用filter实现视频合并，例如：overlay filter实现画中画效果，amix filter实现音频混合。</li>
+</ul>
+</li>
+<li>拼接更多指的是将视频按顺序连接在一起，而合并更多指的是将视频进行叠加或混合。</li>
+<li>拼接或合并前【注意事项】<ul>
+<li>确保所有视频的参数匹配，包括分辨率、帧率、像素格式等，不匹配时需先使用滤镜对视频进行调整。</li>
+<li>要求输入视频使用相同的编解码格式，如果不同，则需要重新编码视频，以确保编解码格式保持一致。</li>
+<li>确保视频的时长和帧率匹配，以避免拼接或合并后出现播放速度不一致的问题。</li>
+<li>不同的视频格式需使用不同的处理方式，确保输入视频的格式兼容并符合要求。</li>
+<li>若视频中包含音频，需确保音频的参数匹配，并在拼接或合并时正确的处理音频。</li>
+<li>在拼接或合并时，需要注意保持视频质量，避免出现画面失真或压缩损失等情况。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-1-视频拼接"><a href="#4-1-视频拼接" class="headerlink" title="4-1 视频拼接"></a>4-1 视频拼接</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -qscale 4：设置视频质量的参数，数值越小质量越高</span><br><span class="hljs-comment"># -vbsf h264_mp4toannexb：指定视频比特流过滤器的参数，将H.264编码的视频流转换为Annex B格式</span><br><span class="hljs-comment"># -absf aac_adtstoasc：指定音频比特流过滤器的参数，将AAC编码的音频流转换为ADTS格式</span><br><span class="hljs-comment"># -filter_complex：指定复杂滤镜图的参数，允许用户在一个命令中应用多个滤镜，以实现更复杂的视频处理</span><br><span class="hljs-comment">#     [0:0][0:1] [1:0][1:1] [2:0][2:1] concat=n=3:v=1:a=1 [v][a]：将3个视频流连接在一起并保留音频</span><br><span class="hljs-comment">#     [0:0][1:0][2:0][3:0] concat=n=4:v=1 [v]：使用concat滤镜功能，将4个视频流连接在一起</span><br><br><span class="hljs-comment"># mp4转mpeg，使用mpeg拼接</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-qscale</span> <span class="hljs-number">4</span> test1.mpg<br>ffmpeg <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-qscale</span> <span class="hljs-number">4</span> test2.mpg<br>ffmpeg <span class="hljs-literal">-i</span> <span class="hljs-string">&quot;concat:test1.mpg|test2.mpg&quot;</span> <span class="hljs-literal">-c</span>:v mpeg4 output.mp4<br><br><span class="hljs-comment"># mp4转ts，使用ts拼接</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-vbsf</span> h264_mp4toannexb test1.ts<br>ffmpeg <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-vbsf</span> h264_mp4toannexb test2.ts<br>ffmpeg <span class="hljs-literal">-i</span> <span class="hljs-string">&quot;concat:test1.ts|test2.ts&quot;</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-absf</span> aac_adtstoasc output.mp4<br><br><span class="hljs-comment"># 将3个视频拼接成一个很长的视频，有声音(提供的视频文件必须存在音频流，否则报错)</span><br><span class="hljs-comment"># 报错信息：Stream specifier &#x27;:a&#x27; in filtergraph description ... [v][a] matches no streams.</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-i</span> test3.mp4<br> <span class="hljs-literal">-filter_complex</span> <span class="hljs-string">&#x27;[0:0][0:1] [1:0][1:1] [2:0][2:1] concat=n=3:v=1:a=1 [v][a]&#x27;</span><br> <span class="hljs-literal">-map</span> [<span class="hljs-type">v</span>] <span class="hljs-literal">-map</span> [<span class="hljs-type">a</span>] output.mp4<br><span class="hljs-comment"># 将4个视频拼接成一个很长的视频，无声音</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-i</span> test3.mp4 <span class="hljs-literal">-i</span> test4.mp4<br> <span class="hljs-literal">-filter_complex</span> <span class="hljs-string">&#x27;[0:0][1:0][2:0][3:0] concat=n=4:v=1 [v]&#x27;</span> <span class="hljs-literal">-map</span> [<span class="hljs-type">v</span>] output.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-视频合并"><a href="#4-2-视频合并" class="headerlink" title="4-2 视频合并"></a>4-2 视频合并</h2><ul>
+<li>视频合并<ul>
+<li>当两个视频合并时，各自的音频流处理方式可以分三种情况。</li>
+<li>若两个视频的音频流相同，可选择保留其中一个视频的音频流，或将两个音频流混合在一起。</li>
+<li>若两个视频的音频流不同，可选择保留其中一个视频的音频流，或将其中一视频的音频静音。</li>
+<li>如果想保留两个视频的音频流，可以使用音频混合的方式将其合并，以保留两个视频的声音。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -lavfi hstack：水平叠加视频</span><br><span class="hljs-comment"># -lavfi vstack：垂直叠加视频</span><br><span class="hljs-comment"># [0:a][1:a]amix=inputs=2:duration=longest</span><br><span class="hljs-comment"># 使用amix滤镜，将两个音频流混合在一起，并指定混合后音频流的持续时间为最长的那个音频流的持续时间</span><br><span class="hljs-comment"># -strict experimental：某些编码器可能需要此选项来启用实验性功能，新版不再需要此选项</span><br><span class="hljs-comment"># -filter_complex：指定复杂滤镜图的参数，允许用户在一个命令中应用多个滤镜，以实现更复杂的视频处理</span><br><span class="hljs-comment">#     [0:v]pad=iw*2:ih*1[a];[a][1:v]overlay=w：对第一个视频流进行填充，然后再与第二个视频流进行叠加</span><br><span class="hljs-comment">#     [0:v]pad=iw*3:ih*1[a];[a][1:v]overlay=w[b];[b][2:v]overlay=2.0*w</span><br><span class="hljs-comment">#     对第一个视频流进行填充，然后与第二个视频流叠加并保存到变量b中，最后b中视频流再与第三个视频流叠加</span><br><br><span class="hljs-comment"># 2个视频水平合并，只保留test1.mp4的音频(垂直合并使用vstack参数)</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-lavfi</span> hstack hstack.mp4<br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-filter_complex</span> hstack hstack.mp4<br><span class="hljs-comment"># 保留并合并各自的音频，【首先】需要各自提取视频中的音频</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-vn</span> <span class="hljs-literal">-y</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> audio1.m4a<br>ffmpeg <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-vn</span> <span class="hljs-literal">-y</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> audio2.m4a<br><span class="hljs-comment"># 【然后】合并音频</span><br>ffmpeg <span class="hljs-literal">-i</span> audio1.m4a <span class="hljs-literal">-i</span> audio2.m4a<br> <span class="hljs-literal">-filter_complex</span> <span class="hljs-string">&quot;[0:a][1:a]amix=inputs=2:duration=longest&quot;</span> audio3.mp3<br><span class="hljs-comment"># 【最后】将合并音频audio3.mp3再合并回原先已合并的视频hstack.mp4中</span><br>ffmpeg <span class="hljs-literal">-i</span> hstack.mp4 <span class="hljs-literal">-i</span> audio3.mp3 <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a aac <span class="hljs-literal">-strict</span> experimental output.mp4<br><br><span class="hljs-comment"># 3个视频水平合并，只保留test1.mp4的音频</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-i</span> test3.mp4 <span class="hljs-literal">-lavfi</span> hstack=inputs=<span class="hljs-number">3</span> output.mp4<br><br><span class="hljs-comment"># 横向合并2个视频</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4<br> <span class="hljs-literal">-filter_complex</span> <span class="hljs-string">&quot;[0:v]pad=iw*2:ih*1[a];[a][1:v]overlay=w&quot;</span> output.mp4<br><span class="hljs-comment"># 竖向合并2个视频</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4<br> <span class="hljs-literal">-filter_complex</span> <span class="hljs-string">&quot;[0:v]pad=iw:ih*2[a];[a][1:v]overlay=0:h&quot;</span> output.mp4<br><br><span class="hljs-comment"># 横向合并3个视频</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-i</span> test3.mp4<br> <span class="hljs-literal">-filter_complex</span> <span class="hljs-string">&quot;[0:v]pad=iw*3:ih*1[a];[a][1:v]overlay=w[b];[b][2:v]overlay=2.0*w&quot;</span> output.mp4<br><span class="hljs-comment"># 竖向合并3个视频</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-i</span> test3.mp4<br> <span class="hljs-literal">-filter_complex</span> <span class="hljs-string">&quot;[0:v]pad=iw:ih*3[a];[a][1:v]overlay=0:h[b];[b][2:v]overlay=0:2.0*h&quot;</span> output.mp4<br><br><span class="hljs-comment"># 2x2方式排列合并4个视频</span><br>ffmpeg <span class="hljs-literal">-i</span> test1.mp4 <span class="hljs-literal">-i</span> test2.mp4 <span class="hljs-literal">-i</span> test3.mp4 <span class="hljs-literal">-i</span> test4.mp4<br> <span class="hljs-literal">-filter_complex</span> <span class="hljs-string">&quot;[0:v]pad=iw*2:ih*2[a];</span><br><span class="hljs-string"> [a][1:v]overlay=w[b];[b][2:v]overlay=0:h[c];[c][3:v]overlay=w:h&quot;</span> output.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-3-添加水印"><a href="#4-3-添加水印" class="headerlink" title="4-3 添加水印"></a>4-3 添加水印</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># movie=test.jpg[logo];[in][logo]overlay=10:10:1[out]</span><br><span class="hljs-comment"># overlay=10:10:1：logo位于左上角处，左距10像素，上距10像素，1表示logo透明度</span><br><span class="hljs-comment"># [0:v][1:v]overlay=10:10:enable=&#x27;between(t,0,5)&#x27;：[1:v]将test.jpg看成一个视频流</span><br><span class="hljs-comment"># 将第二个视频流叠加到第一个视频流的(10,10)位置上，并且叠加操作发生在视频的0秒到5秒之间</span><br><span class="hljs-comment"># -ignore_loop 0：指定循环播放</span><br><span class="hljs-comment"># -filter_complex overlay=0:H-h：叠加到底部并指定位置，0和H-h分别指横纵坐标的起始位置</span><br><span class="hljs-comment"># drawtext=fontfile=test.ttf:text=&#x27;添加文字水印&#x27;:x=100:y=10:fontsize=24:fontcolor=yellow:shadowy=2</span><br><span class="hljs-comment"># 设置水印的字体样式、文本内容、位置、字体大小、字体颜色和阴影效果</span><br><br><span class="hljs-comment"># 添加图片水印，需要提供test.jpg</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;movie=test.jpg[logo];[in][logo]overlay=10:10:1[out]&quot;</span> output.mp4<br><span class="hljs-comment"># Linux下可能警告：EOF timestamp not reliable</span><br><span class="hljs-comment"># 这是由于movie滤镜无法准确获取test.jpg的时长信息而引起的</span><br><span class="hljs-comment"># 可以使用enable选项来手动设置overlay滤镜的生效时间段</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4<br> <span class="hljs-literal">-i</span> test.jpg <span class="hljs-literal">-filter_complex</span> <span class="hljs-string">&quot;[0:v][1:v]overlay=10:10:enable=&#x27;between(t,0,5)&#x27;&quot;</span> output.mp4<br><span class="hljs-comment"># 添加图片水印，需要提供test.jpg</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-i</span> test.jpg <span class="hljs-literal">-filter_complex</span> overlay output.mp4<br><span class="hljs-comment"># 添加图片水印，需要提供test.jpg</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4<br> <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;movie=test.jpg[logo];[in][logo]overlay=10:10:1[out]&quot;</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> output.mp4<br><br><span class="hljs-comment"># 添加GIF，需要提供test.gif</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-ignore_loop</span> <span class="hljs-number">0</span> <span class="hljs-literal">-i</span> test.gif <span class="hljs-literal">-filter_complex</span> overlay=<span class="hljs-number">0</span>:<span class="hljs-built_in">H</span><span class="hljs-literal">-h</span> output.mp4<br><br><span class="hljs-comment"># 添加文字水印，需要提供test.ttf</span><br>ffmpeg <span class="hljs-literal">-i</span> test.flv<br> <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;drawtext=fontfile=test.ttf:text=&#x27;添加文字水印&#x27;:</span><br><span class="hljs-string"> x=100:y=10:fontsize=24:fontcolor=yellow:shadowy=2&quot;</span> output.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-画面旋转"><a href="#5-画面旋转" class="headerlink" title="5 画面旋转"></a>5 画面旋转</h1><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -metadata:s:v rotate=&quot;90&quot;：表示将视频的旋转属性设置为90度</span><br><span class="hljs-comment"># -vf &quot;transpose=1&quot;：表示使用transpose滤镜将视频顺时针旋转90度</span><br><span class="hljs-comment"># -vf hflip：表示使用FFmpeg框架中的hflip滤镜将视频进行水平翻转</span><br><br><span class="hljs-comment"># 旋转90°</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-metadata</span>:s:v rotate=<span class="hljs-string">&quot;90&quot;</span> <span class="hljs-literal">-codec</span> <span class="hljs-built_in">copy</span> output.mp4<br><br><span class="hljs-comment"># 顺时针旋转90°</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;transpose=1&quot;</span> output.mp4<br><span class="hljs-comment"># 逆时针旋转90°</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;transpose=2&quot;</span> output.mp4<br><br><span class="hljs-comment"># 水平翻转</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vf</span> hflip output.mp4<br><span class="hljs-comment"># 垂直翻转</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vf</span> vflip output.mp4<br><br><span class="hljs-comment"># 顺时针旋转90°后再水平翻转</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;transpose=3&quot;</span> output.mp4<br><span class="hljs-comment"># 逆时针旋转90°后再水平翻转</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;transpose=0&quot;</span> output.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-视频转码"><a href="#6-视频转码" class="headerlink" title="6 视频转码"></a>6 视频转码</h1><ul>
+<li>视频转码<ul>
+<li>转文件格式<ul>
+<li>通常指的是改变视频文件的容器格式，即改变视频数据的封装方式，但不会改变视频的编码方式。</li>
+<li>可能影响视频兼容性和功能，但不改变视频的压缩算法，常见格式包括MP4、AVI、FLV、MKV等。</li>
+</ul>
+</li>
+<li>转编码格式<ul>
+<li>通常指改变视频文件的编码方式，即改变视频数据的压缩格式以及算法，而不改变视频的容器格式。</li>
+<li>可能影响视频质量、大小和兼容性，但不改变文件类型，常见格式有H.264、H.265、MPEG-4等。</li>
+</ul>
+</li>
+<li>转编码格式主要关注视频数据的压缩和编码方式，而转文件格式主要关注视频数据的封装以及存储方式。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-1-转文件格式"><a href="#6-1-转文件格式" class="headerlink" title="6-1 转文件格式"></a>6-1 转文件格式</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># ffmpeg -i [input_file] [output_file]：基本命令，建议带其他参数，如编解码器、视频质量等</span><br><span class="hljs-comment"># -bsf:v h264_mp4toannexb：定义比特流过滤器，将H.264编码的视频流转换为MP4格式的AnnexB格式</span><br><span class="hljs-comment"># -loglevel error：用于设置日志级别，控制输出的详细程度</span><br><span class="hljs-comment">#     quiet：最低的日志级别，不输出任何信息</span><br><span class="hljs-comment">#     panic：只输出致命错误信息</span><br><span class="hljs-comment">#     fatal：只输出致命错误信息和错误信息</span><br><span class="hljs-comment">#     error：只输出错误信息</span><br><span class="hljs-comment">#     warning：输出警告信息和错误信息</span><br><span class="hljs-comment">#     info：输出详细信息，包括警告信息、错误信息和一般信息</span><br><span class="hljs-comment">#     verbose：输出更多详细信息</span><br><span class="hljs-comment">#     debug：输出调试信息，最详细的日志级别</span><br><br><span class="hljs-comment"># 3gp转avi</span><br>ffmpeg <span class="hljs-literal">-i</span> test.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span> <span class="hljs-operator">-f</span> avi <span class="hljs-literal">-vcodec</span> libxvid <span class="hljs-literal">-acodec</span> mp3 <span class="hljs-literal">-ar</span> <span class="hljs-number">22050</span> output.avi<br><span class="hljs-comment"># mkv转avi</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mkv <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-bsf</span>:v h264_mp4toannexb output.avi<br><br><span class="hljs-comment"># h264转ts</span><br>ffmpeg <span class="hljs-literal">-i</span> test.h264 <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-c</span>:a aac output.ts<br><span class="hljs-comment"># wmv转flv</span><br>ffmpeg <span class="hljs-literal">-i</span> test.wmv <span class="hljs-literal">-c</span>:v flv <span class="hljs-literal">-c</span>:a libmp3lame output.flv<br><span class="hljs-comment"># avi转mpeg</span><br>ffmpeg <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-aspect</span> <span class="hljs-number">16</span>:<span class="hljs-number">9</span> <span class="hljs-literal">-maxrate</span> <span class="hljs-number">2</span>M <span class="hljs-literal">-bufsize</span> <span class="hljs-number">5</span>M output.mpeg<br><br><span class="hljs-comment"># mp3转pcm</span><br><span class="hljs-comment"># Linux下可能警告：Estimating duration from bitrate, this may be inaccurate</span><br><span class="hljs-comment"># 这是由于FFmpeg在处理MP3输入文件时，根据比特率来估算持续时间，但这种估算可能不准确导致</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp3 <span class="hljs-operator">-f</span> s16le <span class="hljs-literal">-acodec</span> pcm_s16le <span class="hljs-literal">-ar</span> <span class="hljs-number">44100</span> output.pcm<br>ffmpeg <span class="hljs-literal">-i</span> test.mp3 <span class="hljs-operator">-f</span> s16le <span class="hljs-literal">-acodec</span> pcm_s16le <span class="hljs-literal">-ar</span> <span class="hljs-number">44100</span> <span class="hljs-literal">-hide_banner</span> <span class="hljs-literal">-loglevel</span> error output.pcm<br><br><span class="hljs-comment"># mp3转wav</span><br><span class="hljs-comment"># Linux下可能警告：Estimating duration from bitrate, this may be inaccurate</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp3 output.wav<br>ffmpeg <span class="hljs-literal">-i</span> test.mp3 <span class="hljs-literal">-hide_banner</span> <span class="hljs-literal">-loglevel</span> error output.wav<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-flv转其他"><a href="#1-flv转其他" class="headerlink" title="(1) flv转其他"></a>(1) flv转其他</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -b:v 640k：设置视频的比特率为640kbps</span><br><span class="hljs-comment"># -b:a 128k：设置音频的比特率为128kbps</span><br><br><span class="hljs-comment"># flv转mp4</span><br>ffmpeg <span class="hljs-literal">-i</span> test.flv <span class="hljs-literal">-b</span>:v <span class="hljs-number">640</span>k output.mp4<br><br><span class="hljs-comment"># flv转mp4</span><br>ffmpeg <span class="hljs-literal">-i</span> test.flv<br> <span class="hljs-literal">-b</span>:v <span class="hljs-number">200</span>k <span class="hljs-literal">-ac</span> <span class="hljs-number">2</span> <span class="hljs-literal">-r</span> <span class="hljs-number">25</span> <span class="hljs-literal">-vcodec</span> h264 <span class="hljs-literal">-acodec</span> mp3 <span class="hljs-literal">-b</span>:a <span class="hljs-number">128</span>k <span class="hljs-literal">-ar</span> <span class="hljs-number">44100</span> output.mp4<br><br><span class="hljs-comment"># flv转3gp</span><br>ffmpeg <span class="hljs-literal">-i</span> test.flv<br> <span class="hljs-literal">-b</span>:v <span class="hljs-number">200</span>k <span class="hljs-literal">-ac</span> <span class="hljs-number">1</span> <span class="hljs-literal">-r</span> <span class="hljs-number">25</span> <span class="hljs-literal">-vcodec</span> h263 <span class="hljs-literal">-acodec</span> aac <span class="hljs-literal">-b</span>:a <span class="hljs-number">128</span>k <span class="hljs-literal">-ar</span> <span class="hljs-number">8000</span> <span class="hljs-literal">-s</span> <span class="hljs-number">176</span>x144 output.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-其他转3gp"><a href="#2-其他转3gp" class="headerlink" title="(2) 其他转3gp"></a>(2) 其他转3gp</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># mpeg转3gp</span><br><span class="hljs-comment"># Linux下可能警告：Past duration 0.748665 too large</span><br><span class="hljs-comment"># 这是由于视频文件本身的问题，或是在视频处理过程中出现了一些意外情况</span><br><span class="hljs-comment"># FFmpeg检测到时间戳过大的情况，可能会导致视频处理过程中的一些不确定性和错误</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mpeg<br> <span class="hljs-literal">-y</span> <span class="hljs-literal">-ar</span> <span class="hljs-number">22500</span> <span class="hljs-literal">-r</span> <span class="hljs-number">15</span> <span class="hljs-literal">-ac</span> <span class="hljs-number">2</span> <span class="hljs-literal">-s</span> <span class="hljs-number">176</span>x144 <span class="hljs-literal">-c</span>:v h263 <span class="hljs-literal">-b</span>:v <span class="hljs-number">128</span>k <span class="hljs-literal">-c</span>:a aac <span class="hljs-literal">-b</span>:a <span class="hljs-number">24</span>k <span class="hljs-operator">-f</span> <span class="hljs-number">3</span><span class="hljs-built_in">gp</span> output.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span><br><br><span class="hljs-comment"># wmv转3gp</span><br>ffmpeg <span class="hljs-literal">-i</span> test.wmv<br> <span class="hljs-literal">-y</span> <span class="hljs-literal">-ar</span> <span class="hljs-number">08000</span> <span class="hljs-literal">-r</span> <span class="hljs-number">15</span> <span class="hljs-literal">-ac</span> <span class="hljs-number">1</span> <span class="hljs-literal">-s</span> <span class="hljs-number">176</span>x144 <span class="hljs-literal">-ab</span> <span class="hljs-number">12200</span> <span class="hljs-literal">-acodec</span> libamr_nb <span class="hljs-literal">-b</span>:v <span class="hljs-number">128</span>k output.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span><br><br><span class="hljs-comment"># avi转3gp</span><br>ffmpeg <span class="hljs-literal">-i</span> test.avi<br> <span class="hljs-literal">-y</span> <span class="hljs-literal">-ar</span> <span class="hljs-number">08000</span> <span class="hljs-literal">-r</span> <span class="hljs-number">25</span> <span class="hljs-literal">-ac</span> <span class="hljs-number">1</span> <span class="hljs-literal">-s</span> <span class="hljs-number">352</span>x288 <span class="hljs-literal">-ab</span> <span class="hljs-number">32</span>k<br> <span class="hljs-literal">-vcodec</span> h263 <span class="hljs-literal">-acodec</span> libopencore_amrnb <span class="hljs-literal">-b</span>:v <span class="hljs-number">128</span>k output.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-mp4转其他"><a href="#3-mp4转其他" class="headerlink" title="(3) mp4转其他"></a>(3) mp4转其他</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -c copy：指定复制原始编解码器而不进行重新编码，以避免质量损失或加快转换速度</span><br><span class="hljs-comment"># -c:v copy -c:a copy：在不重新编码的情况下，直接从源文件中复制视频流和音频流到输出文件中</span><br><span class="hljs-comment"># -acodec copy -vcodec copy：在不重新编码的情况下，直接从源文件中复制音频流和视频流到输出文件中</span><br><span class="hljs-comment"># -q:v 2：设置视频的质量，取值范围是0到31，0表示最高质量，31表示最低质量</span><br><br><span class="hljs-comment"># mp4转avi</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 output.avi<br><span class="hljs-comment"># mp4转mkv</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> output.mkv<br><br><span class="hljs-comment"># mp4转flv</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-b</span>:v <span class="hljs-number">640</span>k output.flv<br><span class="hljs-comment"># mp4转flv</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-ar</span> <span class="hljs-number">22050</span> <span class="hljs-literal">-crf</span> <span class="hljs-number">28</span> output.flv<br><span class="hljs-comment"># mp4转flv</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> flv output.flv<br><br><span class="hljs-comment"># mp4转ts</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a <span class="hljs-built_in">copy</span> output.ts<br><span class="hljs-comment"># mp4转wmv</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span>:v wmv2 <span class="hljs-literal">-b</span>:v <span class="hljs-number">1024</span>k <span class="hljs-literal">-c</span>:a wmav2 <span class="hljs-literal">-b</span>:a <span class="hljs-number">192</span>k output.wmv<br><span class="hljs-comment"># mp4转h264</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-c</span>:a aac <span class="hljs-literal">-crf</span> <span class="hljs-number">23</span> <span class="hljs-literal">-preset</span> medium <span class="hljs-literal">-b</span>:v <span class="hljs-number">1</span>M output.h264<br><span class="hljs-comment"># mp4转3gp</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-s</span> <span class="hljs-number">176</span>x144 <span class="hljs-literal">-vcodec</span> h263 <span class="hljs-literal">-r</span> <span class="hljs-number">25</span> <span class="hljs-literal">-b</span>:v <span class="hljs-number">12200</span> <span class="hljs-literal">-ab</span> <span class="hljs-number">12200</span> <span class="hljs-literal">-ac</span> <span class="hljs-number">1</span> <span class="hljs-literal">-ar</span> <span class="hljs-number">8000</span> output.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span><br><br><span class="hljs-comment"># mp4转mpeg</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span>:v mpeg2video <span class="hljs-literal">-c</span>:a mp2 <span class="hljs-literal">-q</span>:v <span class="hljs-number">2</span> output.mpg[<span class="hljs-type">mpeg</span>]<br><span class="hljs-comment"># Linux下需正确设置VBV缓冲区大小，否则警告：VBV buffer size not set, using default size of 130KB.</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span>:v mpeg2video <span class="hljs-literal">-c</span>:a mp2 <span class="hljs-literal">-q</span>:v <span class="hljs-number">2</span> <span class="hljs-literal">-maxrate</span> <span class="hljs-number">4000</span>k <span class="hljs-literal">-bufsize</span> <span class="hljs-number">1835</span>k output.mpg<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-其他转mp4"><a href="#4-其他转mp4" class="headerlink" title="(4) 其他转mp4"></a>(4) 其他转mp4</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -vf &quot;setpts=PTS-STARTPTS&quot;：部分用于设置时间戳，以确保从第一个帧开始计算时间戳</span><br><span class="hljs-comment"># -bsf:a aac_adtstoasc：将ACC音频流从MPEG-2传输流转换为原始的MPEG-4文件格式</span><br><span class="hljs-comment"># -movflags +faststart：在输出的MP4文件中启用快速启动，使视频在网络上的播放更加流畅</span><br><br><span class="hljs-comment"># avi转mp4</span><br>ffmpeg <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-map</span> <span class="hljs-number">0</span> output.mp4<br><span class="hljs-comment"># h264转mp4</span><br>ffmpeg <span class="hljs-literal">-i</span> test.h264 <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">23</span> <span class="hljs-literal">-preset</span> medium <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;setpts=PTS-STARTPTS&quot;</span> output.mp4<br><span class="hljs-comment"># mkv转mp4</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mkv <span class="hljs-literal">-y</span> <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> output.mp4<br><span class="hljs-comment"># wmv转mp4</span><br>ffmpeg <span class="hljs-literal">-i</span> test.wmv <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">23</span> <span class="hljs-literal">-c</span>:a aac output.mp4<br><br><span class="hljs-comment"># ts转mp4</span><br>ffmpeg <span class="hljs-literal">-i</span> test.ts <span class="hljs-operator">-f</span> mp4 <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> output.mp4<br><span class="hljs-comment"># Linux下可能出现如下警告信息，这是在处理H.264视频流时出现了SPS(序列参数集)引用错误</span><br><span class="hljs-comment"># 通常是由于输入文件的视频流中缺少SPS，或SPS数据损坏导致的，是输入文件本身的编码问题</span><br><span class="hljs-comment"># [h264 @ 0x556d2ecaefc0] non-existing SPS 0 referenced in buffering period</span><br><span class="hljs-comment"># [h264 @ 0x556d2ecaefc0] SPS unavailable in decode_picture_timing</span><br><span class="hljs-comment"># [h264 @ 0x556d2ecaefc0] non-existing SPS 0 referenced in buffering period</span><br><span class="hljs-comment"># [h264 @ 0x556d2ecaefc0] SPS unavailable in decode_picture_timing</span><br><span class="hljs-comment"># 可以控制不输出任何信息来规避，但若希望视频质量得以保证，最好想法设法进行更好地处理</span><br>ffmpeg <span class="hljs-literal">-i</span> test.ts <span class="hljs-operator">-f</span> mp4 <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-loglevel</span> quiet output.mp4<br><br><span class="hljs-comment"># m3u8转mp4</span><br>ffmpeg <span class="hljs-literal">-i</span> http://<span class="hljs-number">220.161</span>.<span class="hljs-number">87.62</span>:<span class="hljs-number">8800</span>/hls/<span class="hljs-number">0</span>/index.m3u8<br> <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-bsf</span>:a aac_adtstoasc <span class="hljs-literal">-movflags</span> +faststart output.mp4<br><span class="hljs-comment"># Linux下可能出现如下警告信息，这是由于HLS视频流的编码格式不兼容或存在问题</span><br><span class="hljs-comment"># [NULL @ 0x556bbcc2f4e0] SPS unavailable in decode_picture_timing</span><br><span class="hljs-comment"># [NULL @ 0x556bbcc2f4e0] non-existing PPS 0 referenced</span><br><span class="hljs-comment"># [h264 @ 0x556bbcc31220] SPS unavailable in decode_picture_timing</span><br><span class="hljs-comment"># [h264 @ 0x556bbcc31220] non-existing PPS 0 referenced</span><br><span class="hljs-comment"># [h264 @ 0x556bbcc31220] decode_slice_header error</span><br><span class="hljs-comment"># [h264 @ 0x556bbcc31220] no frame!</span><br><span class="hljs-comment"># [NULL @ 0x556bbcc2f4e0] ...</span><br><span class="hljs-comment"># [NULL @ 0x556bbcc2f4e0] non-existing SPS 0 referenced in buffering period</span><br><span class="hljs-comment"># [NULL @ 0x556bbcc2f4e0] SPS unavailable in decode_picture_timing</span><br><span class="hljs-comment"># [h264 @ 0x556bbcc31220] non-existing SPS 0 referenced in buffering period</span><br><span class="hljs-comment"># [h264 @ 0x556bbcc31220] SPS unavailable in decode_picture_timing</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-2-转编码格式"><a href="#6-2-转编码格式" class="headerlink" title="6-2 转编码格式"></a>6-2 转编码格式</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># mpeg4编码转h264编码</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vcodec</span> h264 output.mp4<br><br><span class="hljs-comment"># h264编码转mpeg4编码</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vcodec</span> mpeg4 output.mp4<br><br><span class="hljs-comment"># 当前的编码格式转换为H.265视频编码和AAC音频编码</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span>:v libx265 <span class="hljs-literal">-c</span>:a aac output.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-图像处理"><a href="#7-图像处理" class="headerlink" title="7 图像处理"></a>7 图像处理</h1><ul>
+<li>图像处理<ul>
+<li>FFmpeg截取视频帧的两种seeking方式。</li>
+<li>在输入文件之前使用-ss参数：影响视频解码的速度，因为FFmpeg会在指定时间点之前进行解码。</li>
+<li>在输入文件之后使用-ss参数：会在解码后丢弃指定时间点之前的帧，可能导致一些性能上的差异。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 将视频第5秒的一帧图像截取出来，使用关键帧，速度快，Linux下可能不识别</span><br>ffmpeg <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">01</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-frames</span>:v <span class="hljs-number">1</span> output.jpg<br><br><span class="hljs-comment"># 将视频第5秒的一帧图像截取出来，逐帧解码，直到05秒才截取，速度慢</span><br><span class="hljs-comment"># Linux下可能警告：deprecated pixel format used, make sure you did set range correctly</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-frames</span>:v <span class="hljs-number">1</span> output.jpg<br><br><span class="hljs-comment"># 从视频第8秒的位置截取一张大小为350x240的缩略图</span><br><span class="hljs-comment"># Linux下可能警告：deprecated pixel format used, make sure you did set range correctly</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-y</span> <span class="hljs-operator">-f</span> image2 <span class="hljs-literal">-ss</span> <span class="hljs-number">8</span> <span class="hljs-literal">-t</span> <span class="hljs-number">0.001</span> <span class="hljs-literal">-s</span> <span class="hljs-number">350</span>x240 output.jpg<br><br><span class="hljs-comment"># 提取图片，提取的图像帧率为1帧/秒，输出格式为image2</span><br><span class="hljs-comment"># Linux下可能警告：deprecated pixel format used, make sure you did set range correctly</span><br><span class="hljs-comment"># 出现该警告是由于在视频处理过程中，使用了不推荐的过时像素格式，可能会导致颜色范围设置不正确</span><br><span class="hljs-comment"># 设置像素格式、使用最邻近算法进行缩放、使用-color_range设置颜色范围，可解决警告(***好像无效)</span><br>ffmpeg <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-r</span> <span class="hljs-number">1</span> <span class="hljs-operator">-f</span> image2 image-%<span class="hljs-number">3</span>d.jpeg<br>ffmpeg <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-r</span> <span class="hljs-number">1</span> <span class="hljs-operator">-f</span> image2 <span class="hljs-literal">-pix_fmt</span> yuvj420p image-%<span class="hljs-number">3</span>d.jpeg<br>ffmpeg <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-r</span> <span class="hljs-number">1</span> <span class="hljs-operator">-f</span> image2 <span class="hljs-literal">-sws_flags</span> neighbor image-%<span class="hljs-number">3</span>d.jpeg<br><br><span class="hljs-comment"># 把视频的前30帧截取转换成一个gif图片</span><br><span class="hljs-comment"># fps=10,scale=320:-1:flags=lanczos：设置视频帧率为10，尺寸320x240，并使用lanczos算法进行缩放</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;fps=10,scale=320:-1:flags=lanczos&quot;</span> <span class="hljs-literal">-t</span> <span class="hljs-number">3</span> output.gif<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-1-图转视频"><a href="#7-1-图转视频" class="headerlink" title="7-1 图转视频"></a>7-1 图转视频</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -framerate 30：设置视频的帧率为30帧每秒</span><br><span class="hljs-comment"># test%d.jpg：%d表示从0开始依次递增的数字</span><br><span class="hljs-comment"># -vf &quot;scale=500:424&quot;：将视频尺寸缩放为500x424</span><br><span class="hljs-comment"># -pix_fmt yuv420p：设置视频的像素格式为yuv420p</span><br><span class="hljs-comment"># -pattern_type glob：使用glob模式来匹配不规则命名的图片文件</span><br><br><span class="hljs-comment"># 规则名称的图片转视频，不规则名称可以使用*.jpg</span><br>ffmpeg <span class="hljs-literal">-i</span> test%d.jpg <span class="hljs-literal">-vf</span> <span class="hljs-string">&quot;scale=500:424&quot;</span> <span class="hljs-literal">-c</span>:v libx264 output.mp4<br><span class="hljs-comment"># 比特率为200k，像素格式为yuv420p</span><br>ffmpeg <span class="hljs-literal">-framerate</span> <span class="hljs-number">30</span> <span class="hljs-literal">-i</span> test%d.jpg<br> <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-r</span> <span class="hljs-number">30</span> <span class="hljs-literal">-b</span>:v <span class="hljs-number">200</span>k <span class="hljs-literal">-pix_fmt</span> yuv420p output.mp4<br><span class="hljs-comment"># 假设视频时长为5秒，总帧数N=30帧/秒×5秒=150帧</span><br>ffmpeg <span class="hljs-literal">-framerate</span> <span class="hljs-number">30</span> <span class="hljs-literal">-i</span> test%d.jpg<br> <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-r</span> <span class="hljs-number">30</span> <span class="hljs-literal">-b</span>:v <span class="hljs-number">200</span>k <span class="hljs-literal">-pix_fmt</span> yuv420p <span class="hljs-literal">-t</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> output.mp4<br><br><span class="hljs-comment"># 不规则名称图片转视频，Linux方法</span><br>ffmpeg <span class="hljs-literal">-framerate</span> <span class="hljs-number">25</span> <span class="hljs-literal">-pattern_type</span> glob <span class="hljs-literal">-i</span> <span class="hljs-string">&quot;*.jpg&quot;</span><br> <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-r</span> <span class="hljs-number">30</span> <span class="hljs-literal">-pix_fmt</span> yuv420p output.mp4<br>ffmpeg <span class="hljs-literal">-framerate</span> <span class="hljs-number">10</span> <span class="hljs-literal">-pattern_type</span> glob <span class="hljs-literal">-i</span> <span class="hljs-string">&quot;*.jpg&quot;</span> output.mp4<br><span class="hljs-built_in">cat</span> *.jpg | ffmpeg <span class="hljs-operator">-f</span> image2pipe <span class="hljs-literal">-i</span> - output.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-2-格式转换"><a href="#7-2-格式转换" class="headerlink" title="7-2 格式转换"></a>7-2 格式转换</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># jpg转png</span><br>ffmpeg <span class="hljs-literal">-i</span> test.jpg output.png<br><br><span class="hljs-comment"># jpg转webp</span><br>ffmpeg <span class="hljs-literal">-i</span> test.jpg <span class="hljs-literal">-pix_fmt</span> yuv420p output.webp<br><br><span class="hljs-comment"># png转jpg</span><br><span class="hljs-comment"># Linux下可能警告：deprecated pixel format used, make sure you did set range correctly</span><br>ffmpeg <span class="hljs-literal">-i</span> test.png <span class="hljs-literal">-pix_fmt</span> yuvj420p output.jpg<br><br><span class="hljs-comment"># png转bmp</span><br>ffmpeg <span class="hljs-literal">-i</span> test.png output.bmp<br><br><span class="hljs-comment"># png转webp</span><br>ffmpeg <span class="hljs-literal">-i</span> test.png <span class="hljs-literal">-pix_fmt</span> yuv420p output.webp<br><br><span class="hljs-comment"># png转tiff</span><br>ffmpeg <span class="hljs-literal">-i</span> test.png output.tiff<br><br><span class="hljs-comment"># png转raw</span><br>ffmpeg <span class="hljs-literal">-i</span> test.png <span class="hljs-literal">-vcodec</span> png <span class="hljs-literal">-vcodec</span> rawvideo <span class="hljs-operator">-f</span> rawvideo <span class="hljs-literal">-pix_fmt</span> rgb24 output.raw<br><br><span class="hljs-comment"># webp转jpg</span><br><span class="hljs-comment"># Linux下可能警告：deprecated pixel format used, make sure you did set range correctly</span><br>ffmpeg <span class="hljs-literal">-i</span> test.webp <span class="hljs-literal">-pix_fmt</span> yuvj420p output.jpg<br><br><span class="hljs-comment"># webp转png</span><br>ffmpeg <span class="hljs-literal">-i</span> test.webp output.png<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="8-其他操作"><a href="#8-其他操作" class="headerlink" title="8 其他操作"></a>8 其他操作</h1><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 音频和视频混合</span><br><span class="hljs-comment"># Linux下可能警告：Guessed Channel Layout for Input Stream #0.0 : stereo</span><br><span class="hljs-comment"># 由于FFmpeg猜测输入音频流的通道布局时，无法确定输入音频流的通道布局，因此使用了默认的立体声布局</span><br>ffmpeg <span class="hljs-literal">-i</span> test.wav <span class="hljs-literal">-i</span> test.avi output.mpg<br><span class="hljs-comment"># 若能确定输入音频流的通道布局，可使用-map选项显式地指定输入流的通道布局，例如立体声(左声道和右声道)</span><br><span class="hljs-comment"># 0:a:0表示输入文件0(即test.wav)的第一个音频流，1:v:0表示输入文件1(即test.avi)的第一个视频流</span><br>ffmpeg <span class="hljs-literal">-i</span> test.wav <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-map</span> <span class="hljs-number">0</span>:a:<span class="hljs-number">0</span> <span class="hljs-literal">-map</span> <span class="hljs-number">1</span>:v:<span class="hljs-number">0</span> <span class="hljs-literal">-maxrate</span> <span class="hljs-number">3.5</span>M <span class="hljs-literal">-bufsize</span> <span class="hljs-number">4</span>M output.mpg<br><br><span class="hljs-comment"># 设置视频屏幕高宽比</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-aspect</span> <span class="hljs-number">16</span>:<span class="hljs-number">9</span> output.mp4<br><br><span class="hljs-comment"># 重新设置key frame interval</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vcodec</span> libx264 <span class="hljs-literal">-x264-params</span> keyint=<span class="hljs-number">1</span>:scenecut=<span class="hljs-number">0</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> output.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-1-视频压缩"><a href="#8-1-视频压缩" class="headerlink" title="8-1 视频压缩"></a>8-1 视频压缩</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -threads 4：使用4个线程进行处理，有助于加快视频转码的速度</span><br><span class="hljs-comment"># -vf scale=640:-2：将视频缩放到宽度为640像素，高度按比例自动调整</span><br><span class="hljs-comment"># 考虑到libx264要求高度是偶数，让软件自动计算得出一个接近等比例的偶数高</span><br><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vcodec</span> h264 output.mp4<br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-b</span>:v <span class="hljs-number">1000</span>k <span class="hljs-literal">-b</span>:a <span class="hljs-number">128</span>k output.mp4<br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vcodec</span> h264 <span class="hljs-literal">-vf</span> scale=<span class="hljs-number">640</span>:<span class="hljs-literal">-2</span> <span class="hljs-literal">-threads</span> <span class="hljs-number">4</span> output.mp4<br><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vcodec</span> libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">28</span> <span class="hljs-literal">-acodec</span> aac output.mp4<br>ffmpeg <span class="hljs-literal">-i</span> test.flv <span class="hljs-literal">-vcodec</span> libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">28</span> <span class="hljs-literal">-acodec</span> aac output.flv<br>ffmpeg <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-vcodec</span> libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">28</span> <span class="hljs-literal">-acodec</span> aac output.avi<br>ffmpeg <span class="hljs-literal">-i</span> test.wmv <span class="hljs-literal">-vcodec</span> libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">28</span> <span class="hljs-literal">-acodec</span> aac output.wmv<br>ffmpeg <span class="hljs-literal">-i</span> test.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span> <span class="hljs-literal">-vcodec</span> libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">28</span> <span class="hljs-literal">-acodec</span> aac output.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span><br><br>ffmpeg <span class="hljs-literal">-i</span> test.mpeg <span class="hljs-literal">-vcodec</span> libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">28</span> <span class="hljs-literal">-acodec</span> aac output.mpeg<br><span class="hljs-comment"># Linux下可能警告：VBV buffer size not set, using default size of 130KB</span><br><span class="hljs-comment"># 由于将MPEG格式的视频文件转换为H.264格式时，检测到源文件中没有设置VBV缓冲区大小导致</span><br><span class="hljs-comment"># 尝试增加VBV缓冲区大小，让VBV缓冲区足够大，从而消除没有设置VBV缓冲区大小导致的警告</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mpeg<br> <span class="hljs-literal">-vcodec</span> libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">28</span> <span class="hljs-literal">-acodec</span> aac <span class="hljs-literal">-b</span>:v <span class="hljs-number">5000</span>k <span class="hljs-literal">-bufsize</span> <span class="hljs-number">10000</span>k output.mpeg<br><span class="hljs-comment"># Linux下可能警告：VBV bufsize set but maxrate unspecified, ignored</span><br><span class="hljs-comment"># 这个警告是由于设置了VBV缓冲区大小，但没有设置最大比特率(maxrate)而引起的警告</span><br><span class="hljs-comment"># VBV缓冲区大小和最大比特率是一对相关参数，一起控制视频的比特率和帧率，确保视频能正常播放</span><br><span class="hljs-comment"># 设置VBV缓冲区大小为10000k，最大比特率为5000k，保证输出视频文件的比特率和帧率控制正确</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mpeg<br> <span class="hljs-literal">-vcodec</span> libx264 <span class="hljs-literal">-crf</span> <span class="hljs-number">28</span> <span class="hljs-literal">-acodec</span> aac <span class="hljs-literal">-b</span>:v <span class="hljs-number">5000</span>k <span class="hljs-literal">-bufsize</span> <span class="hljs-number">10000</span>k <span class="hljs-literal">-maxrate</span> <span class="hljs-number">5000</span>k output.mpeg<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-2-视频剪切"><a href="#8-2-视频剪切" class="headerlink" title="8-2 视频剪切"></a>8-2 视频剪切</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 从视频第3秒开始剪切，持续5秒</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-ss</span> <span class="hljs-number">3</span> <span class="hljs-literal">-t</span> <span class="hljs-number">5</span> <span class="hljs-literal">-codec</span> <span class="hljs-built_in">copy</span> output.mp4<br><span class="hljs-comment"># 从视频第3秒开始剪切，持续5秒</span><br>ffmpeg <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">03</span> <span class="hljs-literal">-t</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> output.avi<br><br><span class="hljs-comment"># -ss 00:00:05：指定剪切视频的开始时间为00:00:05</span><br><span class="hljs-comment"># -to 00:00:10：指定剪切视频的结束时间为00:00:10</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-to</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a <span class="hljs-built_in">copy</span> output.mp4<br>ffmpeg <span class="hljs-literal">-i</span> test.flv <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-to</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a <span class="hljs-built_in">copy</span> output.flv<br>ffmpeg <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-to</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a <span class="hljs-built_in">copy</span> output.avi<br>ffmpeg <span class="hljs-literal">-i</span> test.wmv <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-to</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a <span class="hljs-built_in">copy</span> output.wmv<br>ffmpeg <span class="hljs-literal">-i</span> test.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span> <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-to</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a <span class="hljs-built_in">copy</span> output.<span class="hljs-number">3</span><span class="hljs-built_in">gp</span><br><br>ffmpeg <span class="hljs-literal">-i</span> test.mpeg <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-to</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a <span class="hljs-built_in">copy</span> output.mpeg<br><span class="hljs-comment"># Linux下可能警告：VBV buffer size not set, using default size of 130KB</span><br><span class="hljs-comment"># 下述方法都试过了，均无效，貌似遇到MPEG文件问题，FFmpeg都不好处理</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mpeg<br> <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-to</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-b</span>:v <span class="hljs-number">2000</span>k <span class="hljs-literal">-c</span>:a aac <span class="hljs-literal">-b</span>:a <span class="hljs-number">128</span>k output.mpeg<br>ffmpeg <span class="hljs-literal">-i</span> test.mpeg <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-to</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> <span class="hljs-literal">-c</span>:v mpeg2video <span class="hljs-literal">-c</span>:a mp2 output.mpeg<br>ffmpeg <span class="hljs-literal">-i</span> test.mpeg <span class="hljs-literal">-ss</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">05</span> <span class="hljs-literal">-to</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">10</span> <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a <span class="hljs-built_in">copy</span> <span class="hljs-literal">-bufsize</span> <span class="hljs-number">2000</span>k output.mpeg<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-3-倒放与加减速"><a href="#8-3-倒放与加减速" class="headerlink" title="8-3 倒放与加减速"></a>8-3 倒放与加减速</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># [0:v]reverse[v]：将输入的第一个视频流倒转，然后将结果输出为一个新的视频流</span><br><span class="hljs-comment"># -vf reverse：将视频逆序播放</span><br><span class="hljs-comment"># -af areverse：将音频逆序播放</span><br><span class="hljs-comment"># -vf setpts=PTS/2：将视频的播放速度减半</span><br><span class="hljs-comment"># -af atempo=2：将音频的播放速度加倍</span><br><span class="hljs-comment"># PTS即Presentation Time Stamp，是视频帧的显示时间戳，调整倍速范围0.25~4倍</span><br><span class="hljs-comment"># -filter:v &quot;setpts=0.5*PTS&quot;：将视频的播放速度减半</span><br><span class="hljs-comment"># -filter:v &quot;setpts=2.0*PTS&quot;：将视频的播放速度加倍</span><br><span class="hljs-comment"># -filter:a &quot;atempo=0.5&quot;：将音频的播放速度减半</span><br><span class="hljs-comment"># -filter:a &quot;atempo=2.0&quot;：将音频的播放速度加倍</span><br><br><span class="hljs-comment"># 视频倒放，无音频</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-filter_complex</span> [<span class="hljs-number">0</span>:<span class="hljs-type">v</span>]reverse[<span class="hljs-type">v</span>] <span class="hljs-literal">-map</span> [<span class="hljs-type">v</span>] <span class="hljs-literal">-preset</span> superfast output.mp4<br><span class="hljs-comment"># 视频倒放，音频不变</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vf</span> reverse output.mp4<br><span class="hljs-comment"># 音频倒放，视频不变</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-af</span> areverse <span class="hljs-literal">-map</span> <span class="hljs-number">0</span> <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> output.mp4<br><span class="hljs-comment"># 音频和视频同时倒放</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-af</span> areverse <span class="hljs-literal">-vf</span> reverse <span class="hljs-literal">-preset</span> superfast output.mp4<br><br><span class="hljs-comment"># 视频加速播放</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-af</span> atempo=<span class="hljs-number">2</span> <span class="hljs-literal">-vf</span> setpts=PTS/<span class="hljs-number">2</span> output.mp4<br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-filter</span>:v <span class="hljs-string">&quot;setpts=0.5*PTS&quot;</span> <span class="hljs-literal">-filter</span>:a <span class="hljs-string">&quot;atempo=2.0&quot;</span> output.mp4<br><span class="hljs-comment"># 视频减速播放</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-an</span> <span class="hljs-literal">-filter</span>:v setpts=<span class="hljs-number">0.5</span>*PTS output.mp4<br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-filter</span>:v <span class="hljs-string">&quot;setpts=2.0*PTS&quot;</span> <span class="hljs-literal">-filter</span>:a <span class="hljs-string">&quot;atempo=0.5&quot;</span> output.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-4-分离音视频流"><a href="#8-4-分离音视频流" class="headerlink" title="8-4 分离音视频流"></a>8-4 分离音视频流</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 分离视频流</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-an</span> output.mp4<br><br><span class="hljs-comment"># 分离音频流</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-acodec</span> <span class="hljs-built_in">copy</span> <span class="hljs-literal">-vn</span> output.mp3<br><span class="hljs-comment"># Linux下可能报错：Invalid audio stream. Exactly one MP3 audio stream is required.</span><br><span class="hljs-comment"># 需要确保只有一个有效的MP3音频流，如果输入文件不包含MP3音频流，则需要将其转码为MP3格式</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-acodec</span> libmp3lame <span class="hljs-literal">-vn</span> output.mp3<br><br><span class="hljs-comment"># 去掉视频中的音频</span><br>ffmpeg <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-an</span> output.mp4<br><br><span class="hljs-comment"># 去掉视频中的音频</span><br>ffmpeg <span class="hljs-literal">-i</span> test.avi <span class="hljs-literal">-an</span> <span class="hljs-literal">-vcodec</span> <span class="hljs-built_in">copy</span> output.avi<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="9-推流拉流"><a href="#9-推流拉流" class="headerlink" title="9 推流拉流"></a>9 推流拉流</h1><ul>
+<li>推流拉流<ul>
+<li>推流：将直播内容推送至服务器的过程。</li>
+<li>拉流：服务器已有直播内容，用指定地址将其拉取的过程，<a target="_blank" rel="noopener" href="https://www.videolan.org/">VLC媒体播放器官网</a>。</li>
+<li>MediaMTX实时媒体服务器：<a target="_blank" rel="noopener" href="https://github.com/bluenviron/mediamtx/releases">https://github.com/bluenviron/mediamtx/releases</a>。<ul>
+<li>下载安装版本，Windows：mediamtx_v1.4.0_windows_amd64.zip。</li>
+<li>解压后，在本地双击运行“mediamtx.exe”，进行本地推流的模拟。</li>
+<li>下载安装版本，Ubuntu：mediamtx_v1.4.0_linux_amd64.tar.gz。</li>
+<li>命令解压：<code>tar -zxvf mediamtx_v1.4.0_linux_amd64.tar.gz</code>。</li>
+<li>在当前解压的目录中执行命令开启本地媒体服务器：<code>./mediamtx</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># MediaMTX支持的推流协议，及对应使用的端口</span><br><span class="hljs-number">2024</span>/<span class="hljs-number">01</span>/<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">58</span>:<span class="hljs-number">42</span> INF MediaMTX v1.<span class="hljs-number">4.0</span><br><span class="hljs-number">2024</span>/<span class="hljs-number">01</span>/<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">58</span>:<span class="hljs-number">42</span> INF configuration loaded from C:\Users\Admin\Downloads\mediamtx.yml<br><span class="hljs-number">2024</span>/<span class="hljs-number">01</span>/<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">58</span>:<span class="hljs-number">42</span> INF [<span class="hljs-type">RTSP</span>] listener opened on :<span class="hljs-number">8554</span> (TCP), :<span class="hljs-number">8000</span> (UDP/RTP), :<span class="hljs-number">8001</span> (UDP/RTCP)<br><span class="hljs-number">2024</span>/<span class="hljs-number">01</span>/<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">58</span>:<span class="hljs-number">42</span> INF [<span class="hljs-type">RTMP</span>] listener opened on :<span class="hljs-number">1935</span><br><span class="hljs-number">2024</span>/<span class="hljs-number">01</span>/<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">58</span>:<span class="hljs-number">42</span> INF [<span class="hljs-type">HLS</span>] listener opened on :<span class="hljs-number">8888</span><br><span class="hljs-number">2024</span>/<span class="hljs-number">01</span>/<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">58</span>:<span class="hljs-number">42</span> INF [<span class="hljs-type">WebRTC</span>] listener opened on :<span class="hljs-number">8889</span> (HTTP), :<span class="hljs-number">8189</span> (ICE/UDP)<br><span class="hljs-number">2024</span>/<span class="hljs-number">01</span>/<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">58</span>:<span class="hljs-number">42</span> INF [<span class="hljs-type">SRT</span>] listener opened on :<span class="hljs-number">8890</span> (UDP)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-1-推流"><a href="#9-1-推流" class="headerlink" title="9-1 推流"></a>9-1 推流</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># -rtsp_transport tcp：指定RTSP传输协议为TCP</span><br><span class="hljs-comment"># -stream_loop -1：无限循环播放输入的视频流，-1表示无限循环，注意放在“-i test.mp4”之前</span><br><span class="hljs-comment"># -auto-alt-ref 0：告诉FFmpeg对视频进行WebM格式编码时不要使用禁止VP8编码中的备用参考帧特性</span><br><br><span class="hljs-comment"># 使用RTSP进行推流</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> rtsp rtsp://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8554</span>/stream<br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> rtsp <span class="hljs-literal">-rtsp_transport</span> tcp rtsp://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8554</span>/stream<br><br><span class="hljs-comment"># 使用RTMP进行推流</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> flv rtmp://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">1935</span>/stream<br><span class="hljs-comment"># Linux下可能警告：Failed to update header with correct duration ... correct filesize.</span><br><span class="hljs-comment"># 报告无法更新头部信息以包含正确的持续时间和文件大小，可以尝试使用特定的编码参数进行转码</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span>:v libx264 <span class="hljs-literal">-c</span>:a aac <span class="hljs-operator">-f</span> flv rtmp://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">1935</span>/stream<br><br><span class="hljs-comment"># 使用HLS进行推流</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> hls http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8888</span>/stream.m3u8<br><span class="hljs-comment"># Linux下可能警告：No HTTP method set, hls muxer defaulting to method PUT.</span><br><span class="hljs-comment"># 警告说明在使用HLS(HTTP Live Streaming)复用器时，未设置HTTP方法，默认使用PUT方法</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> hls <span class="hljs-literal">-method</span> POST http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8888</span>/stream.m3u8<br><span class="hljs-comment"># Linux下可能警告：Cannot use rename on non file protocol ... temporary partial files</span><br><br><span class="hljs-comment"># 使用WebRTC进行推流</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> webm http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8889</span>/stream<br><span class="hljs-comment"># Linux下可能报错：Only VP8 or VP9 video and Vorbis or Opus ... are supported for WebM.</span><br><span class="hljs-comment"># WebM仅支持VP8或VP9视频编解码器、Vorbis或Opus音频编解码器和WebVTT字幕，确保使用支持的编解码器</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4<br> <span class="hljs-literal">-c</span>:v libvpx <span class="hljs-literal">-c</span>:a libvorbis <span class="hljs-literal">-auto-alt-ref</span> <span class="hljs-number">0</span> <span class="hljs-operator">-f</span> webm http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8889</span>/stream<br><br><span class="hljs-comment"># 使用SRT进行推流</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> mpegts srt://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8890</span><br><span class="hljs-comment"># Linux下可能报错：srt://127.0.0.1:8890: Protocol not found</span><br><span class="hljs-comment"># 这是由于FFmpeg在Linux下对SRT URL方案的支持不完整</span><br><span class="hljs-comment"># 尝试使用SRT协议的另一种写法，即通过UDP指定端口进行传输，并添加参数设置数据包大小</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> mpegts <span class="hljs-string">&quot;srt://127.0.0.1:8890?pkt_size=1316&quot;</span><br><span class="hljs-comment"># Linux下可能报错：srt://127.0.0.1:8890?pkt_size=1316: Protocol not found</span><br><span class="hljs-comment"># 尝试使用SRT的传统端口模式，而非URL形式，mode=listener参数告诉FFmpeg在监听模式下等待传入连接</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> mpegts <span class="hljs-string">&quot;srt://:8890?pkt_size=1316&amp;mode=listener&quot;</span><br><span class="hljs-comment"># Linux下可能报错：srt://:8890?pkt_size=1316&amp;mode=listener: Protocol not found(***方法都无效)</span><br><br><span class="hljs-comment"># 使用RTSP进行循环推流</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-stream_loop</span> <span class="hljs-literal">-1</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> <span class="hljs-operator">-f</span> rtsp rtsp://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8554</span>/stream<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-2-拉流"><a href="#9-2-拉流" class="headerlink" title="9-2 拉流"></a>9-2 拉流</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># RTSP推流</span><br>ffmpeg <span class="hljs-literal">-re</span> <span class="hljs-literal">-stream_loop</span> <span class="hljs-literal">-1</span> <span class="hljs-literal">-i</span> test.mp4 <span class="hljs-literal">-c</span>:v <span class="hljs-built_in">copy</span> <span class="hljs-literal">-c</span>:a aac <span class="hljs-operator">-f</span> rtsp rtsp://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8554</span>/stream<br><br><span class="hljs-comment"># 推流后，可以使用VLC媒体播放器进行拉流播放，或ffplay命令播放</span><br>ffplay rtsp://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8554</span>/stream<br><br><span class="hljs-comment"># -timeout 30000000：设置超时时间为30秒，单位微秒(us)，该选项必须放在“-i”参数之前</span><br>ffmpeg <span class="hljs-literal">-timeout</span> <span class="hljs-number">30000000</span> <span class="hljs-literal">-i</span> rtsp://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8554</span>/stream <span class="hljs-literal">-c</span> <span class="hljs-built_in">copy</span> output.mp4<br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" class="category-chain-item">测试工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%A7%86%E9%A2%91%E8%BD%AC%E7%A0%81/">#视频转码</a>
+      
+        <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">#图像处理</a>
+      
+        <a href="/tags/%E6%8E%A8%E6%B5%81/">#推流</a>
+      
+        <a href="/tags/%E6%8B%89%E6%B5%81/">#拉流</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>FFmpeg 命令详解</div>
+      <div>https://stitch-top.github.io/2024/01/11/ce-shi-gong-ju/tt07-ffmpeg-de-ying-yong/tt01-ffmpeg-ming-ling-xiang-jie/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年1月11日 23:15:13</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/02/ce-shi-kuang-jia/tf04-unittest/tf02-unittest-zi-bao-mock/" title="UnitTest 子包 Mock">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">UnitTest 子包 Mock</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/02/ce-shi-kuang-jia/tf05-playwright/tf02-playwright-kuang-jia-er/" title="PlayWright 框架(二)">
+                        <span class="hidden-mobile">PlayWright 框架(二)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","appKey":"DwsEb5BeMxwdz0CEJ6MUBdu3","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"monsterid","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"pageSize":13,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="测试工具"
+        id="heading-7e2f62602068bab6246b886d7866dc56" role="tab" data-toggle="collapse" href="#collapse-7e2f62602068bab6246b886d7866dc56"
+        aria-expanded="true"
+      >
+        测试工具
+        <span class="list-group-count">(9)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-7e2f62602068bab6246b886d7866dc56"
+           role="tabpanel" aria-labelledby="heading-7e2f62602068bab6246b886d7866dc56">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/01/05/ce-shi-gong-ju/tt01-jmeter/tt01-jmeter-zu-jian/" title="JMeter 组件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JMeter 组件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/27/ce-shi-gong-ju/tt01-jmeter/tt02-jmeter-jiao-ben/" title="JMeter 脚本"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JMeter 脚本</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/03/02/ce-shi-gong-ju/tt02-fiddler/tt01-fiddler-mian-ban/" title="Fiddler 面板"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Fiddler 面板</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/05/10/ce-shi-gong-ju/tt03-charles/tt01-charles-gong-neng/" title="Charles 功能"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Charles 功能</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/07/21/ce-shi-gong-ju/tt04-postman/tt01-postman-jie-shao/" title="Postman 介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Postman 介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/09/02/ce-shi-gong-ju/tt05-adb-diao-shi-gong-ju/tt01-adb-shi-yong-ming-ling/" title="ADB 实用命令"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">ADB 实用命令</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/11/10/ce-shi-gong-ju/tt06-f12-kai-fa-zhe-gong-ju/tt01-f12-gong-neng-shuo-ming/" title="F12 功能说明"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">F12 功能说明</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/04/15/ce-shi-gong-ju/tt06-f12-kai-fa-zhe-gong-ju/tt02-f12-console-mian-ban/" title="F12 Console 面板"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">F12 Console 面板</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/11/ce-shi-gong-ju/tt07-ffmpeg-de-ying-yong/tt01-ffmpeg-ming-ling-xiang-jie/" title="FFmpeg 命令详解"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">FFmpeg 命令详解</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2024</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        📈 总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        📊 总访客数 
+        <span id="leancloud-site-uv"></span>
+         人 🌹
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
