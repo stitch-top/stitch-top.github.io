@@ -1,0 +1,1101 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🍭 MongoDB Query Language，是MongoDB数据库的查询语言，类似于SQL，是针对于文档数据库的设计，支持丰富的查询操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MQL">
+<meta property="og:url" content="https://stitch-top.github.io/2024/11/28/shu-ju-ku/db02-mql/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="🍭 MongoDB Query Language，是MongoDB数据库的查询语言，类似于SQL，是针对于文档数据库的设计，支持丰富的查询操作。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1529632145.jpg">
+<meta property="article:published_time" content="2024-11-27T16:25:30.000Z">
+<meta property="article:modified_time" content="2024-11-28T01:11:37.661Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="MongoDB">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MongoDBCompass">
+<meta property="article:tag" content="MQL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1529632145.jpg">
+  
+  
+  
+  <title>MQL - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MQL"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-28 00:25" pubdate>
+          2024年11月28日 00:25:30
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          129 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MQL</h1>
+            
+            <div class="markdown-body">
+              
+              <p>🍭 MongoDB Query Language，是MongoDB数据库的查询语言，类似于SQL，是针对于文档数据库的设计，支持丰富的查询操作。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-MQL"><a href="#1-MQL" class="headerlink" title="1 MQL"></a>1 MQL</h1><ul>
+<li>MQL<ul>
+<li>MongoDB数据库下载：<a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/community">https://www.mongodb.com/try/download/community</a>。</li>
+<li>MongoDB数据库，自带UI界面可操作，或使用NoSQLBooster for MongoDB。</li>
+<li>提供图形化和命令行界面，使用户能轻松连接、管理和操作MongoDB数据库。</li>
+<li>表达式<ul>
+<li>等于(<code>:</code>·····<code>=</code>)、不等于(<code>$ne</code>········<code>!=</code>)。</li>
+<li>小于(<code>$lt</code>···<code>&lt;</code>)、小于等于(<code>$lte</code>·····<code>&lt;=</code>)。</li>
+<li>大于(<code>$gt</code>···<code>&gt;</code>)、大于等于(<code>$gte</code>·····<code>&gt;=</code>)。</li>
+<li>包含(<code>$in</code>···<code>in()</code>)、不包含(<code>$nin</code>····<code>not in()</code>)。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">SQL</th>
+<th align="center">MongoDB</th>
+<th align="center">解释&#x2F;说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">database</td>
+<td align="center">database</td>
+<td align="center">数据库</td>
+</tr>
+<tr>
+<td align="center">table</td>
+<td align="center">collection</td>
+<td align="center">数据表&#x2F;集合</td>
+</tr>
+<tr>
+<td align="center">row</td>
+<td align="center">document</td>
+<td align="center">数据记录行&#x2F;文档</td>
+</tr>
+<tr>
+<td align="center">column</td>
+<td align="center">field</td>
+<td align="center">数据字段(列)&#x2F;域</td>
+</tr>
+<tr>
+<td align="center">index</td>
+<td align="center">index</td>
+<td align="center">索引</td>
+</tr>
+<tr>
+<td align="center">primary key</td>
+<td align="center">primary key</td>
+<td align="center">主键，MongoDB自动将_id字段设置为主键</td>
+</tr>
+</tbody></table>
+<h1 id="2-数据创建"><a href="#2-数据创建" class="headerlink" title="2 数据创建"></a>2 数据创建</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// 创建数据表<br>create table people1(<br>  id mediumint not null<br>  auto_increment,<br>  user_id varchar(30),<br>  age int,<br>  status char(1),<br>  primary key (id)<br>);<br><br>// 插入数据<br>insert into people1(user_id, age, status) values (&quot;sql001&quot;, 20, &quot;A&quot;);<br>insert into people1(user_id, age, status) values (&quot;sql002&quot;, 21, &quot;B&quot;);<br>insert into <br>  people1(user_id, age, status) <br>values <br>  (&quot;sql003&quot;, 20, &quot;C&quot;),<br>  (&quot;sql004&quot;, 20, &quot;D&quot;),<br>  (&quot;sql005&quot;, 22, &quot;B&quot;),<br>  (&quot;sql116&quot;, 19, &quot;B&quot;),<br>  (&quot;sql117&quot;, 23, &quot;B&quot;);<br><br>// 使用数据库dbtest<br>use dbtest<br><br>// mongodb不用创建表，如果没有插入数据的指定文档<br>// 则数据库会自动创建，也可以先创建文档再插入数据<br>db.people1.insertOne(<br>  &#123;user_id: &quot;mql001&quot;, age: 20, status: &quot;A&quot;&#125;<br>);<br>db.people1.insertOne(<br>  &#123;user_id: &quot;mql002&quot;, age: 21, status: &quot;B&quot;&#125;<br>);<br>db.people1.insertMany([<br>  &#123;user_id: &quot;mql003&quot;, age: 20, status: &quot;C&quot;&#125;,<br>  &#123;user_id: &quot;mql004&quot;, age: 20, status: &quot;D&quot;&#125;,<br>  &#123;user_id: &quot;mql005&quot;, age: 22, status: &quot;B&quot;&#125;,<br>  &#123;user_id: &quot;mql116&quot;, age: 19, status: &quot;B&quot;&#125;,<br>  &#123;user_id: &quot;mql117&quot;, age: 23, status: &quot;B&quot;&#125;<br>]);<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-数据查询"><a href="#3-数据查询" class="headerlink" title="3 数据查询"></a>3 数据查询</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-number">1</span>	sql001	<span class="hljs-number">20</span>	A<br><span class="hljs-number">2</span>	sql002	<span class="hljs-number">21</span>	B<br><span class="hljs-number">3</span>	sql003	<span class="hljs-number">20</span>	C<br><span class="hljs-number">4</span>	sql004	<span class="hljs-number">20</span>	D<br><span class="hljs-number">5</span>	sql005	<span class="hljs-number">22</span>	B<br><span class="hljs-number">6</span>	sql116	<span class="hljs-number">19</span>	B<br><span class="hljs-number">7</span>	sql117	<span class="hljs-number">23</span>	B<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>MySQL数据表people1如上，MongoDB数据表people1如下。</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs JSON"><span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;$oid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6745827854fbcbc1330904be&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;user_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mql001&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;A&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;$oid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6745828954fbcbc1330904bf&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;user_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mql002&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">21</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;B&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;$oid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6745828e54fbcbc1330904c0&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;user_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mql003&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;$oid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6745828e54fbcbc1330904c1&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;user_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mql004&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;D&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;$oid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6745828e54fbcbc1330904c2&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;user_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mql005&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">22</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;B&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;$oid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6745828e54fbcbc1330904c3&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;user_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mql116&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">19</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;B&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;$oid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6745828e54fbcbc1330904c4&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;user_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mql117&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;age&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">23</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;B&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-1-简单查询"><a href="#3-1-简单查询" class="headerlink" title="3-1 简单查询"></a>3-1 简单查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">select * from people1;<br>db.people1.find();<br>db.people1.find(&#123;&#125;);<br><br>select id, user_id, status from people1;<br>// 第一个&#123;&#125;不能去掉，表示筛选条件<br>// 后一个&#123;&#125;中，1代表显示，0不显示，_id默认显示<br>db.people1.find(<br>  &#123;&#125;, <br>  &#123;user_id: 1, status: 1&#125;<br>);<br><br>select user_id, status from people1;<br>db.people1.find(<br>  &#123;&#125;, <br>  &#123;user_id: 1, status: 1, _id: 0&#125;<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2-条件查询"><a href="#3-2-条件查询" class="headerlink" title="3-2 条件查询"></a>3-2 条件查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">select * from people1 where status = &quot;A&quot;;<br>db.people1.find(<br>  &#123;status: &quot;A&quot;&#125;<br>);<br><br>// 不返回_id<br>select user_id, status from people1 where status = &quot;A&quot;;<br>db.people1.find(<br>  &#123;status: &quot;A&quot;&#125;,<br>  &#123;user_id: 1, status: 1, _id: 0&#125;<br>);<br><br>select * from people1 where status != &quot;A&quot;;<br>db.people1.find(<br>  &#123;status: &#123;$ne: &quot;A&quot;&#125;&#125;<br>);<br><br>select * from people1 where status in (&quot;A&quot;, &quot;C&quot;);<br>db.people1.find(<br>  &#123;status: &#123;$in:[&quot;A&quot;, &quot;D&quot;]&#125;&#125;<br>);<br><br>select * from people1 where status = &quot;A&quot; and age &lt; 21;<br>db.people1.find(<br>  &#123;status: &quot;B&quot;, age: &#123;$lt: 21&#125;&#125;<br>);<br><br>select * from people1 where status = &quot;A&quot; and age = 20;<br>db.people1.find(<br>  &#123;status: &quot;A&quot;, age: 20&#125;<br>);<br><br>select * from people1 where status = &quot;A&quot; or age = 20;<br>// MongoDB使用的是Bson格式，Bson是Json的一个升级版<br>db.people1.find(<br>  &#123;$or: [&#123;status: &quot;A&quot;&#125;, &#123;age: 20&#125;]&#125;<br>);<br><br>select * from people1 where age &gt; 20;<br>db.people1.find(<br>  &#123;age: &#123;$gt: 20&#125;&#125;<br>);<br><br>select * from people1 where age &lt;= 20;<br>db.people1.find(<br>  &#123;age: &#123;$lte: 20&#125;&#125;<br>);<br><br>select * from people1 where age &gt; 20 and age &lt;= 22;<br>db.people1.find(<br>  &#123;age: &#123;$gt: 20, $lte: 22&#125;&#125;<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-模糊查询"><a href="#3-3-模糊查询" class="headerlink" title="3-3 模糊查询"></a>3-3 模糊查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">select * from people1 where user_id like &quot;%11%&quot;;<br>db.people1.find(<br>  &#123;user_id: /11/&#125;<br>);<br>db.people1.find(<br>  &#123;user_id: &#123;$regex: /11/&#125;&#125; <br>);<br><br>select * from people1 where user_id like &quot;sql1%&quot;;<br>// “/”指表达式的开始或结束，“^”表示字符串的开头<br>db.people1.find(<br>  &#123;user_id: /^mql1/&#125;<br>);<br>db.people1.find(<br>  &#123;user_id: &#123;$regex: /^mql1/&#125;&#125; <br>);<br><br>// 去重<br>select distinct(status) from people1;<br>db.people1.aggregate(<br>  [&#123;$group: &#123;_id: &quot;$status&quot;&#125;&#125;]<br>);<br>db.people1.distinct(&quot;status&quot;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-4-排序查询"><a href="#3-4-排序查询" class="headerlink" title="3-4 排序查询"></a>3-4 排序查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// asc升序排序<br>select * from <br>  people1 <br>where <br>  status = &quot;B&quot; <br>order by <br>  user_id asc;<br><br>// “1”升序，“-1”降序<br>db.people1.find(<br>  &#123;status: &quot;B&quot;&#125;<br>).sort(&#123;user_id: 1&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-5-聚合函数"><a href="#3-5-聚合函数" class="headerlink" title="3-5 聚合函数"></a>3-5 聚合函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">select count(*) from people1;<br>db.people1.count();<br>db.people1.find().count();<br><br>select count(user_id) from people1;<br>db.people1.count(<br>  &#123;user_id: &#123;$exists: true&#125;&#125;<br>);<br>db.people1.find(<br>  &#123;user_id: &#123;$exists: true&#125;&#125;<br>).count();<br><br>select count(*) from people1 where age &gt; 20;<br>db.people1.count(<br>  &#123;age: &#123;$gt: 20&#125;&#125;<br>);<br>db.people1.find(<br>  &#123;age: &#123;$gt: 20&#125;&#125;<br>).count();<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-6-分页查询"><a href="#3-6-分页查询" class="headerlink" title="3-6 分页查询"></a>3-6 分页查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// 获取指定条数<br>select * from people1 limit 1;<br>db.people1.findOne();<br>db.people1.find().limit(1);<br><br>// 从索引值3开始，获取2条数据<br>select * from people1 limit 3, 2;<br>db.people1.find().limit(2).skip(3);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-7-其他子句"><a href="#3-7-其他子句" class="headerlink" title="3-7 其他子句"></a>3-7 其他子句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// 多条件查询<br>select * from <br>  people1 <br>where <br>  status = &quot;A&quot; <br>and <br>  (age &lt; 21 or user_id like &quot;%00%&quot;);<br><br>db.people1.find(&#123;<br>  status: &quot;A&quot;, <br>  $or:[&#123;age: &#123;$lt: 21&#125;&#125;, &#123;user_id: &quot;%00%&quot;&#125;]<br>&#125;);<br><br>// 查看sql执行情况<br>explain select * from people1 where status = &quot;A&quot;;<br>db.people1.find(&#123;status: &quot;A&quot;&#125;).explain();<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-数据更新"><a href="#4-数据更新" class="headerlink" title="4 数据更新"></a>4 数据更新</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// 更改全部status为D<br>update people1 set status = &quot;D&quot;;<br>db.people1.updateMany(<br>  &#123;&#125;,<br>  &#123;$set: &#123;status: &quot;D&quot;&#125;&#125;<br>);<br><br>// age为20的status改为C<br>update people1 set status = &quot;C&quot; where age = 20;<br>db.people1.updateMany(<br>   &#123;age: 20&#125;,<br>   &#123;$set: &#123;status: &quot;C&quot;&#125;&#125;<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-Json查询"><a href="#5-Json查询" class="headerlink" title="5 Json查询"></a>5 Json查询</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> people2(<br>  id mediumint <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span><br>  auto_increment,<br>  user_id <span class="hljs-type">varchar</span>(<span class="hljs-number">30</span>),<br>  age <span class="hljs-type">int</span>,<br>  status <span class="hljs-type">char</span>(<span class="hljs-number">1</span>),<br>  size json,<br>  <span class="hljs-keyword">primary</span> key (id)<br>);<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> <br>	people2(user_id, age, status, size) <br><span class="hljs-keyword">values</span> <br>	(&quot;sql001&quot;, <span class="hljs-number">20</span>, &quot;A&quot;, <span class="hljs-string">&#x27;&#123;&quot;h&quot;: 172, &quot;w&quot;: 121, &quot;address&quot;: &quot;cn&quot;&#125;&#x27;</span>);<br>  <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> <br>	people2(user_id, age, status, size) <br><span class="hljs-keyword">values</span> <br>	(&quot;sql002&quot;, <span class="hljs-number">21</span>, &quot;B&quot;, <span class="hljs-string">&#x27;&#123;&quot;h&quot;: 178, &quot;w&quot;: 115, &quot;address&quot;: &quot;cn&quot;&#125;&#x27;</span>);<br>  <br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> <br>  people2(user_id, age, status, size)<br><span class="hljs-keyword">values</span> <br>  (&quot;sql003&quot;, <span class="hljs-number">20</span>, &quot;C&quot;, <span class="hljs-string">&#x27;&#123;&quot;h&quot;: 172, &quot;w&quot;: 121, &quot;address&quot;: &quot;en&quot;&#125;&#x27;</span>),<br>  (&quot;sql004&quot;, <span class="hljs-number">20</span>, &quot;D&quot;, <span class="hljs-string">&#x27;&#123;&quot;h&quot;: 155, &quot;w&quot;: 86, &quot;address&quot;: &quot;cn&quot;&#125;&#x27;</span>),<br>  (&quot;sql005&quot;, <span class="hljs-number">22</span>, &quot;B&quot;, <span class="hljs-string">&#x27;&#123;&quot;h&quot;: 168, &quot;w&quot;: 103, &quot;address&quot;: &quot;en&quot;&#125;&#x27;</span>),<br>  (&quot;sql116&quot;, <span class="hljs-number">19</span>, &quot;B&quot;, <span class="hljs-string">&#x27;&#123;&quot;h&quot;: 188, &quot;w&quot;: 137, &quot;address&quot;: &quot;en&quot;&#125;&#x27;</span>),<br>  (&quot;sql117&quot;, <span class="hljs-number">23</span>, &quot;B&quot;, <span class="hljs-string">&#x27;&#123;&quot;h&quot;: 158, &quot;w&quot;: 92, &quot;address&quot;: &quot;cn&quot;&#125;&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-1-字符串"><a href="#5-1-字符串" class="headerlink" title="5-1 字符串"></a>5-1 字符串</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// 以字符串形式存储<br>db.people2.insertOne(&#123;<br>  user_id: &quot;mql001&quot;, <br>  age: 20, <br>  status: &quot;A&quot;, <br>  size: &#x27;&#123;&quot;h&quot;: 172, &quot;w&quot;: 121, &quot;address&quot;: &quot;cn&quot;&#125;&#x27;<br>&#125;);<br>db.people2.insertOne(&#123;<br>  user_id: &quot;mql002&quot;,<br>  age: 21,<br>  status: &quot;B&quot;,<br>  size: &#x27;&#123;&quot;h&quot;: 178, &quot;w&quot;: 115, &quot;address&quot;: &quot;cn&quot;&#125;&#x27;<br>&#125;);<br>db.people2.insertMany([<br>  &#123;<br>    user_id: &quot;mql003&quot;, age: 20, status: &quot;C&quot;, <br>    size: &#x27;&#123;&quot;h&quot;: 172, &quot;w&quot;: 121, &quot;address&quot;: &quot;en&quot;&#125;&#x27;<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql004&quot;, age: 20, status: &quot;D&quot;,<br>    size: &#x27;&#123;&quot;h&quot;: 155, &quot;w&quot;: 86, &quot;address&quot;: &quot;cn&quot;&#125;&#x27;<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql005&quot;, age: 22, status: &quot;B&quot;,<br>    size: &#x27;&#123;&quot;h&quot;: 168, &quot;w&quot;: 103, &quot;address&quot;: &quot;en&quot;&#125;&#x27;<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql116&quot;, age: 19, status: &quot;B&quot;,<br>    size: &#x27;&#123;&quot;h&quot;: 188, &quot;w&quot;: 137, &quot;address&quot;: &quot;en&quot;&#125;&#x27;<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql117&quot;, age: 23, status: &quot;B&quot;,<br>    size: &#x27;&#123;&quot;h&quot;: 158, &quot;w&quot;: 92, &quot;address&quot;: &quot;cn&quot;&#125;&#x27;<br>  &#125;<br>]);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-Json形式"><a href="#5-2-Json形式" class="headerlink" title="5-2 Json形式"></a>5-2 Json形式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// 以Json形式存储<br>db.people3.insertOne(&#123;<br>  user_id: &quot;mql001&quot;, <br>  age: 20, <br>  status: &quot;A&quot;, <br>  size: &#123;h: 172, w: 121, address: &quot;cn&quot;&#125;<br>&#125;);<br>db.people3.insertOne(&#123;<br>  user_id: &quot;mql002&quot;,<br>  age: 21,<br>  status: &quot;B&quot;,<br>  size: &#123;h: 178, w: 115, address: &quot;cn&quot;&#125;<br>&#125;);<br>db.people3.insertMany([<br>  &#123;<br>    user_id: &quot;mql003&quot;, age: 20, status: &quot;C&quot;, <br>    size: &#123;h: 172, w: 121, address: &quot;en&quot;&#125;<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql004&quot;, age: 20, status: &quot;D&quot;,<br>    size: &#123;h: 155, w: 86, address: &quot;cn&quot;&#125;<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql005&quot;, age: 22, status: &quot;B&quot;,<br>    size: &#123;h: 168, w: 103, address: &quot;en&quot;&#125;<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql116&quot;, age: 19, status: &quot;B&quot;,<br>    size: &#123;h: 188, w: 137, address: &quot;en&quot;&#125;<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql117&quot;, age: 23, status: &quot;B&quot;,<br>    size: &#123;h: 158, w: 92, address: &quot;cn&quot;&#125;<br>  &#125;<br>]);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-3-数据查询"><a href="#5-3-数据查询" class="headerlink" title="5-3 数据查询"></a>5-3 数据查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// MySQL使用JSON_CONTAINS函数查询Json数据<br>select * from <br>	people2<br>where<br>	json_contains(size, &#x27;&#123;&quot;address&quot;: &quot;cn&quot;&#125;&#x27;);<br>  <br>// 字符串形式存储，使用正则表达式来匹配部分内容<br>// 注意：单双引号的书写，可能也影响查询到的结果<br>db.people2.find(&#123;size: /&quot;address&quot;: &quot;cn&quot;/&#125;);<br><br>// 以Json形式存储<br>db.people3.find(&#123;&quot;size.address&quot;: &quot;cn&quot;&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-点连接"><a href="#1-点连接" class="headerlink" title="(1) 点连接"></a>(1) 点连接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">select * from <br>	people2<br>where <br>	json_contains(size, &#x27;&#123;&quot;h&quot;: 158, &quot;w&quot;: 92, &quot;address&quot;: &quot;cn&quot;&#125;&#x27;);<br>  <br>// 以字符串形式存储<br>db.people2.find(<br>  &#123;size: /&quot;h&quot;: 158, &quot;w&quot;: 92, &quot;address&quot;: &quot;cn&quot;/&#125;<br>);<br><br>// 以Json形式存储<br>db.people3.find(&#123;<br>  &quot;size.h&quot;: 158,<br>  &quot;size.w&quot;: 92,<br>  &quot;size.address&quot;: &quot;cn&quot;<br>&#125;);<br><br>// MongoDB中，单引号用于分隔字符串<br>// 字段名、字符串值、嵌入式文档的键（如：size.address）必须使用双引号括起来<br>db.people3.find(<br>  &#123;size: &#123;h: 158, w: 92, address: &quot;cn&quot;&#125;&#125;<br>);<br><br>// 顺序乱掉，就查不到数据了<br>db.people3.find(<br>  &#123;size: &#123;w: 92, h: 158, address: &quot;cn&quot;&#125;&#125;<br>);<br><br>// 少属性值，也查询不到数据<br>db.people3.find(<br>  &#123;size: &#123;h: 158, w: 92&#125;&#125;<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-表达式"><a href="#2-表达式" class="headerlink" title="(2) 表达式"></a>(2) 表达式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// 使用JSON_EXTRACT函数查询Json数据<br>select * from<br>  people2<br>where json_extract(size, &quot;$.h&quot;) &lt; 170;<br><br>// 以字符串形式存储，不推荐使用，效率不高<br>db.people2.find(&#123;<br>  &quot;size&quot;: &#123;$regex: /&quot;h&quot;:\s*(\d+)/, $options: &quot;i&quot;&#125;,<br>  $where: function() &#123; <br>    var match = this.size.match(/&quot;h&quot;:\s*(\d+)/);<br>    return match &amp;&amp; parseInt(match[1]) &lt; 170;<br>  &#125;<br>&#125;);<br><br>// 以Json形式存储，size中的h属性小于170<br>db.people3.find(<br>  &#123;&quot;size.h&quot;: &#123;$lt: 170&#125;&#125;<br>);<br><br>select * from<br>  people2<br>where<br>  size regexp &#x27;&quot;h&quot;:\\s*\\d+&#x27;<br>and <br>  cast(json_extract(size, &quot;$.h&quot;) as unsigned) &lt; 170<br>and <br>  json_contains(size, &#x27;&quot;cn&quot;&#x27;, &quot;$.address&quot;)<br>and status = &quot;D&quot;;<br><br>// 字符串形式存储<br>db.people2.find(&#123;<br>  &quot;size&quot;: &#123;$regex: /&quot;h&quot;\s*:\s*(\d+)/, $options: &quot;i&quot;&#125;,<br>  $where: function() &#123;<br>    var hMatch = this.size.match(/&quot;h&quot;\s*:\s*(\d+)/);<br>    var addressMatch = this.size.match(/&quot;address&quot;\s*:\s*&quot;([^&quot;]+)&quot;/);<br>    return hMatch &amp;&amp; parseInt(hMatch[1]) &lt; 170 <br>      &amp;&amp; addressMatch &amp;&amp; addressMatch[1].toLowerCase() === &quot;cn&quot; <br>      &amp;&amp; this.status === &quot;D&quot;;<br>  &#125;<br>&#125;);<br><br>// 以Json形式存储<br>db.people3.find(<br>  &#123;<br>  &quot;size.h&quot;: &#123;$lt: 170&#125;,<br>  &quot;size.address&quot;: &quot;cn&quot;, status: &quot;D&quot; <br>  &#125;<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-数组查询"><a href="#6-数组查询" class="headerlink" title="6 数组查询"></a>6 数组查询</h1><ul>
+<li>数组查询<ul>
+<li>使用SQL查询语句的传统关系数据库，均不支持直接存储数组。</li>
+<li>关系数据库中的字段只能存储单个标量值，如字符串、日期等。</li>
+<li>但可使用变通方法存储，如：序列化数组、创建多表、使用NoSQL数据库等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-1-数据定义"><a href="#6-1-数据定义" class="headerlink" title="6-1 数据定义"></a>6-1 数据定义</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">db.people4.insertMany([<br>  &#123;<br>    user_id: &quot;mql001&quot;, age: 20, status: &quot;A&quot;, <br>    size: &#123;h: 172, w: 121, address: &quot;cn&quot;&#125;,<br>    score: [97, 91, 93, 95, 100, 99, 99]<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql002&quot;, age: 21, status: &quot;B&quot;,<br>    size: &#123;h: 178, w: 115, address: &quot;cn&quot;&#125;,<br>    score: [89, 88, 93, 90, 84, 85, 95]<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql003&quot;, age: 20, status: &quot;C&quot;, <br>    size: &#123;h: 172, w: 121, address: &quot;en&quot;&#125;,<br>    score: [97, 91, 93, 95, 100, 99, 99]<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql004&quot;, age: 20, status: &quot;D&quot;,<br>    size: &#123;h: 155, w: 86, address: &quot;cn&quot;&#125;,<br>    score: [67, 78, 75, 77, 83, 76, 71]<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql005&quot;, age: 22, status: &quot;B&quot;,<br>    size: &#123;h: 168, w: 103, address: &quot;en&quot;&#125;,<br>    score: [88, 91, 85, 89, 83, 90, 80]<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql116&quot;, age: 19, status: &quot;B&quot;,<br>    size: &#123;h: 188, w: 137, address: &quot;en&quot;&#125;,<br>    score: [86, 87, 83, 80, 81, 85, 88]<br>  &#125;,<br>  &#123;<br>    user_id: &quot;mql117&quot;, age: 23, status: &quot;B&quot;,<br>    size: &#123;h: 158, w: 92, address: &quot;cn&quot;&#125;,<br>    score: [90, 91, 83, 81, 87, 79, 81]<br>  &#125;<br>]);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-2-查询操作"><a href="#6-2-查询操作" class="headerlink" title="6-2 查询操作*"></a>6-2 查询操作*</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// 详细查询：必须指定相等条件，包括数组顺序、元素个数<br>db.people4.find(<br>  &#123;score: [86, 87, 83, 80, 81, 85, 88]&#125;<br>);<br><br>// 包含查询：查询score域中包含[88, 89]元素的数据<br>db.people4.find(<br>  &#123;score: &#123;$all: [88, 89]&#125;&#125;<br>);<br><br>// 查询score域中大于90的所有数据<br>// 为什么会获取到小于90的值？？？<br>db.people4.find(<br>  &#123;score: &#123;$gt: 90&#125;&#125;<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-聚合管道"><a href="#7-聚合管道" class="headerlink" title="7 聚合管道"></a>7 聚合管道</h1><ul>
+<li>聚合管道<ul>
+<li>MongoDB提供三种执行聚合的方法：Pipeline、Reference、Map-Reduce。</li>
+<li>聚合管道，即Aggregation Pipeline，则使用的是aggregate()方法。</li>
+<li>其余表达式参看“<a target="_blank" rel="noopener" href="https://www.mongodb.com/zh-cn/docs/upcoming/reference/operator/aggregation-pipeline/">MongoDB 官方文档 Aggregation Pipeline 说明</a>”。</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-1-筛选查询"><a href="#7-1-筛选查询" class="headerlink" title="7-1 筛选查询"></a>7-1 筛选查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">// 查询status=&quot;B&quot;的所有数据<br>db.people4.aggregate(<br>    [&#123;$match: &#123;status: &quot;B&quot;&#125;&#125;]<br>);<br><br>// age大于20，并且小于23，或status=&quot;A&quot;的所有数据<br>db.people4.aggregate(<br>    [&#123;$match: &#123;$or: [&#123;age: &#123;$gt: 20, $lt: 23&#125;&#125;, &#123;status: &quot;A&quot;&#125;]&#125;&#125;]<br>);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-2-分组查询"><a href="#7-2-分组查询" class="headerlink" title="7-2 分组查询"></a>7-2 分组查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">select count(*) as count from people2;<br><br>// _id: null没有指定具体的字段<br>// count: &#123;$sum: 1&#125;查询的条数<br>db.people4.aggregate([<br>  &#123;$group: &#123;_id: null, count: &#123;$sum: 1&#125;&#125;&#125;<br>]);<br><br>// 根据age字段分组<br>db.people4.aggregate([<br>  &#123;$group: &#123;_id: &quot;$age&quot;&#125;&#125;<br>]);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-3-组合查询"><a href="#7-3-组合查询" class="headerlink" title="7-3 组合查询"></a>7-3 组合查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs MongoDB">db.people4.aggregate([<br>  // 先筛选<br>  &#123;$match: &#123;age: &#123;$gt: 19, $lt: 23&#125;&#125;&#125;,<br>  // 再分组<br>  &#123;$group: &#123;_id: &quot;$status&quot;&#125;&#125;,<br>  // 最后升序排序<br>  &#123;$sort: &#123;&quot;_id&quot;: 1&#125;&#125;<br>]);<br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MongoDB/">#MongoDB</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a>
+      
+        <a href="/tags/MongoDBCompass/">#MongoDBCompass</a>
+      
+        <a href="/tags/MQL/">#MQL</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MQL</div>
+      <div>https://stitch-top.github.io/2024/11/28/shu-ju-ku/db02-mql/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月28日 00:25:30</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/25/shu-ju-ku/db01-sql/" title="SQL">
+                        <span class="hidden-mobile">SQL</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"PDfaLoft9OAolB0AmON5AqUb-gzGzoHsz","appKey":"xq13nodBzh8hOliBusHUKDwj","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"monsterid","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"pageSize":13,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="数据库"
+        id="heading-68051bf4aa2743b030984b694628ee9c" role="tab" data-toggle="collapse" href="#collapse-68051bf4aa2743b030984b694628ee9c"
+        aria-expanded="true"
+      >
+        数据库
+        <span class="list-group-count">(2)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-68051bf4aa2743b030984b694628ee9c"
+           role="tabpanel" aria-labelledby="heading-68051bf4aa2743b030984b694628ee9c">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/10/25/shu-ju-ku/db01-sql/" title="SQL"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">SQL</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/11/28/shu-ju-ku/db02-mql/" title="MQL"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">MQL</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2024</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        📈 总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        📊 总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
