@@ -1,0 +1,1224 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Tkinter是Python标准库的一部分，提供了一套用于创建图形用户界面的工具，以其简单性著称，支持多种控件如按钮、菜单等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Tkinter">
+<meta property="og:url" content="https://stitch-top.github.io/2024/12/31/python/python14-python-tkinter-yi/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="Tkinter是Python标准库的一部分，提供了一套用于创建图形用户界面的工具，以其简单性著称，支持多种控件如按钮、菜单等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/0015241266.jpg">
+<meta property="article:published_time" content="2024-12-31T14:30:00.000Z">
+<meta property="article:modified_time" content="2024-12-31T14:20:33.479Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="Tkinter">
+<meta property="article:tag" content="窗口方法">
+<meta property="article:tag" content="控件">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/0015241266.jpg">
+  
+  
+  
+  <title>Python Tkinter - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python Tkinter"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-31 22:30" pubdate>
+          2024年12月31日 22:30:00
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          16k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          135 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python Tkinter</h1>
+            
+            <div class="markdown-body">
+              
+              <p>Tkinter是Python标准库的一部分，提供了一套用于创建图形用户界面的工具，以其简单性著称，支持多种控件如按钮、菜单等。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-GUI库"><a href="#1-GUI库" class="headerlink" title="1 GUI库"></a>1 GUI库</h1><ul>
+<li>GUI库<ul>
+<li>Tkinter<ul>
+<li>标准库，轻量级，易于学习和使用。</li>
+<li>简单的应用，不需复杂的图形界面。</li>
+</ul>
+</li>
+<li>PyQt<ul>
+<li>功能强大，跨平台，可创建复杂应用。</li>
+<li>需要复杂图形界面和高可用性的应用。</li>
+<li>需要安装Qt库：<code>pip install PyQt5</code>。</li>
+</ul>
+</li>
+<li>Kivy<ul>
+<li>支持多点触控，适用于触摸屏设备，跨平台。</li>
+<li>游戏开发，安装Kivy库：<code>pip install kivy</code>。</li>
+</ul>
+</li>
+<li>wxPython<ul>
+<li>跨平台，功能强大，支持复杂的GUI应用。</li>
+<li>需要跨平台支持和高度定制化的GUI应用。</li>
+<li>需要安装wxWidgets库：<code>pip install wxPython</code>。</li>
+<li>wxWidgets是C++库，而wxPython是Python的绑定。</li>
+</ul>
+</li>
+<li>PySimpleGUI<ul>
+<li>简单易用，基于PyQt或Tkinter，提供更简洁的API。</li>
+<li>安装PySimpleGUI库：<code>pip install PySimpleGUI</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-Tkinter"><a href="#2-Tkinter" class="headerlink" title="2 Tkinter"></a>2 Tkinter</h1><ul>
+<li>Tkinter<ul>
+<li>Tkinter是Python官方推荐的GUI工具包，属于标准库。</li>
+<li>Python官方提供的IDLE，就是使用Tkinter开发而成的。</li>
+<li>官方手册：<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.13/library/tk.html">https://docs.python.org/zh-cn/3.13/library/tk.html</a>。</li>
+<li>查看版本，显示一个简易窗口，使用命令：<code>python -m tkinter</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br><br><span class="hljs-comment"># 开启主循环，让窗口保持显示状态</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-窗口方法"><a href="#3-窗口方法" class="headerlink" title="3 窗口方法"></a>3 窗口方法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br><br><span class="hljs-comment"># 设置窗口名称</span><br>window.title(<span class="hljs-string">&quot;Tkinter&quot;</span>)<br><br><span class="hljs-comment"># 设置窗口拉伸，默认允许</span><br><span class="hljs-comment"># window.resizable()</span><br><br><span class="hljs-comment"># 不可更改窗口大小</span><br><span class="hljs-comment"># window.resizable(0, 0)</span><br><span class="hljs-comment"># window.resizable(False, False)</span><br><br><span class="hljs-comment"># 设置窗口被允许调整的最大范围，与resizable()冲突</span><br>window.maxsize(<span class="hljs-number">800</span>, <span class="hljs-number">400</span>)<br><br><span class="hljs-comment"># 设置窗口被允许调整的最小范围，与resizable()冲突</span><br>window.minsize(<span class="hljs-number">500</span>, <span class="hljs-number">250</span>)<br><br><span class="hljs-comment"># 设置窗口默认大小：宽x高</span><br>window.geometry(<span class="hljs-string">&quot;300x150&quot;</span>)<br><br><span class="hljs-comment"># 读取窗口大小前，必须刷新当前窗口</span><br>window.update()<br><span class="hljs-built_in">print</span>(<br>    <span class="hljs-string">&quot;窗口分辨率：&quot;</span>,<br>    (window.winfo_width(), window.winfo_height())<br>)<br><span class="hljs-built_in">print</span>(<br>    <span class="hljs-string">&quot;电脑分辨率：&quot;</span>,<br>    (<br>        window.winfo_screenwidth(),<br>        window.winfo_screenheight()<br>    )<br>)<br><br><span class="hljs-comment"># 设置窗口左上角图标：ico文件类型</span><br><span class="hljs-comment"># 只支持本地路径，不支持线上路径</span><br>window.iconbitmap(<span class="hljs-string">&quot;.../file/title.ico&quot;</span>)<br><br><span class="hljs-comment"># 设置窗口背景颜色</span><br>window.config(background=<span class="hljs-string">&quot;#6fb765&quot;</span>)<br><br><span class="hljs-comment"># 设置窗口透明度</span><br>window.attributes(<span class="hljs-string">&quot;-alpha&quot;</span>, <span class="hljs-number">0.8</span>)<br><br><span class="hljs-comment"># 设置窗口置顶</span><br>window.attributes(<span class="hljs-string">&quot;-topmost&quot;</span>, <span class="hljs-literal">True</span>)<br><br><span class="hljs-comment"># 设置窗口全屏，与maxsize()冲突</span><br><span class="hljs-comment"># window.attributes(&quot;-fullscreen&quot;, True)</span><br><br><span class="hljs-comment"># 设置窗口显示状态：normal正常、icon最小化、zoomed最大化</span><br><span class="hljs-comment"># window.state(&quot;zoomed&quot;)</span><br><br><span class="hljs-comment"># 设置窗口最小化，作用同state(&quot;icon&quot;)</span><br><span class="hljs-comment"># window.iconify()</span><br><br><span class="hljs-comment"># 隐藏窗口，但不会销毁窗口</span><br>window.withdraw()<br>time.sleep(<span class="hljs-number">5</span>)<br><br><span class="hljs-comment"># 将窗口从隐藏状态还原显示</span><br>window.deiconify()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">QuitWindow</span>():<br>    <span class="hljs-comment"># 关闭当前窗口</span><br>    window.quit()<br><br><br><span class="hljs-comment"># 延迟10秒后退出当前窗口</span><br>window.after(<span class="hljs-number">10000</span>, QuitWindow)<br><br><span class="hljs-comment"># 设置文本内容，结合pack()使用</span><br>text = tk.Label(<br>    window,<br>    text=<span class="hljs-string">&quot;欢迎访问站点：https://stitch-top.github.io/&quot;</span>,<br>    bg=<span class="hljs-string">&quot;yellow&quot;</span>, fg=<span class="hljs-string">&quot;red&quot;</span>,<br>    font=(<span class="hljs-string">&quot;Times&quot;</span>, <span class="hljs-number">11</span>, <span class="hljs-string">&quot;bold italic underline&quot;</span>)<br>)<br><br><span class="hljs-comment"># 将文本放置在窗口内</span><br>text.pack()<br><br><span class="hljs-comment"># 添加按钮，结合pack()使用</span><br>button = tk.Button(window, text=<span class="hljs-string">&quot;关闭&quot;</span>, command=window.quit)<br><br><span class="hljs-comment"># 将按钮放置在窗口底部</span><br>button.pack(side=<span class="hljs-string">&quot;bottom&quot;</span>)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-1-协议处理机制"><a href="#3-1-协议处理机制" class="headerlink" title="3-1 协议处理机制"></a>3-1 协议处理机制</h2><ul>
+<li>协议处理机制<ul>
+<li>Protocol协议处理机制，指的是应用程序和窗口管理器之间的交互。</li>
+<li>最常用协议是WM_DELETE_WINDOW，使用该协议与窗口交互时。</li>
+<li>窗口右上角的关闭功能会失效，可以转变成调用自定义的函数。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-comment"># 导入对话框控件</span><br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> messagebox<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br><br><br><span class="hljs-comment"># 定义回调函数，点击右上角关闭按钮时，执行自定义的函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">QueryWindow</span>():<br>    <span class="hljs-comment"># 显示一个警告信息，点击确认后，销毁窗口</span><br>    <span class="hljs-keyword">if</span> messagebox.showwarning(<span class="hljs-string">&quot;警告&quot;</span>, <span class="hljs-string">&quot;啊哦，出现了一个错误！！！&quot;</span>):<br>        <span class="hljs-comment"># 这里必须使用destroy()关闭窗口</span><br>        window.destroy()<br><br><br><span class="hljs-comment"># 使用协议机制与窗口交互，并回调自定义的函数</span><br>window.protocol(<span class="hljs-string">&quot;WM_DELETE_WINDOW&quot;</span>, QueryWindow)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2-封装函数形式"><a href="#3-2-封装函数形式" class="headerlink" title="3-2 封装函数形式"></a>3-2 封装函数形式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><br><span class="hljs-comment"># 定义回调函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">CallBack</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;执行回调函数：&quot;</span>, <span class="hljs-string">&quot;你好呀~&quot;</span>)<br><br><br><span class="hljs-comment"># 点击执行按钮</span><br>button = tk.Button(window, text=<span class="hljs-string">&quot;执行&quot;</span>, command=CallBack)<br>button.pack()<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-设置窗口位置"><a href="#3-3-设置窗口位置" class="headerlink" title="3-3 设置窗口位置"></a>3-3 设置窗口位置</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br><br><span class="hljs-comment"># 设置窗口大小参数</span><br>width = <span class="hljs-number">500</span><br>height = <span class="hljs-number">250</span><br><br><span class="hljs-comment"># 获取屏幕尺寸，用来计算布局参数，使窗口居中</span><br>screenwidth = window.winfo_screenwidth()<br>screenheight = window.winfo_screenheight()<br><span class="hljs-built_in">print</span>(screenwidth, screenheight)<br><br>xoffset = (screenwidth - width) / <span class="hljs-number">2</span><br>yoffset = (screenheight - height) / <span class="hljs-number">2</span><br><span class="hljs-built_in">print</span>(xoffset, yoffset)<br><br><span class="hljs-comment"># %dx%d+%d+%d：width x height + xoffset + yoffset</span><br><span class="hljs-comment"># 注意：不能在算术运算符两侧添加空格，会将其视为分隔符，无法正确解析</span><br>center = <span class="hljs-string">&quot;%dx%d+%d+%d&quot;</span> % (width, height, xoffset, yoffset)<br>window.geometry(center)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-标签控件"><a href="#4-标签控件" class="headerlink" title="4 标签控件"></a>4 标签控件</h1><ul>
+<li>标签控件<ul>
+<li>标签控件(Label)用于显示窗口中的文本或者图像，不同标签可设置不同背景图。</li>
+<li>而一个控件主要由前景和背景组成，前景又分为内容区、填充区、边框区3部分。</li>
+<li>内容区使用了width、height，填充区使用padx、pady，边框区使用borderwidth。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><span class="hljs-comment"># 设置一个标签控件</span><br>label = tk.Label(<br>    window,<br><br>    <span class="hljs-comment"># 标签显示的文本内容【内容区】</span><br>    text=<span class="hljs-string">&quot;https://stitch-top.github.io/\n\n欢迎访问个人站点！！！&quot;</span>,<br><br>    <span class="hljs-comment"># 控制文本或图像在标签内部的对齐方式，默认中心位置center</span><br>    <span class="hljs-comment"># 左上nw、上n、右上ne、左w、右e、左下sw、下s、右下se</span><br>    anchor=<span class="hljs-string">&quot;center&quot;</span>,<br><br>    <span class="hljs-comment"># 文本前景色，即文本颜色</span><br>    fg=<span class="hljs-string">&quot;yellow&quot;</span>,<br><br>    <span class="hljs-comment"># 当标签处于禁用状态时文本的颜色</span><br>    disabledforeground=<span class="hljs-string">&quot;black&quot;</span>,<br><br>    <span class="hljs-comment"># 文本的字体、大小、样式</span><br>    font=(<span class="hljs-string">&quot;宋体&quot;</span>, <span class="hljs-number">11</span>, <span class="hljs-string">&quot;bold italic&quot;</span>),<br><br>    <span class="hljs-comment"># 多行文本的对齐方式，文本位置取决于anchor属性</span><br>    <span class="hljs-comment"># 参数值：left、right、center</span><br>    justify=<span class="hljs-string">&quot;center&quot;</span>,<br><br>    <span class="hljs-comment"># 字符下划线，默认值-1不添加，从0开始索引添加下划线</span><br>    underline=<span class="hljs-number">0</span>,<br><br>    <span class="hljs-comment"># 文本换行的宽度(像素)，指定每一行的长度，默认值0</span><br>    wraplength=<span class="hljs-number">330</span>,<br><br>    <span class="hljs-comment"># 内容区和边框之间添加的间距【填充区】</span><br>    <span class="hljs-comment"># x：内容区与左右边框之间的距离(像素)，水平填充</span><br>    <span class="hljs-comment"># y：内容区与上下边框之间的距离(像素)，垂直填充</span><br>    padx=<span class="hljs-number">10</span>, pady=<span class="hljs-number">30</span>,<br><br>    <span class="hljs-comment"># 边框宽度，即borderwidth【边框区】</span><br>    <span class="hljs-comment"># 单位像素，默认值为2个像素</span><br>    bd=<span class="hljs-number">1</span>,<br><br>    <span class="hljs-comment"># 标签的背景颜色，包括填充区</span><br>    bg=<span class="hljs-string">&quot;yellow green&quot;</span>,<br><br>    <span class="hljs-comment"># 标签未获得焦点时的边框高亮颜色</span><br>    highlightbackground=<span class="hljs-string">&quot;white&quot;</span>,<br><br>    <span class="hljs-comment"># 标签获得焦点时的边框高亮颜色</span><br>    highlightcolor=<span class="hljs-string">&quot;yellow&quot;</span>,<br><br>    <span class="hljs-comment"># 边框样式，默认值为flat</span><br>    <span class="hljs-comment"># 参数值：groove、raised、ridge、solid、sunken</span><br>    relief=<span class="hljs-string">&quot;solid&quot;</span>,<br><br>    <span class="hljs-comment"># 标签宽高，文本则是文本单元，图像则是像素</span><br>    <span class="hljs-comment"># 不设置时，会自动依据内容计算宽高</span><br>    width=<span class="hljs-number">30</span>, height=<span class="hljs-number">3</span>,<br><br>    <span class="hljs-comment"># 鼠标从标签上方掠过时，鼠标显示的样式【其他】</span><br>    <span class="hljs-comment"># 参数值：arrow、circle、cross、plus</span><br>    cursor=<span class="hljs-string">&quot;cross&quot;</span>,<br><br>    <span class="hljs-comment"># 标签状态：normal、active、disabled</span><br>    state=<span class="hljs-string">&quot;normal&quot;</span>,<br><br>    <span class="hljs-comment"># 标签是否接受输入焦点，默认值为False</span><br>    takefocus=<span class="hljs-literal">True</span>,<br>)<br><br><span class="hljs-comment"># 添加标签到窗口</span><br>label.pack()<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-1-位图属性"><a href="#4-1-位图属性" class="headerlink" title="4-1 位图属性"></a>4-1 位图属性</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><span class="hljs-comment"># 使用系统预定义的位图</span><br>label1 = tk.Label(window, bitmap=<span class="hljs-string">&quot;error&quot;</span>, text=<span class="hljs-string">&quot;错误&quot;</span>)<br>label1.pack(pady=<span class="hljs-number">10</span>)<br><br>label2 = tk.Label(window, bitmap=<span class="hljs-string">&quot;info&quot;</span>, text=<span class="hljs-string">&quot;信息&quot;</span>)<br>label2.pack(pady=<span class="hljs-number">10</span>)<br><br>label3 = tk.Label(window, bitmap=<span class="hljs-string">&quot;warning&quot;</span>, text=<span class="hljs-string">&quot;警告&quot;</span>)<br>label3.pack(pady=<span class="hljs-number">10</span>)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-图片属性"><a href="#4-2-图片属性" class="headerlink" title="4-2 图片属性"></a>4-2 图片属性</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><span class="hljs-comment"># 显示图片</span><br>photo = tk.PhotoImage(file = <span class="hljs-string">&quot;.../file/label.gif&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(photo))<br><br><span class="hljs-comment"># 将图片放在窗口右侧，GIF格式图片只会显示第一帧</span><br><span class="hljs-comment"># 如果想让GIF动画正常播放，需要手动实现动画循环</span><br>tk.Label(window, image=photo).pack(side=<span class="hljs-string">&quot;right&quot;</span>)<br><br><span class="hljs-comment"># 将文字放在窗口左侧</span><br>tk.Label(<br>    window, <br>    text=<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        盛年不重来，</span><br><span class="hljs-string">        一日难再晨。</span><br><span class="hljs-string">        及时当勉励，</span><br><span class="hljs-string">        岁月不待人。</span><br><span class="hljs-string">    &quot;&quot;&quot;</span>,<br>    fg=<span class="hljs-string">&quot;green&quot;</span>,<br>    font=(<span class="hljs-string">&quot;楷体&quot;</span>, <span class="hljs-number">10</span>, <span class="hljs-string">&quot;bold italic&quot;</span>),<br>    justify=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">10</span><br>).pack(side=<span class="hljs-string">&quot;left&quot;</span>)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-信息控件"><a href="#5-信息控件" class="headerlink" title="5 信息控件"></a>5 信息控件</h1><ul>
+<li>信息控件<ul>
+<li>Message与Label控件类似，主要用来显示多行不可编辑的文本信息。</li>
+<li>与Label控件的不同之处在于，Message控件增加了自动分行的功能。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br>txt = <span class="hljs-string">&quot;盛年不重来，一日难再晨。及时当勉励，岁月不待人。&quot;</span><br><br><span class="hljs-comment"># 显示多行不可编辑的文本信息(带自动分行功能)</span><br>tk.Message(<br>    window, text=txt, width=<span class="hljs-number">90</span>, <br>    font=(<span class="hljs-string">&quot;华文行楷&quot;</span>, <span class="hljs-number">10</span>, <span class="hljs-string">&quot;bold&quot;</span>)<br>).pack(side=<span class="hljs-string">&quot;top&quot;</span>)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-按钮控件"><a href="#6-按钮控件" class="headerlink" title="6 按钮控件"></a>6 按钮控件</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> messagebox<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><br><span class="hljs-comment"># 定义按钮点击后的回调函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">OnClick</span>():<br>    <span class="hljs-comment"># 显示一个弹窗</span><br>    messagebox.showinfo(title=<span class="hljs-string">&quot;彩蛋&quot;</span>, message=<span class="hljs-string">&quot;你好呀！&quot;</span>)<br><br><br><span class="hljs-comment"># 设置一个按钮控件</span><br>button = tk.Button(<br>    window,<br><br>    <span class="hljs-comment"># 按钮要显示的文本内容【内容区】</span><br>    text=<span class="hljs-string">&quot;点击&quot;</span>,<br>    <br>    <span class="hljs-comment"># 按钮文本的字体、大小、样式</span><br>    font=(<span class="hljs-string">&quot;Arial&quot;</span>, <span class="hljs-number">12</span>),<br>    <br>    <span class="hljs-comment"># 按钮显示多行文本时，用来指定文本的对齐方式</span><br>    <span class="hljs-comment"># 参数值：left、right、center</span><br>    justify=<span class="hljs-string">&quot;right&quot;</span>,<br><br>    <span class="hljs-comment"># 控制文本或图像在标签内部的对齐方式，默认中心位置center</span><br>    <span class="hljs-comment"># 左上nw、上n、右上ne、左w、右e、左下sw、下s、右下se</span><br>    anchor=<span class="hljs-string">&quot;center&quot;</span>,<br><br>    <span class="hljs-comment"># 按钮的高度、宽度【填充区】</span><br>    height=<span class="hljs-number">1</span>, width=<span class="hljs-number">3</span>,<br><br>    <span class="hljs-comment"># 内容区和边框之间添加的间距</span><br>    <span class="hljs-comment"># x：内容区与左右边框之间的距离(像素)，水平填充</span><br>    <span class="hljs-comment"># y：内容区与上下边框之间的距离(像素)，垂直填充</span><br>    padx=<span class="hljs-number">10</span>, pady=<span class="hljs-number">5</span>,<br><br>    <span class="hljs-comment"># 按钮边框大小，默认2个像素【边框区】</span><br>    bd=<span class="hljs-number">10</span>,<br>    <br>    <span class="hljs-comment"># 按钮在正常状态下的背景颜色</span><br>    bg=<span class="hljs-string">&quot;yellow green&quot;</span>,<br>    <br>    <span class="hljs-comment"># 按钮在正常状态下的前景色，即按钮上文字的颜色</span><br>    fg=<span class="hljs-string">&quot;white&quot;</span>,<br>    <br>    <span class="hljs-comment"># 按钮在按下或获得焦点状态下的背景颜色</span><br>    activebackground=<span class="hljs-string">&quot;orange&quot;</span>,<br>    <br>    <span class="hljs-comment"># 按钮在按下或获得焦点状态下的前景色，即按钮上文字的颜色</span><br>    activeforeground=<span class="hljs-string">&quot;blue&quot;</span>,<br><br>    <span class="hljs-comment"># 按钮的高亮颜色，系统默认高亮色为SystemHighlight</span><br>    highlightcolor=<span class="hljs-string">&quot;SystemHighlight&quot;</span>,<br><br>    <span class="hljs-comment"># 按钮的可用状态：normal、active、disabled</span><br>    state=<span class="hljs-string">&quot;active&quot;</span>,<br><br>    <span class="hljs-comment"># 回调函数，当按钮被点击时执行该函数【其他】</span><br>    command=OnClick<br>)<br><br><br><span class="hljs-comment"># 当鼠标移动到按钮上时，打印颜色信息</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">OnEnter</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;鼠标放在按钮上：&quot;</span>, button[<span class="hljs-string">&quot;activebackground&quot;</span>])<br><br><br><span class="hljs-comment"># 当鼠标移动到按钮外时，打印颜色信息</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">OnLeave</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;鼠标放在按钮外：&quot;</span>, button[<span class="hljs-string">&quot;bg&quot;</span>])<br><br><br>button.bind(<span class="hljs-string">&quot;&lt;Enter&gt;&quot;</span>, OnEnter)<br>button.bind(<span class="hljs-string">&quot;&lt;Leave&gt;&quot;</span>, OnLeave)<br><br><span class="hljs-comment"># 添加按钮到窗口</span><br>button.pack()<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-1-添加图片"><a href="#6-1-添加图片" class="headerlink" title="6-1 添加图片"></a>6-1 添加图片</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> messagebox<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><br><span class="hljs-comment"># 定义按钮点击后的回调函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">OnClick</span>():<br>    <span class="hljs-comment"># 显示一个弹窗</span><br>    messagebox.showinfo(title=<span class="hljs-string">&quot;彩蛋&quot;</span>, message=<span class="hljs-string">&quot;你好呀！&quot;</span>)<br><br><br>image = tk.PhotoImage(file=<span class="hljs-string">&quot;.../file/button.jpg&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;图片是否存在：<span class="hljs-subst">&#123;image.width() &gt; <span class="hljs-number">0</span>&#125;</span>&quot;</span>)<br><br><span class="hljs-comment"># 设置一个按钮属性</span><br>button = tk.Button(<br>    window,<br><br>    <span class="hljs-comment"># 按钮上要显示的图片，支持gif、png、ppm等</span><br>    <span class="hljs-comment"># 直接调用PhotoImage()赋值，会变成空白按钮显示</span><br>    <span class="hljs-comment"># image=tk.PhotoImage(file=&quot;.../file/button.gif&quot;),</span><br>    image=image,<br><br>    <span class="hljs-comment"># 回调函数，当按钮被点击时执行该函数</span><br>    command=OnClick<br>)<br><br><span class="hljs-comment"># 添加按钮到窗口</span><br>button.pack()<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-2-按钮布局"><a href="#6-2-按钮布局" class="headerlink" title="6-2 按钮布局"></a>6-2 按钮布局</h2><ul>
+<li>按钮布局<ul>
+<li>通常使用<code>grid()</code>函数完成按钮布局，该函数以网格形式(即行和列形式)来管理窗口布局。</li>
+<li><code>grid()</code>函数的sticky参数属性值与anchor参数属性值一样，函数与<code>pack()</code>不能混合使用。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> messagebox<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><span class="hljs-comment"># 将两个标签分别放置在第一、二行</span><br>tk.Label(window, text=<span class="hljs-string">&quot;账号：&quot;</span>).grid(row=<span class="hljs-number">1</span>)<br>tk.Label(window, text=<span class="hljs-string">&quot;密码：&quot;</span>).grid(row=<span class="hljs-number">2</span>)<br><br><span class="hljs-comment"># 创建输入框控件</span><br>input1 = tk.Entry(window)<br>input1.grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">1</span>, padx=<span class="hljs-number">60</span>, pady=<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># 以*形式显示密码</span><br>input2 = tk.Entry(window, show=<span class="hljs-string">&quot;*&quot;</span>)<br>input2.grid(row=<span class="hljs-number">2</span>, column=<span class="hljs-number">1</span>, padx=<span class="hljs-number">60</span>, pady=<span class="hljs-number">20</span>)<br><br><br><span class="hljs-comment"># 定义按钮点击后的回调函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">OnClick1</span>():<br>    <span class="hljs-comment"># 显示一个弹窗</span><br>    messagebox.showinfo(title=<span class="hljs-string">&quot;登录&quot;</span>, message=<span class="hljs-string">&quot;登录成功！&quot;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">OnClick2</span>():<br>    <span class="hljs-comment"># 显示一个弹窗</span><br>    messagebox.showinfo(title=<span class="hljs-string">&quot;退出&quot;</span>, message=<span class="hljs-string">&quot;退出成功！&quot;</span>)<br><br><br><span class="hljs-comment"># 使用grid()函数布局，并控制按钮的显示位置</span><br>tk.Button(<br>    window, text=<span class="hljs-string">&quot;登录&quot;</span>, width=<span class="hljs-number">10</span>, command=OnClick1<br>).grid(row=<span class="hljs-number">5</span>, column=<span class="hljs-number">0</span>, sticky=<span class="hljs-string">&quot;w&quot;</span>, padx=<span class="hljs-number">60</span>, pady=<span class="hljs-number">20</span>)<br><br>tk.Button(<br>    window, text=<span class="hljs-string">&quot;退出&quot;</span>, width=<span class="hljs-number">10</span>, command=OnClick2<br>).grid(row=<span class="hljs-number">5</span>, column=<span class="hljs-number">1</span>, sticky=<span class="hljs-string">&quot;e&quot;</span>, padx=<span class="hljs-number">60</span>, pady=<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-输入控件"><a href="#7-输入控件" class="headerlink" title="7 输入控件"></a>7 输入控件</h1><ul>
+<li>输入控件<ul>
+<li>Entry控件是Tkinter GUI编程的基础控件之一，允许用户输入内容。</li>
+<li>Entry控件除了具备一些共有的属性之外，还有一些自身的特殊属性。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><span class="hljs-comment"># exportselection：值为0时，禁用“将选中文本复制到剪贴板”功能</span><br>tk.Entry(window, exportselection=<span class="hljs-number">0</span>).pack(pady=<span class="hljs-number">3</span>)<br><br><span class="hljs-comment"># exportselection：不设置，则默认启用“将选中文本复制到剪贴板”功能</span><br>tk.Entry(window).pack(pady=<span class="hljs-number">3</span>)<br><br>tk.Entry(<br>    window,<br>    <span class="hljs-comment"># selectbackground：选中文字时的背景颜色</span><br>    selectbackground=<span class="hljs-string">&quot;yellow&quot;</span>,<br><br>    <span class="hljs-comment"># selectforeground：选中文字时的前景色，即文字颜色</span><br>    selectforeground=<span class="hljs-string">&quot;green&quot;</span><br>).pack(pady=<span class="hljs-number">3</span>)<br><br><span class="hljs-comment"># show：显示星号而不是实际字符</span><br>tk.Entry(window, show=<span class="hljs-string">&quot;*&quot;</span>).pack(pady=<span class="hljs-number">3</span>)<br><br><span class="hljs-comment"># textvariable：使用动态字符串StringVar()来更新Entry的值</span><br>text = tk.StringVar()<br>tk.Entry(window, textvariable=text).pack(pady=<span class="hljs-number">3</span>)<br>text.<span class="hljs-built_in">set</span>(<span class="hljs-string">&quot;初始文本&quot;</span>)<br><br>scrollbar = tk.Scrollbar(<br>    window,<br>    orient=<span class="hljs-string">&quot;horizontal&quot;</span><br>)<br>scrollbar.pack(side=tk.BOTTOM, fill=tk.X)<br><br><span class="hljs-comment"># xscrollcommand：设置宽度以创建较窄的输入框</span><br>entry = tk.Entry(<br>    window,<br>    xscrollcommand=scrollbar.<span class="hljs-built_in">set</span>,<br>    width=<span class="hljs-number">20</span><br>)<br>entry.pack(pady=<span class="hljs-number">3</span>)<br><br><span class="hljs-comment"># 将滚动条链接到Entry</span><br>scrollbar.config(command=entry.xview)<br><br><span class="hljs-comment"># 模拟长文本输入以显示水平滚动条</span><br>LongText = <span class="hljs-string">&quot;&quot;&quot;这是一个长字符串，超过Entry部件的宽度&quot;&quot;&quot;</span><br>entry.insert(<span class="hljs-number">0</span>, LongText)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-1-动态数据"><a href="#7-1-动态数据" class="headerlink" title="7-1 动态数据"></a>7-1 动态数据</h2><ul>
+<li>动态数据<ul>
+<li>数据类型：StringVar()、BooleanVar()、DoubleVar()、IntVar()。</li>
+<li>Python内置的数据类型无法实现界面编程的一些变量值的动态跟踪。</li>
+<li>因而使用TCL内置的对象，并将这些方法创建的数据类型称为动态类型。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><span class="hljs-comment"># 生成动态字符串</span><br>dstr = tk.StringVar()<br><br><br><span class="hljs-comment"># 获取时间函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">GetTime</span>():<br>    <span class="hljs-comment"># 获取当前时间</span><br>    dstr.<span class="hljs-built_in">set</span>(time.strftime(<span class="hljs-string">&quot;%H:%M:%S&quot;</span>))<br><br>    <span class="hljs-comment"># 每隔1s调用一次gettime()函数来获取时间</span><br>    window.after(<span class="hljs-number">1000</span>, GetTime)<br><br><br><span class="hljs-comment"># 利用textvariable实现文本变化</span><br>tk.Label(<br>    window, textvariable=dstr,<br>    fg=<span class="hljs-string">&quot;green&quot;</span>, font=(<span class="hljs-string">&quot;华文楷体&quot;</span>, <span class="hljs-number">40</span>, <span class="hljs-string">&quot;bold&quot;</span>)<br>).pack()<br><br><span class="hljs-comment"># 调用生成时间的函数</span><br>GetTime()<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-2-常用方法"><a href="#7-2-常用方法" class="headerlink" title="7-2 常用方法"></a>7-2 常用方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><span class="hljs-comment"># 创建输入框控件</span><br>entry = tk.Entry(window)<br>entry.pack()<br><br><span class="hljs-comment"># 设置输入框内的值，新版本中已弃用</span><br><span class="hljs-comment"># entry.set(&quot;https://stitch-top.github.io/&quot;)</span><br><br><span class="hljs-comment"># 在输入框中插入文本</span><br>entry.insert(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;https://stitch-top.github.io/&quot;</span>)<br><br><span class="hljs-comment"># 选中文本“-top”</span><br>entry.select_from(<span class="hljs-number">14</span>)<br>entry.select_to(<span class="hljs-number">18</span>)<br><br><span class="hljs-built_in">print</span>(entry.index(<span class="hljs-string">&quot;sel.first&quot;</span>))<br><span class="hljs-built_in">print</span>(entry.index(<span class="hljs-string">&quot;sel.last&quot;</span>))<br><br><span class="hljs-comment"># 删除选中的文本</span><br>entry.delete(<span class="hljs-string">&quot;sel.first&quot;</span>, <span class="hljs-string">&quot;sel.last&quot;</span>)<br><br><span class="hljs-comment"># 删除所有的文本</span><br><span class="hljs-comment"># entry.delete(0, tk.END)</span><br><br><span class="hljs-comment"># 返回指定的索引值</span><br><span class="hljs-built_in">print</span>(entry.index(<span class="hljs-string">&quot;end&quot;</span>))<br><span class="hljs-built_in">print</span>(entry.index(tk.END))<br><br><span class="hljs-comment"># 选中索引值5和光标所在位置之前的字符</span><br>entry.select_adjust(<span class="hljs-number">5</span>)<br><br><span class="hljs-comment"># 返回输入框中是否有处于选中状态的文本</span><br><span class="hljs-built_in">print</span>(entry.select_present())<br><br><span class="hljs-comment"># 取消选中状态</span><br>entry.select_clear()<br><span class="hljs-built_in">print</span>(entry.select_present())<br><br><span class="hljs-comment"># 选中索引值0到5之间的所有值</span><br>entry.select_range(<span class="hljs-number">0</span>, <span class="hljs-number">5</span>)<br><span class="hljs-built_in">print</span>(entry.select_present())<br><br><span class="hljs-comment"># 获取输出输入框的所有文本</span><br><span class="hljs-built_in">print</span>(entry.get())<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-3-验证功能"><a href="#7-3-验证功能" class="headerlink" title="7-3 验证功能"></a>7-3 验证功能</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> messagebox<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><br><span class="hljs-comment"># 创建验证函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">check</span>():<br>    <span class="hljs-keyword">if</span> entry1.get() == <span class="hljs-string">&quot;admin&quot;</span>:<br>        messagebox.showinfo(title=<span class="hljs-string">&quot;正确&quot;</span>, message=<span class="hljs-string">&quot;输入正确！&quot;</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        messagebox.showwarning(title=<span class="hljs-string">&quot;错误&quot;</span>, message=<span class="hljs-string">&quot;输入错误！&quot;</span>)<br>        entry1.delete(<span class="hljs-number">0</span>, tk.END)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>    <br><br><span class="hljs-comment"># 新建文本标签</span><br>label1 = tk.Label(window, text=<span class="hljs-string">&quot;账号：&quot;</span>)<br>label2 = tk.Label(window, text=<span class="hljs-string">&quot;密码：&quot;</span>)<br>label1.grid(row=<span class="hljs-number">0</span>, padx=<span class="hljs-number">90</span>, pady=<span class="hljs-number">20</span>)<br>label2.grid(row=<span class="hljs-number">1</span>, padx=<span class="hljs-number">90</span>, pady=<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># 创建动态字符串</span><br>dystr = tk.StringVar()<br><br><span class="hljs-comment"># 使用验证参数validata，参数值为focusout</span><br>entry1 = tk.Entry(<br>    window, textvariable=dystr,<br><br>    <span class="hljs-comment"># validate：指定验证方式</span><br>    <span class="hljs-comment"># focus：获得或失去焦点时，验证输入框内容是否正确</span><br>    <span class="hljs-comment"># focusin：获得焦点时验证</span><br>    <span class="hljs-comment"># focusout：失去焦点时验证</span><br>    <span class="hljs-comment"># key：输入框被编辑时验证</span><br>    <span class="hljs-comment"># all：出现上述任何一种情况时验证</span><br>    <span class="hljs-comment"># none：默认不启用验证功能，注意这里none是字符串</span><br>    validate=<span class="hljs-string">&quot;focusout&quot;</span>,<br>    <span class="hljs-comment"># validatecommand：指定自定义的验证函数</span><br>    <span class="hljs-comment"># 这里自定义的验证函数只能返回True或False</span><br>    validatecommand=check,<br><br>    <span class="hljs-comment"># 当指定的验证函数返回False时，使用该参数再指定一个验证函数</span><br>    <span class="hljs-comment"># invalidcommand</span><br>)<br>entry2 = tk.Entry(window)<br><br><span class="hljs-comment"># 对控件进行布局管理，放在文本标签的后面</span><br>entry1.grid(row=<span class="hljs-number">0</span>, column=<span class="hljs-number">1</span>, padx=<span class="hljs-number">30</span>)<br>entry2.grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">1</span>, padx=<span class="hljs-number">30</span>)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-4-验证注册"><a href="#7-4-验证注册" class="headerlink" title="7-4 验证注册"></a>7-4 验证注册</h2><ul>
+<li>验证注册<ul>
+<li>Tkinter为验证函数提供了一些额外的选项。</li>
+<li>使用这些选项之前，需要提前注册验证函数。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> messagebox<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = tk.Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><br><span class="hljs-comment"># 创建验证函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">check</span>(<span class="hljs-params">strings, reason, <span class="hljs-built_in">id</span></span>):<br>    <span class="hljs-keyword">if</span> entry1.get() == <span class="hljs-string">&quot;admin&quot;</span>:<br>        messagebox.showinfo(title=<span class="hljs-string">&quot;正确&quot;</span>, message=<span class="hljs-string">&quot;输入正确！&quot;</span>)<br>        <span class="hljs-built_in">print</span>(strings, reason, <span class="hljs-built_in">id</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">else</span>:<br>        messagebox.showwarning(title=<span class="hljs-string">&quot;错误&quot;</span>, message=<span class="hljs-string">&quot;输入错误！&quot;</span>)<br>        <span class="hljs-built_in">print</span>(strings, reason, <span class="hljs-built_in">id</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br><br><span class="hljs-comment"># 对验证函数进行注册</span><br>CheckTest = window.register(check)<br><br><span class="hljs-comment"># 新建文本标签</span><br>label1 = tk.Label(window, text=<span class="hljs-string">&quot;账号：&quot;</span>)<br>label2 = tk.Label(window, text=<span class="hljs-string">&quot;密码：&quot;</span>)<br>label1.grid(row=<span class="hljs-number">0</span>, padx=<span class="hljs-number">90</span>, pady=<span class="hljs-number">20</span>)<br>label2.grid(row=<span class="hljs-number">1</span>, padx=<span class="hljs-number">90</span>, pady=<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># 创建动态字符串</span><br>dystr = tk.StringVar()<br><br><span class="hljs-comment"># 使用验证参数validata，参数值为focusout</span><br>entry1 = tk.Entry(<br>    window, textvariable=dystr,<br><br>    <span class="hljs-comment"># validate：指定验证方式</span><br>    validate=<span class="hljs-string">&quot;focusout&quot;</span>,<br><br>    <span class="hljs-comment"># 验证函数的额外选项</span><br>    <span class="hljs-comment"># %d：0表示删除，1表示插入，2表示焦点离开</span><br>    <span class="hljs-comment"># %i：插入索引</span><br>    <span class="hljs-comment"># %P：指定输入框的文本内容，当输入框的值允许改变时该选项才生效</span><br>    <span class="hljs-comment"># %s：调用验证函数前输入框的文本内容</span><br>    <span class="hljs-comment"># %S：插入或删除操作触发验证函数时才生效，表示被插入或删除的内容</span><br>    <span class="hljs-comment"># %v：当前Entry控件的validate参数值</span><br>    <span class="hljs-comment"># %V：触发验证函数的原因，值为focus、...、key、none中的一个</span><br>    <span class="hljs-comment"># %W：控件类型</span><br>    validatecommand=(CheckTest, <span class="hljs-string">&quot;%P&quot;</span>, <span class="hljs-string">&quot;%V&quot;</span>, <span class="hljs-string">&quot;%W&quot;</span>),<br>)<br>entry2 = tk.Entry(window)<br><br><span class="hljs-comment"># 对控件进行布局管理，放在文本标签的后面</span><br>entry1.grid(row=<span class="hljs-number">0</span>, column=<span class="hljs-number">1</span>, padx=<span class="hljs-number">30</span>)<br>entry2.grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">1</span>, padx=<span class="hljs-number">30</span>)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-5-验证实例"><a href="#7-5-验证实例" class="headerlink" title="7-5 验证实例"></a>7-5 验证实例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><span class="hljs-comment"># 创建一个容器包含其他控件</span><br>frame = Frame(window)<br><br><span class="hljs-comment"># 创建一个Label控件</span><br>label = Label(frame)<br><br><span class="hljs-comment"># 创建一个Entry控件</span><br>entry = Entry(frame)<br><br><span class="hljs-comment"># 读取用户输入的表达式</span><br>expression = StringVar()<br><br><span class="hljs-comment"># 将用户输入的表达式显示在Entry控件上</span><br>entry[<span class="hljs-string">&quot;textvariable&quot;</span>] = expression<br><br><br><span class="hljs-comment"># 创建一个计算器</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">Calculator</span>():<br>    <span class="hljs-comment"># 输入的表达式，计算结果后转换为字符串</span><br>    result = <span class="hljs-string">&quot;=&quot;</span> + <span class="hljs-built_in">str</span>(<span class="hljs-built_in">eval</span>(expression.get()))<br><br>    <span class="hljs-comment"># 将计算结果显示在Label控件上</span><br>    label.config(text=result)<br><br><br><span class="hljs-comment"># 创建一个Button控件，输入完毕，单击此按钮计算表达式结果</span><br>button = Button(frame, text=<span class="hljs-string">&quot;等于&quot;</span>, command=Calculator)<br><br><span class="hljs-comment"># 设置Entry控件为焦点</span><br>entry.focus()<br>frame.pack(pady=<span class="hljs-number">10</span>)<br><br><span class="hljs-comment"># Entry控件位于窗口上方</span><br>entry.pack(pady=<span class="hljs-number">10</span>)<br><br><span class="hljs-comment"># Label控件位于窗口左方</span><br>label.pack(side=<span class="hljs-string">&quot;left&quot;</span>, pady=<span class="hljs-number">10</span>)<br><br><span class="hljs-comment"># Button控件位于窗口右方</span><br>button.pack(side=<span class="hljs-string">&quot;right&quot;</span>, pady=<span class="hljs-number">10</span>)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="8-旋钮控件"><a href="#8-旋钮控件" class="headerlink" title="8 旋钮控件"></a>8 旋钮控件</h1><ul>
+<li>旋钮控件<ul>
+<li>旋钮控件(Spinbox)是Entry控件的升级版，是Tkinter8.4版本后新增的控件。</li>
+<li>该控件不仅允许直接输入内容，还支持使用微调选择器(即上下按钮调节器)。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><br><span class="hljs-comment"># 调用Tk()创建主窗口</span><br>window = Tk()<br>window.geometry(<span class="hljs-string">&quot;500x250&quot;</span>)<br><br><span class="hljs-comment"># 数字使用from_和to参数，范围0~20，2步长递增减</span><br>Spinbox(<br>    window, from_=<span class="hljs-number">0</span>, to=<span class="hljs-number">20</span>,<br>    increment=<span class="hljs-number">2</span>, bg=<span class="hljs-string">&quot;yellow green&quot;</span><br>).pack(pady=<span class="hljs-number">10</span>)<br><br><span class="hljs-comment"># 字符串使用values参数，以元组形式传参</span><br>Spinbox(<br>    window,<br>    values=(<span class="hljs-string">&quot;Python&quot;</span>, <span class="hljs-string">&quot;Java&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>)<br>).pack(pady=<span class="hljs-number">10</span>)<br><br><span class="hljs-comment"># 设置窗口主循环，一直显示，直到窗口被关闭</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Tkinter/">#Tkinter</a>
+      
+        <a href="/tags/%E7%AA%97%E5%8F%A3%E6%96%B9%E6%B3%95/">#窗口方法</a>
+      
+        <a href="/tags/%E6%8E%A7%E4%BB%B6/">#控件</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python Tkinter</div>
+      <div>https://stitch-top.github.io/2024/12/31/python/python14-python-tkinter-yi/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年12月31日 22:30:00</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/11/28/shu-ju-ku/db02-mql/" title="MQL">
+                        <span class="hidden-mobile">MQL</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"PDfaLoft9OAolB0AmON5AqUb-gzGzoHsz","appKey":"xq13nodBzh8hOliBusHUKDwj","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"monsterid","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"pageSize":13,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Python"
+        id="heading-a7f5f35426b927411fc9231b56382173" role="tab" data-toggle="collapse" href="#collapse-a7f5f35426b927411fc9231b56382173"
+        aria-expanded="true"
+      >
+        Python
+        <span class="list-group-count">(14)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-a7f5f35426b927411fc9231b56382173"
+           role="tabpanel" aria-labelledby="heading-a7f5f35426b927411fc9231b56382173">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2021/01/01/python/python01-python-ji-chu-yi/" title="Python 基础(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 基础(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/01/15/python/python02-python-ji-chu-er/" title="Python 基础(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 基础(二)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/02/03/python/python03-python-wen-jian-chu-li/" title="Python 文件处理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 文件处理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/03/01/python/python04-python-numpy-ji-chu/" title="Python NumPy 基础"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 基础</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/04/06/python/python05-python-numpy-sui-ji/" title="Python NumPy 随机"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 随机</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/05/05/python/python06-python-numpy-han-shu/" title="Python NumPy 函数"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python NumPy 函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/06/08/python/python07-python-pandas/" title="Python Pandas"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Pandas</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/07/09/python/python08-python-scipy/" title="Python SciPy"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python SciPy</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/08/02/python/python09-python-matplotlib/" title="Python Matplotlib"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Matplotlib</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/09/04/python/python10-python-ji-qi-xue-xi/" title="Python 机器学习"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python 机器学习</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/10/07/python/python11-python-mysql/" title="Python MySQL"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python MySQL</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/11/03/python/python12-python-mongodb/" title="Python MongoDB"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python MongoDB</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/12/10/python/python13-python-flask/" title="Python Flask"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Python Flask</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/12/31/python/python14-python-tkinter-yi/" title="Python Tkinter"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Python Tkinter</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2024</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        📈 总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        📊 总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
