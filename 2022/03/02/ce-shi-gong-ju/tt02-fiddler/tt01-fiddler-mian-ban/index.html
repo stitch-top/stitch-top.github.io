@@ -29,9 +29,9 @@
 <meta property="article:published_time" content="2022-03-02T14:37:55.000Z">
 <meta property="article:modified_time" content="2024-07-19T09:19:24.995Z">
 <meta property="article:author" content="Dr.626">
-<meta property="article:tag" content="抓包">
 <meta property="article:tag" content="面板">
 <meta property="article:tag" content="插件">
+<meta property="article:tag" content="抓包">
 <meta property="article:tag" content="命令输入">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1675421003.jpg">
@@ -1432,11 +1432,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%8A%93%E5%8C%85/">#抓包</a>
-      
         <a href="/tags/%E9%9D%A2%E6%9D%BF/">#面板</a>
       
         <a href="/tags/%E6%8F%92%E4%BB%B6/">#插件</a>
+      
+        <a href="/tags/%E6%8A%93%E5%8C%85/">#抓包</a>
       
         <a href="/tags/%E5%91%BD%E4%BB%A4%E8%BE%93%E5%85%A5/">#命令输入</a>
       
@@ -1564,10 +1564,10 @@
       var vlink=document.getElementsByClassName("vlink vinput")[0].value;
       var veditor=document.getElementsByClassName("veditor vinput")[0].value;
       var data="昵称："+vnick+"\n邮箱："+vmail+"\n网站地址："+vlink+"\n当前页面："+pagename+"\n评论内容："+veditor+"\n跳转链接："+pageurl+"\n评论时间"+ptime.toLocaleString();
-      var httpRequest = new XMLHttpRequest();    // 第一步：创建需要的对象
-      httpRequest.open('POST',SCKEY_Qmsg, true); // 第二步：打开连接
+      var httpRequest = new XMLHttpRequest();     // 第一步：创建需要的对象
+      httpRequest.open('POST', SCKEY_Qmsg, true); // 第二步：打开连接
       httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded"); // 设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-      httpRequest.send(title2+data);             // 发送请求 
+      httpRequest.send(title2+data);              // 发送请求 
     };
     
     document.body.addEventListener('click', function(e) {
