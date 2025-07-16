@@ -1,0 +1,1441 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🍰 一款轻量级的开源自动化测试报告生成框架，支持绝大部分测试框架，例如：TestNG、JUnit、PyTest、UnitTest等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Allure 测试报告">
+<meta property="og:url" content="https://stitch-top.github.io/2023/05/01/zi-dong-hua/at03-allure/at01-allure-ce-shi-bao-gao/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="🍰 一款轻量级的开源自动化测试报告生成框架，支持绝大部分测试框架，例如：TestNG、JUnit、PyTest、UnitTest等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1406160203.jpg">
+<meta property="article:published_time" content="2023-05-01T13:30:55.000Z">
+<meta property="article:modified_time" content="2025-07-16T08:36:51.222Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Allure">
+<meta property="article:tag" content="测试报告">
+<meta property="article:tag" content="信息注解">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1406160203.jpg">
+  
+  
+  
+  <title>Allure 测试报告 - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Allure 测试报告"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-01 21:30" pubdate>
+          2023年5月1日 21:30:55
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          29k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          240 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Allure 测试报告</h1>
+            
+            <div class="markdown-body">
+              
+              <p>🍰 一款轻量级的开源自动化测试报告生成框架，支持绝大部分测试框架，例如：TestNG、JUnit、PyTest、UnitTest等。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-allure框架"><a href="#1-allure框架" class="headerlink" title="1 allure框架"></a>1 allure框架</h1><ul>
+<li>allure框架<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/allure-framework/allure2/releases">allure2下载</a>：<a target="_blank" rel="noopener" href="https://github.com/allure-framework/allure2/releases/download/2.20.1/allure-2.20.1.zip">allure-2.20.1.zip</a>，JDK1.8版本，<code>pip install allure-pytest</code>安装Python依赖。</li>
+<li>添加变量：控制面板—&gt;用户账户—&gt;更改环境变量—&gt;Path—&gt;添加<code>...\allure-2.20.1\bin</code>。</li>
+<li>Python依赖包含allure-pytest和allure-python-commons两个包，生成与allure2兼容的报告数据。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                   <span class="hljs-comment"># test_case.py</span><br><br><br><span class="hljs-meta">@pytest.mark.skip()</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_a</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---use case a---&quot;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_b</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---use case b---&quot;</span>)<br><br><span class="hljs-comment"># pytest -vs --alluredir=./report/xml --clean-alluredir         # 生成xml格式的报告数据</span><br><span class="hljs-comment"># allure serve report\xml                                       # 直接在本地浏览器中打开报告</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>报告结构介绍<ul>
+<li>Overview：总览。</li>
+<li>Categories：用例类别，默认failed和error，可快速查看哪些用例执行是failed和error的。</li>
+<li>Suites：即所有用例的层级关系，可以依据package、module、class和method来查找用例。</li>
+<li>Graphs：测试结果的图形化展示，包括分布图等。</li>
+<li>Timeline：测试用例的执行顺序，包括执行时间。</li>
+<li>Behaviors：依据epic、feature、story进行用例分组。</li>
+<li>Packages：按package、module进行测试用例的分组。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-添加环境变量"><a href="#1-1-添加环境变量" class="headerlink" title="1-1 添加环境变量"></a>1-1 添加环境变量</h2><ul>
+<li>添加环境变量<ul>
+<li>Overview的ENVIRONMENT<ul>
+<li>在生成xml格式的报告数据文件夹中，创建一个<code>environment.properties</code>文件。</li>
+<li>同理也可以在生成xml格式的报告数据文件夹中创建一个<code>environment.xml</code>文件。</li>
+</ul>
+</li>
+<li>环境变量添加完成后，需要重新执行命令<code>allure serve report\xml</code>，在本地浏览器中重新打开报告才能生效。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-environment-xml"><a href="#1-environment-xml" class="headerlink" title="(1) environment.xml"></a>(1) environment.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Xml"><span class="hljs-tag">&lt;<span class="hljs-name">environment</span>&gt;</span>                                                   <span class="hljs-comment">&lt;!-- environment.xml文件 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">parameter</span>&gt;</span>                                                 <span class="hljs-comment">&lt;!-- .xml配置优先于.properties --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>Browser<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>Chrome<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">parameter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">parameter</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>Browser.Version<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>100.0<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">parameter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">parameter</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>Stand<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>Production<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">parameter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">parameter</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>Type<span class="hljs-tag">&lt;/<span class="hljs-name">key</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>xml<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">parameter</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-environment-properties"><a href="#2-environment-properties" class="headerlink" title="(2) environment.properties"></a>(2) environment.properties</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Ini"><span class="hljs-attr">Browser</span>=Chrome                                                   <span class="hljs-comment"># environment.properties文件</span><br><span class="hljs-attr">Browser.Version</span>=<span class="hljs-number">107.0</span>                                            <span class="hljs-comment"># 最好不带注释信息，可能乱码显示</span><br><span class="hljs-attr">Stand</span>=Production<br><span class="hljs-attr">Type</span>=Properties<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-自定义缺陷分类"><a href="#1-2-自定义缺陷分类" class="headerlink" title="1-2 自定义缺陷分类"></a>1-2 自定义缺陷分类</h2><ul>
+<li>自定义缺陷分类<ul>
+<li>Categories：在生成xml格式的报告数据文件夹中创建一个<code>categories.json</code>文件。</li>
+<li>Json文件参数说明<ul>
+<li>name：必填，类别名称，可以是中文。</li>
+<li>messageRegex：可选，用例运行的错误消息，默认<code>&quot;.*&quot;</code>，可以通过正则表达式进行匹配。</li>
+<li>traceRegex：可选，用例运行错误消息的堆栈跟踪，默认<code>&quot;.*&quot;</code>，可以通过正则表达式匹配。</li>
+<li>matchedStatuses：可选，用例运行状态，默认<code>[&quot;failed&quot;,&quot;broken&quot;,&quot;passed&quot;,&quot;skipped&quot;,&quot;unknown&quot;]</code>。</li>
+<li>如果用例运行结果的状态在列表中，并且错误消息和堆栈跟踪都与之模式相匹配，则测试结果属于该类别。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs Json"><span class="hljs-punctuation">[</span>                                                               <span class="hljs-comment">// categories.json文件</span><br>  <span class="hljs-punctuation">&#123;</span>                                                             <span class="hljs-comment">// 文件中最好不要带注释信息，否则无效</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Ignored tests&quot;</span><span class="hljs-punctuation">,</span> <br>    <span class="hljs-attr">&quot;matchedStatuses&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;skipped&quot;</span><span class="hljs-punctuation">]</span> <br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Infrastructure problems&quot;</span><span class="hljs-punctuation">,</span> <br>    <span class="hljs-attr">&quot;matchedStatuses&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;broken&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;failed&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <br>    <span class="hljs-attr">&quot;messageRegex&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;.*bye-bye.*&quot;</span> <br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Outdated tests&quot;</span><span class="hljs-punctuation">,</span> <br>    <span class="hljs-attr">&quot;matchedStatuses&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;broken&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <br>    <span class="hljs-attr">&quot;traceRegex&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;.*FileNotFoundException.*&quot;</span> <br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Execution failed&quot;</span><span class="hljs-punctuation">,</span> <br>    <span class="hljs-attr">&quot;matchedStatuses&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;failed&quot;</span><span class="hljs-punctuation">]</span> <br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Test defects&quot;</span><span class="hljs-punctuation">,</span> <br>    <span class="hljs-attr">&quot;matchedStatuses&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;broken&quot;</span><span class="hljs-punctuation">]</span> <br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-allure注释说明"><a href="#2-allure注释说明" class="headerlink" title="2 allure注释说明"></a>2 allure注释说明</h1><ul>
+<li>allure注释说明<ul>
+<li><code>@allure.step()</code>：测试用例的步骤，参数传什么，在allure中步骤名就显示什么。</li>
+<li><code>@allure.attach()</code>：显示不同类型的附件，补充测试结果，可依据自身情况调整。</li>
+<li><code>@allure.title()</code>：自定义用例标题，支持占位符传递关键字参数，标题更具可读性。</li>
+<li><code>@allure.description()</code>：为测试用例添加详细的描述，并且将其展示到测试报告中。</li>
+<li>访问链接：将测试报告与bug管理工具或测试管理系统进行关联。<ul>
+<li><code>@allure.link()</code>：访问网址的链接。</li>
+<li><code>@allure.issue()</code>：访问缺陷的链接。</li>
+<li><code>@allure.testcase()</code>：访问用例链接。</li>
+</ul>
+</li>
+<li>BDD风格的标记：行为驱动开发(BDD)，在测试驱动开发(TDD)基础上发展而来的一种软件开发方法。<ul>
+<li><code>@allure.epic()</code>：相当于module级的标签，敏捷里面的概念。</li>
+<li><code>@allure.feature()</code>：相当于class级的标签，epic是feature的父级。</li>
+<li><code>@allure.story()</code>：相当于method级的标签，feature是story的父级。</li>
+</ul>
+</li>
+<li><code>@allure.severity()</code>：划分测试用例的等级，并展示到测试报告内。</li>
+<li>测试套件：已有BDD风格的标记，测试套件不常用，可以做简单了解。<ul>
+<li><code>@allure.suite()</code>：是与当前测试套件同级的测试套件。</li>
+<li><code>@allure.sub_suite()</code>：当前测试套件的子级测试套件。</li>
+<li><code>@allure.parent_suite()</code>：当前测试套件的父级测试套件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-1-用例步骤"><a href="#2-1-用例步骤" class="headerlink" title="2-1 用例步骤"></a>2-1 用例步骤</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_step.py</span><br><br><br><span class="hljs-meta">@allure.step(<span class="hljs-params"><span class="hljs-string">&quot;Open the login site.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">open</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.step(<span class="hljs-params"><span class="hljs-string">&quot;Enter your account and password.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">input_username_password</span>():<br>    input_username_password_and_login(<span class="hljs-string">&quot;admin&quot;</span>, <span class="hljs-string">&quot;123456&quot;</span>)<br><br><br><span class="hljs-meta">@allure.step(<span class="hljs-params"><span class="hljs-string">&quot;Enter account, password &#123;arg1&#125;, &#123;arg2&#125;, and click login.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">input_username_password_and_login</span>(<span class="hljs-params">arg1, arg2</span>):<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.step(<span class="hljs-params"><span class="hljs-string">&quot;Verify the login process.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_login</span>():<br>    <span class="hljs-built_in">open</span>()<br>    input_username_password()<br><br><span class="hljs-comment"># pytest -vs test_step.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-用例补充"><a href="#2-2-用例补充" class="headerlink" title="2-2 用例补充"></a>2-2 用例补充</h2><ul>
+<li>用例补充<ul>
+<li><code>allure.attach(body, name, attachment_type, extension)</code>：用于未想要导入现成的附件情况。</li>
+<li><code>allure.attach.file(source, name, attachment_type, extension)</code>：用于已有对应的附件情况。<ul>
+<li>body(显示内容)、name(附件名)、source(附件路径)。</li>
+<li>extension(附件扩展名)、attachment_type(附件类型)。</li>
+</ul>
+</li>
+<li>附件类型<ul>
+<li>text<ul>
+<li><code>TSV = (&quot;text/tab-separated-values&quot;, &quot;tsv&quot;)</code></li>
+<li><code>HTML = (&quot;text/html&quot;, &quot;html&quot;)</code>、<code>CSV = (&quot;text/csv&quot;, &quot;csv&quot;)</code></li>
+<li><code>TEXT = (&quot;text/plain&quot;, &quot;txt&quot;)</code>、<code>URI_LIST = (&quot;text/uri-list&quot;, &quot;uri&quot;)</code></li>
+</ul>
+</li>
+<li>image<ul>
+<li><code>PNG = (&quot;image/png&quot;, &quot;png&quot;)</code>、<code>BMP = (&quot;image/bmp&quot;, &quot;bmp&quot;)</code></li>
+<li><code>JPG = (&quot;image/jpg&quot;, &quot;jpg&quot;)</code>、<code>GIF = (&quot;image/gif&quot;, &quot;gif&quot;)</code></li>
+<li><code>TIFF = (&quot;image/tiff&quot;, &quot;tiff&quot;)</code>、<code>SVG = (&quot;image/svg-xml&quot;, &quot;svg&quot;)</code></li>
+</ul>
+</li>
+<li>video<ul>
+<li><code>MP4 = (&quot;video/mp4&quot;, &quot;mp4&quot;)</code></li>
+<li><code>OGG = (&quot;video/ogg&quot;, &quot;ogg&quot;)</code></li>
+<li><code>WEBM = (&quot;video/webm&quot;, &quot;webm&quot;)</code></li>
+</ul>
+</li>
+<li>application<ul>
+<li><code>PCAP = (&quot;application/vnd.tcpdump.pcap&quot;, &quot;pcap&quot;)</code></li>
+<li><code>XML = (&quot;application/xml&quot;, &quot;xml&quot;)</code>、<code>JSON = (&quot;application/json&quot;, &quot;json&quot;)</code></li>
+<li><code>PDF = (&quot;application/pdf&quot;, &quot;pdf&quot;)</code>、<code>YAML = (&quot;application/yaml&quot;, &quot;yaml&quot;)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_attach.py</span><br><br><br><span class="hljs-meta">@allure.step(<span class="hljs-params"><span class="hljs-string">&quot;Open the login site.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">open</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.step(<span class="hljs-params"><span class="hljs-string">&quot;Enter your account and password.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">input_username_password</span>():<br>    input_username_password_and_login(<span class="hljs-string">&quot;admin&quot;</span>, <span class="hljs-string">&quot;123456&quot;</span>)<br><br><br><span class="hljs-meta">@allure.step(<span class="hljs-params"><span class="hljs-string">&quot;Enter account, password &#123;arg1&#125;, &#123;arg2&#125;, and click login.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">input_username_password_and_login</span>(<span class="hljs-params">arg1, arg2</span>):<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.step(<span class="hljs-params"><span class="hljs-string">&quot;Verify the login process.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_login</span>():<br>    <span class="hljs-built_in">open</span>()<br>    input_username_password()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_attach</span>():<br>    allure.attach(<span class="hljs-string">&quot;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;strong&gt;Add an html page.&lt;/strong&gt;&lt;/body&gt;&quot;</span>,<br>                  <span class="hljs-string">&quot;Attach with HTML type&quot;</span>, allure.attachment_type.HTML)<br>    <span class="hljs-comment"># 注意：需要在当前test_attach.py文件的目录下放置report.html和report.jpg，否则报错</span><br>    allure.attach.file(<span class="hljs-string">&quot;./report.html&quot;</span>, attachment_type=allure.attachment_type.HTML)<br>    allure.attach.file(<span class="hljs-string">&quot;./report.jpg&quot;</span>, attachment_type=allure.attachment_type.JPG)<br><br><span class="hljs-comment"># pytest test_attach.py --alluredir=./report/annex</span><br><span class="hljs-comment"># allure serve ./report/annex</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-用例标题"><a href="#2-3-用例标题" class="headerlink" title="2-3 用例标题"></a>2-3 用例标题</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                   <span class="hljs-comment"># test_title.py</span><br><span class="hljs-keyword">import</span> allure<br><br><br><span class="hljs-meta">@allure.title(<span class="hljs-params"><span class="hljs-string">&quot;Pre-operation: Get username.&quot;</span></span>)</span><br><span class="hljs-meta">@pytest.fixture()</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_use</span>(<span class="hljs-params">request</span>):<br>    use = request.param<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Username: <span class="hljs-subst">&#123;use&#125;</span>&quot;</span>)<br>    <span class="hljs-keyword">return</span> use<br><br><br><span class="hljs-meta">@allure.title(<span class="hljs-params"><span class="hljs-string">&quot;Pre-operation: Get password.&quot;</span></span>)</span><br><span class="hljs-meta">@pytest.fixture()</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_pwd</span>(<span class="hljs-params">request</span>):<br>    pwd = request.param<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Password: <span class="hljs-subst">&#123;pwd&#125;</span>&quot;</span>)<br>    <span class="hljs-keyword">return</span> pwd<br><br><br>use_data = [<span class="hljs-string">&quot;Holy&quot;</span>, <span class="hljs-string">&quot;Lucy&quot;</span>]<br>pwd_data = [<span class="hljs-string">&quot;1235&quot;</span>, <span class="hljs-string">&quot;1236&quot;</span>]<br><br><br><span class="hljs-meta">@allure.title(<span class="hljs-params"><span class="hljs-string">&quot;Username: &#123;get_use&#125; --- Password: &#123;get_pwd&#125;.&quot;</span></span>)   </span><span class="hljs-comment"># 占位符传递关键字参数</span><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;get_use&quot;</span>, use_data, indirect=<span class="hljs-literal">True</span></span>)    </span><span class="hljs-comment"># 动态标题，结合parametrize使用</span><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;get_pwd&quot;</span>, pwd_data, indirect=<span class="hljs-literal">True</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_get_userinfo</span>(<span class="hljs-params">get_use, get_pwd</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Username: <span class="hljs-subst">&#123;get_use&#125;</span> --- Password: <span class="hljs-subst">&#123;get_pwd&#125;</span>.&quot;</span>)<br><br><span class="hljs-comment"># pytest -vs test_title.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-用例描述"><a href="#2-4-用例描述" class="headerlink" title="2-4 用例描述"></a>2-4 用例描述</h2><ul>
+<li>用例描述<ul>
+<li>在用例函数声明的下方使用<code>&quot;&quot;&quot; &quot;&quot;&quot;</code>，使用<code>@allure.description()</code>装饰器。</li>
+<li>使用<code>@allure.description_html()</code>装饰器添加html描述，类似attach传html。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_description.py</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_description1</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    Verify 1=1</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">1</span> == <span class="hljs-number">1</span><br><br><br><span class="hljs-meta">@allure.description(<span class="hljs-params"><span class="hljs-string">&quot;Verify 1=1&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_description2</span>():<br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">1</span> == <span class="hljs-number">1</span><br><br><br><span class="hljs-meta">@allure.description_html(<span class="hljs-params"><span class="hljs-string">&quot;&quot;&quot;&lt;h1&gt;Verify 1=1&lt;/h1&gt;&quot;&quot;&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_description3</span>():<br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">1</span> == <span class="hljs-number">1</span><br><br><span class="hljs-comment"># pytest -vs test_description.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-5-访问链接"><a href="#2-5-访问链接" class="headerlink" title="2-5 访问链接"></a>2-5 访问链接</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_access.py</span><br><br>test_case_link = <span class="hljs-string">&quot;https://docs.qq.com/mind/DSnRoQU9kRlNTRm1v&quot;</span><br><br><br><span class="hljs-meta">@allure.link(<span class="hljs-params"><span class="hljs-string">&quot;https://stitch-top.github.io&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_link</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.link(<span class="hljs-params"><span class="hljs-string">&quot;https://stitch-top.github.io&quot;</span>, name=<span class="hljs-string">&quot;Click on the title to view the content.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_name_link</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.issue(<span class="hljs-params"><span class="hljs-string">&quot;https://docs.qq.com/mind/DSkNVTGVwVUhzYnBt&quot;</span>, <span class="hljs-string">&quot;Defect link&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_issue_link</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.testcase(<span class="hljs-params">test_case_link, <span class="hljs-string">&quot;Test case link&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_testcase_link</span>():<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-comment"># pytest -vs test_access.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-6-BDD风格的标记"><a href="#2-6-BDD风格的标记" class="headerlink" title="2-6 BDD风格的标记"></a>2-6 BDD风格的标记</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_style.py</span><br><br><br><span class="hljs-meta">@allure.story(<span class="hljs-params"><span class="hljs-string">&quot;epic_a&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_a</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.story(<span class="hljs-params"><span class="hljs-string">&quot;story_a&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_b</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.story(<span class="hljs-params"><span class="hljs-string">&quot;story_b&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_c</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.feature(<span class="hljs-params"><span class="hljs-string">&quot;feature_b&quot;</span></span>)</span><br><span class="hljs-meta">@allure.story(<span class="hljs-params"><span class="hljs-string">&quot;story_b&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_d</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.epic(<span class="hljs-params"><span class="hljs-string">&quot;epic_b&quot;</span></span>)</span><br><span class="hljs-meta">@allure.feature(<span class="hljs-params"><span class="hljs-string">&quot;feature_b&quot;</span></span>)</span><br><span class="hljs-meta">@allure.story(<span class="hljs-params"><span class="hljs-string">&quot;story_b&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_e</span>():<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-comment"># pytest -vs test_style.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br><br><span class="hljs-comment"># 只运行epic中名为epic_b的用例</span><br><span class="hljs-comment"># pytest --alluredir ./report/allure --allure-epics=epic_b</span><br><br><span class="hljs-comment"># 只运行feature中名为feature_b的用例</span><br><span class="hljs-comment"># pytest --alluredir ./report/allure --allure-features=feature_b</span><br><br><span class="hljs-comment"># 只运行story_a,story_b的用例</span><br><span class="hljs-comment"># pytest test_style.py --allure-stories story_a,story_b</span><br><br><span class="hljs-comment"># pytest test_style.py --allure-features feature_b --allure-stories story_a</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-7-用例等级的划分"><a href="#2-7-用例等级的划分" class="headerlink" title="2-7 用例等级的划分"></a>2-7 用例等级的划分</h2><ul>
+<li>用例等级的划分<ul>
+<li>blocker：阻塞缺陷，功能未实现。</li>
+<li>critical：严重缺陷，功能点缺失。</li>
+<li>normal：一般缺陷，边界情况，格式错误。</li>
+<li>minor：次要缺陷，界面错误及UI需求不符。</li>
+<li>trivial：轻微缺陷，必须项无提示，或提示不规范。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_severity.py</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_a</span>():                                                   <span class="hljs-comment"># 没标记severity的方法默认优先级为normal</span><br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.severity(<span class="hljs-params">allure.severity_level.BLOCKER</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_b</span>():                                                   <span class="hljs-comment"># 优先级为blocker</span><br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.severity(<span class="hljs-params">allure.severity_level.CRITICAL</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_c</span>():                                                   <span class="hljs-comment"># 优先级为critical</span><br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.severity(<span class="hljs-params">allure.severity_level.NORMAL</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_d</span>():                                                   <span class="hljs-comment"># 优先级为normal</span><br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.severity(<span class="hljs-params">allure.severity_level.MINOR</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_e</span>():                                                   <span class="hljs-comment"># 优先级为minor</span><br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.severity(<span class="hljs-params">allure.severity_level.TRIVIAL</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_f</span>():                                                   <span class="hljs-comment"># 优先级为trivial</span><br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.severity(<span class="hljs-params">allure.severity_level.NORMAL</span>)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestCase</span>(<span class="hljs-title class_ inherited__">object</span>):                                         <span class="hljs-comment"># 类优先级normal</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_g</span>(<span class="hljs-params">self</span>):                                           <span class="hljs-comment"># 默认继承类优先级normal</span><br>        <span class="hljs-keyword">pass</span><br><br><span class="hljs-meta">    @allure.severity(<span class="hljs-params">allure.severity_level.CRITICAL</span>)</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_h</span>(<span class="hljs-params">self</span>):                                           <span class="hljs-comment"># 类优先级normal，函数优先级critical</span><br>        <span class="hljs-keyword">pass</span><br><br><span class="hljs-comment"># pytest -vs test_severity.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br><span class="hljs-comment"># pytest test_severity.py --allure-severities=normal,critical   # 只运行优先级为normal和critical的用例</span><br><span class="hljs-comment"># pytest test_severity.py --allure-severities blocker,critical  # 只运行优先级为blocker和critical的用例</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-8-测试套件的使用"><a href="#2-8-测试套件的使用" class="headerlink" title="2-8 测试套件的使用"></a>2-8 测试套件的使用</h2><ul>
+<li>测试套件的使用<ul>
+<li>未被suite修饰时，一个py文件和一个class默认就是一个测试套件。</li>
+<li>关系为py包含class套件，py和class下都可有它们各自的测试用例。</li>
+<li>被suite修饰的类和方法，会被认为是和当前文件同级的测试套件。</li>
+<li>如果类和类内方法同时被修饰，类修饰会被类内方法的修饰替代。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_suite.py</span><br><br><br><span class="hljs-meta">@allure.suite(<span class="hljs-params"><span class="hljs-string">&quot;test kit: suite&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_a</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.suite(<span class="hljs-params"><span class="hljs-string">&quot;test kit: sub_suite&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_b</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.suite(<span class="hljs-params"><span class="hljs-string">&quot;test kit: parent_suite&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_c</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-meta">@allure.suite(<span class="hljs-params"><span class="hljs-string">&quot;test suites&quot;</span></span>)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestSuiteX</span>:<br><span class="hljs-meta">    @allure.suite(<span class="hljs-params"><span class="hljs-string">&quot;class internal test kit d&quot;</span></span>)</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_d</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_e</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestSuiteY</span>:                                               <span class="hljs-comment"># 无suite修饰的测试类</span><br><span class="hljs-meta">    @allure.suite(<span class="hljs-params"><span class="hljs-string">&quot;class internal test kit f&quot;</span></span>)</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_f</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_g</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br><br><span class="hljs-comment"># pytest -vs test_suite.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-命令行参数介绍"><a href="#3-命令行参数介绍" class="headerlink" title="3 命令行参数介绍"></a>3 命令行参数介绍</h1><ul>
+<li>命令行参数介绍<ul>
+<li><code>pytest --alluredir=./report/xml test_file.py</code>：执行<code>test_file.py</code>文件用例。<ul>
+<li>当多次执行不同文件用例时，报告存放的路径保持一致，那么报告数据将会累加。</li>
+<li>使用<code>--clean-alluredir</code>命令行参数生成的报告，可以清空报告的历史执行记录。</li>
+<li>命令：<code>pytest --alluredir=./report/xml test_file.py --clean-alluredir</code>。</li>
+</ul>
+</li>
+<li><code>allure -h</code>：查看参数帮助文档。<ul>
+<li>generate：生成allure的html报告。</li>
+<li>serve：启动allure服务，打开报告。</li>
+<li>open：打开用generate生成的报告。</li>
+</ul>
+</li>
+<li>浏览器打开allure报告的两种方式<ul>
+<li><code>pytest -sq --alluredir=./report/xml</code>：执行测试用例文件，并指定结果目录。</li>
+<li><code>allure serve ./report/xml</code>：打开allure测试报告。</li>
+<li><code>allure generate -c -o ./report/xml ./report/html</code>：生成allure的html报告。</li>
+<li><code>allure open ./report/html</code>：打开allure测试报告。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-用例标题动态化"><a href="#4-用例标题动态化" class="headerlink" title="4 用例标题动态化"></a>4 用例标题动态化</h1><ul>
+<li>用例标题动态化<ul>
+<li>使用参数化，报告默认的用例标题为用例名称，可读性差。</li>
+<li>参数化使用ids，会保留用例名称，也无法完全解决可读性差的问题。</li>
+<li>若使用<code>@allure.title()</code>装饰器写死用例标题，后期维护成本较高。</li>
+<li>将parametrize参数化数据驱动与<code>@allure.title()</code>装饰器结合使用，更加高效便捷。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-1-参数化"><a href="#4-1-参数化" class="headerlink" title="4-1 参数化"></a>4-1 参数化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                   <span class="hljs-comment"># test_param1.py</span><br><br>info = [<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin1&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12345&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin2&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12346&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin3&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12347&quot;</span>&#125;<br>]<br><br><br><span class="hljs-meta">@pytest.fixture()</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">login</span>(<span class="hljs-params">request</span>):<br>    param = request.param<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;The account number is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;username&#x27;</span>]&#125;</span> and the password is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;pwd&#x27;</span>]&#125;</span>.&quot;</span>)<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;success!&quot;</span>&#125;<br><br><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;login&quot;</span>, info, indirect=<span class="hljs-literal">True</span></span>)          </span><span class="hljs-comment"># 参数化默认的标题</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_login</span>(<span class="hljs-params">login</span>):<br>    <span class="hljs-keyword">assert</span> login[<span class="hljs-string">&quot;code&quot;</span>] == <span class="hljs-number">0</span><br><br><span class="hljs-comment"># pytest -vs test_param1.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-参数化id"><a href="#4-2-参数化id" class="headerlink" title="4-2 参数化id"></a>4-2 参数化id</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                   <span class="hljs-comment"># test_param2.py</span><br><br>info = [<br>    pytest.param(&#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin1&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12345&quot;</span>&#125;, <span class="hljs-built_in">id</span>=<span class="hljs-string">&quot;admin1 login success&quot;</span>),<br>    pytest.param(&#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin2&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12346&quot;</span>&#125;, <span class="hljs-built_in">id</span>=<span class="hljs-string">&quot;admin2 failed to log in&quot;</span>),<br>    pytest.param(&#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin3&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12347&quot;</span>&#125;, <span class="hljs-built_in">id</span>=<span class="hljs-string">&quot;admin3 username does not exist&quot;</span>)<br>]<br><br><br><span class="hljs-meta">@pytest.fixture()</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">login</span>(<span class="hljs-params">request</span>):<br>    param = request.param<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;The account number is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;username&#x27;</span>]&#125;</span> and the password is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;pwd&#x27;</span>]&#125;</span>.&quot;</span>)<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;success!&quot;</span>&#125;<br><br><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;login&quot;</span>, info, indirect=<span class="hljs-literal">True</span></span>)          </span><span class="hljs-comment"># 参数化ids</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_login</span>(<span class="hljs-params">login</span>):<br>    <span class="hljs-keyword">assert</span> login[<span class="hljs-string">&quot;code&quot;</span>] == <span class="hljs-number">0</span><br><br><span class="hljs-comment"># pytest -vs test_param2.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-3-参数化ids"><a href="#4-3-参数化ids" class="headerlink" title="4-3 参数化ids"></a>4-3 参数化ids</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                   <span class="hljs-comment"># test_param3.py</span><br><br>info = [<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin1&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12345&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin2&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12346&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin3&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12347&quot;</span>&#125;<br>]<br><br>ids = [<span class="hljs-string">&quot;admin1 login success&quot;</span>, <span class="hljs-string">&quot;admin2 failed to log in&quot;</span>, <span class="hljs-string">&quot;admin3 username does not exist&quot;</span>]<br><br><br><span class="hljs-meta">@pytest.fixture()</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">login</span>(<span class="hljs-params">request</span>):<br>    param = request.param<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;The account number is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;username&#x27;</span>]&#125;</span> and the password is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;pwd&#x27;</span>]&#125;</span>.&quot;</span>)<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;success!&quot;</span>&#125;<br><br><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;login&quot;</span>, info, ids=ids, indirect=<span class="hljs-literal">True</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_login</span>(<span class="hljs-params">login</span>):                                          <span class="hljs-comment"># 参数化ids</span><br>    <span class="hljs-keyword">assert</span> login[<span class="hljs-string">&quot;code&quot;</span>] == <span class="hljs-number">0</span><br><br><span class="hljs-comment"># pytest -vs test_param3.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-4-固定标题"><a href="#4-4-固定标题" class="headerlink" title="4-4 固定标题"></a>4-4 固定标题</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                   <span class="hljs-comment"># test_param4.py</span><br><span class="hljs-keyword">import</span> allure<br><br>info = [<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin1&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12345&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin2&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12346&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin3&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12347&quot;</span>&#125;<br>]<br><br><br><span class="hljs-meta">@pytest.fixture()</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">login</span>(<span class="hljs-params">request</span>):<br>    param = request.param<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;The account number is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;username&#x27;</span>]&#125;</span> and the password is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;pwd&#x27;</span>]&#125;</span>.&quot;</span>)<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;success!&quot;</span>&#125;<br><br><br><span class="hljs-meta">@allure.title(<span class="hljs-params"><span class="hljs-string">&quot;Login use case: admin1 success, admin2 failure, admin3 user name does not exist.&quot;</span></span>)</span><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;login&quot;</span>, info, indirect=<span class="hljs-literal">True</span></span>)          </span><span class="hljs-comment"># @allure.title()固定标题</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_login</span>(<span class="hljs-params">login</span>):<br>    <span class="hljs-keyword">assert</span> login[<span class="hljs-string">&quot;code&quot;</span>] == <span class="hljs-number">0</span><br><br><span class="hljs-comment"># pytest -vs test_param4.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-5-参数化与装饰器结合"><a href="#4-5-参数化与装饰器结合" class="headerlink" title="4-5 参数化与装饰器结合"></a>4-5 参数化与装饰器结合</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                   <span class="hljs-comment"># test_param5.py</span><br><span class="hljs-keyword">import</span> allure<br><br>info = [<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin1&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12345&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin2&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12346&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;admin3&quot;</span>, <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;12347&quot;</span>&#125;<br>]<br><br><br><span class="hljs-meta">@pytest.fixture()</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">login</span>(<span class="hljs-params">request</span>):<br>    param = request.param<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;The account number is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;username&#x27;</span>]&#125;</span> and the password is: <span class="hljs-subst">&#123;param[<span class="hljs-string">&#x27;pwd&#x27;</span>]&#125;</span>.&quot;</span>)<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;msg&quot;</span>: <span class="hljs-string">&quot;success!&quot;</span>&#125;<br><br><br><span class="hljs-meta">@allure.title(<span class="hljs-params"><span class="hljs-string">&quot;Login use case: &#123;login&#125;.&quot;</span></span>)                       </span><span class="hljs-comment"># 参数化与title动态生成标题，结合fixture</span><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;login&quot;</span>, info, indirect=<span class="hljs-literal">True</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_login</span>(<span class="hljs-params">login</span>):<br>    <span class="hljs-keyword">assert</span> login[<span class="hljs-string">&quot;code&quot;</span>] == <span class="hljs-number">0</span><br><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">info = [</span><br><span class="hljs-string">    (&quot;admin1&quot;, &quot;12345&quot;, &quot;admin1 login success&quot;),</span><br><span class="hljs-string">    (&quot;admin2&quot;, &quot;12346&quot;, &quot;admin2 failed to log in&quot;),</span><br><span class="hljs-string">    (&quot;admin3&quot;, &quot;12347&quot;, &quot;admin3 username does not exist&quot;)</span><br><span class="hljs-string">]</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">@allure.title(&quot;Login use case: &#123;title&#125;.&quot;)                       # 参数化与title动态生成标题，不结合fixture</span><br><span class="hljs-string">@pytest.mark.parametrize(&quot;username, pwd, title&quot;, info)</span><br><span class="hljs-string">def test_login(username, pwd, title):</span><br><span class="hljs-string">    pass</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># pytest -vs test_param5.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-dynamic动态标记"><a href="#5-dynamic动态标记" class="headerlink" title="5 dynamic动态标记"></a>5 dynamic动态标记</h1><ul>
+<li>dynamic动态标记<ul>
+<li><code>allure.dynamic.issue</code>、<code>allure.dynamic.link</code>、<code>allure.dynamic.testcase</code>。</li>
+<li><code>allure.dynamic.story</code>、<code>allure.dynamic.feature</code>、<code>allure.dynamic.description</code>。</li>
+<li><code>allure.dynamic.title</code>、<code>allure.dynamic.severity</code>、<code>allure.dynamic.description_html</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-1-更改标题"><a href="#5-1-更改标题" class="headerlink" title="5-1 更改标题"></a>5-1 更改标题</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_dynamic1.py</span><br><br><br><span class="hljs-meta">@allure.title(<span class="hljs-params"><span class="hljs-string">&quot;Title: Use case will be replaced after successful execution.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_with_dynamic_title_success</span>():<br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">1</span> + <span class="hljs-number">1</span> == <span class="hljs-number">2</span><br>    allure.dynamic.title(<span class="hljs-string">&quot;Success: updated title.&quot;</span>)<br><br><br><span class="hljs-meta">@allure.title(<span class="hljs-params"><span class="hljs-string">&quot;Title: Use case execution will not be replaced after failure.&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_with_dynamic_title_failed</span>():<br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">1</span> + <span class="hljs-number">1</span> == <span class="hljs-number">3</span><br>    allure.dynamic.title(<span class="hljs-string">&quot;Failure: Invalid title.&quot;</span>)             <span class="hljs-comment"># Python执行机制影响，该行代码不会执行</span><br><br><span class="hljs-comment"># pytest -vs test_dynamic1.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-添加描述"><a href="#5-2-添加描述" class="headerlink" title="5-2 添加描述"></a>5-2 添加描述</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_dynamic2.py</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_a</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    Description: The use case will be replaced after successful execution.</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">1</span> + <span class="hljs-number">1</span> == <span class="hljs-number">2</span><br>    allure.dynamic.description(<span class="hljs-string">&quot;Success: updated description.&quot;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_b</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    Description: The use case will not be replaced after a failed execution.</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">1</span> + <span class="hljs-number">1</span> == <span class="hljs-number">3</span><br>    allure.dynamic.description(<span class="hljs-string">&quot;Failure: Invalid description.&quot;</span>)<br><br><span class="hljs-comment"># pytest -vs test_dynamic2.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-3-参数化设置"><a href="#5-3-参数化设置" class="headerlink" title="5-3 参数化设置"></a>5-3 参数化设置</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_dynamic3.py</span><br><span class="hljs-keyword">import</span> pytest<br><br>info = [<br>    [<span class="hljs-string">&quot;admin1&quot;</span>, <span class="hljs-string">&quot;12345&quot;</span>, <span class="hljs-string">&quot;Use case login success.&quot;</span>],             <span class="hljs-comment"># 这里必须是列表，字典顺序会乱</span><br>    [<span class="hljs-string">&quot;admin2&quot;</span>, <span class="hljs-string">&quot;12346&quot;</span>, <span class="hljs-string">&quot;Use case login failed.&quot;</span>],<br>    [<span class="hljs-string">&quot;admin3&quot;</span>, <span class="hljs-string">&quot;12347&quot;</span>, <span class="hljs-string">&quot;Account does not exist.&quot;</span>]<br>]<br><br><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;username, pwd, title&quot;</span>, info</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_login</span>(<span class="hljs-params">username, pwd, title</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    :param username:</span><br><span class="hljs-string">    :param pwd:</span><br><span class="hljs-string">    :param title:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    allure.dynamic.title(title)<br>    allure.dynamic.description(<span class="hljs-string">f&quot;Username: <span class="hljs-subst">&#123;username&#125;</span>, Password: <span class="hljs-subst">&#123;pwd&#125;</span>&quot;</span>)<br><br><span class="hljs-comment"># pytest -vs test_dynamic3.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-4-结合其他特性"><a href="#5-4-结合其他特性" class="headerlink" title="5-4 结合其他特性"></a>5-4 结合其他特性</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> allure                                                   <span class="hljs-comment"># test_dynamic4.py</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_case</span>():<br>    <span class="hljs-keyword">assert</span> <span class="hljs-number">1</span> == <span class="hljs-number">1</span><br>    allure.dynamic.feature(<span class="hljs-string">&quot;Dynamic feature&quot;</span>)<br>    allure.dynamic.story(<span class="hljs-string">&quot;Dynamic story&quot;</span>)<br>    allure.dynamic.severity(allure.severity_level.BLOCKER)<br>    allure.dynamic.link(<span class="hljs-string">&quot;Dynamic link: https://stitch-top.github.io&quot;</span>)<br>    allure.dynamic.issue(<span class="hljs-string">&quot;Dynamic issue: https://docs.qq.com/mind/DSkNVTGVwVUhzYnBt&quot;</span>)<br>    allure.dynamic.testcase(<span class="hljs-string">&quot;Dynamic testcase: https://docs.qq.com/mind/DSnRoQU9kRlNTRm1v&quot;</span>)<br><br><span class="hljs-comment"># pytest -vs test_dynamic4.py --alluredir=./report/xml --clean-alluredir</span><br><span class="hljs-comment"># allure serve report\xml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-pytest-xdist插件"><a href="#6-pytest-xdist插件" class="headerlink" title="6 pytest-xdist插件"></a>6 pytest-xdist插件</h1><ul>
+<li>pytest-xdist插件<ul>
+<li>为了让自动化测试用例可分布式执行，节省时间，引入pytest-xdist插件。</li>
+<li>pytest-xdist属于进程级别的并发，分布式执行测试用例的设计原则如下。<ul>
+<li>用例之间相互独立：保证用例之间没有依赖关系，可以完全独立运行。</li>
+<li>用例没有执行顺序：保证随机顺序的执行测试用例，都可以正常执行。</li>
+<li>用例之间互不影响：保证用例的运行结果不会影响到其他的测试用例。</li>
+</ul>
+</li>
+<li>命令窗口下安装pytest-xdist插件：<code>pip install pytest-xdist</code>。</li>
+<li>原理<ul>
+<li>xdist通过产生一个或多个由master控制的workers来工作，再按master的指示运行用例。</li>
+<li>每个workers负责执行收集到的完整测试用例集，master本身是不执行任何测试用例的。</li>
+</ul>
+</li>
+<li>命令<ul>
+<li>指定CPU的具体个数：<code>pytest -s -n num</code>，<code>-n</code>可以用<code>--numprocesses</code>代替。</li>
+<li>使用与当前计算机CPU内核一样多的进程，速度提升大：<code>pytest -s -n auto</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Yaml"><span class="hljs-string">/:</span>                                                               <span class="hljs-comment"># 项目结构</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">conftest.py</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">test_case.py</span><br>    <span class="hljs-attr">test_module1:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">test_case1.py</span><br>    <span class="hljs-attr">test_module2:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">test_case2.py</span><br>    <span class="hljs-attr">test_module3:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">test_case3.py</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-1-conftest-py"><a href="#6-1-conftest-py" class="headerlink" title="6-1 conftest.py"></a>6-1 conftest.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                   <span class="hljs-comment"># conftest.py</span><br><br><br><span class="hljs-meta">@pytest.fixture(<span class="hljs-params">scope=<span class="hljs-string">&quot;session&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">login</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---start use case---&quot;</span>)<br>    name, pwd = <span class="hljs-string">&quot;admin&quot;</span>, <span class="hljs-string">&quot;12345&quot;</span><br><br>    <span class="hljs-keyword">yield</span> name, pwd<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---exit use case---&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-2-test-case-py"><a href="#6-2-test-case-py" class="headerlink" title="6-2 test_case.py"></a>6-2 test_case.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                    <span class="hljs-comment"># test_case.py</span><br><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep<br><br><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-built_in">list</span>(<span class="hljs-params"><span class="hljs-built_in">range</span>(<span class="hljs-params"><span class="hljs-number">10</span></span>)</span>)</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_index</span>(<span class="hljs-params">login, x</span>):<br>    sleep(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---home use case---&quot;</span>, x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-3-test-case1-py"><a href="#6-3-test-case1-py" class="headerlink" title="6-3 test_case1.py"></a>6-3 test_case1.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                    <span class="hljs-comment"># test_case1.py</span><br><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep<br><br><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-built_in">list</span>(<span class="hljs-params"><span class="hljs-built_in">range</span>(<span class="hljs-params"><span class="hljs-number">10</span></span>)</span>)</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_case1</span>(<span class="hljs-params">x</span>):<br>    sleep(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;module1: test case 1&quot;</span>, x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-4-test-case2-py"><a href="#6-4-test-case2-py" class="headerlink" title="6-4 test_case2.py"></a>6-4 test_case2.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                    <span class="hljs-comment"># test_case2.py</span><br><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep<br><br><br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-built_in">list</span>(<span class="hljs-params"><span class="hljs-built_in">range</span>(<span class="hljs-params"><span class="hljs-number">10</span></span>)</span>)</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_case2</span>(<span class="hljs-params">x</span>):<br>    sleep(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;module2: test case 2&quot;</span>, x)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-5-test-case3-py"><a href="#6-5-test-case3-py" class="headerlink" title="6-5 test_case3.py"></a>6-5 test_case3.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> sleep                                           <span class="hljs-comment"># test_case3.py</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_case3</span>():<br>    sleep(<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;module3: test case 3&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-6-两种执行方式"><a href="#6-6-两种执行方式" class="headerlink" title="6-6 两种执行方式"></a>6-6 两种执行方式</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs Powershell">&gt; pytest                                                        <span class="hljs-comment"># 不使用分布式执行</span><br>=================================== test session starts ===================================<br>...<br>collected <span class="hljs-number">31</span> items<br><br>test_case.py ..........                                         [ <span class="hljs-number">32</span>%]<br>test_module1\test_case1.py ..........                           [ <span class="hljs-number">64</span>%]<br>test_module2\test_case2.py ..........                           [ <span class="hljs-number">96</span>%]<br>test_module3\test_case3.py ..........                           [<span class="hljs-number">100</span>%]<br>=================================== <span class="hljs-number">31</span> passed <span class="hljs-keyword">in</span> <span class="hljs-number">31.43</span>s ===================================<br><br>&gt; pytest <span class="hljs-literal">-s</span> <span class="hljs-literal">-n</span> auto                                             <span class="hljs-comment"># 使用分布式执行</span><br>=================================== test session starts ===================================<br>...<br>gw0 [<span class="hljs-number">31</span>] / gw1 [<span class="hljs-number">31</span>] / gw2 [<span class="hljs-number">31</span>] / gw3 [<span class="hljs-number">31</span>] / gw4 [<span class="hljs-number">31</span>] / gw5 [<span class="hljs-number">31</span>]<br>...............................<br>=================================== <span class="hljs-number">31</span> passed <span class="hljs-keyword">in</span> <span class="hljs-number">7.45</span>s ====================================<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-插件的文件锁问题"><a href="#7-插件的文件锁问题" class="headerlink" title="7 插件的文件锁问题"></a>7 插件的文件锁问题</h1><ul>
+<li>插件的文件锁问题<ul>
+<li>优点<ul>
+<li>xdist插件充分利用机器多核CPU的优势，提高了资源利用率。</li>
+<li>将常用的功能放到fixture，更是提高了代码的复用性和维护性。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>接口自动化时，通常会将接口放到fixture中，并设置<code>scope=session</code>，全局只运行一次。</li>
+<li>此时若使用xdist插件进行分布式执行，<code>scope=session</code>的fixture将无法保证只运行一次。</li>
+</ul>
+</li>
+<li>尽管没有内置支持确保<code>scope=session</code>的fixture只执行一次，但可通过文件锁进行进程间的通信来实现。<ul>
+<li>使用xdist指定n个线程执行用例时，使用文件锁，fixture实际只执行一次。</li>
+<li>其他n-1个进程通过进程间读取共享缓存文件的方式，复用fixture的数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Yaml"><span class="hljs-string">/:</span>                                                               <span class="hljs-comment"># 项目结构</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">conftest.py</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">test_case1.py</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">test_case2.py</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">test_case3.py</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-1-未用文件锁"><a href="#7-1-未用文件锁" class="headerlink" title="7-1 未用文件锁"></a>7-1 未用文件锁</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                    <span class="hljs-comment"># contest.py</span><br><span class="hljs-keyword">import</span> random<br><br><br><span class="hljs-meta">@pytest.fixture(<span class="hljs-params">scope=<span class="hljs-string">&quot;session&quot;</span></span>)                                 </span><span class="hljs-comment"># 未用文件锁</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">xdist_fixture</span>():<br>    data = <span class="hljs-built_in">str</span>(random.random())<br>    <span class="hljs-keyword">return</span> data<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-2-使用文件锁"><a href="#7-2-使用文件锁" class="headerlink" title="7-2 使用文件锁"></a>7-2 使用文件锁</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> os                                                       <span class="hljs-comment"># contest.py</span><br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> pytest<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">from</span> filelock <span class="hljs-keyword">import</span> FileLock<br><br><br><span class="hljs-meta">@pytest.fixture(<span class="hljs-params">scope=<span class="hljs-string">&quot;session&quot;</span></span>)                                </span><span class="hljs-comment"># 使用文件锁</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">xdist_fixture</span>(<span class="hljs-params">tmp_path_factory, worker_id</span>):<br>    <span class="hljs-comment"># 如果是单机运行，则运行这里的代码块【不可删除、修改】</span><br>    <span class="hljs-keyword">if</span> worker_id == <span class="hljs-string">&quot;master&quot;</span>:<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        【自定义代码块】</span><br><span class="hljs-string">        这里写本身要做的操作，例如：登录请求、新增数据、清空数据库历史数据等</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        data = <span class="hljs-built_in">str</span>(random.random())<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Master is executed for the first time, the data is <span class="hljs-subst">&#123;data&#125;</span>.&quot;</span>)<br>        os.environ[<span class="hljs-string">&quot;data&quot;</span>] = data<br>        <span class="hljs-comment"># 如果测试用例有需要，可以返回对应的数据，比如data</span><br>        <span class="hljs-keyword">return</span> data<br><br>    <span class="hljs-comment"># 如果是分布式运行，获取所有子节点共享的临时目录，无需修改【不可删除、修改】</span><br>    root_tmp_dir = tmp_path_factory.getbasetemp().parent<br>    fn = root_tmp_dir / <span class="hljs-string">&quot;data.json&quot;</span>                             <span class="hljs-comment"># 【不可删除、修改】</span><br>    <br>    <span class="hljs-keyword">with</span> FileLock(<span class="hljs-built_in">str</span>(fn) + <span class="hljs-string">&quot;.lock&quot;</span>):                           <span class="hljs-comment"># 【不可删除、修改】</span><br>        <span class="hljs-keyword">if</span> fn.is_file():                                        <span class="hljs-comment"># 【不可删除、修改】</span><br>            <span class="hljs-comment"># 缓存文件中读取数据，像登录操作的话就是data【不可删除、修改】</span><br>            data = json.loads(fn.read_text())<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;The worker reads the cache file and the data is <span class="hljs-subst">&#123;data&#125;</span>.&quot;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            【自定义代码块】</span><br><span class="hljs-string">            这里写本身要做的操作，例如：登录请求、新增数据、清空数据库历史数据等</span><br><span class="hljs-string">            &quot;&quot;&quot;</span><br>            data = <span class="hljs-built_in">str</span>(random.random())<br>            fn.write_text(json.dumps(data))                     <span class="hljs-comment"># 【不可删除、修改】</span><br>            <span class="hljs-comment"># If required by the test case, the corresponding data, such as token, can be returned.</span><br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;The worker reads the cache file and the data is <span class="hljs-subst">&#123;data&#125;</span>.&quot;</span>)<br><br>        <span class="hljs-comment"># 最好将后续需要保留的数据存在某个位置，比如os的环境变量中</span><br>        os.environ[<span class="hljs-string">&quot;data&quot;</span>] = data<br><br>    <span class="hljs-keyword">return</span> data<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-3-test-case1-py"><a href="#7-3-test-case1-py" class="headerlink" title="7-3 test_case1.py"></a>7-3 test_case1.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_case1</span>(<span class="hljs-params">xdist_fixture</span>):                                   <span class="hljs-comment"># test_case1.py</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Data1：<span class="hljs-subst">&#123;xdist_fixture&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-4-test-case2-py"><a href="#7-4-test-case2-py" class="headerlink" title="7-4 test_case2.py"></a>7-4 test_case2.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_case2</span>(<span class="hljs-params">xdist_fixture</span>):                                   <span class="hljs-comment"># test_case2.py</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Data2：<span class="hljs-subst">&#123;xdist_fixture&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-5-test-case3-py"><a href="#7-5-test-case3-py" class="headerlink" title="7-5 test_case3.py"></a>7-5 test_case3.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_case3</span>(<span class="hljs-params">xdist_fixture</span>):                                   <span class="hljs-comment"># test_case3.py</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Data3：<span class="hljs-subst">&#123;xdist_fixture&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-6-执行情况分析"><a href="#7-6-执行情况分析" class="headerlink" title="7-6 执行情况分析"></a>7-6 执行情况分析</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs Powershell">&gt; pytest <span class="hljs-literal">-n</span> <span class="hljs-number">3</span> <span class="hljs-literal">--alluredir</span>=./report/xml <span class="hljs-literal">--clean-alluredir</span>        <span class="hljs-comment"># 未用文件锁的执行情况</span><br>&gt; allure serve report\xml<br>test_case1<span class="hljs-literal">---Data1</span>：<span class="hljs-number">0.8613196731229967</span>                          <span class="hljs-comment"># session的fixture执行了3次</span><br>test_case2<span class="hljs-literal">---Data2</span>：<span class="hljs-number">0.2953396024322359</span><br>test_case3<span class="hljs-literal">---Data3</span>：<span class="hljs-number">0.5252796017515756</span><br><br>&gt; pytest <span class="hljs-literal">-n</span> <span class="hljs-number">3</span> <span class="hljs-literal">--alluredir</span>=./report/xml <span class="hljs-literal">--clean-alluredir</span>        <span class="hljs-comment"># 使用文件锁，xdist分布式执行</span><br>&gt; allure serve report\xml<br>The worker reads the cache file and the <span class="hljs-keyword">data</span> is <span class="hljs-number">0.14799648172518787</span>.<br>Data1：<span class="hljs-number">0.14799648172518787</span><br>The worker reads the cache file and the <span class="hljs-keyword">data</span> is <span class="hljs-number">0.14799648172518787</span>.<br>Data2：<span class="hljs-number">0.14799648172518787</span><br>The worker reads the cache file and the <span class="hljs-keyword">data</span> is <span class="hljs-number">0.14799648172518787</span>.<br>Data3：<span class="hljs-number">0.14799648172518787</span><br><br>&gt; pytest <span class="hljs-literal">--alluredir</span>=./report/xml <span class="hljs-literal">--clean-alluredir</span>             <span class="hljs-comment"># 使用文件锁，不使用分布式执行</span><br>&gt; allure serve report\xml<br>Master is executed <span class="hljs-keyword">for</span> the first time, the <span class="hljs-keyword">data</span> is <span class="hljs-number">0.5299300518971257</span>.<br>Data1：<span class="hljs-number">0.5299300518971257</span><br>Data2：<span class="hljs-number">0.5299300518971257</span><br>Data3：<span class="hljs-number">0.5299300518971257</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="8-重复执行用例插件"><a href="#8-重复执行用例插件" class="headerlink" title="8 重复执行用例插件"></a>8 重复执行用例插件</h1><ul>
+<li>重复执行用例插件<ul>
+<li>pytest-repeat是一个pytest插件，安装命令：<code>pip install pytest-repeat</code>。</li>
+<li>可以重复执行单个测试用例，或多个测试用例，也可以自定义重复执行的次数。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_a</span>():                                                   <span class="hljs-comment"># test_repeat1.py</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---use case a---&quot;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_b</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---use case b---&quot;</span>)<br><br><br><span class="hljs-comment"># pytest -vs --count 3 test_repeat1.py                          # 指定重复运行3次</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">=================================== test session starts ===================================</span><br><span class="hljs-string">...</span><br><span class="hljs-string">collected 6 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_repeat1.py::test_a[1-3] ---use case a---</span><br><span class="hljs-string">PASSED</span><br><span class="hljs-string">test_repeat1.py::test_a[2-3] ---use case a---</span><br><span class="hljs-string">PASSED</span><br><span class="hljs-string">test_repeat1.py::test_a[3-3] ---use case a---</span><br><span class="hljs-string">PASSED</span><br><span class="hljs-string">test_repeat1.py::test_b[1-3] ---use case b---</span><br><span class="hljs-string">PASSED</span><br><span class="hljs-string">test_repeat1.py::test_b[2-3] ---use case b---</span><br><span class="hljs-string">PASSED</span><br><span class="hljs-string">test_repeat1.py::test_b[3-3] ---use case b---</span><br><span class="hljs-string">PASSED</span><br><span class="hljs-string">==================================== warnings summary =====================================</span><br><span class="hljs-string">...DeprecationWarning: Using or importing the ABCs from &#x27;collections&#x27; instead of from </span><br><span class="hljs-string">&#x27;collections.abc&#x27; is deprecated since Python 3.3, and in 3.10 it will stop working</span><br><span class="hljs-string">    return isinstance(x, collections.Callable)</span><br><span class="hljs-string"></span><br><span class="hljs-string">-- Docs: https://docs.pytest.org/en/stable/warnings.html</span><br><span class="hljs-string">=============================== 6 passed, 1 warning in 0.04s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-1-重复直到失败"><a href="#8-1-重复直到失败" class="headerlink" title="8-1 重复直到失败"></a>8-1 重复直到失败</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> random                                                   <span class="hljs-comment"># test_repeat2.py</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_case</span>():                                                <br>    num = random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>)<br>    <span class="hljs-keyword">assert</span> num != <span class="hljs-number">10</span><br><br><br><span class="hljs-comment"># pytest --count 11 -x test_repeat2.py                          # 重复执行11次直到失败停止</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">=================================== test session starts ===================================</span><br><span class="hljs-string">...</span><br><span class="hljs-string">collected 11 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_repeat2.py ......F</span><br><span class="hljs-string">======================================== FAILURES =========================================</span><br><span class="hljs-string">_____________________________________ test_case[7-11] _____________________________________</span><br><span class="hljs-string"></span><br><span class="hljs-string">    def test_case():</span><br><span class="hljs-string">        num = random.randint(1, 11)</span><br><span class="hljs-string">&gt;       assert num != 10</span><br><span class="hljs-string">E       assert 10 != 10</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_repeat2.py:6: AssertionError</span><br><span class="hljs-string">==================================== warnings summary =====================================</span><br><span class="hljs-string">...DeprecationWarning: Using or importing the ABCs from &#x27;collections&#x27; instead of from </span><br><span class="hljs-string">&#x27;collections.abc&#x27; is deprecated since Python 3.3, and in 3.10 it will stop working</span><br><span class="hljs-string">    return isinstance(x, collections.Callable)</span><br><span class="hljs-string"></span><br><span class="hljs-string">-- Docs: https://docs.pytest.org/en/stable/warnings.html</span><br><span class="hljs-string">================================== short test summary info ================================</span><br><span class="hljs-string">FAILED test_repeat2.py::test_case[7-11] - assert 10 != 10</span><br><span class="hljs-string">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><br><span class="hljs-string">=========================== 1 failed, 6 passed, 1 warning in 0.57s ========================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-2-repeat装饰器"><a href="#8-2-repeat装饰器" class="headerlink" title="8-2 repeat装饰器"></a>8-2 repeat装饰器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> pytest                                                   <span class="hljs-comment"># test_repeat3.py</span><br><br><br><span class="hljs-meta">@pytest.mark.repeat(<span class="hljs-params"><span class="hljs-number">3</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_case</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---use case---&quot;</span>)<br><br><br><span class="hljs-comment"># pytest test_repeat3.py</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">=================================== test session starts ===================================</span><br><span class="hljs-string">...</span><br><span class="hljs-string">collected 3 items</span><br><span class="hljs-string"></span><br><span class="hljs-string">test_repeat3.py ...                                             [100%]</span><br><span class="hljs-string">==================================== warnings summary =====================================</span><br><span class="hljs-string">...DeprecationWarning: Using or importing the ABCs from &#x27;collections&#x27; instead of from </span><br><span class="hljs-string">&#x27;collections.abc&#x27; is deprecated since Python 3.3, and in 3.10 it will stop working</span><br><span class="hljs-string">    return isinstance(x, collections.Callable)</span><br><span class="hljs-string"></span><br><span class="hljs-string">-- Docs: https://docs.pytest.org/en/stable/warnings.html</span><br><span class="hljs-string">=============================== 3 passed, 1 warning in 0.12s ==============================</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-3-命令参数说明"><a href="#8-3-命令参数说明" class="headerlink" title="8-3 命令参数说明"></a>8-3 命令参数说明</h2><ul>
+<li>命令参数说明<ul>
+<li><code>--repeat-scope</code>：覆盖默认的用例执行顺序，类似于fixture的scope。</li>
+<li>function：默认，范围针对每个用例重复执行，然后再执行下一个用例。</li>
+<li>class：以类为用例的集合单位，重复执行类里面的用例，再执行下一个用例。</li>
+<li>module：以模块为集合单位，重复执行模块里面的用例，再执行下一个用例。</li>
+<li>session：重复整个测试会话，即所有测试用例都执行一次，然后再执行第二次。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_a</span>():                                                   <span class="hljs-comment"># test_repeat4.py</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---use case a---&quot;</span>)<br>    <br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_b</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---use case b---&quot;</span>)<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestCase1</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_c</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---use case c---&quot;</span>)<br>        <br>        <br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestCase2</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_d</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---use case d---&quot;</span>)<br><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"># pytest -s --count=2 --repeat-scope=class test_repeat4.py      # 重复执行class级别用例</span><br><span class="hljs-string">.---use case a---</span><br><span class="hljs-string">.---use case b---</span><br><span class="hljs-string">.---use case a---</span><br><span class="hljs-string">.---use case b---</span><br><span class="hljs-string">.---use case c---</span><br><span class="hljs-string">.---use case c---</span><br><span class="hljs-string">.---use case d---</span><br><span class="hljs-string">.---use case d---</span><br><span class="hljs-string"></span><br><span class="hljs-string"># pytest -s --count=2 --repeat-scope=module test_repeat4.py     # 重复执行module级别用例</span><br><span class="hljs-string">.---use case a---</span><br><span class="hljs-string">.---use case b---</span><br><span class="hljs-string">.---use case c---</span><br><span class="hljs-string">.---use case d---</span><br><span class="hljs-string">.---use case a---</span><br><span class="hljs-string">.---use case b---</span><br><span class="hljs-string">.---use case c---</span><br><span class="hljs-string">.---use case d---</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96/" class="category-chain-item">自动化</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/Allure/">#Allure</a>
+      
+        <a href="/tags/%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A/">#测试报告</a>
+      
+        <a href="/tags/%E4%BF%A1%E6%81%AF%E6%B3%A8%E8%A7%A3/">#信息注解</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Allure 测试报告</div>
+      <div>https://stitch-top.github.io/2023/05/01/zi-dong-hua/at03-allure/at01-allure-ce-shi-bao-gao/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月1日 21:30:55</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/23/zi-dong-hua/at04-unittest/at01-unittest-ce-shi-kuang-jia/" title="UnitTest 测试框架">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">UnitTest 测试框架</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/03/zi-dong-hua/at02-pytest/at01-pytest-ce-shi-kuang-jia/" title="Pytest 测试框架">
+                        <span class="hidden-mobile">Pytest 测试框架</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"PDfaLoft9OAolB0AmON5AqUb-gzGzoHsz","appKey":"xq13nodBzh8hOliBusHUKDwj","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"monsterid","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"pageSize":13,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+
+    // Qmsg评论推送服务：QQ2338638343 + 邮件zero_021@aliyun.com
+    var title2="msg=Stitch's Blog又有新评论啦！\n"
+    var SCKEY_Qmsg="https://qmsg.zendee.cn/send/ad06ce297bd5d64b5aa08ea55560f7a2"
+    var ValineButton=document.getElementsByClassName("vsubmit vbtn")[0];
+    function send_valine_Qmsg(){
+      var pagename=document.title;
+      var wz=pagename.indexOf('|');
+      var res=pagename.substring(0, wz);
+      var pageurl=document.URL;
+      var ptime=new Date();
+      var vnick=document.getElementsByClassName("vnick vinput")[0].value;
+      var vmail=document.getElementsByClassName("vmail vinput")[0].value;
+      var vlink=document.getElementsByClassName("vlink vinput")[0].value;
+      var veditor=document.getElementsByClassName("veditor vinput")[0].value;
+      var data="昵称："+vnick+"\n邮箱："+vmail+"\n网站地址："+vlink+"\n当前页面："+pagename+"\n评论内容："+veditor+"\n跳转链接："+pageurl+"\n评论时间"+ptime.toLocaleString();
+      var httpRequest = new XMLHttpRequest();       // 第一步：创建需要的对象
+      httpRequest.open('POST', SCKEY_Qmsg, true);   // 第二步：打开连接
+      httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded"); // 设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+      httpRequest.send(title2 + data);              // 发送请求 
+    };
+    
+    document.body.addEventListener('click', function(e) {
+      if(e.target.className.indexOf('vsubmit') === -1) {
+        return;
+      }
+      send_valine_Qmsg();
+    })
+
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="自动化"
+        id="heading-4c65b7cd7d08612ab67d280c05d07a25" role="tab" data-toggle="collapse" href="#collapse-4c65b7cd7d08612ab67d280c05d07a25"
+        aria-expanded="true"
+      >
+        自动化
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-4c65b7cd7d08612ab67d280c05d07a25"
+           role="tabpanel" aria-labelledby="heading-4c65b7cd7d08612ab67d280c05d07a25">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/01/08/zi-dong-hua/at01-selenium/at01-selenium/" title="Selenium"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Selenium</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/03/03/zi-dong-hua/at02-pytest/at01-pytest-ce-shi-kuang-jia/" title="Pytest 测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Pytest 测试框架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/01/zi-dong-hua/at03-allure/at01-allure-ce-shi-bao-gao/" title="Allure 测试报告"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Allure 测试报告</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/23/zi-dong-hua/at04-unittest/at01-unittest-ce-shi-kuang-jia/" title="UnitTest 测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">UnitTest 测试框架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/03/02/zi-dong-hua/at04-unittest/at02-unittest-zi-bao-mock/" title="UnitTest 子包 Mock"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">UnitTest 子包 Mock</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/09/09/zi-dong-hua/at05-playwright/at01-playwright-gong-ju-yi/" title="PlayWright 工具(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PlayWright 工具(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/02/zi-dong-hua/at05-playwright/at02-playwright-gong-ju-er/" title="PlayWright 工具(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PlayWright 工具(二)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/07/16/zi-dong-hua/at06-robot-framework/at01-robot-framework/" title="Robot Framework"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Robot Framework</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/03/19/zi-dong-hua/at07-locust/at01-locust-ce-shi-gong-ju/" title="Locust 测试工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Locust 测试工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/16/zi-dong-hua/at08-cypress/at01-cypress-ce-shi-kuang-jia/" title="Cypress 测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Cypress 测试框架</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2025</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        📈 总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        📊 总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

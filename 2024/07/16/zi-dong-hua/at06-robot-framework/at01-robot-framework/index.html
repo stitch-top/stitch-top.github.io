@@ -1,0 +1,1360 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🍰 基于Python的关键字驱动测试框架，用于验收测试驱动开发(ATDD)、行为驱动开发(BDD)、机器人流程自动化(RPA)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Robot Framework">
+<meta property="og:url" content="https://stitch-top.github.io/2024/07/16/zi-dong-hua/at06-robot-framework/at01-robot-framework/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="🍰 基于Python的关键字驱动测试框架，用于验收测试驱动开发(ATDD)、行为驱动开发(BDD)、机器人流程自动化(RPA)。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/9314065459.jpg">
+<meta property="article:published_time" content="2024-07-16T14:30:30.000Z">
+<meta property="article:modified_time" content="2025-07-16T08:38:07.855Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="关键字">
+<meta property="article:tag" content="分层设计">
+<meta property="article:tag" content="数据驱动">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/9314065459.jpg">
+  
+  
+  
+  <title>Robot Framework - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Robot Framework"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-16 22:30" pubdate>
+          2024年7月16日 22:30:30
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          94 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Robot Framework</h1>
+            
+            <div class="markdown-body">
+              
+              <p>🍰 基于Python的关键字驱动测试框架，用于验收测试驱动开发(ATDD)、行为驱动开发(BDD)、机器人流程自动化(RPA)。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-库安装"><a href="#1-库安装" class="headerlink" title="1 库安装"></a>1 库安装</h1><ul>
+<li>库安装<ul>
+<li>基于Python安装robotframework：<code>pip install robotframework</code>。</li>
+<li>安装robotframework-ride：<code>pip install robotframework-ride</code>。</li>
+<li>安装seleniumlibrary库：<code>pip install robotframework-seleniumlibrary</code>。</li>
+<li>Python3.8版本以上可使用最新版的RobotFramework，否则需下载对应版本。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Bash">&gt; python -V<br>Python 3.9.7<br><br>&gt; pip install robotframework<br>&gt; pip install robotframework-ride<br>&gt; pip install robotframework-seleniumlibrary<br><br>&gt; pip list<br>Pypubsub                           4.0.3<br>robotframework                     7.0.1<br>robotframework-pythonlibcore       4.4.1<br>robotframework-ride                2.0.8.1<br>robotframework-seleniumlibrary     6.5.0<br>wxPython                           4.2.1<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-1-报错分析"><a href="#1-1-报错分析" class="headerlink" title="1-1 报错分析"></a>1-1 报错分析</h2><ul>
+<li>报错分析<ul>
+<li>库安装完成时，桌面可能没有ride.py可执行文件，也搜索不到ride.py文件。</li>
+<li>命令<code>pip show robotframework-ride</code>查找安装路径，打开文件夹定位到该路径下。</li>
+<li>一般位于<code>C:\Users\Admin\AppData\Roaming\Python\Python39\Scripts</code>文件夹中。</li>
+<li>在该文件夹中鼠标右键<code>Git Bash here</code>打开命令窗口，输入<code>python ride.py</code>执行。</li>
+<li>问题定位<ul>
+<li><code>ImportError: DLL load failed while importing _sqlite3</code>：无法找到sqlite3库的动态链接库。</li>
+<li>这里使用的Python环境是Anaconda3(指定了安装路径)，与库的安装路径<code>C:\...\Python39</code>不一致。</li>
+<li>执行ride.py时，位于C盘的robotframework库文件识别不到Anaconda下的sqlite3库(Python自带库)。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs Bash">&gt; pip show robotframework-ride<br>Name: robotframework-ride<br>Version: 2.0.8.1<br>Summary: RIDE :: Robot Framework Test Data Editor<br>Home-page: https://github.com/robotframework/RIDE/<br>Author: Robot Framework Developers<br>Author-email: robotframework@gmail.com<br>License: Apache License 2.0<br>Location: c:\<span class="hljs-built_in">users</span>\admin\appdata\roaming\python\python39\site-packages<br>Requires: psutil, Pygments, PyPubSub, Pywin32, wxPython<br>Required-by:<br><br>&gt; python ride.py<br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;C:\...\site-packages\robotide\__init__.py&quot;</span>, line 71, <span class="hljs-keyword">in</span> main<br>    _run(inpath, not noupdatecheck, debug_console)<br>  File <span class="hljs-string">&quot;C:\...\site-packages\robotide\__init__.py&quot;</span>, line 91, <span class="hljs-keyword">in</span> _run<br>    from robotide.application import RIDE<br>  File <span class="hljs-string">&quot;C:\...\site-packages\robotide\application\__init__.py&quot;</span>, line 16, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    from .application import RIDE<br>  File <span class="hljs-string">&quot;C:\...\site-packages\robotide\application\application.py&quot;</span>, line 20, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    from ..namespace import Namespace<br>  File <span class="hljs-string">&quot;C:\...\site-packages\robotide\namespace\__init__.py&quot;</span>, line 16, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    from .namespace import Namespace<br>  File <span class="hljs-string">&quot;C:\...\site-packages\robotide\namespace\namespace.py&quot;</span>, line 27, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    from ..spec.iteminfo import (TestCaseUserKeywordInfo, ... , UserKeywordInfo,<br>  File <span class="hljs-string">&quot;C:\...\site-packages\robotide\spec\__init__.py&quot;</span>, line 16, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    from .librarydatabase import DATABASE_FILE<br>  File <span class="hljs-string">&quot;C:\...\site-packages\robotide\spec\librarydatabase.py&quot;</span>, line 17, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    import sqlite3<br>  File <span class="hljs-string">&quot;D:\Program\Java\Anaconda3\lib\sqlite3\__init__.py&quot;</span>, line 57, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    from sqlite3.dbapi2 import *<br>  File <span class="hljs-string">&quot;D:\Program\Java\Anaconda3\lib\sqlite3\dbapi2.py&quot;</span>, line 27, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    from _sqlite3 import *<br>ImportError: DLL load failed <span class="hljs-keyword">while</span> importing _sqlite3: 找不到指定的模块。<br><br>Use --<span class="hljs-built_in">help</span> to get usage information.<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-解决方法"><a href="#1-2-解决方法" class="headerlink" title="1-2 解决方法"></a>1-2 解决方法</h2><ul>
+<li>解决方法<ul>
+<li>到系统环境变量PATH中添加<code>...\Anaconda3\Library\bin</code>变量。</li>
+<li>排序一定要在第三方库环境<code>C:\...\Python39\Scripts</code>变量上面。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-Console报错"><a href="#1-3-Console报错" class="headerlink" title="1-3 Console报错"></a>1-3 Console报错</h2><ul>
+<li>Console报错<ul>
+<li>执行测试用例时，在Run运行区会以红色字体显示报错信息，报错信息如下。</li>
+<li>官方给出的回答是：RIDE还未完全支持最近发布的Robot Framework版本7。</li>
+<li>解决方法<ul>
+<li>卸载：<code>pip uninstall robotframework</code>。</li>
+<li>重装：<code>pip install robotframework==6.1.1</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Bash">[ ERROR ] Calling method <span class="hljs-string">&#x27;log_message&#x27;</span> of listener <br><span class="hljs-string">&#x27;D:\Anaconda3\lib\site-packages\robotide\contrib\testrunner\TestRunnerAgent.py&#x27;</span> <br>failed: AttributeError: <span class="hljs-string">&#x27;Output&#x27;</span> object has no attribute <span class="hljs-string">&#x27;_xmllogger&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-界面介绍"><a href="#2-界面介绍" class="headerlink" title="2 界面介绍"></a>2 界面介绍</h1><ul>
+<li>界面介绍<ul>
+<li>执行ride.py文件，或命令窗口定位到该文件目录，执行<code>python ride.py</code>，即可打开RIDE主界面。</li>
+<li>工具栏：点击<img src="/../img/RobotFramework/RobotFramework@001.jpg" srcset="/img/load.gif" lazyload alt="界面介绍-关键字查找">可查找关键字，或快捷键F5查找，点击<img src="/../img/RobotFramework/RobotFramework@002.jpg" srcset="/img/load.gif" lazyload alt="界面介绍-测试用例查找">可查找测试用例，或快捷键F3查找。</li>
+<li>Editor是编辑区，Text Edit是代码格式区，Run是运行区。</li>
+<li>Text Edit区记录的是Settings设置和测试用例文本信息，由RIDE自动生成，不需要用户进行编写。</li>
+<li>Run运行区<ul>
+<li>Execution Profile：选择运行的方式，选项有custom script、pybot、jybot等，默认robot即可。</li>
+<li>Report和Log：报告和日志，运行后才能点击，区别在于报告是结果展示，日志是过程的记录。</li>
+<li>Autosave：若不勾选，修改用例后没保存，执行用例时将提示保存，勾选则在运行时自动保存。</li>
+<li>Pause on failure：关键字执行失败立马暂停。</li>
+<li>Start：运行用例。<ul>
+<li>若该测试套件下的测试用例没有勾选，则默认执行该测试套件下所有的用例。</li>
+<li>若该测试套件下的测试用例勾选了，那么执行该测试套件下勾选的所有用例。</li>
+</ul>
+</li>
+<li>Stop：停止用例。</li>
+<li>Only Run Tests with these Tags：只运行带有标记的测试用例。</li>
+<li>Skip Tests with these Tags：指跳过带有标记的所有测试用例。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/RobotFramework/RobotFramework@003.jpg" srcset="/img/load.gif" lazyload alt="界面介绍-RIDE主界面"></p>
+<h2 id="2-1-Settings部分"><a href="#2-1-Settings部分" class="headerlink" title="2-1 Settings部分"></a>2-1 Settings部分</h2><ul>
+<li>Settings部分<ul>
+<li>项目<ul>
+<li>Documentation：给当前对象写一些文档说明。</li>
+<li>Suite Setup：测试套件启动时，先执行指定的关键字，例如设置等待5秒，即<code>Sleep | 5sec</code>。</li>
+<li>Suite Teardown：测试套件结束时，先执行指定的关键字。</li>
+<li>Test Setup：测试用例启动时，先执行指定的关键字。</li>
+<li>Test Teardown：测试用例结束时，先执行指定的关键字。</li>
+<li>Force Tags：给当前项目及项目下的套件及套件下的每个用例都加上Tag，只能在设置处删除。</li>
+</ul>
+</li>
+<li>套件<ul>
+<li>Documentation、Suite Setup、Suite Teardown、Test Setup、Test Teardown、Force Tags同。</li>
+<li>Test Template：测试模板。<ul>
+<li>可以指定关键字为该测试套件下所有测试用例的模版。</li>
+<li>这样所有的用例只需设置指定关键字的传入参数即可。</li>
+</ul>
+</li>
+<li>Test Timeout：超时时间。<ul>
+<li>设置每一个测试用例的超时时间，超时即失败并停止用例的运行。</li>
+<li>这是为了防止某些情况导致用例一直卡住不动，不停止也不失败。</li>
+</ul>
+</li>
+<li>Test Tags：给当前测试套件及套件下的每个测试用例都加上Tag，只能在设置处删除。</li>
+<li>Default Tags：默认标记，给自身打上Tag，而不会给子集打上Tag(区分Force Tags)。</li>
+</ul>
+</li>
+<li>用例<ul>
+<li>Setup：测试用例启动时，先执行指定的关键字。</li>
+<li>Teardown：测试用例结束时，先执行指定的关键字。</li>
+<li>Timeout：设置当前用例的超时时间，超时则失败并停止运行。</li>
+<li>Template：测试模版，可以指定关键字为当前测试用例的模版。</li>
+<li>Tags：标记当前测试用例，在Run的Tests filters中，将通过Tags来识别是否运行或跳过用例。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-加载外部文件"><a href="#2-2-加载外部文件" class="headerlink" title="2-2 加载外部文件"></a>2-2 加载外部文件</h2><ul>
+<li>加载外部文件<ul>
+<li>Library：加载库，主要是Python目录\Lib\site-packages中的测试库，库字体标红则说明导入失败。</li>
+<li>Resource：加载资源，主要是项目相关的资源文件。</li>
+<li>Variables：加载变量文件，不怎么使用，可以忽略。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-定义内部变量"><a href="#2-3-定义内部变量" class="headerlink" title="2-3 定义内部变量"></a>2-3 定义内部变量</h2><ul>
+<li>定义内部变量<ul>
+<li>Add Scalar：定义变量。</li>
+<li>Add List：定义列表类型变量。</li>
+<li>Add Dict：定义字典类型变量。</li>
+<li>内部变量是Robot Framework自身使用的变量，是在测试执行过程动态生成的，且无法直接修改。</li>
+<li>Add Metadata：定义元数据，即关于测试套件的附加信息，如作者、版本、描述等(非内部变量)。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-测试用例表格"><a href="#2-4-测试用例表格" class="headerlink" title="2-4 测试用例表格"></a>2-4 测试用例表格</h2><ul>
+<li>测试用例表格<ul>
+<li>表格的第一列一般填写的是关键字，关键字来源包括Builtln库、第三方库、自定义库。</li>
+<li>表格的二三四等列一般输入参数，红色代表必填，浅灰代表选填，深灰代表无需填写。</li>
+<li>左侧的Test Suites区域，如果测试套件或测试用例名称左上角带*号，说明文件没保存。</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-常用类库"><a href="#3-常用类库" class="headerlink" title="3 常用类库"></a>3 常用类库</h1><ul>
+<li>常用类库<ul>
+<li>标准库<ul>
+<li>安装位置：Python路径\Lib\site-packages\robot\libraries。</li>
+<li>Builtln(测试库)、Collections(集合库)、Datatime(时间库)。</li>
+<li>使用集合库的关键字没有成功引入时，需在测试套件中添加。</li>
+<li>在测试套件的Editor中，点击Library，直接输入名称，点OK。</li>
+</ul>
+</li>
+<li>扩展库(通过PIP安装)<ul>
+<li>安装位置：Python路径\Lib\site-packages。</li>
+<li>接口自动化：<code>pip install robotframework-requests</code>。</li>
+<li>APP自动化：<code>pip install robotframework-appiumlibrary</code>。</li>
+<li>WEB自动化：<code>pip install robotframework-seleniumlibrary</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-F5查看"><a href="#3-1-F5查看" class="headerlink" title="3-1 F5查看"></a>3-1 F5查看</h2><ul>
+<li>F5查看<ul>
+<li>Name(关键字名称)、Source(关键字的位置)。</li>
+<li>Arguments(传入参数)、Examples(使用示例)。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/RobotFramework/RobotFramework@004.jpg" srcset="/img/load.gif" lazyload alt="常用类库-F5查看"></p>
+<h2 id="3-2-关键字"><a href="#3-2-关键字" class="headerlink" title="3-2 关键字"></a>3-2 关键字</h2><ul>
+<li>关键字<ul>
+<li>代码注释<code>Ctrl + #</code>、取消注释<code>Ctrl + $</code>、撤销操作<code>Ctrl + z</code>、删除整行<code>Ctrl + d</code>。</li>
+<li>关键字补全<code>Ctrl + Shift + 空格</code>，将鼠标放在关键字上按住<code>Ctrl</code>可查看关键字详情。</li>
+<li>常用关键字<ul>
+<li>打印<code>Log Hello world~</code>、获取系统时间<code>$&#123;time&#125; Get Time</code>。</li>
+<li>强制等待3秒<code>sleep 3</code>、设置变量<code>$&#123;num&#125; Set Variable 66</code>。</li>
+<li>字符串拼接：<code>$&#123;str1&#125; Set Variable 今天</code>、<code>$&#123;str2&#125; Set Variable 周末</code>。<ul>
+<li>用变量替换：<code>$&#123;str3&#125; Set Variable $&#123;str1&#125;$&#123;str2&#125;</code>，打印<code>Log $&#123;str3&#125;</code>。</li>
+<li>Catenate关键字：<code>$&#123;str4&#125; Catenate $&#123;str1&#125;$&#123;str2&#125;</code>，打印<code>Log $&#123;str4&#125;</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>集合关键字：在测试套件中点Library导入Collections集合库(标准库)。<ul>
+<li>列表<ul>
+<li>关键字格式1：<code>$&#123;list1&#125; Create List apple lemon mango</code>。</li>
+<li>打印关键字1：<code>Log $&#123;list1&#125;</code>。</li>
+<li>关键字格式2：<code>@&#123;list2&#125; Create List apple peach mango</code>。</li>
+<li>打印关键字2：<code>Log Many @&#123;list2&#125;</code>。</li>
+</ul>
+</li>
+<li>字典<ul>
+<li>格式<code>$&#123;dict&#125; Create Dictionary 苹果=apple 柠檬=lemon</code>、打印<code>Log $&#123;dict&#125;</code>。</li>
+<li>获取字典中所有key值<code>$&#123;keys&#125; Get Dictionary Keys $&#123;dict&#125;</code>、打印<code>Log $&#123;keys&#125;</code>。</li>
+<li>获取所有value值<code>$&#123;values&#125; Get Dictionary Values $&#123;dict&#125;</code>、打印<code>Log $&#123;values&#125;</code>。</li>
+<li>通过key获取value值<code>$&#123;key_value&#125; Get From Dictionary $&#123;dict&#125; 苹果</code>、打印<code>Log $&#123;key_value&#125;</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../img/RobotFramework/RobotFramework@005.jpg" srcset="/img/load.gif" lazyload alt="常用类库-关键字"></p>
+<h2 id="3-3-格式区"><a href="#3-3-格式区" class="headerlink" title="3-3 格式区"></a>3-3 格式区</h2><figure class="highlight plaintext"><figcaption><span>Framework</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs Robot">*** Settings ***<br>Library           Collections<br><br>*** Test Cases ***<br>测试用例<br>    Log    Hello world~<br>    $&#123;time&#125;    Get Time<br>    sleep    3<br>    $&#123;num&#125;    Set Variable    66<br>    $&#123;str1&#125;    Set Variable    今天<br>    $&#123;str2&#125;    Set Variable    周末<br>    $&#123;str3&#125;    Set Variable    $&#123;str1&#125;$&#123;str2&#125;<br>    Log    $&#123;str3&#125;<br>    $&#123;str4&#125;    Catenate    $&#123;str1&#125;$&#123;str2&#125;<br>    Log    $&#123;str4&#125;<br><br>    $&#123;list1&#125;    Create List    apple    lemon    mango<br>    Log    $&#123;list1&#125;<br>    @&#123;list2&#125;    Create List    apple    peach    mango<br>    Log Many    @&#123;list2&#125;<br>    $&#123;dict&#125;    Create Dictionary    苹果=apple    柠檬=lemon<br>    Log    $&#123;dict&#125;<br>    $&#123;keys&#125;    Get Dictionary Keys    $&#123;dict&#125;<br>    Log    $&#123;keys&#125;<br>    $&#123;values&#125;    Get Dictionary Values    $&#123;dict&#125;<br>    Log    $&#123;values&#125;<br>    $&#123;key_value&#125;    Get From Dictionary    $&#123;dict&#125;    苹果<br>    Log    $&#123;key_value&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-调用方法"><a href="#4-调用方法" class="headerlink" title="4 调用方法"></a>4 调用方法</h1><ul>
+<li>调用方法<ul>
+<li>调用方法，需要使用到Evaluate关键字，可以直接调用Python方法关键字。</li>
+<li>也可以调用外部Python文件关键字，通过<code>Import Library</code>导入外部文件。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-1-外部文件"><a href="#4-1-外部文件" class="headerlink" title="4-1 外部文件"></a>4-1 外部文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment"># C:/Users/Admin/Documents/sum.py</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">sum</span>(<span class="hljs-params">a, b</span>):<br>    <span class="hljs-keyword">return</span> a + b<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-测试用例"><a href="#4-2-测试用例" class="headerlink" title="4-2 测试用例"></a>4-2 测试用例</h2><p><img src="/../img/RobotFramework/RobotFramework@006.jpg" srcset="/img/load.gif" lazyload alt="调用方法-测试用例"></p>
+<h2 id="4-3-格式代码"><a href="#4-3-格式代码" class="headerlink" title="4-3 格式代码"></a>4-3 格式代码</h2><figure class="highlight plaintext"><figcaption><span>Framework</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Robot">*** Test Cases ***<br>测试用例<br>    $&#123;num&#125;    Evaluate    random.randint(1, 10)<br>    Log    $&#123;num&#125;<br><br>    Comment    调用外部的Python文件<br>    Import Library    C:/Users/Admin/Documents/sum.py<br>    $&#123;a&#125;    Evaluate    10<br>    $&#123;b&#125;    Evaluate    17<br>    $&#123;total&#125;    sum    $&#123;a&#125;    $&#123;b&#125;<br>    Log    $&#123;total&#125;<br>    $&#123;a_type&#125;    Evaluate    type($&#123;a&#125;)<br>    Log    $&#123;a_type&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-流程控制"><a href="#5-流程控制" class="headerlink" title="5 流程控制"></a>5 流程控制</h1><ul>
+<li>流程控制<ul>
+<li>嵌套if需要创建一个<code>.txt</code>类型的资源文件，然后自定义关键字IF。</li>
+<li>格式：<code>Run Keyword If $&#123;arg&#125;==100	Log	自定义关键字IF嵌套</code>。</li>
+<li>自定义关键字IF完成后，在测试套件中点击Resource导入资源文件。</li>
+<li>最后，在测试用例中调用自定义关键字嵌套IF。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-1-自定义关键字"><a href="#5-1-自定义关键字" class="headerlink" title="5-1 自定义关键字"></a>5-1 自定义关键字</h2><p><img src="/../img/RobotFramework/RobotFramework@007.jpg" srcset="/img/load.gif" lazyload alt="流程控制-自定义关键字"></p>
+<h2 id="5-2-Resource导入"><a href="#5-2-Resource导入" class="headerlink" title="5-2 Resource导入"></a>5-2 Resource导入</h2><p><img src="/../img/RobotFramework/RobotFramework@008.jpg" srcset="/img/load.gif" lazyload alt="流程控制-Resource导入"></p>
+<h2 id="5-3-调用关键字嵌套"><a href="#5-3-调用关键字嵌套" class="headerlink" title="5-3 调用关键字嵌套"></a>5-3 调用关键字嵌套</h2><p><img src="/../img/RobotFramework/RobotFramework@009.jpg" srcset="/img/load.gif" lazyload alt="流程控制-调用关键字嵌套"></p>
+<h2 id="5-4-Text代码格式区"><a href="#5-4-Text代码格式区" class="headerlink" title="5-4 Text代码格式区"></a>5-4 Text代码格式区</h2><figure class="highlight plaintext"><figcaption><span>Framework</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs Robot">*** Settings ***<br>Resource          资源文件.txt<br><br>*** Test Cases ***<br>测试用例<br>    Comment    if...else if...else结构<br>    $&#123;score&#125;    Set Variable    80<br>    Run Keyword If    $&#123;score&#125; &lt; 60    Log    不及格<br>    ...    ELSE IF    $&#123;score&#125; &lt;= 80    Log    一般<br>    ...    ELSE    Log    优秀<br>    Comment    if多条件判断使用and    如果a既不等于b又不等于c    则执行Log 1和Log 0    注意：AND只能大写<br>    Run Keyword If    &#x27;a&#x27;!=&#x27;b&#x27; and &#x27;a&#x27;!=&#x27;c&#x27;    Run Keywords    Log    1<br>    ...    AND    Log    0<br>    Comment    嵌套if<br>    $&#123;score&#125;    Set Variable    100<br>    Run Keyword If    $&#123;score&#125; &lt; 60    Log    不及格<br>    ...    ELSE IF    $&#123;score&#125; &lt;= 80    Log    一般<br>    ...    ELSE    IF    $&#123;score&#125;<br><br>    Comment    for普通循环<br>    FOR    $&#123;value&#125;    IN    apple    lemon    mango<br>    Log    $&#123;value&#125;<br>    END<br>    Comment    for循环容器<br>    @&#123;list&#125;    Create List    peach    mango    apple<br>    FOR    $&#123;value&#125;    IN    @&#123;list&#125;<br>    Log    $&#123;value&#125;<br>    END<br>    Comment    for循环加if<br>    FOR    $&#123;value&#125;    IN RANGE    1    11<br>    Run Keyword If    $&#123;value&#125;==5    Exit For Loop<br>    Log    $&#123;value&#125;<br>    END<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-WebUI应用"><a href="#6-WebUI应用" class="headerlink" title="6 WebUI应用"></a>6 WebUI应用</h1><ul>
+<li>WebUI应用<ul>
+<li>WebUI应用以登录JForum论坛为例，论坛搭建过程可以参看“<a href="https://stitch-top.github.io/2023/11/02/ce-shi-kuang-jia/tf07-playwright-kuang-jia-er/#3-%E9%A1%B5%E9%9D%A2%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B">页面对象模型</a>”。</li>
+<li>Robot Framework使用的浏览器驱动和Selenium是一样的，驱动安装参考“<a href="https://stitch-top.github.io/2023/01/08/ce-shi-kuang-jia/tf01-selenium/#1-%E6%A6%82%E5%BF%B5">Selenium概念</a>”。</li>
+<li>新建项目：File—&gt;New Project—&gt;Name为“Robot Framework”，选择保存路径，类型必须选目录—&gt;OK。<ul>
+<li>Type选择Directory(目录)，则可以创建测试套件。</li>
+<li>Type选择File(文件)，只能创建用例，不利于管理。</li>
+</ul>
+</li>
+<li>项目下创建测试套件：选中项目，鼠标右键—&gt;New Suite，Name为“JForum登录”，类型必选文件—&gt;OK。<ul>
+<li>Type选择Directory(目录)，得再继续创建一个File类型的套件才能创建用例。</li>
+<li>Type选择File(文件)，测试用例只允许在Type为File类型的测试套件下创建。</li>
+<li>测试套件的Editor编辑区，点击Library输入SeleniumLibrary，导入第三方库。</li>
+</ul>
+</li>
+<li>套件下创建测试用例：选中套件(File类型)，鼠标右键—&gt;New Test Case，Name设为“登录论坛”—&gt;OK。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-1-登录论坛"><a href="#6-1-登录论坛" class="headerlink" title="6-1 登录论坛"></a>6-1 登录论坛</h2><p><img src="/../img/RobotFramework/RobotFramework@010.jpg" srcset="/img/load.gif" lazyload alt="WebUI应用-登录论坛"></p>
+<h2 id="6-2-代码格式"><a href="#6-2-代码格式" class="headerlink" title="6-2 代码格式"></a>6-2 代码格式</h2><figure class="highlight plaintext"><figcaption><span>Framework</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs Robot">*** Settings ***<br>Library           SeleniumLibrary<br><br>*** Test Cases ***<br>登录论坛<br>    Comment    打开论坛首页，设置隐式等待<br>    Open Browser    http://127.0.0.1:8080/jforum-2.7.0/forums/list.page    Edge<br>    Set Browser Implicit Wait    10<br><br>    Comment    设置浏览器大小<br>    Sleep    3<br>    Set Window Size    1920    1080<br><br>    Comment    获得窗口大小<br>    Sleep    3<br>    $&#123;width&#125;    $&#123;height&#125;    Get Window Size<br>    Log    $&#123;width&#125;<br>    Log    $&#123;height&#125;<br><br>    Comment    获取标题<br>    $&#123;title&#125;    Get Title<br>    Log    $&#123;title&#125;<br><br>    Comment    点击登录<br>    Click Element    xpath=//*[@id=&quot;login&quot;]<br><br>    Comment    输入账号密码，点击登录按钮<br>    Sleep    3<br>    Input Text    xpath=//*[@id=&quot;loginform&quot;]/table[2]/tbody/tr[2]/td/table/tbody/tr[2]/td[2]/input    admin<br>    Input Text    xpath=//*[@id=&quot;loginform&quot;]/table[2]/tbody/tr[2]/td/table/tbody/tr[3]/td[2]/input    123456<br>    Click Button    xpath=//*[@id=&quot;loginform&quot;]/table[2]/tbody/tr[2]/td/table/tbody/tr[5]/td/input[2]<br><br>    Comment    关闭浏览器<br>    Sleep    3<br>    Close Browser<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-3-其他元素"><a href="#6-3-其他元素" class="headerlink" title="6-3 其他元素"></a>6-3 其他元素</h2><ul>
+<li>其他元素<ul>
+<li>进入嵌套框架<code>Select Frame</code>、跳出框架<code>Unselect Frame</code>、RadioBox单选框<code>Click</code>。</li>
+<li>Option下拉框<ul>
+<li>值定位：<code>Select From List By Value</code>。</li>
+<li>下标定位：<code>Select From List By Index</code>。</li>
+<li>文本定位：<code>Select From List By Label</code>。</li>
+</ul>
+</li>
+<li>CheckBox复选框：判断框体是否存在于页面<code>Page Should Contain Element</code>(断言操作)。<ul>
+<li><code>$&#123;checked&#125;   Get Element Attribute   xpath=//input[@type=&#39;checkbox&#39;]@checked</code></li>
+<li><code>Run Keyword If   &#39;$&#123;checked&#125;&#39; == &#39;true&#39;   Log   复选框被选中</code></li>
+<li><code>Run Keyword If   &#39;$&#123;checked&#125;&#39; == &#39;false&#39; or &#39;$&#123;checked&#125;&#39; == &#39;&#39;   Log   复选框未选中或不存在</code></li>
+</ul>
+</li>
+<li>窗口切换：获取所有句柄<code>$&#123;handles&#125; Get Window Handles</code>、切换窗口<code>Switch Window $&#123;handles[n]&#125;</code>。</li>
+<li>执行Js脚本<code>Execute Javascript</code>、模拟按键<code>Press Keys</code>、文件上传<code>Input text</code>(不用AutoItLibrary库)。</li>
+</ul>
+</li>
+</ul>
+<h1 id="7-项目模块分层"><a href="#7-项目模块分层" class="headerlink" title="7 项目模块分层"></a>7 项目模块分层</h1><ul>
+<li>项目的模块进行分层<ul>
+<li>底层(公共类)：针对元素的通用操作来进行实现，SeleniumLibrary库和其他通用库。</li>
+<li>模块层<ul>
+<li>元素层：针对页面单个元素操作，统一定义为页面元素关键字，给业务层调用。</li>
+<li>业务逻辑层<ul>
+<li>针对页面具体要实现的行为方法，调用元素层的单一操作进行组合。</li>
+<li>定义为单个业务关键字，业务即测试人员最终想要实现的测试用例。</li>
+<li>为了方便后续维护，也为了减少用例编写的步骤冗余，尽量把每个页面单独定义为关键字。</li>
+<li>例如：登录，需要打开首页，再点击登录，就可以把首页的操作，单独定义在首页模块里。</li>
+<li>其他地方需用到首页操作时，直接调用资源文件即可，不用每次都单独写一遍，减少冗余。</li>
+</ul>
+</li>
+<li>测试用例层：调用业务逻辑层的方法，组合实现想要的用例。</li>
+</ul>
+</li>
+<li>设置公共资源变量<ul>
+<li>一些常量可以使用公共变量进行管理<code>New Scalar</code>，例如用户名、密码等。</li>
+<li>使用时，在相应的测试套件中导入资源文件，相应的测试用例中进行调用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96/" class="category-chain-item">自动化</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/%E5%85%B3%E9%94%AE%E5%AD%97/">#关键字</a>
+      
+        <a href="/tags/%E5%88%86%E5%B1%82%E8%AE%BE%E8%AE%A1/">#分层设计</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/">#数据驱动</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Robot Framework</div>
+      <div>https://stitch-top.github.io/2024/07/16/zi-dong-hua/at06-robot-framework/at01-robot-framework/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月16日 22:30:30</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/03/web/web01-javascript/javascript01-js-de-shi-yong/" title="Js 的使用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Js 的使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/06/27/ce-shi-gong-ju/tt01-jmeter/tt02-jmeter-jiao-ben/" title="JMeter 脚本">
+                        <span class="hidden-mobile">JMeter 脚本</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"PDfaLoft9OAolB0AmON5AqUb-gzGzoHsz","appKey":"xq13nodBzh8hOliBusHUKDwj","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"monsterid","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"pageSize":13,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+
+    // Qmsg评论推送服务：QQ2338638343 + 邮件zero_021@aliyun.com
+    var title2="msg=Stitch's Blog又有新评论啦！\n"
+    var SCKEY_Qmsg="https://qmsg.zendee.cn/send/ad06ce297bd5d64b5aa08ea55560f7a2"
+    var ValineButton=document.getElementsByClassName("vsubmit vbtn")[0];
+    function send_valine_Qmsg(){
+      var pagename=document.title;
+      var wz=pagename.indexOf('|');
+      var res=pagename.substring(0, wz);
+      var pageurl=document.URL;
+      var ptime=new Date();
+      var vnick=document.getElementsByClassName("vnick vinput")[0].value;
+      var vmail=document.getElementsByClassName("vmail vinput")[0].value;
+      var vlink=document.getElementsByClassName("vlink vinput")[0].value;
+      var veditor=document.getElementsByClassName("veditor vinput")[0].value;
+      var data="昵称："+vnick+"\n邮箱："+vmail+"\n网站地址："+vlink+"\n当前页面："+pagename+"\n评论内容："+veditor+"\n跳转链接："+pageurl+"\n评论时间"+ptime.toLocaleString();
+      var httpRequest = new XMLHttpRequest();       // 第一步：创建需要的对象
+      httpRequest.open('POST', SCKEY_Qmsg, true);   // 第二步：打开连接
+      httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded"); // 设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+      httpRequest.send(title2 + data);              // 发送请求 
+    };
+    
+    document.body.addEventListener('click', function(e) {
+      if(e.target.className.indexOf('vsubmit') === -1) {
+        return;
+      }
+      send_valine_Qmsg();
+    })
+
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="自动化"
+        id="heading-4c65b7cd7d08612ab67d280c05d07a25" role="tab" data-toggle="collapse" href="#collapse-4c65b7cd7d08612ab67d280c05d07a25"
+        aria-expanded="true"
+      >
+        自动化
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-4c65b7cd7d08612ab67d280c05d07a25"
+           role="tabpanel" aria-labelledby="heading-4c65b7cd7d08612ab67d280c05d07a25">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/01/08/zi-dong-hua/at01-selenium/at01-selenium/" title="Selenium"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Selenium</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/03/03/zi-dong-hua/at02-pytest/at01-pytest-ce-shi-kuang-jia/" title="Pytest 测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Pytest 测试框架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/01/zi-dong-hua/at03-allure/at01-allure-ce-shi-bao-gao/" title="Allure 测试报告"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Allure 测试报告</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/23/zi-dong-hua/at04-unittest/at01-unittest-ce-shi-kuang-jia/" title="UnitTest 测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">UnitTest 测试框架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/03/02/zi-dong-hua/at04-unittest/at02-unittest-zi-bao-mock/" title="UnitTest 子包 Mock"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">UnitTest 子包 Mock</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/09/09/zi-dong-hua/at05-playwright/at01-playwright-gong-ju-yi/" title="PlayWright 工具(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PlayWright 工具(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/02/zi-dong-hua/at05-playwright/at02-playwright-gong-ju-er/" title="PlayWright 工具(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PlayWright 工具(二)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/07/16/zi-dong-hua/at06-robot-framework/at01-robot-framework/" title="Robot Framework"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Robot Framework</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/03/19/zi-dong-hua/at07-locust/at01-locust-ce-shi-gong-ju/" title="Locust 测试工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Locust 测试工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/16/zi-dong-hua/at08-cypress/at01-cypress-ce-shi-kuang-jia/" title="Cypress 测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Cypress 测试框架</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2025</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        📈 总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        📊 总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
