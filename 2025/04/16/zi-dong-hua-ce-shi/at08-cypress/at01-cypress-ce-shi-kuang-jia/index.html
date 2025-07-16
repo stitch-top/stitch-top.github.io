@@ -1,0 +1,1239 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🍰 Cypress是一款开源的基于NodeJS的JavaScript自动化测试框架，专为端到端(E2E)测试设计，用于简化Web应用的测试自动化。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cypress 测试框架">
+<meta property="og:url" content="https://stitch-top.github.io/2025/04/16/zi-dong-hua-ce-shi/at08-cypress/at01-cypress-ce-shi-kuang-jia/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="🍰 Cypress是一款开源的基于NodeJS的JavaScript自动化测试框架，专为端到端(E2E)测试设计，用于简化Web应用的测试自动化。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1744769035.jpg">
+<meta property="article:published_time" content="2025-04-16T07:50:00.000Z">
+<meta property="article:modified_time" content="2025-07-16T03:49:33.197Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Cypress">
+<meta property="article:tag" content="E2E">
+<meta property="article:tag" content="Automation">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1744769035.jpg">
+  
+  
+  
+  <title>Cypress 测试框架 - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Cypress 测试框架"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-16 15:50" pubdate>
+          2025年4月16日 15:50:00
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          125 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Cypress 测试框架</h1>
+            
+            <div class="markdown-body">
+              
+              <p>🍰 Cypress是一款开源的基于NodeJS的JavaScript自动化测试框架，专为端到端(E2E)测试设计，用于简化Web应用的测试自动化。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-Cypress简介"><a href="#1-Cypress简介" class="headerlink" title="1 Cypress简介"></a>1 Cypress简介</h1><ul>
+<li>Cypress简介<ul>
+<li>Cypress官网：<a target="_blank" rel="noopener" href="https://www.cypress.io/">https://www.cypress.io/</a>。</li>
+<li>安装Node.js：<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-Node-js"><a href="#1-1-Node-js" class="headerlink" title="1-1 Node.js"></a>1-1 Node.js</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 安装好Node.js，命令确认是否安装成功</span><br>node <span class="hljs-literal">-v</span><br>v22.<span class="hljs-number">14.0</span><br><br>npm <span class="hljs-literal">-v</span><br><span class="hljs-number">10.9</span>.<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-权限设置"><a href="#1-2-权限设置" class="headerlink" title="1-2 权限设置"></a>1-2 权限设置</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 若使用VSCode或PowerShell进行操作，则需确认权限是否给到</span><br><span class="hljs-comment"># 查看当前命令终端权限</span><br><span class="hljs-built_in">get-executionpolicy</span><br>Restricted<br><br><span class="hljs-comment"># 显示为Restricted，则限制，需授权</span><br><span class="hljs-comment"># 否则使用VSCode或PowerShell操作时，可能报错提示</span><br><span class="hljs-comment"># 无法加载文件...\nodejs\npm.ps1，因为在此系统上禁止运行脚本</span><br><br><span class="hljs-comment"># npm.ps1是npm在PowerShell中运行时的启动脚本</span><br><span class="hljs-comment"># PowerShell的执行策略阻止了npm.ps1脚本的运行</span><br><br><span class="hljs-comment"># 仅对当前会话设置执行策略：推荐，风险最小，每次重启都需执行一次</span><br><span class="hljs-built_in">Set-ExecutionPolicy</span> <span class="hljs-literal">-ExecutionPolicy</span> RemoteSigned <span class="hljs-literal">-Scope</span> <span class="hljs-keyword">Process</span><br><br><span class="hljs-comment"># 为当前用户永久更改执行策略：风险中等</span><br><span class="hljs-built_in">Set-ExecutionPolicy</span> <span class="hljs-literal">-ExecutionPolicy</span> RemoteSigned <span class="hljs-literal">-Scope</span> CurrentUser<br><br><span class="hljs-comment"># 为本地计算机设置执行策略：不推荐，风险较高</span><br><span class="hljs-built_in">Set-ExecutionPolicy</span> <span class="hljs-literal">-ExecutionPolicy</span> RemoteSigned <span class="hljs-literal">-Scope</span> LocalMachine<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3-安装Cypress"><a href="#1-3-安装Cypress" class="headerlink" title="1-3 安装Cypress"></a>1-3 安装Cypress</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 安装Cypress，创建一个新的文件夹，命名为Cypress</span><br>mkdir Cypress<br><br><span class="hljs-comment"># 进入Cypress文件夹</span><br><span class="hljs-built_in">cd</span> Cypress<br><br><span class="hljs-comment"># 快速初始化Node.js项目，生成一个package.json文件</span><br>npm init <span class="hljs-literal">-y</span><br><br>Wrote to ...\Cypress\package.json:<br>&#123;<br>    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;cypress&quot;</span>,<br>    <span class="hljs-string">&quot;version&quot;</span>: <span class="hljs-string">&quot;1.0.0&quot;</span>,<br>    <span class="hljs-string">&quot;main&quot;</span>: <span class="hljs-string">&quot;index.js&quot;</span>,<br>    <span class="hljs-string">&quot;scripts&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;test&quot;</span>: <span class="hljs-string">&quot;echo \&quot;</span>Error: no test specified\<span class="hljs-string">&quot; &amp;&amp; exit 1&quot;</span><br>    &#125;,<br>    <span class="hljs-string">&quot;keywords&quot;</span>: [],<br>    <span class="hljs-string">&quot;author&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>    <span class="hljs-string">&quot;license&quot;</span>: <span class="hljs-string">&quot;ISC&quot;</span>,<br>    <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;&quot;</span><br>&#125;<br><br><span class="hljs-comment"># 安装Cypress及其依赖，--save-dev使Cypress作为dev dependency被安装</span><br>npm install cypress <span class="hljs-literal">--save-dev</span><br><br>added <span class="hljs-number">175</span> packages, and audited <span class="hljs-number">176</span> packages <span class="hljs-keyword">in</span> <span class="hljs-number">3</span>m<br><br><span class="hljs-number">40</span> packages are looking <span class="hljs-keyword">for</span> funding<br>  run `npm fund` <span class="hljs-keyword">for</span> details<br><br>found <span class="hljs-number">0</span> vulnerabilities<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-4-启动Cypress"><a href="#1-4-启动Cypress" class="headerlink" title="1-4 启动Cypress"></a>1-4 启动Cypress</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 命令启动Cypress【完整路径启动】</span><br>./node_modules/.bin/cypress open<br><br>It looks like this is your first time <span class="hljs-keyword">using</span> Cypress: 14.2.1<br>✔  Verified Cypress! C:\Users\...\Cypress\Cache\<span class="hljs-number">14.2</span>.<span class="hljs-number">1</span>\Cypress<br>Opening Cypress...<br>DevTools listening on ws://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">54830</span>/devtools/browser/...<br><br><span class="hljs-comment"># 命令启动Cypress【npm命令启动】</span><br><span class="hljs-comment"># ①将Cypress添加到package.json的scripts中</span><br>&#123;<br>    <span class="hljs-string">&quot;scripts&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;cypress:open&quot;</span>: <span class="hljs-string">&quot;cypress open&quot;</span>,<br>        <span class="hljs-string">&quot;cypress:run&quot;</span>: <span class="hljs-string">&quot;cypress run&quot;</span><br>    &#125;<br>&#125;<br><span class="hljs-comment"># ②然后使用npm命令启动Cypress</span><br>npm run cypress:open<br><br>&gt; cypress@<span class="hljs-number">1.0</span>.<span class="hljs-number">0</span> cypress:open<br>&gt; cypress open<br>DevTools listening on ws://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">55024</span>/devtools/browser/...<br><br><span class="hljs-comment"># 命令启动Cypress【npx命令启动】，npm版本需要高于5.2</span><br>npx cypress open<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-5-配置Cypress"><a href="#1-5-配置Cypress" class="headerlink" title="1-5 配置Cypress"></a>1-5 配置Cypress</h2><ul>
+<li>配置Cypress<ul>
+<li>在“Welcome to Cypress!”界面，选择“E2E Testing”，默认勾选配置并继续。</li>
+<li>选浏览器，这里使用Edge，Start E2E Testing in Edge，弹窗Edge的Cypress主页。</li>
+<li>在Edge的Cypress主页，选择“Scaffold example specs”，生成一些示例测试脚本。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Yaml"><span class="hljs-comment"># Cypress目录结构介绍，可以在VSCode安装Cypress时创建的Cypress文件夹里查看</span><br><span class="hljs-attr">cypress:</span>                <span class="hljs-comment"># 核心目录，包含所有测试相关文件(启动命令后自动生成)</span><br>    <span class="hljs-attr">e2e:</span>                <span class="hljs-comment"># 存放测试用例</span><br>    <span class="hljs-attr">fixtures:</span>           <span class="hljs-comment"># 存储测试用例的外部静态数据</span><br>    <span class="hljs-attr">support:</span>            <span class="hljs-comment"># 存放辅助文件，如命令、配置等</span><br><span class="hljs-attr">node_modules:</span>           <span class="hljs-comment"># 存储Cypress和其他npm依赖项的文件</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">cypress.config.js</span>     <span class="hljs-comment"># 全局配置文件，设置Cypress的运行参数</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">package.json</span>          <span class="hljs-comment"># 定义Cypress相关依赖和运行脚本</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">package-lock.json</span>     <span class="hljs-comment"># 记录项目中所有已安装依赖项的精确版本</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-测试工作原理"><a href="#2-测试工作原理" class="headerlink" title="2 测试工作原理"></a>2 测试工作原理</h1><ul>
+<li>测试工作原理<ul>
+<li>用户与应用交互后，测试脚本向Cypress Runner发送了指令，Cypress Runner与代理服务器通信。</li>
+<li>代理向应用服务器发送请求，应用服务器处理请求并返回响应，Cypress Runner记录快照和视频。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/Cypress/Cypress@001.jpg" srcset="/img/load.gif" lazyload alt="测试工作原理"></p>
+<h1 id="3-编写测试用例"><a href="#3-编写测试用例" class="headerlink" title="3 编写测试用例"></a>3 编写测试用例</h1><ul>
+<li>编写测试用例<ul>
+<li>测试文件存放：&#x2F;cypress&#x2F;e2e&#x2F;目录中，这里新建文件命名为<code>sampleTest.cy.js</code>。</li>
+<li>测试文件类型：JavaScript类型，测试文件后缀名必须是<code>.cy.&#123;js,jsx,ts,tsx&#125;</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;Cypress测试&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;访问网站并验证标题&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">visit</span>(<span class="hljs-string">&quot;https://www.baidu.com/&quot;</span>);<br>        cy.<span class="hljs-title function_">title</span>().<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;include&quot;</span>, <span class="hljs-string">&quot;百度一下&quot;</span>);<br>    &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-运行测试用例"><a href="#4-运行测试用例" class="headerlink" title="4 运行测试用例"></a>4 运行测试用例</h1><ul>
+<li>运行测试用例<ul>
+<li>点击测试文件，图形化界面的Cypress测试运行器将直接运行选中的测试文件并展示结果。</li>
+<li>或命令执行测试文件：<code>npx cypress run --spec &quot;./cypress/e2e/sampleTest.cy.js&quot;</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs Powershell">npx cypress run <span class="hljs-literal">--spec</span> <span class="hljs-string">&quot;./cypress/e2e/sampleTest.cy.js&quot;</span><br><br>DevTools listening on ws://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">53250</span>/devtools/browser/...<br>&gt;<br>=============================================================================<br><br>  (Run Starting)<br><br>  ┌─────────────────────────────────────────────────────────────────────────┐<br>  │ Cypress:        <span class="hljs-number">14.2</span>.<span class="hljs-number">1</span>                                                  │<br>  │ Browser:        Electron <span class="hljs-number">130</span> (headless)                                 │<br>  │ Node Version:   v22.<span class="hljs-number">14.0</span> (...\nodejs\node.exe)                          │<br>  │ Specs:          <span class="hljs-number">1</span> found (sampleTest.cy.js)                              │<br>  │ Searched:       ...\Cypress\cypress\e2e\sampleTest.cy.js                │<br>  └─────────────────────────────────────────────────────────────────────────┘<br><br><br>─────────────────────────────────────────────────────────────────────────────<br>  Running:  sampleTest.cy.js                                        (<span class="hljs-number">1</span> of <span class="hljs-number">1</span>)<br><br>  Cypress测试<br>    √ 访问网站并验证标题 (<span class="hljs-number">1848</span>ms)<br><br>  <span class="hljs-number">1</span> passing (<span class="hljs-number">4</span>s)<br><br>  (Results)<br><br>  ┌─────────────────────────────────────────────────────────────────────────┐<br>  │ Tests:        <span class="hljs-number">1</span>                                                         │<br>  │ Passing:      <span class="hljs-number">1</span>                                                         │<br>  │ Failing:      <span class="hljs-number">0</span>                                                         │<br>  │ Pending:      <span class="hljs-number">0</span>                                                         │<br>  │ Skipped:      <span class="hljs-number">0</span>                                                         │<br>  │ Screenshots:  <span class="hljs-number">0</span>                                                         │<br>  │ Video:        false                                                     │<br>  │ Duration:     <span class="hljs-number">3</span> seconds                                                 │<br>  │ Spec Ran:     sampleTest.cy.js                                          │<br>  └─────────────────────────────────────────────────────────────────────────┘<br><br>=============================================================================<br>  (Run Finished)<br><br>       Spec                       Tests  Passing  Failing  Pending  Skipped  <br>  ┌─────────────────────────────────────────────────────────────────────────┐<br>  │ √  sampleTest.cy.js    <span class="hljs-number">00</span>:<span class="hljs-number">03</span>    <span class="hljs-number">1</span>       <span class="hljs-number">1</span>        -        -        -    │<br>  └─────────────────────────────────────────────────────────────────────────┘<br>    √  All specs passed!   <span class="hljs-number">00</span>:<span class="hljs-number">03</span>    <span class="hljs-number">1</span>       <span class="hljs-number">1</span>        -        -        -  <br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-1-通配符执行"><a href="#4-1-通配符执行" class="headerlink" title="4-1 通配符执行"></a>4-1 通配符执行</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 执行e2e目录下的所有测试文件</span><br>npx cypress run <span class="hljs-literal">--spec</span> <span class="hljs-string">&quot;cypress/e2e/**/*.cy.js&quot;</span><br><br><span class="hljs-comment"># 执行多个特定的测试文件，逗号分隔，注意逗号前后不要带空格</span><br>npx cypress run <span class="hljs-literal">--spec</span> <span class="hljs-string">&quot;cypress/e2e/sampleTest.cy.js,cypress/e2e/1-getting-started/todo.cy.js&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-运行脚本执行"><a href="#4-2-运行脚本执行" class="headerlink" title="4-2 运行脚本执行"></a>4-2 运行脚本执行</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 修改package.json文件配置</span><br>&#123;<br>    <span class="hljs-string">&quot;scripts&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;test&quot;</span>: <span class="hljs-string">&quot;echo \&quot;</span>Error: no test specified\<span class="hljs-string">&quot; &amp;&amp; exit 1&quot;</span>,<br>        <span class="hljs-string">&quot;cypress:open&quot;</span>: <span class="hljs-string">&quot;cypress open&quot;</span>,<br>        <span class="hljs-string">&quot;cypress:run&quot;</span>: <span class="hljs-string">&quot;cypress run&quot;</span>,<br>        <br>        <span class="hljs-string">&quot;cy:run:all&quot;</span>: <span class="hljs-string">&quot;cypress run --spec &#x27;cypress/e2e/**/*.cy.js&#x27;&quot;</span>,<br>        <span class="hljs-string">&quot;cy:run:astart&quot;</span>: <span class="hljs-string">&quot;cypress run --spec &#x27;cypress/e2e/2-advanced-examples/a*.cy.js&#x27;&quot;</span>,<br>        <span class="hljs-string">&quot;cy:run:spectest&quot;</span>: <span class="hljs-string">&quot;cypress run --spec &#x27;cypress/e2e/sampleTest.cy.js&#x27;&quot;</span><br>    &#125;<br>&#125;<br><br><span class="hljs-comment"># 运行所有测试文件</span><br>npm run cy:run:all<br><br><span class="hljs-comment"># 运行“a”开头的测试文件</span><br>npm run cy:run:astart<br><br><span class="hljs-comment"># 运行指定的测试文件</span><br>npm run cy:run:spectest<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-3-默认执行所有"><a href="#4-3-默认执行所有" class="headerlink" title="4-3 默认执行所有"></a>4-3 默认执行所有</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Powershell"><span class="hljs-comment"># 使用cypress.config.js的specPattern默认行为</span><br><span class="hljs-comment"># 不指定--spec选项，则Cypress将运行所有测试文件</span><br>npx cypress run<br><br><span class="hljs-comment"># 添加specPattern值，可用于指定需要执行的测试文件</span><br>const &#123; defineConfig &#125; = require(<span class="hljs-string">&quot;cypress&quot;</span>);<br><br>module.exports = defineConfig(&#123;<br>    e2e: &#123;<br>        <span class="hljs-comment"># 修改该值，再重新执行命令“npx cypress run”</span><br>        specPattern: <span class="hljs-string">&quot;cypress/e2e/sampleTest.cy.js&quot;</span>,<br>        setupNodeEvents(on, config) &#123;<br>            // implement node event listeners here<br>        &#125;,<br>    &#125;,<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-生成测试报告"><a href="#5-生成测试报告" class="headerlink" title="5 生成测试报告"></a>5 生成测试报告</h1><ul>
+<li>生成测试报告<ul>
+<li>JUnit Reporter：适用于将测试结果集成到CI&#x2F;CD系统中，生成JUnit xml标准格式的报告。</li>
+<li>Mochawesome：适用于生成美观并且易于阅读的HTML测试报告，适合手动分析测试结果。</li>
+<li>Cypress-multi-reporters：适用于需要多种格式的报告，例如同时生成HTML和JUnit报告。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-1-JUnit-Reporter"><a href="#5-1-JUnit-Reporter" class="headerlink" title="5-1 JUnit Reporter"></a>5-1 JUnit Reporter</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">// 安装JUnit Reporter报告生成器</span><br>npm install --save-dev mocha-junit-reporter<br><br><span class="hljs-comment">// 配置cypress.config.js文件</span><br><span class="hljs-keyword">const</span> &#123; defineConfig &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;cypress&quot;</span>);<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title function_">defineConfig</span>(&#123;<br>    <span class="hljs-attr">e2e</span>: &#123;<br>        <span class="hljs-title function_">setupNodeEvents</span>(<span class="hljs-params">on, config</span>) &#123;<br>            <span class="hljs-comment">// implement node event listeners here</span><br>        &#125;,<br>        <span class="hljs-attr">reporter</span>: <span class="hljs-string">&quot;mocha-junit-reporter&quot;</span>,<br>        <span class="hljs-attr">reporterOptions</span>: &#123;<br>            <span class="hljs-attr">mochaFile</span>: <span class="hljs-string">&quot;cypress/reports/junit/results-[hash].xml&quot;</span>,<br>            <span class="hljs-attr">toConsole</span>: <span class="hljs-literal">true</span>,<br>        &#125;,<br>    &#125;,<br>&#125;);<br><br><span class="hljs-comment">// 执行命令</span><br>npx cypress run<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-Mochawesome"><a href="#5-2-Mochawesome" class="headerlink" title="5-2 Mochawesome"></a>5-2 Mochawesome</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">// 安装Mochawesome报告生成器</span><br>npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator<br><br><span class="hljs-comment">// 配置cypress.config.js文件</span><br><span class="hljs-keyword">const</span> &#123; defineConfig &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;cypress&quot;</span>);<br><span class="hljs-keyword">const</span> mochawesome = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;mochawesome&quot;</span>);<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title function_">defineConfig</span>(&#123;<br>    <span class="hljs-attr">e2e</span>: &#123;<br>        <span class="hljs-title function_">setupNodeEvents</span>(<span class="hljs-params">on, config</span>) &#123;<br>            <span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;after:spec&quot;</span>, <span class="hljs-function">(<span class="hljs-params">spec, results</span>) =&gt;</span> &#123;<br>                <span class="hljs-keyword">if</span> (results &amp;&amp; results.<span class="hljs-property">video</span>) &#123;<br>                    <span class="hljs-keyword">const</span> hasResults =<br>                        <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(results.<span class="hljs-property">results</span>) &amp;&amp;<br>                        results.<span class="hljs-property">results</span>.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">testResult</span> =&gt;</span> &#123;<br>                            <span class="hljs-keyword">return</span> <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(testResult.<span class="hljs-property">passes</span>) &amp;&amp;<br>                                testResult.<span class="hljs-property">passes</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>;<br>                        &#125;);<br>                    <span class="hljs-keyword">if</span> (!hasResults) &#123;<br>                        fs.<span class="hljs-title function_">unlinkSync</span>(results.<span class="hljs-property">video</span>);<br>                    &#125;<br>                &#125;<br>            &#125;);<br><br>            <span class="hljs-title function_">on</span>(<br>                <span class="hljs-string">&quot;before:browser:launch&quot;</span>,<br>                <span class="hljs-function">(<span class="hljs-params">browser = &#123;&#125;, launchOptions</span>) =&gt;</span> &#123;<br>                    <span class="hljs-keyword">if</span> (<br>                        browser.<span class="hljs-property">name</span> === <span class="hljs-string">&quot;chrome&quot;</span> || browser.<span class="hljs-property">name</span> === <span class="hljs-string">&quot;edge&quot;</span><br>                    ) &#123;<br>                        launchOptions.<span class="hljs-property">args</span>.<span class="hljs-title function_">push</span>(<span class="hljs-string">&quot;--disable-dev-shm-usage&quot;</span>)<br>                    &#125;<br>                    <span class="hljs-keyword">return</span> launchOptions<br>                &#125;<br>            )<br><br>            <span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;after:run&quot;</span>, <span class="hljs-function">(<span class="hljs-params">results</span>) =&gt;</span> &#123;<br>                <span class="hljs-keyword">if</span> (results) &#123;<br>                    <span class="hljs-keyword">const</span> marge = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;mochawesome-merge&quot;</span>)<br>                    <span class="hljs-keyword">const</span> generator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;mochawesome-report-generator&quot;</span>)<br><br>                    <span class="hljs-keyword">return</span> marge.<span class="hljs-title function_">merge</span>(&#123;<br>                        <span class="hljs-attr">files</span>: [<br>                            <span class="hljs-string">&quot;cypress/reports/mochawesome/*.json&quot;</span><br>                        ]<br>                    &#125;).<span class="hljs-title function_">then</span>(<br>                        <span class="hljs-function"><span class="hljs-params">report</span> =&gt;</span> generator.<span class="hljs-title function_">create</span>(<br>                            report,<br>                            &#123;<br>                                <span class="hljs-attr">reportDir</span>: <span class="hljs-string">&quot;cypress/reports/mochawesome/&quot;</span><br>                            &#125;<br>                        )<br>                    )<br>                &#125;<br>            &#125;)<br><br>            <span class="hljs-title function_">on</span>(<span class="hljs-string">&quot;task&quot;</span>, &#123;<br>                <span class="hljs-title function_">log</span>(<span class="hljs-params">message</span>) &#123;<br>                    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(message)<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br>                &#125;,<br>                <span class="hljs-title function_">table</span>(<span class="hljs-params">message</span>) &#123;<br>                    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">table</span>(message)<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span><br>                &#125;,<br>            &#125;)<br>        &#125;,<br>        <span class="hljs-attr">reporter</span>: <span class="hljs-string">&quot;mochawesome&quot;</span>,<br>        <span class="hljs-attr">reporterOptions</span>: &#123;<br>            <span class="hljs-attr">reportDir</span>: <span class="hljs-string">&quot;cypress/reports/mochawesome/&quot;</span>,<br>            <span class="hljs-attr">overwrite</span>: <span class="hljs-literal">false</span>,<br>            <span class="hljs-attr">html</span>: <span class="hljs-literal">true</span>,<br>            <span class="hljs-attr">json</span>: <span class="hljs-literal">true</span>,<br>        &#125;,<br>    &#125;,<br>&#125;);<br><br><span class="hljs-comment">// 执行命令</span><br>npx cypress run<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-3-Cypress-multi-reporters"><a href="#5-3-Cypress-multi-reporters" class="headerlink" title="5-3 Cypress-multi-reporters"></a>5-3 Cypress-multi-reporters</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">// 安装Cypress-multi-reporters报告生成器</span><br>npm install --save-dev cypress-multi-reporters mocha-junit-reporter mochawesome<br><br><span class="hljs-comment">// 配置cypress.config.js文件</span><br><span class="hljs-keyword">const</span> &#123; defineConfig &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;cypress&quot;</span>);<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-title function_">defineConfig</span>(&#123;<br>    <span class="hljs-attr">e2e</span>: &#123;<br>        <span class="hljs-title function_">setupNodeEvents</span>(<span class="hljs-params">on, config</span>) &#123;<br>            <span class="hljs-comment">// implement node event listeners here</span><br>        &#125;,<br>        <span class="hljs-attr">reporter</span>: <span class="hljs-string">&quot;cypress-multi-reporters&quot;</span>,<br>        <span class="hljs-attr">reporterOptions</span>: &#123;<br>            <span class="hljs-attr">reporterEnabled</span>: <span class="hljs-string">&quot;mochawesome, mocha-junit-reporter&quot;</span>,<br>            <span class="hljs-attr">mochawesomeReporterOptions</span>: &#123;<br>                <span class="hljs-attr">reportDir</span>: <span class="hljs-string">&quot;cypress/reports/multi/mochawesome&quot;</span>,<br>                <span class="hljs-attr">overwrite</span>: <span class="hljs-literal">false</span>,<br>                <span class="hljs-attr">html</span>: <span class="hljs-literal">true</span>,<br>                <span class="hljs-attr">json</span>: <span class="hljs-literal">true</span>,<br>            &#125;,<br>            <span class="hljs-attr">mochaJunitReporterReporterOptions</span>: &#123;<br>                <span class="hljs-attr">mochaFile</span>: <span class="hljs-string">&quot;cypress/reports/multi/junit/results-[hash].xml&quot;</span>,<br>            &#125;,<br>        &#125;,<br>    &#125;,<br>&#125;);<br><br><span class="hljs-comment">// 执行命令</span><br>npx cypress run<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-Cypress测试器"><a href="#6-Cypress测试器" class="headerlink" title="6 Cypress测试器"></a>6 Cypress测试器</h1><ul>
+<li>Cypress测试器<ul>
+<li>Cypress测试器中，鼠标移动到用例的任意行并悬停，可回溯到该命令行的执行时状态。</li>
+<li>单击测试用例的任意行，则可将其固定，左侧会显示一个紫高亮的固定图标，方便截图。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/Cypress/Cypress@002.jpg" srcset="/img/load.gif" lazyload alt="Cypress测试器"></p>
+<h2 id="6-1-事件触发"><a href="#6-1-事件触发" class="headerlink" title="6-1 事件触发"></a>6-1 事件触发</h2><ul>
+<li>事件触发<ul>
+<li>在Cypress测试器中，<code>click()</code>动作命令被固定时，右侧界面的type处会显示一个红点。</li>
+<li>红点代表此处有事件触发，底部可选before或after来查看动作命令执行前后的页面区别。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/Cypress/Cypress@003.jpg" srcset="/img/load.gif" lazyload alt="Cypress测试器-事件触发"></p>
+<h2 id="6-2-报错信息"><a href="#6-2-报错信息" class="headerlink" title="6-2 报错信息"></a>6-2 报错信息</h2><ul>
+<li>报错信息<ul>
+<li>执行测试用例时发生错误，Cypress将提供以下信息。</li>
+<li>错误名称：显示错误的类型，例如CypressError、AssertionError等。</li>
+<li>错误信息：显示错误的具体信息，可能还提供修复方法。</li>
+<li>Learn more：点击此项可以打开相关的Cypress文档页面。</li>
+<li>Print to console：点击此项可将完整的错误信息打印到DevTools中。</li>
+<li>View stack trace：查看堆栈轨迹。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/Cypress/Cypress@004.jpg" srcset="/img/load.gif" lazyload alt="Cypress测试器-报错信息"></p>
+<h2 id="6-3-控制台输出"><a href="#6-3-控制台输出" class="headerlink" title="6-3 控制台输出"></a>6-3 控制台输出</h2><ul>
+<li>控制台输出<ul>
+<li>Cypress可以在控制台中提供额外的调试信息，F12打开浏览器的DevTools。</li>
+<li>选中Get选择器命令行将其固定，在DevTools的Console中可看到额外信息。<ul>
+<li>Command：触发的命令。</li>
+<li>Selector：使用的参数。</li>
+<li>Yielded：命令返回的内容。</li>
+<li>Elements：找到的元素数量。</li>
+</ul>
+</li>
+<li>如果返回了多个元素，则可以在DevTools中展开以查看每个元素的具体信息。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/Cypress/Cypress@005.jpg" srcset="/img/load.gif" lazyload alt="Cypress测试器-控制台输出"></p>
+<h1 id="7-Cypress的用法"><a href="#7-Cypress的用法" class="headerlink" title="7 Cypress的用法"></a>7 Cypress的用法</h1><ul>
+<li>Cypress的用法<ul>
+<li>测试构成：Given(设定当前状态)、When(执行某操作)、Then(断言状态变更)。</li>
+<li>Cypress还提供了调试使用的特殊命令，例如：<code>cy.pause()</code>、<code>cy.debug()</code>等。</li>
+<li>Cypress使用链式语法，当涉及页面加载时，等待加载完毕才继续执行后续步骤。<ul>
+<li>单个测试套件<code>describe()</code>可以包含多个测试用例<code>it()</code>。</li>
+<li>单个测试套件<code>describe()</code>可嵌套测试套件<code>describe()</code>。</li>
+<li>单个测试用例<code>it()</code>还能包含多个平行或顺序断言<code>should()</code>。</li>
+</ul>
+</li>
+<li>Cypress记录的页面事件：网络XHR的请求、URL Hash的变更、页面加载、表单提交。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;Cypress的用法&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;测试构成 &amp;&amp; 调试 &amp;&amp; 输出日志&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-comment">// Given：设定</span><br>        cy.<span class="hljs-title function_">visit</span>(<span class="hljs-string">&quot;https://www.baidu.com/&quot;</span>);<br><br>        <span class="hljs-comment">// 输出日志</span><br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;访问百度首页&quot;</span>);<br><br>        <span class="hljs-comment">// 调试：特殊命令</span><br>        <span class="hljs-comment">// cy.debug();</span><br><br>        <span class="hljs-comment">// When：执行</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">click</span>();<br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;点击了搜索框&quot;</span>);<br><br>        <span class="hljs-comment">// 调试：特殊命令</span><br>        cy.<span class="hljs-title function_">pause</span>();<br><br>        <span class="hljs-comment">// Then：断言</span><br>        cy.<span class="hljs-title function_">title</span>().<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;include&quot;</span>, <span class="hljs-string">&quot;百度一下&quot;</span>);<br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;验证页面标题&quot;</span>);<br>    &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-1-context"><a href="#7-1-context" class="headerlink" title="7-1 context()"></a>7-1 context()</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">// context()是describe()的别名，行为方式一致</span><br><span class="hljs-title function_">context</span>(<span class="hljs-string">&quot;Cypress的用法&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;context()&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">visit</span>(<span class="hljs-string">&quot;https://www.baidu.com/&quot;</span>);<br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;访问百度首页&quot;</span>);<br><br>        cy.<span class="hljs-title function_">title</span>().<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;include&quot;</span>, <span class="hljs-string">&quot;百度一下&quot;</span>);<br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;验证页面标题&quot;</span>);<br>    &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-2-钩子函数"><a href="#7-2-钩子函数" class="headerlink" title="7-2 钩子函数"></a>7-2 钩子函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;Cypress的用法&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 在当前测试套件的第一个测试用例中仅调用一次</span><br>    <span class="hljs-title function_">before</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;before()&quot;</span>)<br>    &#125;);<br><br>    <span class="hljs-comment">// 在当前测试套件中的所有测试用例(包括子测试套件)使用前调用</span><br>    <span class="hljs-title function_">beforeEach</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;beforeEach()&quot;</span>)<br>    &#125;);<br><br>    <span class="hljs-comment">// 在当前测试套件中的所有测试用例(包括子测试套件)完成后调用</span><br>    <span class="hljs-title function_">afterEach</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;afterEach()&quot;</span>)<br>    &#125;);<br><br>    <span class="hljs-comment">// 在当前测试套件的最后一个测试用例(包括子测试套件)中仅调用一次</span><br>    <span class="hljs-title function_">after</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;after()&quot;</span>)<br>    &#125;);<br><br>    <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;Hook钩子函数1&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;打印日志1&quot;</span>);<br>    &#125;);<br><br>    <span class="hljs-title function_">context</span>(<span class="hljs-string">&quot;Hook钩子函数2&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;二级测试套件&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>            cy.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;打印日志2&quot;</span>)<br>        &#125;);<br>    &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-3-获取元素"><a href="#7-3-获取元素" class="headerlink" title="7-3 获取元素"></a>7-3 获取元素</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;Cypress的用法&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;获取元素&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">visit</span>(<span class="hljs-string">&quot;https://www.baidu.com/&quot;</span>);<br>        <span class="hljs-comment">// cy.get(selector)：在DOM树中查找selector对应的DOM元素</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>);<br><br>        <span class="hljs-comment">// cy.contains(content)：获取包含指定文本的DOM元素</span><br>        cy.<span class="hljs-title function_">contains</span>(<span class="hljs-string">&quot;#kw&quot;</span>);<br><br>        <span class="hljs-comment">// 辅助方法</span><br>        <span class="hljs-comment">// cy.get(selector).parents()···获取所有父元素</span><br>        <span class="hljs-comment">// cy.get(selector).parent()····获取第一层父元素</span><br>        <span class="hljs-comment">// cy.get(selector).children()··获取所有子元素</span><br>        <span class="hljs-comment">// cy.get(selector).siblings()··获取所有同级元素</span><br>        <span class="hljs-comment">// cy.get(selector).first()·····返回第一个元素</span><br>        <span class="hljs-comment">// cy.get(selector).last()······返回最后一个元素</span><br>        <span class="hljs-comment">// cy.get(selector).nextUntil(selector)</span><br>        <span class="hljs-comment">// 获取后面紧跟的所有同级元素，直到下一个指定的元素</span><br>        <span class="hljs-comment">// cy.get(selector).prevUntil()</span><br>        <span class="hljs-comment">// 获取前面紧跟的所有同级元素，直到下一个指定的元素</span><br>        <span class="hljs-comment">// cy.get(selector).next()······获取下一个同级元素</span><br>        <span class="hljs-comment">// cy.get(selector).prev()······获取上一个同级元素</span><br>        <span class="hljs-comment">// cy.get(selector).nextAll()···获取后面所有的同级元素</span><br>        <span class="hljs-comment">// cy.get(selector).prevAll()···获取前面所有的同级元素</span><br>        <span class="hljs-comment">// cy.get(selector).closest()···获取与选择器匹配的第一个父元素</span><br>        <span class="hljs-comment">// cy.get(selector).eq()········获取特定索引处的元素</span><br>        <span class="hljs-comment">// cy.get(selector).each(($element) =&gt; &#123;&#125;);</span><br>        <span class="hljs-comment">// 遍历数据或类似结构，对象包含length属性即可</span><br><br>        cy.<span class="hljs-title function_">pause</span>();<br>    &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-4-断言方式"><a href="#7-4-断言方式" class="headerlink" title="7-4 断言方式"></a>7-4 断言方式</h2><ul>
+<li>断言方式<ul>
+<li>重试(Retry-ability)是Cypress的核心概念之一，即断言失败后自动重新查询。</li>
+<li>重试有条件限制，当命令可能改变被测应用程序的状态时，该命令将不会重试。</li>
+<li>Cypress仅会重试一些查询DOM的命令，例如：<code>cy.get()</code>、<code>cy.contains()</code>等。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;Cypress的用法&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;断言方式&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">visit</span>(<span class="hljs-string">&quot;https://www.baidu.com/&quot;</span>);<br><br>        <span class="hljs-comment">// 值：have.value，eq()从0开始选择特定索引的元素</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;input&quot;</span>).<span class="hljs-title function_">eq</span>(<span class="hljs-number">5</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;have.value&quot;</span>, <span class="hljs-string">&quot;baidu&quot;</span>);<br><br>        <span class="hljs-comment">// 类：not.have.class，验证表单元素是否没有类“楷书”</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;form&quot;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;not.have.class&quot;</span>, <span class="hljs-string">&quot;楷书&quot;</span>);<br><br>        <span class="hljs-comment">// 长度：have.length，确认搜索输入框的数量是否为1</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;have.length&quot;</span>, <span class="hljs-number">1</span>);<br><br>        <span class="hljs-comment">// 文本内容：not.contain，确认搜索框不包含特定文本</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;not.contain&quot;</span>, <span class="hljs-string">&quot;测试文本&quot;</span>);<br><br>        <span class="hljs-comment">// 元素是否可见：be.visible，确认搜索框可见</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;be.visible&quot;</span>);<br><br>        <span class="hljs-comment">// 元素是否存在：exist，确认搜索框存在</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;exist&quot;</span>);<br><br>        <span class="hljs-comment">// 元素状态：be.checked</span><br>        <span class="hljs-comment">// 确认搜索框未被选中，一般用于checkbox、radio</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;not.be.checked&quot;</span>);<br><br>        <span class="hljs-comment">// css：have.css，确认搜索框的CSS属性包含border属性值</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-string">&quot;have.css&quot;</span>, <span class="hljs-string">&quot;border&quot;</span>);<br><br>        <span class="hljs-comment">// 回调函数</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">should</span>(<span class="hljs-function">(<span class="hljs-params">$input</span>) =&gt;</span> &#123;<br>            <span class="hljs-comment">// 断言长度</span><br>            <span class="hljs-title function_">expect</span>($input).<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">length</span>(<span class="hljs-number">1</span>);<br>            <span class="hljs-comment">// 确认元素是输入框</span><br>            <span class="hljs-title function_">expect</span>($input).<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">prop</span>(<span class="hljs-string">&quot;tagName&quot;</span>, <span class="hljs-string">&quot;INPUT&quot;</span>);<br>            <span class="hljs-comment">// 确认是否具有特定的类</span><br>            <span class="hljs-title function_">expect</span>($input).<span class="hljs-property">to</span>.<span class="hljs-property">have</span>.<span class="hljs-title function_">class</span>(<span class="hljs-string">&quot;s_ipt&quot;</span>);<br>        &#125;);<br>    &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-5-点击事件"><a href="#7-5-点击事件" class="headerlink" title="7-5 点击事件"></a>7-5 点击事件</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;Cypress的用法&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;点击事件&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">visit</span>(<span class="hljs-string">&quot;https://www.baidu.com/&quot;</span>);<br><br>        <span class="hljs-comment">// 单击搜索框并输入文字</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">click</span>().<span class="hljs-title function_">type</span>(<span class="hljs-string">&quot;Cypress&quot;</span>);<br><br>        <span class="hljs-comment">// 双击搜索框</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">dblclick</span>();<br><br>        <span class="hljs-comment">// 右键点击搜索按钮</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#su&quot;</span>).<span class="hljs-title function_">rightclick</span>();<br>    &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-6-页面操作"><a href="#7-6-页面操作" class="headerlink" title="7-6 页面操作"></a>7-6 页面操作</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;Cypress的用法&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;页面操作&quot;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>        cy.<span class="hljs-title function_">visit</span>(<span class="hljs-string">&quot;https://www.baidu.com/&quot;</span>);<br><br>        <span class="hljs-comment">// 在搜索框输入文本</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">type</span>(<span class="hljs-string">&quot;Cypress自动化测试&quot;</span>);<br><br>        <span class="hljs-comment">// 强制聚焦搜索框，即使已默认聚焦</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">focus</span>();<br><br>        <span class="hljs-comment">// 输入后让搜索框失去焦点</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">type</span>(<span class="hljs-string">&quot;文本&quot;</span>).<span class="hljs-title function_">blur</span>();<br><br>        <span class="hljs-comment">// 清空已输入的内容</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#kw&quot;</span>).<span class="hljs-title function_">type</span>(<span class="hljs-string">&quot;文本&quot;</span>).<span class="hljs-title function_">clear</span>();<br><br>        <span class="hljs-comment">// 提交搜索表单</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#form&quot;</span>).<span class="hljs-title function_">submit</span>();<br><br>        <span class="hljs-comment">// 模拟鼠标悬停在“设置”上，可能触发下拉菜单</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;#s-usersetting-top&quot;</span>).<span class="hljs-title function_">trigger</span>(<span class="hljs-string">&quot;mouseover&quot;</span>);<br>        cy.<span class="hljs-title function_">contains</span>(<span class="hljs-string">&quot;搜索设置&quot;</span>).<span class="hljs-title function_">click</span>();<br><br>        <span class="hljs-comment">// 进入高级搜索</span><br>        cy.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;[data-tabid=&#x27;advanced&#x27;]&quot;</span>).<span class="hljs-title function_">click</span>();<br><br>        <span class="hljs-comment">// 滚动到页面底部</span><br>        cy.<span class="hljs-title function_">scrollTo</span>(<span class="hljs-string">&quot;bottom&quot;</span>);<br><br>        <span class="hljs-comment">// 滚动到指定坐标</span><br>        cy.<span class="hljs-title function_">scrollTo</span>(<span class="hljs-number">0</span>, <span class="hljs-number">500</span>);<br>    &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" class="category-chain-item">自动化测试</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JavaScript/">#JavaScript</a>
+      
+        <a href="/tags/Cypress/">#Cypress</a>
+      
+        <a href="/tags/E2E/">#E2E</a>
+      
+        <a href="/tags/Automation/">#Automation</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Cypress 测试框架</div>
+      <div>https://stitch-top.github.io/2025/04/16/zi-dong-hua-ce-shi/at08-cypress/at01-cypress-ce-shi-kuang-jia/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月16日 15:50:00</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/30/java/java01-java-ji-chu-yi/" title="Java 基础(一)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 基础(一)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/19/zi-dong-hua-ce-shi/at07-locust/at01-locust-ce-shi-gong-ju/" title="Locust 测试工具">
+                        <span class="hidden-mobile">Locust 测试工具</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"PDfaLoft9OAolB0AmON5AqUb-gzGzoHsz","appKey":"xq13nodBzh8hOliBusHUKDwj","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"monsterid","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"pageSize":13,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+
+    // Qmsg评论推送服务：QQ2338638343 + 邮件zero_021@aliyun.com
+    var title2="msg=Stitch's Blog又有新评论啦！\n"
+    var SCKEY_Qmsg="https://qmsg.zendee.cn/send/ad06ce297bd5d64b5aa08ea55560f7a2"
+    var ValineButton=document.getElementsByClassName("vsubmit vbtn")[0];
+    function send_valine_Qmsg(){
+      var pagename=document.title;
+      var wz=pagename.indexOf('|');
+      var res=pagename.substring(0, wz);
+      var pageurl=document.URL;
+      var ptime=new Date();
+      var vnick=document.getElementsByClassName("vnick vinput")[0].value;
+      var vmail=document.getElementsByClassName("vmail vinput")[0].value;
+      var vlink=document.getElementsByClassName("vlink vinput")[0].value;
+      var veditor=document.getElementsByClassName("veditor vinput")[0].value;
+      var data="昵称："+vnick+"\n邮箱："+vmail+"\n网站地址："+vlink+"\n当前页面："+pagename+"\n评论内容："+veditor+"\n跳转链接："+pageurl+"\n评论时间"+ptime.toLocaleString();
+      var httpRequest = new XMLHttpRequest();       // 第一步：创建需要的对象
+      httpRequest.open('POST', SCKEY_Qmsg, true);   // 第二步：打开连接
+      httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded"); // 设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+      httpRequest.send(title2 + data);              // 发送请求 
+    };
+    
+    document.body.addEventListener('click', function(e) {
+      if(e.target.className.indexOf('vsubmit') === -1) {
+        return;
+      }
+      send_valine_Qmsg();
+    })
+
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="自动化测试"
+        id="heading-1b6ad7ffbb9999f3678111235e345392" role="tab" data-toggle="collapse" href="#collapse-1b6ad7ffbb9999f3678111235e345392"
+        aria-expanded="true"
+      >
+        自动化测试
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-1b6ad7ffbb9999f3678111235e345392"
+           role="tabpanel" aria-labelledby="heading-1b6ad7ffbb9999f3678111235e345392">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/01/08/zi-dong-hua-ce-shi/at01-selenium/at01-selenium/" title="Selenium"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Selenium</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/03/03/zi-dong-hua-ce-shi/at02-pytest/at01-pytest-ce-shi-kuang-jia/" title="Pytest 测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Pytest 测试框架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/01/zi-dong-hua-ce-shi/at03-allure/at01-allure-ce-shi-bao-gao/" title="Allure 测试报告"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Allure 测试报告</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/23/zi-dong-hua-ce-shi/at04-unittest/at01-unittest-ce-shi-kuang-jia/" title="UnitTest 测试框架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">UnitTest 测试框架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/03/02/zi-dong-hua-ce-shi/at04-unittest/at02-unittest-zi-bao-mock/" title="UnitTest 子包 Mock"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">UnitTest 子包 Mock</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/09/09/zi-dong-hua-ce-shi/at05-playwright/at01-playwright-gong-ju-yi/" title="PlayWright 工具(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PlayWright 工具(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/02/zi-dong-hua-ce-shi/at05-playwright/at02-playwright-gong-ju-er/" title="PlayWright 工具(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">PlayWright 工具(二)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/07/16/zi-dong-hua-ce-shi/at06-robot-framework/at01-robot-framework/" title="Robot Framework"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Robot Framework</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/03/19/zi-dong-hua-ce-shi/at07-locust/at01-locust-ce-shi-gong-ju/" title="Locust 测试工具"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Locust 测试工具</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/16/zi-dong-hua-ce-shi/at08-cypress/at01-cypress-ce-shi-kuang-jia/" title="Cypress 测试框架"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Cypress 测试框架</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2025</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        📈 总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        📊 总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
