@@ -1,0 +1,1369 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🍵 Servlet简称Server Applet(即服务器端小程序)，是一种基于Java技术的Web组件，运行在服务器端。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet(一)">
+<meta property="og:url" content="https://stitch-top.github.io/2025/09/17/java/java05-servlet-yi/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="🍵 Servlet简称Server Applet(即服务器端小程序)，是一种基于Java技术的Web组件，运行在服务器端。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/1420511071.jpg">
+<meta property="article:published_time" content="2025-09-17T13:00:21.000Z">
+<meta property="article:modified_time" content="2025-11-05T09:21:17.095Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="容器">
+<meta property="article:tag" content="注解">
+<meta property="article:tag" content="映射">
+<meta property="article:tag" content="匹配规则">
+<meta property="article:tag" content="load-on-startup">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/1420511071.jpg">
+  
+  
+  
+  <title>Servlet(一) - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Servlet(一)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-17 21:00" pubdate>
+          2025年9月17日 21:00:21
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          30k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          250 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Servlet(一)</h1>
+            
+            <div class="markdown-body">
+              
+              <p>🍵 Servlet简称Server Applet(即服务器端小程序)，是一种基于Java技术的Web组件，运行在服务器端。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-Servlet简介"><a href="#1-Servlet简介" class="headerlink" title="1 Servlet简介"></a>1 Servlet简介</h1><ul>
+<li>Servlet简介<ul>
+<li>Servlet简称 Server Applet (服务器端小程序)，是一种基于Java技术的Web组件。</li>
+<li>运行在服务器端，由Servlet容器管理，用来生成动态的Web内容，具平台独立性。</li>
+<li>使用Servlet，可获取用户通过网页表单提交的数据、访问数据库，创建动态网页。</li>
+<li>严格来说，Servlet只是一套Java Web开发的技术标准，实现其规范需要编写代码。</li>
+<li>目前常见的实现了Servlet规范的产品包括Tomcat、Jetty、Jboss、WebSphere等。</li>
+<li>接口<ul>
+<li>所有的Servlet功能都是通过一个名为Servlet的接口(Interface)向外暴露的。</li>
+<li>Servlet规范提供了2个抽象类，分别是GenericServlet类以及HttpServlet类。</li>
+<li>和GenericServlet类比，HttpServlet类更加方便，实际开发一般继承自后者。</li>
+</ul>
+</li>
+<li>JSP<ul>
+<li>Servlet是第一代Java Web开发技术，那么JSP就是第二代Java Web开发技术。</li>
+<li>JSP允许HTML代码和JSP代码分离，让开发能在HTML文档中直接嵌入JSP代码。</li>
+<li>Servlet是JSP的基础，Servlet虽然不直接面向用户，但是依然是JSP的后台支撑。</li>
+</ul>
+</li>
+<li>Applet<ul>
+<li>Java Servlet是服务端小程序，运行在服务器上，用来开发动态网站。</li>
+<li>Java Applet是客户端小程序，一般被嵌入到HTML页面，运行在支持Java的浏览器中。</li>
+<li>Applet开发步骤繁杂，只能安装在Java虚拟机(JVM)上运行，已被JavaScript全面取代。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-Servlet容器"><a href="#1-1-Servlet容器" class="headerlink" title="1-1 Servlet容器"></a>1-1 Servlet容器</h2><ul>
+<li>Servlet容器<ul>
+<li>Web服务器<ul>
+<li>只有Web服务器，例如Apache、Nginx、IIS等，功能单一，只能部署静态网站。</li>
+<li>想部署动态网站，必须有编程语言运行环境(Runtime)和数据库管理系统的支持。</li>
+<li>解释器是执行脚本语言的核心部件，除此还需垃圾回收器、标准库等辅助性部件。</li>
+</ul>
+</li>
+<li>Web容器<ul>
+<li>JRE只包含了JVM、核心类库和一些辅助性文件，不支持Servlet规范。</li>
+<li>运行Servlet代码还需Servlet容器，实现了Servlet接口的一些基础类。</li>
+<li>Servlet类没有main()函数，不能独立运行，只作为一模块被载入Servlet容器。</li>
+<li>然后由Servlet容器实例化，并调用其中的方法，一动态页面对应一Servlet类。</li>
+<li>当用户请求到达时，Servlet容器就会根据配置文件(web.xml)来决定调用的类。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-Tomcat安装"><a href="#1-2-Tomcat安装" class="headerlink" title="1-2 Tomcat安装"></a>1-2 Tomcat安装</h2><ul>
+<li>Tomcat安装<ul>
+<li>官网：<a target="_blank" rel="noopener" href="http://tomcat.apache.org/">http://tomcat.apache.org/</a>，不同的Java版本需要选择对应的Tomcat版本。</li>
+<li>JDK8对应Tomcat版本9或10，这里选<code>Core 64-bit Windows zip (pgp, sha512)</code>。</li>
+<li>目录<ul>
+<li>conf：用于存放Tomcat配置文件。<ul>
+<li>context.xml：配置数据源等。</li>
+<li>web.xml：设置Tomcat支持的文件类型。</li>
+<li>Catalina文件下可设置默认加载的项目。</li>
+<li>server.xml：配置域名、IP、端口、默认加载的项目等。</li>
+<li>tomcat-users.xml：配置和管理Tomcat的用户以及权限。</li>
+</ul>
+</li>
+<li>lib：用于存放Tomcat需进行加载的jar包。</li>
+<li>temp：存放Tomcat运行时产生的临时文件。</li>
+<li>work：存放应用程序，启动时会来加载该目录下的应用程序。</li>
+<li>logs：存放Tomcat运行时产生的日志文件，Win以log结尾，Linux以out结尾。</li>
+<li>webapps：存放Tomcat运行时的编译文件，清空work目录重启可以清除缓存。</li>
+<li>bin：存放Tomcat命令，<code>.sh</code>结尾的Linux命令，<code>.bat</code>结尾的Windows命令。<ul>
+<li>startup.sh&#x2F;startup.bat：双击启动Tomcat。</li>
+<li>shutdown.sh&#x2F;shutdown.bat：双击关闭Tomcat。</li>
+<li>catalina.sh&#x2F;catalina.bat：用来设置Tomcat内存。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-部署与访问"><a href="#2-部署与访问" class="headerlink" title="2 部署与访问"></a>2 部署与访问</h1><ul>
+<li>部署与访问<ul>
+<li>以Tomcat为例，通常会将JavaWeb应用存放到Tomcat的webapps目录下。</li>
+<li>webapps下的每一个子目录都是一个独立的Web应用，子目录名即应用名。</li>
+<li>Web应用名也叫Web应用的上下文根，通过其访问JavaWeb应用中的资源。</li>
+<li>webapps目录结构<ul>
+<li>\examples：Web应用的根目录，该应用的所有资源存放位置(✔)。</li>
+<li>\examples\WEB-INF：存放web.xml、lib目录、classes目录等(✔)。</li>
+<li>\examples\WEB-INF\lib：存放应用所需的各种jar包。</li>
+<li>\examples\WEB-INF\web.xml：web.xml中包含该应用程序的配置和部署信息(✔)。</li>
+<li>\examples\WEB-INF\classes：存放class或包含class文件的目录，包括Servlet类的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-1-创建方式"><a href="#2-1-创建方式" class="headerlink" title="2-1 创建方式"></a>2-1 创建方式</h2><ul>
+<li>创建方式<ul>
+<li>Servlet规范的最顶层是一个名为javax.servlet.Servlet的接口。</li>
+<li>Servlet又内置了GenericServlet和HttpServlet这两个抽象类。</li>
+<li>三种方式创建Servlet类<ul>
+<li>实现javax.servlet.Servlet接口，重写其全部方法。</li>
+<li>继承javax.servlet.GenericServlet抽象类，重写service()方法。</li>
+<li>继承javax.servlet.http.HttpServlet抽象类，重写doGet()或doPost()方法。</li>
+</ul>
+</li>
+<li>三者关系<ul>
+<li>GenericServlet是实现了Servlet接口的抽象类。</li>
+<li>HttpServlet是GenericServlet的子类，具有其一切特性。</li>
+<li>Servlet程序(MyServlet类)是实现Servlet接口的Java类。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-Servlet"><a href="#1-Servlet" class="headerlink" title="(1) Servlet"></a>(1) Servlet</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.Servlet;<br><span class="hljs-keyword">import</span> javax.servlet.ServletConfig;<br><span class="hljs-keyword">import</span> javax.servlet.ServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.ServletResponse;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet01</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Servlet</span> &#123;<br>	<span class="hljs-comment">// Servlet实例被创建后，调用init()方法进行初始化，该方法只能被调用一次</span><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">(ServletConfig servletConfig)</span> <span class="hljs-keyword">throws</span> ServletException &#123;<br>	&#125;<br><br>	<span class="hljs-comment">// 返回ServletConfig对象，该对象包含了Servlet的初始化参数</span><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> ServletConfig <span class="hljs-title function_">getServletConfig</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>	&#125;<br><br>	<span class="hljs-comment">// 每次请求，都会调用一次service()方法，用于处理客户端请求</span><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">service</span><span class="hljs-params">(ServletRequest servletRequest, ServletResponse servletResponse)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		<span class="hljs-comment">// 设置字符集</span><br>		servletResponse.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>		<span class="hljs-comment">// 使用PrintWriter.write()方法向前台页面输出内容</span><br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> servletResponse.getWriter();<br>		writer.write(<span class="hljs-string">&quot;欢迎访问首页【MyServlet01】！&quot;</span>);<br>		writer.close();<br>	&#125;<br><br>	<span class="hljs-comment">// 返回关于Servlet的信息，例如作者、版本、版权等</span><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">getServletInfo</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>	&#125;<br><br>	<span class="hljs-comment">// 服务器关闭、重启或Servlet对象被移除时，由Servlet容器调用，负责释放对象占用的资源</span><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span> &#123;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-HttpServlet"><a href="#2-HttpServlet" class="headerlink" title="(2) HttpServlet"></a>(2) HttpServlet</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-comment">// HttpServlet继承了GenericServlet抽象类，用于开发基于HTTP协议的Servlet程序</span><br><span class="hljs-comment">// HttpServlet针对HTTP/1.1协议中定义的7种请求方式分别定义了7种方法</span><br><span class="hljs-comment">// 即doGet()、doPost()、doHead()、doPut()、doDelete()、doTrace()、doOptions()</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet02</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>	<span class="hljs-comment">// serialVersionUID是Java序列化机制中的一个版本控制标识符，用于验证类的版本兼容性</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		<span class="hljs-comment">// 使用PrintWriter.write()方法向前台页面输出内容</span><br>		resp.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> resp.getWriter();<br>		writer.write(<span class="hljs-string">&quot;欢迎访问首页【MyServlet02】！&quot;</span>);<br>		writer.close();<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		<span class="hljs-comment">// 使用PrintWriter.write()方法gaifang向前台页面输出内容</span><br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> resp.getWriter();<br>		writer.write(<span class="hljs-string">&quot;欢迎访问首页【MyServlet02】！&quot;</span>);<br>		writer.close();<br>		doGet(req, resp);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-GenericServlet"><a href="#3-GenericServlet" class="headerlink" title="(3) GenericServlet"></a>(3) GenericServlet</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.GenericServlet;<br><span class="hljs-keyword">import</span> javax.servlet.ServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.ServletResponse;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><br><span class="hljs-comment">// GenericServlet实现了Servlet接口并提供除service()外的其他四个方法的实现</span><br><span class="hljs-comment">// 通过继承GenericServlet类创建Servlet，只需重写service()，减少了创建Servlet的工作量</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet03</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">GenericServlet</span> &#123;<br>	<span class="hljs-comment">// serialVersionUID是Java序列化机制中的一个版本控制标识符，用于验证类的版本兼容性</span><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">service</span><span class="hljs-params">(ServletRequest servletRequest, ServletResponse servletResponse)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		<span class="hljs-comment">// 设置字符集</span><br>		servletResponse.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>		<span class="hljs-comment">// 使用PrintWriter.write()方法向前台页面输出内容</span><br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> servletResponse.getWriter();<br>		writer.write(<span class="hljs-string">&quot;欢迎访问首页【MyServlet03】！&quot;</span>);<br>		writer.close();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-部署访问"><a href="#2-2-部署访问" class="headerlink" title="2-2 部署访问"></a>2-2 部署访问</h2><ul>
+<li>部署访问<ul>
+<li>Tomcat中最快部署应用方式，即直接将应用的所有文件复制到&#x2F;webapps目录下。</li>
+<li>默认情况会自动加载webapps目录下的JavaWeb应用，并将其发布到虚拟主机中。</li>
+<li>Tomcat可运行开放式的目录结构(只编译不打包)，也可运行打包文件(War文件)。</li>
+<li>开放式的目录结构：Win+R输入cmd，进入DOS命令窗口，引入javax.servlet包。</li>
+<li>临时环境变量：set classpath&#x3D;E:\Software\Tomcat.9.0.111\lib\servlet-api.jar。</li>
+<li>编译Servlet，MyServletX.java目录：javac -encoding UTF-8 MyServletX.java。</li>
+<li>创建目录结构<ul>
+<li>\servletDemo</li>
+<li>\servletDemo\WEB-INF</li>
+<li>\servletDemo\WEB-INF\web.xml</li>
+<li>\servletDemo\WEB-INF\classes\MyServletX.class</li>
+</ul>
+</li>
+<li>双击startup.bat启动Tomcat，访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServletX">http://localhost:8080/servletDemo/MyServletX</a>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-comment">&lt;!-- 根元素 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee </span></span><br><span class="hljs-string"><span class="hljs-tag">  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;WebApp_ID&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>servletDemo<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span><br>    <br>  	<span class="hljs-comment">&lt;!-- MyServlet01，用于注册Servlet，给Servlet起名 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-comment">&lt;!-- 指定Servlet的名称和完整限定名(包名+类名) --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-comment">&lt;!-- 无包名时，直接写类名 --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 定义Servlet与URL之间的映射 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-comment">&lt;!-- 指定Servlet的名称和虚拟路径 --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- MyServlet02 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet02<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet02<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet02<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet02<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- MyServlet03 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet03<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet03<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet03<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet03<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- MyServlet04，Eclipse快速创建，很奇怪，使用Eclipse访问时只有该地址链接正确 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet04<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet04<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet04<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet04<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-快速创建"><a href="#2-3-快速创建" class="headerlink" title="2-3 快速创建"></a>2-3 快速创建</h2><ul>
+<li>快速创建<ul>
+<li>File -&gt; New -&gt; Dynamic Web Project -&gt; Project name设为servletDemo。</li>
+<li>点击New Runtime新建一个运行时环境 -&gt; 选择本地已安装好的Tomcat版本。</li>
+<li>勾选Creat a new local servlet，创建新的本地服务器 -&gt; 点击Next(下一步)。</li>
+<li>选择Tomcat服务器名称和安装目录并指定JDK版本 -&gt; Finish返回工程对话框。</li>
+<li>勾选Generate web.xml deployment descriptor，生成web.xml文件 -&gt; Finish。</li>
+<li>创建Servlet<ul>
+<li>右键点击项目名 -&gt; New -&gt; Servlet -&gt; 填写包名、类名 -&gt; Next。</li>
+<li>保持默认选项 -&gt; Next -&gt; 根据需要勾选继承的方法 -&gt; 点击Finish。</li>
+<li>修改代码，配置web.xml -&gt; 部署项目并启动服务器Run As -&gt; Run on server。</li>
+<li>弹出的对话框中选一个Tomcat服务器 -&gt; Next -&gt;选要运行的项目 -&gt; Finish。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Servlet implementation class MyServlet</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@WebServlet(&quot;/MyServlet04&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet04</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@see</span> HttpServlet#HttpServlet()</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-title function_">MyServlet04</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-built_in">super</span>();<br>		<span class="hljs-comment">// TODO Auto-generated constructor stub</span><br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@see</span> HttpServlet#doGet(HttpServletRequest request, HttpServletResponse</span><br><span class="hljs-comment">	 *      response)</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		<span class="hljs-comment">// TODO Auto-generated method stub</span><br>		<span class="hljs-comment">// response.getWriter().append(&quot;Served at: &quot;).append(request.getContextPath());</span><br>		<span class="hljs-comment">// 设置响应给页面的格式、字符集</span><br>		response.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> response.getWriter();<br>		writer.write(<span class="hljs-string">&quot;欢迎访问首页【MyServlet04】！&quot;</span>);<br>		writer.close();<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * <span class="hljs-doctag">@see</span> HttpServlet#doPost(HttpServletRequest request, HttpServletResponse</span><br><span class="hljs-comment">	 *      response)</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		<span class="hljs-comment">// TODO Auto-generated method stub</span><br>		doGet(request, response);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-Servlet注解"><a href="#3-Servlet注解" class="headerlink" title="3 Servlet注解"></a>3 Servlet注解</h1><ul>
+<li>Servlet注解<ul>
+<li>Servlet中，web.xml文件十分重要，可以将所有的Servlet配置集中进行管理。</li>
+<li>但若项目中Servlet数量较多，配置将变得冗长，此时可用注解(Annotation)。</li>
+<li>Servlet3.0增加了注解，如：@WebServlet、@WebFilter、@WebLitener等。</li>
+<li>@WebServlet用于将一个类声明为Servlet，该注解会在部署时被容器所处理。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-启用注解支持"><a href="#3-1-启用注解支持" class="headerlink" title="3-1 启用注解支持"></a>3-1 启用注解支持</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee </span></span><br><span class="hljs-string"><span class="hljs-tag">  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;WebApp_ID&quot;</span> <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br>  <span class="hljs-comment">&lt;!-- metadata-complete取值true，表示关闭注解支持 --&gt;</span><br>  <span class="hljs-comment">&lt;!-- metadata-complete取值false，表示启用注解支持，默认属性，不必创建web.xml文件 --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2-WebServlet"><a href="#3-2-WebServlet" class="headerlink" title="3-2 @WebServlet"></a>3-2 @WebServlet</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebInitParam;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-comment">// asyncSupported：是否支持异步处理</span><br><span class="hljs-comment">// name：Servlet的名称</span><br><span class="hljs-comment">// description：Servlet的描述信息</span><br><span class="hljs-comment">// loadOnStartup：数值越小优先级越高，指定Servlet启动顺序的优先级</span><br><span class="hljs-comment">// urlPatterns：必选，用于定义请求路径映射，可以写多个路径，逗号隔开</span><br><span class="hljs-comment">// initParams：定义初始化参数，类似于web.xml中的&lt;init-param&gt;</span><br><span class="hljs-meta">@WebServlet(asyncSupported = true, name = &quot;MyServlet05&quot;, description = &quot;描述信息&quot;, </span><br><span class="hljs-meta">            loadOnStartup = 1, urlPatterns = &#123;</span><br><span class="hljs-meta">		&quot;/MyServlet05&quot; &#125;, initParams = &#123; </span><br><span class="hljs-meta">    @WebInitParam(name = &quot;Java&quot;, value = &quot;Java&quot;, description = &quot;init参数1&quot;),</span><br><span class="hljs-meta">    @WebInitParam(name = &quot;Servlet&quot;, value = &quot;Servlet&quot;, description = &quot;init参数2&quot;) </span><br><span class="hljs-meta">&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet05</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		response.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> response.getWriter();<br>		writer.write(<span class="hljs-string">&quot;欢迎访问首页【MyServlet05】！&quot;</span>);<br>		writer.close();<br>	&#125;<br><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		doGet(request, response);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-与web-xml比较"><a href="#3-3-与web-xml比较" class="headerlink" title="3-3 与web.xml比较"></a>3-3 与web.xml比较</h2><ul>
+<li>与web.xml比较<ul>
+<li>@WebServlet注解配置Servlet，直接类中使用，代码量少，配置简单，适合多人开发，难管理。</li>
+<li>web.xml文件配置Servlet，集中管理配置便于查找和修改，但代码繁琐，可读性不强，不易理解。</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-虚拟路径映射"><a href="#4-虚拟路径映射" class="headerlink" title="4 虚拟路径映射"></a>4 虚拟路径映射</h1><ul>
+<li>虚拟路径映射<ul>
+<li>客户端通过URL地址访问Web服务器中的资源，Servlet程序必须被映射到URL地址上才能被访问。</li>
+<li>很多时候该URL地址和Servlet程序的物理路径(硬盘上的存储位置)并不一致，因此称为虚拟路径。</li>
+<li>Servlet与虚拟路径的对应关系，叫做Servlet虚拟路径映射，可以分为单一映射和多重映射这两类。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-1-单一映射"><a href="#4-1-单一映射" class="headerlink" title="4-1 单一映射"></a>4-1 单一映射</h2><ul>
+<li>单一映射<ul>
+<li>Servelt单一映射指的是一个Servlet只被映射到一个虚拟路径上。</li>
+<li>两种实现方式：使用web.xml或使用@WebServlet实现单一映射。</li>
+<li>web.xml文件中，使用<servlet>和<servlet-mapping>元素实现Servlet单一映射。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee </span></span><br><span class="hljs-string"><span class="hljs-tag">  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;WebApp_ID&quot;</span> <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>servletDemo<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet06<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet06<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet06<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet06<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-value属性"><a href="#1-value属性" class="headerlink" title="(1) value属性"></a>(1) value属性</h3><ul>
+<li>在@WebServlet注解中，一般使用value属性实现Servlet单一映射。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-meta">@WebServlet(&quot;/MyServlet06&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet06</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		response.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> response.getWriter();<br>		writer.write(<span class="hljs-string">&quot;欢迎访问首页【MyServlet06】！&quot;</span>);<br>		writer.close();<br>	&#125;<br><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		doGet(request, response);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-urlPatterns属性"><a href="#2-urlPatterns属性" class="headerlink" title="(2) urlPatterns属性"></a>(2) urlPatterns属性</h3><ul>
+<li>在@WebServlet注解中，也可以使用urlPatterns属性实现Servlet单一映射。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-meta">@WebServlet(urlPatterns = &quot;/MyServlet07&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet07</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		response.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> response.getWriter();<br>		writer.write(<span class="hljs-string">&quot;欢迎访问首页【MyServlet07】！&quot;</span>);<br>		writer.close();<br>	&#125;<br><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		doGet(request, response);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-多重映射"><a href="#4-2-多重映射" class="headerlink" title="4-2 多重映射"></a>4-2 多重映射</h2><ul>
+<li>多重映射<ul>
+<li>Servlet的多重映射是指一个Servlet可被映射到多个虚拟路径上。</li>
+<li>此时，客户端可以通过多个路径来实现对同一个Servlet的访问。</li>
+<li>三种实现方式<ul>
+<li>Servlet2.5前：配置多个<servlet-mapping>元素。</li>
+<li>Servlet2.5后：配置多个<url-pattern>子元素。</li>
+<li>Servlet3.0后：在@WebServlet的urlPatterns属性中使用字符串数组。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-Servlet2-5前"><a href="#1-Servlet2-5前" class="headerlink" title="(1) Servlet2.5前"></a>(1) Servlet2.5前</h3><ul>
+<li>Servlet2.5规范前，<servlet-mapping>元素只允许包含一个<url-pattern>子元素。<ul>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet01">http://localhost:8080/servletDemo/MyServlet01</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet02">http://localhost:8080/servletDemo/MyServlet02</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet03">http://localhost:8080/servletDemo/MyServlet03</a>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee </span></span><br><span class="hljs-string"><span class="hljs-tag">  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;WebApp_ID&quot;</span> <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>servletDemo<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet02<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet03<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-Servlet2-5后"><a href="#2-Servlet2-5后" class="headerlink" title="(2) Servlet2.5后"></a>(2) Servlet2.5后</h3><ul>
+<li>Servlet2.5规范开始，<servlet-mapping>元素可以包含多个<url-pattern>子元素。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee </span></span><br><span class="hljs-string"><span class="hljs-tag">  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;WebApp_ID&quot;</span> <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>servletDemo<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet01<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet02<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet03<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-Servlet3-0后"><a href="#3-Servlet3-0后" class="headerlink" title="(3) Servlet3.0后"></a>(3) Servlet3.0后</h3><ul>
+<li>Servlet3.0增加了对@WebServlet注解的支持，可使用urlPatterns属性。</li>
+<li>以字符串数组的形式指定一组映射规则，用其来实现Servlet的多重映射。<ul>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet08">http://localhost:8080/servletDemo/MyServlet08</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet09">http://localhost:8080/servletDemo/MyServlet09</a>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-meta">@WebServlet(urlPatterns = &#123; &quot;/MyServlet08&quot;, &quot;/MyServlet09&quot; &#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet08</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">initCount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">httpCount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">destoryCount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span> &#123;<br>		destoryCount++;<br>		<span class="hljs-built_in">super</span>.destroy();<br>		<span class="hljs-comment">// 向控制台输出destory方法被调用次数</span><br>		System.out.println(<span class="hljs-string">&quot;*****destroy方法：&quot;</span> + destoryCount + <span class="hljs-string">&quot;*****&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> ServletException &#123;<br>		initCount++;<br>		<span class="hljs-built_in">super</span>.init();<br>		<span class="hljs-comment">// 向控制台输出init方法被调用次数</span><br>		System.out.println(<span class="hljs-string">&quot;init方法：&quot;</span> + initCount);<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <br>            <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		httpCount++;<br>		<span class="hljs-comment">// 控制台输出doGet方法次数</span><br>		System.out.println(<span class="hljs-string">&quot;doGet方法：&quot;</span> + httpCount);<br>		<span class="hljs-comment">// 设置返回页面格式与字符集</span><br>		resp.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> resp.getWriter();<br>		<span class="hljs-comment">// 向页面输出</span><br>		writer.write(<br>            <span class="hljs-string">&quot;初始次数:&quot;</span> + initCount + <span class="hljs-string">&quot;&lt;br/&gt;&quot;</span> + <span class="hljs-string">&quot;请求次数:&quot;</span> + <br>            httpCount + <span class="hljs-string">&quot;&lt;br/&gt;&quot;</span> + <span class="hljs-string">&quot;销毁次数:&quot;</span> + destoryCount<br>        );<br>		writer.close();<br>	&#125;<br><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span><br>			<span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-路径匹配规则"><a href="#5-路径匹配规则" class="headerlink" title="5 路径匹配规则"></a>5 路径匹配规则</h1><ul>
+<li>路径匹配规则<ul>
+<li>web.xml优先注解次之，xml没覆盖到的路径才轮到注解处理。</li>
+<li>完全路径：以<code>/</code>开始，不能包含通配符<code>*</code>，必须完全匹配。</li>
+<li>目录匹配：以<code>/</code>开头并以<code>/*</code>结尾的字符串，用于路径匹配。</li>
+<li>扩展名匹配：以通配符<code>*.</code>开头的字符串，用于扩展名匹配。</li>
+<li>缺省匹配(默认匹配)：映射路径为<code>/</code>。<ul>
+<li>该Servlet为当前应用的默认Servlet。</li>
+<li>默认处理无法匹配到虚拟路径的请求。</li>
+</ul>
+</li>
+<li>注意：目录匹配和扩展名匹配无法混合使用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-1-匹配优先级"><a href="#5-1-匹配优先级" class="headerlink" title="5-1 匹配优先级"></a>5-1 匹配优先级</h2><ul>
+<li>匹配优先级<ul>
+<li>Servlet容器会从优先级高的虚拟路径开始匹配。</li>
+<li>成功后立刻将请求交给相应的Servlet进行处理，不再关注其他匹配。</li>
+<li>全路径匹配(精确匹配)&gt;目录匹配&gt;扩展名匹配&gt;缺省匹配(默认匹配)。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-创建类"><a href="#1-创建类" class="headerlink" title="(1) 创建类"></a>(1) 创建类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-comment">// 创建名为MyServlet10的Servlet类</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet10</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <br>            <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		resp.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>		<span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> resp.getWriter();<br>		<span class="hljs-comment">// 向页面输出</span><br>		writer.write(<span class="hljs-string">&quot;本次访问的Servlet是:&quot;</span> + <span class="hljs-built_in">this</span>.getServletName());<br>		writer.close();<br>	&#125;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <br>            <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>		doGet(req, resp);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-web-xml"><a href="#2-web-xml" class="headerlink" title="(2) web.xml"></a>(2) web.xml</h3><ul>
+<li>web.xml文件配置如下，启动Tomcat应用，并访问链接。<ul>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/hello">http://localhost:8080/servletDemo/hello</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/abc/my/login">http://localhost:8080/servletDemo/abc/my/login</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/abc/index.do">http://localhost:8080/servletDemo/abc/index.do</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/hello/index.do">http://localhost:8080/servletDemo/hello/index.do</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/hello/pay.html">http://localhost:8080/servletDemo/hello/pay.html</a>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee </span></span><br><span class="hljs-string"><span class="hljs-tag">  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;WebApp_ID&quot;</span> <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>servletDemo<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span><br><br>  	<span class="hljs-comment">&lt;!-- 同一个类MyServlet10，不同的servlet --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet11<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet12<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet13<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet14<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet15<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br>  	<span class="hljs-comment">&lt;!-- 完全路径匹配(精确匹配) --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet11<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/hello<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 目录匹配 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet12<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/abc/my/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 目录匹配 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet13<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/abc/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 扩展名匹配 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet14<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>*.do<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 缺省匹配 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet15<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-缺省Servlet"><a href="#5-2-缺省Servlet" class="headerlink" title="5-2 缺省Servlet"></a>5-2 缺省Servlet</h2><ul>
+<li>缺省Servlet<ul>
+<li>Tomcat目录的&#x2F;conf&#x2F;web.xml文件注册了一个DefaultServlet类的Servlet，并设为缺省Servlet。</li>
+<li>当客户端访问Tomcat服务器中某个静态HTML文件或图片时，DefaultServlet将判断其是否存在。</li>
+<li>如果存在，则Tomcat服务器将数据以流的形式返回给客户端，如果不存在，则报告一个404错误。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-web-xml"><a href="#1-web-xml" class="headerlink" title="(1) web.xml"></a>(1) web.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>org.apache.catalina.servlets.DefaultServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>debug<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>listings<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-缺省匹配"><a href="#2-缺省匹配" class="headerlink" title="(2) 缺省匹配"></a>(2) 缺省匹配</h3><ul>
+<li>删除servletDemo应用中xml的缺省匹配，并在webapp目录添加baidu.png。</li>
+<li>重启Tomcat，访问地址：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/baidu.png">http://localhost:8080/servletDemo/baidu.png</a>。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee </span></span><br><span class="hljs-string"><span class="hljs-tag">  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;WebApp_ID&quot;</span> <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>servletDemo<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span><br><br>  	<span class="hljs-comment">&lt;!-- 同一个类MyServlet10，不同的servlet --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet11<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet12<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet13<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet14<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet15<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet10<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br>  	<span class="hljs-comment">&lt;!-- 完全路径匹配(精确匹配) --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet11<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/hello<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 目录匹配 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet12<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/abc/my/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 目录匹配 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet13<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/abc/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 扩展名匹配 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet14<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>*.do<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 缺省匹配 --&gt;</span><br>    <span class="hljs-comment">&lt;!-- </span><br><span class="hljs-comment">    &lt;servlet-mapping&gt;</span><br><span class="hljs-comment">        &lt;servlet-name&gt;MyServlet15&lt;/servlet-name&gt;</span><br><span class="hljs-comment">        &lt;url-pattern&gt;/&lt;/url-pattern&gt;</span><br><span class="hljs-comment">    &lt;/servlet-mapping&gt;</span><br><span class="hljs-comment">     --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-load-on-startup"><a href="#6-load-on-startup" class="headerlink" title="6 load-on-startup"></a>6 load-on-startup</h1><ul>
+<li>load-on-startup<ul>
+<li>load-on-startup是web.xml配置文件中的一个节点，是servlet元素的子元素。</li>
+<li>标记Servlet容器启动时是否初始化当前Servlet，及当前Servlet的初始化顺序。</li>
+<li>元素取值规则<ul>
+<li>必须是一个整数，当值小于0或未指定时，容器在该Servlet被首次请求时才会被加载。</li>
+<li>当值大于或等于0时，容器在启动时就加载并初始化该Servlet，取值越小优先级越高。</li>
+<li>当取值相同时，容器会自行选择顺序并进行加载。</li>
+</ul>
+</li>
+<li>@WebServlet的loadOnStartup属性与web.xml文件中的load-on-startup元素取值规则相同。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-1-创建类"><a href="#6-1-创建类" class="headerlink" title="6-1 创建类"></a>6-1 创建类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyServlet16</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HttpServlet</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <br>            <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>        resp.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br>        <span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> resp.getWriter();<br>        <span class="hljs-comment">// 向页面输出</span><br>        writer.write(<span class="hljs-string">&quot;本次访问的Servlet是:&quot;</span> + <span class="hljs-built_in">this</span>.getServletName());<br>        writer.close();<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <br>            <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>        doGet(req, resp);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-built_in">this</span>.getServletName() + <span class="hljs-string">&quot;：销毁&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> ServletException &#123;<br>        System.out.println(<span class="hljs-built_in">this</span>.getServletName() + <span class="hljs-string">&quot;：初始化完成&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-2-web-xml"><a href="#6-2-web-xml" class="headerlink" title="6-2 web.xml"></a>6-2 web.xml</h2><ul>
+<li>web.xml<ul>
+<li>启动Tomcat服务，分别访问以下地址。<ul>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet16">http://localhost:8080/servletDemo/MyServlet16</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet17">http://localhost:8080/servletDemo/MyServlet17</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet18">http://localhost:8080/servletDemo/MyServlet18</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet19">http://localhost:8080/servletDemo/MyServlet19</a>。</li>
+<li>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/servletDemo/MyServlet20">http://localhost:8080/servletDemo/MyServlet20</a>。</li>
+</ul>
+</li>
+<li>MyServlet16~18的load-on-startup取值都大于等于0，Tomcat启动时就对其进行了初始化。</li>
+<li>Servlet生命周期内init()只能被调用一次，Tomcat启动后访问MyServlet16~18不再被初始化。</li>
+<li>MyServlet19~20的load-on-startup取值小于0和未指定，所以第一次请求时才会进行初始化。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee </span></span><br><span class="hljs-string"><span class="hljs-tag">  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span> </span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;WebApp_ID&quot;</span> <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">display-name</span>&gt;</span>servletDemo<span class="hljs-tag">&lt;/<span class="hljs-name">display-name</span>&gt;</span><br><br>  	<span class="hljs-comment">&lt;!-- 同一个类MyServlet16，不同的servlet --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet16<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet16<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet17<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet16<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet18<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet16<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet19<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet16<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>-1<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet20<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>MyServlet16<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>        <span class="hljs-comment">&lt;!-- 不设置load-on-startup，去掉默认值 --&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet16<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet16<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet17<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet17<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet18<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet18<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet19<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet19<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>MyServlet20<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/MyServlet20<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AE%B9%E5%99%A8/">#容器</a>
+      
+        <a href="/tags/%E6%B3%A8%E8%A7%A3/">#注解</a>
+      
+        <a href="/tags/%E6%98%A0%E5%B0%84/">#映射</a>
+      
+        <a href="/tags/%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/">#匹配规则</a>
+      
+        <a href="/tags/load-on-startup/">#load-on-startup</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Servlet(一)</div>
+      <div>https://stitch-top.github.io/2025/09/17/java/java05-servlet-yi/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年9月17日 21:00:21</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/08/21/java/java04-java-ji-chu-si/" title="Java 基础(四)">
+                        <span class="hidden-mobile">Java 基础(四)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"PDfaLoft9OAolB0AmON5AqUb-gzGzoHsz","appKey":"xq13nodBzh8hOliBusHUKDwj","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"monsterid","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"pageSize":13,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+
+    // Qmsg评论推送服务：QQ2338638343 + 邮件zero_021@aliyun.com
+    var title2="msg=Stitch's Blog又有新评论啦！\n"
+    var SCKEY_Qmsg="https://qmsg.zendee.cn/send/ad06ce297bd5d64b5aa08ea55560f7a2"
+    var ValineButton=document.getElementsByClassName("vsubmit vbtn")[0];
+    function send_valine_Qmsg(){
+      var pagename=document.title;
+      var wz=pagename.indexOf('|');
+      var res=pagename.substring(0, wz);
+      var pageurl=document.URL;
+      var ptime=new Date();
+      var vnick=document.getElementsByClassName("vnick vinput")[0].value;
+      var vmail=document.getElementsByClassName("vmail vinput")[0].value;
+      var vlink=document.getElementsByClassName("vlink vinput")[0].value;
+      var veditor=document.getElementsByClassName("veditor vinput")[0].value;
+      var data="昵称："+vnick+"\n邮箱："+vmail+"\n网站地址："+vlink+"\n当前页面："+pagename+"\n评论内容："+veditor+"\n跳转链接："+pageurl+"\n评论时间"+ptime.toLocaleString();
+      var httpRequest = new XMLHttpRequest();       // 第一步：创建需要的对象
+      httpRequest.open('POST', SCKEY_Qmsg, true);   // 第二步：打开连接
+      httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded"); // 设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
+      httpRequest.send(title2 + data);              // 发送请求 
+    };
+    
+    document.body.addEventListener('click', function(e) {
+      if(e.target.className.indexOf('vsubmit') === -1) {
+        return;
+      }
+      send_valine_Qmsg();
+    })
+
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Java"
+        id="heading-d52387880e1ea22817a72d3759213819" role="tab" data-toggle="collapse" href="#collapse-d52387880e1ea22817a72d3759213819"
+        aria-expanded="true"
+      >
+        Java
+        <span class="list-group-count">(5)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-d52387880e1ea22817a72d3759213819"
+           role="tabpanel" aria-labelledby="heading-d52387880e1ea22817a72d3759213819">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/05/30/java/java01-java-ji-chu-yi/" title="Java 基础(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Java 基础(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/06/13/java/java02-java-ji-chu-er/" title="Java 基础(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Java 基础(二)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/07/08/java/java03-java-ji-chu-san/" title="Java 基础(三)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Java 基础(三)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/08/21/java/java04-java-ji-chu-si/" title="Java 基础(四)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Java 基础(四)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/09/17/java/java05-servlet-yi/" title="Servlet(一)"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Servlet(一)</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a><span>Copyright © 2021 - 2025</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        📈 总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        📊 总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
