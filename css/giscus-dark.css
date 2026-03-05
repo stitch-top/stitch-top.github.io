@@ -74,7 +74,7 @@ p, span, div, button, textarea, a {
 .gsc-comment-box-top,
 .gsc-comment-box-textarea,
 textarea {
-    background-color: #000000 !important;
+    background-color: #181c27 !important;
     color: #ffffff !important;
     border-color: #444444 !important;
     caret-color: #ffffff !important;
@@ -87,7 +87,7 @@ textarea::placeholder {
 
 /* 底部工具栏（退出登录 + 评论按钮）*/
 .gsc-comment-box-bottom {
-    background-color: #000000 !important;
+    background-color: #181c27 !important;
     border-top: 1px solid #333333 !important;
 }
 
