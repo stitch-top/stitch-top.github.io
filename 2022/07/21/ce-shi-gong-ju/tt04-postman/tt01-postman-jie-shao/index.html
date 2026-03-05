@@ -774,55 +774,72 @@
             
   <article id="comments">
     
-  <div id="valine"></div>
+  <div class="giscus"></div>
   <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://cdn.staticfile.org/valine/1.5.1/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"PDfaLoft9OAolB0AmON5AqUb-gzGzoHsz","appKey":"xq13nodBzh8hOliBusHUKDwj","path":"window.location.pathname","placeholder":"赠人玫瑰，手留余香(～o￣3￣)～","avatar":"monsterid","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"pageSize":13,"lang":"zh-CN","highlight":"ture","recordIP":"ture","serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":"ture"},
-          {
-            el: "#valine",
-            path: window.location.pathname
-          }
-        )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
-          Fluid.plugins.imageCaption(imgSelector);
-          Fluid.plugins.fancyBox(imgSelector);
-        })
-      });
-    });
+    Fluid.utils.loadComments('.giscus', function() {
+      // 获取当前页面的协议和域名，拼接 CSS 的绝对路径
+      var baseUrl = 'https://stitch-top.github.io'.replace(/\/$/, '');
+      var lightTheme = baseUrl + '/css/giscus-light.css';
+      var darkTheme = baseUrl + '/css/giscus-dark.css';
 
-    // Qmsg评论推送服务：QQ2338638343 + 邮件zero_021@aliyun.com
-    var title2="msg=Stitch's Blog又有新评论啦！\n"
-    var SCKEY_Qmsg="https://qmsg.zendee.cn/send/ad06ce297bd5d64b5aa08ea55560f7a2"
-    var ValineButton=document.getElementsByClassName("vsubmit vbtn")[0];
-    function send_valine_Qmsg(){
-      var pagename=document.title;
-      var wz=pagename.indexOf('|');
-      var res=pagename.substring(0, wz);
-      var pageurl=document.URL;
-      var ptime=new Date();
-      var vnick=document.getElementsByClassName("vnick vinput")[0].value;
-      var vmail=document.getElementsByClassName("vmail vinput")[0].value;
-      var vlink=document.getElementsByClassName("vlink vinput")[0].value;
-      var veditor=document.getElementsByClassName("veditor vinput")[0].value;
-      // var data="昵称："+vnick+"\n邮箱："+vmail+"\n网站地址："+vlink+"\n当前页面："+pagename+"\n评论内容："+veditor+"\n跳转链接："+pageurl+"\n评论时间"+ptime.toLocaleString();
-      var data="评论昵称："+vnick+"\n当前页面："+pagename+"\n评论内容："+veditor+"\n评论时间："+ptime.toLocaleString();
-      var httpRequest = new XMLHttpRequest();       // 第一步：创建需要的对象
-      httpRequest.open('POST', SCKEY_Qmsg, true);   // 第二步：打开连接
-      httpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded"); // 设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-      httpRequest.send(title2 + data);              // 发送请求 
-    };
-    
-    document.body.addEventListener('click', function(e) {
-      if(e.target.className.indexOf('vsubmit') === -1) {
-        return;
+      // 判断当前 Fluid 主题状态
+      var currentMode = document.documentElement.getAttribute('data-user-color-scheme');
+      var giscusTheme = currentMode === 'dark' ? darkTheme : lightTheme;
+
+      var options = {
+        'src': 'https://giscus.app/client.js',
+        'data-repo': 'stitch-top/stitch-top.github.io',
+        'data-repo-id': 'R_kgDOHJ03lw',
+        'data-category': 'General',
+        'data-category-id': 'DIC_kwDOHJ03l84C3tTM',
+        'data-mapping': 'pathname',
+        'data-strict': '0',
+        'data-reactions-enabled': '1',
+        'data-emit-metadata': '0',
+        'data-input-position': 'bottom',
+        'data-theme': giscusTheme,
+        'data-lang': 'zh-CN',
+        'crossorigin': 'anonymous',
+        'async': true
+      };
+
+      // 动态创建脚本
+      var s = document.createElement('script');
+      for (var key in options) {
+        s.setAttribute(key, options[key]);
       }
-      send_valine_Qmsg();
-    })
+      var container = document.querySelector('.giscus');
+      container.appendChild(s);
 
+      // 监听 Fluid 主题切换事件，同步更新 Giscus
+      window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://giscus.app') return;
+        // 这里的逻辑通常由 Giscus 内部处理，
+        // 但我们需要手动告诉 Giscus 切换主题，通过 postMessage 发送新配置
+      });
+
+      // 重点：当 Fluid 切换主题时，通知 Giscus
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === "data-user-color-scheme") {
+            var themeMode = document.documentElement.getAttribute('data-user-color-scheme');
+            var updatedTheme = themeMode === 'dark' ? darkTheme : lightTheme;
+            var sendMessage = {
+              giscus: {
+                setConfig: {
+                  theme: updatedTheme
+                }
+              }
+            };
+            var iframe = document.querySelector('iframe.giscus-frame');
+            if (iframe && iframe.contentWindow) {
+              iframe.contentWindow.postMessage(sendMessage, 'https://giscus.app');
+            }
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true });
+    });
   </script>
   <noscript>Please enable JavaScript to view the comments</noscript>
 
