@@ -47,25 +47,25 @@ p, span, div, button, textarea, a {
 
 /* ========== 只有输入框区域：纯黑底色 ========== */
 .gsc-comment-box {
-    background-color: #000000 !important;
+    background-color: #181c27 !important;
     border: 1px solid #444444 !important;
     border-radius: 6px !important;
 }
 
 /* Tab 栏（输入/预览）*/
 .gsc-comment-box-tabs {
-    background-color: #000000 !important;
+    background-color: #181c27 !important;
     border-bottom: 1px solid #333333 !important;
 }
 
 .gsc-comment-box-tabs button {
-    background-color: #000000 !important;
+    background-color: #181c27 !important;
     color: #ffffff !important;
     border-color: #444444 !important;
 }
 
 .gsc-comment-box-tabs button[aria-selected="true"] {
-    background-color: #000000 !important;
+    background-color: #181c27 !important;
     color: #ffffff !important;
     border-bottom: 2px solid #58a6ff !important;
 }

@@ -298,12 +298,6 @@
     
     
       
-        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="leancloud-page-views"></span> 次
-        </span>
-        
-      
     
   </div>
 
@@ -967,7 +961,8 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a><span>Copyright © 2021 - 2025</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+      <!--  <a><span>Copyright © 2021 - {current_year}</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a>  -->
+       <a><span>Copyright © 2021 - 2026</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
     </div>
   
   
@@ -976,22 +971,37 @@
   
 
   
+    <!-- GoatCounter 逻辑 -->
     
-      <span id="leancloud-site-pv-container" style="display: none">
+      <span id="goatcounter-site-pv-container">
         📈 总访问量 
-        <span id="leancloud-site-pv"></span>
+        <span id="goatcounter-site-pv">...</span>
          次
       </span>
     
     
-      <span id="leancloud-site-uv-container" style="display: none">
-        📊 总访客数 
-        <span id="leancloud-site-uv"></span>
-         人
-      </span>
+    <script data-goatcounter="https://stitch.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
     
+    <script>
+      // 动态获取 GoatCounter 的总访问量并填充
+      window.addEventListener('load', function() {
+        var id = 'stitch';
+        var url = 'https://' + id + '.goatcounter.com/counter/total.json';
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.onload = function() {
+          if (this.status >= 200 && this.status < 400) {
+            var data = JSON.parse(this.response);
+            var count = data.count.replace(/\s/g, ''); // 去除千分位空格
+            var el = document.getElementById('goatcounter-site-pv');
+            if (el) el.innerText = count;
+          }
+        };
+        request.send();
+      });
+    </script>
     
-
   
 </div>
 
