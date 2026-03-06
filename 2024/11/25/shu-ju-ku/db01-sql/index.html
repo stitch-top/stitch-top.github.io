@@ -29,8 +29,8 @@
 <meta property="article:published_time" content="2024-11-25T14:10:00.000Z">
 <meta property="article:modified_time" content="2025-02-08T02:52:02.348Z">
 <meta property="article:author" content="Dr.626">
-<meta property="article:tag" content="MySQL">
 <meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MySQL">
 <meta property="article:tag" content="DBeaver">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary_large_image">
@@ -574,9 +574,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/MySQL/">#MySQL</a>
-      
         <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a>
+      
+        <a href="/tags/MySQL/">#MySQL</a>
       
         <a href="/tags/DBeaver/">#DBeaver</a>
       
@@ -905,19 +905,32 @@
             async src="//gc.zgo.at/count.js"></script>
     
     <script>
-      // 动态获取 GoatCounter 的总访问量并填充
       window.addEventListener('load', function() {
         var id = 'stitch';
-        var url = 'https://' + id + '.goatcounter.com/counter/total.json';
+        // 尝试使用 TOTAL.json 获取全站总计
+        var url = 'https://' + id + '.goatcounter.com/counter/TOTAL.json';
+        
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.onload = function() {
           if (this.status >= 200 && this.status < 400) {
-            var data = JSON.parse(this.response);
-            var count = data.count.replace(/\s/g, ''); // 去除千分位空格
-            var el = document.getElementById('goatcounter-site-pv');
-            if (el) el.innerText = count;
+            try {
+              var data = JSON.parse(this.response);
+              // GoatCounter 返回的可能是 "1,234" 这种字符串
+              var count = data.count.replace(/[^0-9]/g, ''); 
+              var el = document.getElementById('goatcounter-site-pv');
+              if (el) {
+                el.innerText = count;
+              }
+            } catch (e) {
+              console.error("GoatCounter 数据解析失败:", e);
+            }
+          } else {
+            console.error("GoatCounter 请求失败，状态码:", this.status);
           }
+        };
+        request.onerror = function() {
+          console.error("GoatCounter 请求连接错误");
         };
         request.send();
       });

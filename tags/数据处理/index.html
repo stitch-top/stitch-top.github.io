@@ -365,19 +365,32 @@
             async src="//gc.zgo.at/count.js"></script>
     
     <script>
-      // 动态获取 GoatCounter 的总访问量并填充
       window.addEventListener('load', function() {
         var id = 'stitch';
-        var url = 'https://' + id + '.goatcounter.com/counter/total.json';
+        // 尝试使用 TOTAL.json 获取全站总计
+        var url = 'https://' + id + '.goatcounter.com/counter/TOTAL.json';
+        
         var request = new XMLHttpRequest();
         request.open('GET', url, true);
         request.onload = function() {
           if (this.status >= 200 && this.status < 400) {
-            var data = JSON.parse(this.response);
-            var count = data.count.replace(/\s/g, ''); // 去除千分位空格
-            var el = document.getElementById('goatcounter-site-pv');
-            if (el) el.innerText = count;
+            try {
+              var data = JSON.parse(this.response);
+              // GoatCounter 返回的可能是 "1,234" 这种字符串
+              var count = data.count.replace(/[^0-9]/g, ''); 
+              var el = document.getElementById('goatcounter-site-pv');
+              if (el) {
+                el.innerText = count;
+              }
+            } catch (e) {
+              console.error("GoatCounter 数据解析失败:", e);
+            }
+          } else {
+            console.error("GoatCounter 请求失败，状态码:", this.status);
           }
+        };
+        request.onerror = function() {
+          console.error("GoatCounter 请求连接错误");
         };
         request.send();
       });
