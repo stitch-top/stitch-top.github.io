@@ -1,0 +1,1350 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Burp Suite是由PortSwigger公司开发的一款集成式Web应用安全测试平台，被广泛用于发现和利用Web应用中的漏洞。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Burp Suite(一)">
+<meta property="og:url" content="https://stitch-top.github.io/2026/02/09/ce-shi-gong-ju/tt09-burp-suite/tt01-burp-suite-yi/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="Burp Suite是由PortSwigger公司开发的一款集成式Web应用安全测试平台，被广泛用于发现和利用Web应用中的漏洞。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/9314065461.jpg">
+<meta property="article:published_time" content="2026-02-09T15:57:30.000Z">
+<meta property="article:modified_time" content="2026-03-17T08:20:14.649Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="漏洞扫描">
+<meta property="article:tag" content="Proxy">
+<meta property="article:tag" content="手工重放">
+<meta property="article:tag" content="密码爆破">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/9314065461.jpg">
+  
+  
+  
+  <title>Burp Suite(一) - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Burp Suite(一)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    <!-- 作者 -->
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    <!-- 日期 -->
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-09 23:57" pubdate>
+          2026年2月9日 23:57:30
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    <!-- 字数统计 -->
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6k 字
+        
+      </span>
+    
+
+    <!-- 阅读时长 -->
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          50 分钟
+        
+      </span>
+    
+
+    <!-- 阅读量 -->
+    
+    
+      
+        <span id="goatcounter-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="goatcounter-value"></span> 次
+        </span>
+
+        <script>
+          (function () {
+            // 确保这里的变量名与配置文件一致（这里用 goatcounter_id）
+            var gcCode = 'stitch';
+            if (!gcCode || gcCode === 'undefined') {
+              console.warn('GoatCounter Error: gcCode is missing. Check your _config.fluid.yml');
+              return;
+            }
+            function fetchViews() {
+              var path = window.location.pathname.replace(/\/$/, "");
+              if (path === "") { path = "/"; }
+              var url = 'https://' + gcCode + '.goatcounter.com/counter/' + encodeURIComponent(path) + '.json';
+              console.log('Fetching GoatCounter views from:', url); // 调试日志
+              fetch(url)
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                  console.log('GoatCounter Data:', data);           // 调试日志
+                  var count = (data && data.count) ? data.count.replace(/\s/g, "") : "0";
+                  var el = document.getElementById('goatcounter-value');
+                  var container = document.getElementById('goatcounter-container');
+                  if (el && container) {
+                    el.innerText = count;
+                    container.style.display = 'inline';
+                  }
+                })
+                .catch(function(err) { 
+                  console.warn('GoatCounter Fetch Error:', err); 
+                });
+            }
+            // 立即执行
+            fetchViews();
+          })();
+        </script>
+  
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Burp Suite(一)</h1>
+            
+            <div class="markdown-body">
+              
+              <p>Burp Suite是由PortSwigger公司开发的一款集成式Web应用安全测试平台，被广泛用于发现和利用Web应用中的漏洞。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-安装设置"><a href="#1-安装设置" class="headerlink" title="1 安装设置"></a>1 安装设置</h1><ul>
+<li>安装设置<ul>
+<li>官网：<a target="_blank" rel="noopener" href="https://portswigger.net/">https://portswigger.net</a>，Support &gt; Downloads，这里用Burp Suite Pro v2022.3.7破解版。</li>
+<li>设置字体样式：User options &gt; Display &gt; HTTP message display &gt; Change font &gt; 选Consolas 15。</li>
+<li>中文乱码处理：User options &gt; Display &gt; Character Sets &gt; Use a specific character set &gt; UTF-8。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@001.png" srcset="/img/load.gif" lazyload alt="安装设置"></p>
+<h1 id="2-界面介绍"><a href="#2-界面介绍" class="headerlink" title="2 界面介绍"></a>2 界面介绍</h1><ul>
+<li>界面介绍<ul>
+<li>Dashboard：用于执行自动化漏洞扫描，可以选择预定义或自定义扫描规则。</li>
+<li>Target：用于设置测试目标，并让Burp Suite扫描目标应用程序以发现漏洞。</li>
+<li>Proxy：代理服务器，是浏览器与目标应用的中间人，用于拦截和修改HTTP请求和响应。</li>
+<li>Intruder：用于发送请求的多个副本，帮助确定目标应用程序是否易受到重复攻击的影响。</li>
+<li>Repeater： 一个靠手动操作来补发单独的HTTP请求，并分析应用程序响应的工具。</li>
+<li>Sequencer：用来分析那些不可预知的应用程序会话令牌和重要数据项的随机工具。</li>
+<li>Decoder：将数据进行编码解码的工具，能够智能地识别多种编码格式。</li>
+<li>Comparer：通过相关的请求和响应，得到两组数据的一个可视化比较。</li>
+<li>Extender：第三方扩展插件，支持以多种方式自定义Burp Suite的行为。</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-漏洞扫描"><a href="#3-漏洞扫描" class="headerlink" title="3 漏洞扫描"></a>3 漏洞扫描</h1><ul>
+<li>Tasks任务扫描、Event log事件日志、Issue activity任务扫描结果、Advisory任务扫描详情。</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@002.png" srcset="/img/load.gif" lazyload alt="漏洞扫描"></p>
+<h2 id="3-1-新建扫描任务"><a href="#3-1-新建扫描任务" class="headerlink" title="3-1 新建扫描任务"></a>3-1 新建扫描任务</h2><ul>
+<li>Dashboard &gt; Tasks &gt; New scan &gt; 设置扫描范围，设置黑白名单(Detailed scope configuration)。</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@003.png" srcset="/img/load.gif" lazyload alt="漏洞扫描-新建扫描任务"></p>
+<h2 id="3-2-添加扫描配置"><a href="#3-2-添加扫描配置" class="headerlink" title="3-2 添加扫描配置"></a>3-2 添加扫描配置</h2><p><img src="/../../img/BurpSuite/BurpSuite@004.png" srcset="/img/load.gif" lazyload alt="漏洞扫描-添加扫描配置"></p>
+<h2 id="3-3-设置登录认证"><a href="#3-3-设置登录认证" class="headerlink" title="3-3 设置登录认证"></a>3-3 设置登录认证</h2><p><img src="/../../img/BurpSuite/BurpSuite@005.png" srcset="/img/load.gif" lazyload alt="漏洞扫描-设置登录认证"></p>
+<h2 id="3-4-自定义资源池"><a href="#3-4-自定义资源池" class="headerlink" title="3-4 自定义资源池"></a>3-4 自定义资源池</h2><p><img src="/../../img/BurpSuite/BurpSuite@006.png" srcset="/img/load.gif" lazyload alt="漏洞扫描-自定义资源池"></p>
+<h2 id="3-5-新建实时任务"><a href="#3-5-新建实时任务" class="headerlink" title="3-5 新建实时任务"></a>3-5 新建实时任务</h2><p><img src="/../../img/BurpSuite/BurpSuite@007.png" srcset="/img/load.gif" lazyload alt="漏洞扫描-新建实时任务"></p>
+<h1 id="4-测试目标"><a href="#4-测试目标" class="headerlink" title="4 测试目标"></a>4 测试目标</h1><ul>
+<li>测试目标<ul>
+<li>Site map：以树状结构提供站点的URL及请求响应等内容详情。</li>
+<li>Scope：过滤排除一些干扰的包，或设置只抓取需要的对应包。</li>
+<li>Issue definitions：漏洞百科，列出能检测到的所有潜在漏洞类型，并为其提供详尽的解释和修复建议。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@008.png" srcset="/img/load.gif" lazyload alt="测试目标"></p>
+<h1 id="5-Proxy模块"><a href="#5-Proxy模块" class="headerlink" title="5 Proxy模块"></a>5 Proxy模块</h1><ul>
+<li>Proxy模块<ul>
+<li>Intercept：核心功能之一，允许拦截应用请求，查看并修改请求，然后转发到目标服务器上。</li>
+<li>HTTP history：记录了所有被拦截的数据包，使用户能够查看和分析之前的请求或响应数据。</li>
+<li>Filter可筛选想要的数据包，点击标题栏则可进行排序查看。</li>
+<li>WebSockets history：一般用来抓取实时聊天对话的数据包。</li>
+<li>Options<ul>
+<li>Proxy Listeners：监听地址、端口、证书配置。</li>
+<li>Intercept Client Requests：拦截请求包配置。</li>
+<li>Intercept Server Responses：拦截响应包配置。</li>
+<li>Match and Replace：通过字符串或正则表达式，将数据包的参数值进行动态匹配替换。</li>
+</ul>
+</li>
+<li>Burp Suite默认监听本地8080端口，只需将浏览器的流量转发到端口上，就能接收到数据。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-1-安装插件"><a href="#5-1-安装插件" class="headerlink" title="5-1 安装插件"></a>5-1 安装插件</h2><ul>
+<li>安装插件<ul>
+<li>安装Firefox或Google &gt; 插件管理 &gt; 搜索Proxy SwitchyOmega &gt; 添加插件到浏览器中。</li>
+<li>这里使用Win10自带的Edge浏览器 &gt; 安装Proxy SwitchyOmega 3插件 &gt; 插件界面如下。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@009.png" srcset="/img/load.gif" lazyload alt="Proxy模块-安装插件"></p>
+<h2 id="5-2-配置证书"><a href="#5-2-配置证书" class="headerlink" title="5-2 配置证书"></a>5-2 配置证书</h2><ul>
+<li>配置证书<ul>
+<li>配置证书(Burp CA Certificate)是全局通用的，针对HTTPS网站确保抓取到网站数据包。</li>
+<li>而Proxy SwitchyOmega插件仅仅是快速切换浏览器的代理设置，就相当于是一个遥控器。</li>
+<li>若不想配置证书和安装插件，可使用Burp Suite &gt; Proxy &gt; Intercept &gt; Open Browser。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-获取证书"><a href="#1-获取证书" class="headerlink" title="(1) 获取证书"></a>(1) 获取证书</h3><ul>
+<li>Burp Suite &gt; Proxy &gt; Options &gt; Proxy Listeners &gt; 点击Import &#x2F; export CA certification。</li>
+<li>Certificate in DER format &gt; Next &gt; Select file &gt; 保存为BurpSuite.cer &gt; Next &gt; Close。</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@010.png" srcset="/img/load.gif" lazyload alt="Proxy模块-配置证书-获取证书"></p>
+<h3 id="2-导入证书"><a href="#2-导入证书" class="headerlink" title="(2) 导入证书"></a>(2) 导入证书</h3><ul>
+<li>Edge &gt; 设置 &gt; 隐私、搜索和服务 &gt; 安全性 &gt; 管理证书 &gt; 本地证书 &gt; 自定义 &gt; 导入受信任的证书。</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@011.png" srcset="/img/load.gif" lazyload alt="Proxy模块-配置证书-导入证书"></p>
+<h3 id="3-证书验证"><a href="#3-证书验证" class="headerlink" title="(3) 证书验证"></a>(3) 证书验证</h3><ul>
+<li>在Edge地址栏输入地址<code>127.0.0.1:8080</code>回车进行访问 &gt; 显示Welcome说明证书配置成功。</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@012.png" srcset="/img/load.gif" lazyload alt="Proxy模块-配置证书-证书验证"></p>
+<h2 id="5-3-拦截请求"><a href="#5-3-拦截请求" class="headerlink" title="5-3 拦截请求"></a>5-3 拦截请求</h2><ul>
+<li>拦截请求<ul>
+<li>Edge &gt; 点击插件 &gt; 选中proxy &gt; 切回到Buip Suite &gt; Proxy &gt; Intercept &gt; 点击Intercept is off。</li>
+<li>此时按钮变为Intercept is on &gt; 切回Edge &gt; 访问百度 &gt; 再切回Buip Suite &gt; 查看拦截到的请求。</li>
+<li>Forward：数据包放行，一般用在修改完请求包参数值之后放行，若是图片、CSS、JS等直接放行。</li>
+<li>Drop：数据包丢弃，即这个数据包不会发送到目标服务器上。</li>
+<li>Intercept is off是关闭拦截器，Intercept is on是开启拦截器。</li>
+<li>Action：转移到其他模块上操作，例如Intruder、Repeater等。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@013.png" srcset="/img/load.gif" lazyload alt="Proxy模块-拦截请求"></p>
+<h2 id="5-4-拦截响应"><a href="#5-4-拦截响应" class="headerlink" title="5-4 拦截响应"></a>5-4 拦截响应</h2><ul>
+<li>Buip Suite抓取到请求包后 &gt; 在Raw中右键 &gt; Do intercept &gt; Response to this request &gt; Forward。</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@014.png" srcset="/img/load.gif" lazyload alt="Proxy模块-拦截响应"></p>
+<h1 id="6-手工重放请求"><a href="#6-手工重放请求" class="headerlink" title="6 手工重放请求"></a>6 手工重放请求</h1><ul>
+<li>以本地部署的<a href="https://stitch-top.github.io/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/#1-%E5%AE%89%E8%A3%85PHPStudy">DVWA</a>登录为例，设置<code>\WWW\DVWA\config\config.inc.php</code>安全等级为<code>low</code>。</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs PHP"><span class="hljs-comment"># Default security level</span><br><span class="hljs-comment">#   Default value for the security level with each session.</span><br><span class="hljs-comment">#   The default is &#x27;impossible&#x27;.</span><br><span class="hljs-comment">#   You may wish to set this to either &#x27;low&#x27;, &#x27;medium&#x27;, &#x27;high&#x27; or impossible&#x27;.</span><br><span class="hljs-variable">$_DVWA</span>[ <span class="hljs-string">&#x27;default_security_level&#x27;</span> ] = <span class="hljs-string">&#x27;low&#x27;</span>;<br><br><span class="hljs-comment"># 若修改完配置文件，登录时发现账号密码登录失败，则访问http://localhost:81/setup.php</span><br><span class="hljs-comment"># 点击Create / Reset Database，强制重置数据库</span><br><span class="hljs-comment"># 手动修改配置文件，容易出现由于数据库未初始化或Session冲突导致的登录失败</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-1-取消回环忽略"><a href="#6-1-取消回环忽略" class="headerlink" title="6-1 取消回环忽略"></a>6-1 取消回环忽略</h2><ul>
+<li>取消回环忽略<ul>
+<li>出于安全性、稳定性和性能的三重考虑，大部分浏览器都会默认忽略回环地址的代理设置。</li>
+<li>Edge &gt; Proxy SwitchyOmega 3插件 &gt; 选项 &gt; proxy &gt; 不代理地址列表添加<code>&lt;-loopback&gt;</code>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@015.png" srcset="/img/load.gif" lazyload alt="手工重放请求-取消回环忽略"></p>
+<h2 id="6-2-拦截请求转移"><a href="#6-2-拦截请求转移" class="headerlink" title="6-2 拦截请求转移"></a>6-2 拦截请求转移</h2><ul>
+<li>拦截请求转移<ul>
+<li>Edge &gt; 登录DVWA &gt; Brute Force &gt; 插件选proxy &gt; 输入账号admin密码password。</li>
+<li>Burp Suite &gt; Proxy &gt; Intercept &gt; 点击<code>Intercept is of</code> &gt; 开启请求拦截的操作。</li>
+<li>切回Edge &gt; 点Login &gt; Burp Suite拦截请求 &gt; Raw中右键弹窗 &gt; Send to Repeater。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@016.png" srcset="/img/load.gif" lazyload alt="手工重放请求-拦截请求转移"></p>
+<h2 id="6-3-请求手工重放"><a href="#6-3-请求手工重放" class="headerlink" title="6-3 请求手工重放"></a>6-3 请求手工重放</h2><ul>
+<li>继拦截请求转移后 &gt; 切到Repeater &gt; 此时Request是转移后的请求内容 &gt; Send &gt; 查看Response。</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@017.png" srcset="/img/load.gif" lazyload alt="手工重放请求-请求手工重放"></p>
+<h1 id="7-爆破类型攻击"><a href="#7-爆破类型攻击" class="headerlink" title="7 爆破类型攻击"></a>7 爆破类型攻击</h1><ul>
+<li>爆破类型攻击<ul>
+<li>Intruder：可执行SQL注入、暴力破解等不同类型的攻击，用来测试Web应用程序的安全性。</li>
+<li>Intruder是通过<code>$</code>符号进行参数指定的，例如：<code>user=$admin$</code>，<code>admin</code>则是需要替换的值。</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-1-密码字典"><a href="#7-1-密码字典" class="headerlink" title="7-1 密码字典"></a>7-1 密码字典</h2><ul>
+<li>密码字典<ul>
+<li>Weakpass提供了非常庞大的字典集合：<a target="_blank" rel="noopener" href="https://weakpass.com/">https://weakpass.com/</a>。</li>
+<li>基于统计学概率生成的字典：<a target="_blank" rel="noopener" href="https://github.com/berzerk0/Probable-Wordlists">https://github.com/berzerk0/Probable-Wordlists</a>。</li>
+<li>安全从业者和学生最常用的资源库：<a target="_blank" rel="noopener" href="https://github.com/danielmiessler/SecLists">https://github.com/danielmiessler/SecLists</a>。</li>
+<li>这里提供所使用的字典链接：<a target="_blank" rel="noopener" href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/100k-most-used-passwords-NCSC.txt">密码字典</a>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-2-攻击类型"><a href="#7-2-攻击类型" class="headerlink" title="7-2 攻击类型"></a>7-2 攻击类型</h2><ul>
+<li>攻击类型<ul>
+<li>Sniper：一次只修改一个位置，其他位置保持原值。</li>
+<li>Battering ram：所有位置同时使用同一个payload。</li>
+<li>Pitchfork：多个位置，各自一组payload，按顺序一一对应。</li>
+<li>Cluster bomb：多个位置做笛卡尔积，全部组合后完整爆破。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs MarkDown">GET /vulnerabilities/brute/?username=§admin§&amp;password=§password§&amp;Login=Login HTTP/1.1<br>同时标记了username、password<br><br>【Sniper】<br>payload：root、guest、123456<br>第一轮：改username、password保持不变<br>username=root&amp;password=password<br>username=guest&amp;password=password<br>username=123456&amp;password=password<br>第二轮：username保持不变，改password<br>username=admin&amp;password=root<br>username=admin&amp;password=guest<br>username=admin&amp;password=123456<br>考虑：哪个参数更敏感、单点fuzz、看是用户名还是密码问题、探测参数是否存在过滤差异<br><br>【Battering ram】<br>payload：root、guest、123456<br>username=root&amp;password=root<br>username=guest&amp;password=guest<br>username=123456&amp;password=123456<br>考虑：多个参数要填同个值时、测试用户名=密码这类弱口令、同个token或同个输入被多个位置复用时<br><br>【Pitchfork】<br>payload 1：admin、guest、test<br>payload 2：password、12345、123456<br>username=admin&amp;password=password<br>username=guest&amp;password=12345<br>username=test&amp;password=123456<br>考虑：已知账号密码是成对关系时、从泄露清单中已有账号密码配对、测试固定映射的数据<br>请求总数取决于最短列表，例如Payload 1有100个，Payload 2只有20个，则只会跑前20个<br><br>【Cluster bomb】<br>payload 1：admin、guest<br>payload 2：password、12345<br>username=admin&amp;password=password<br>username=admin&amp;password=12345<br>username=guest&amp;password=password<br>username=guest&amp;password=12345<br>考虑：用户名和密码都不确定、要做全组合尝试、登录爆破、表单枚举等<br>请求总数 = Payload 1个数 <span class="hljs-emphasis">* Payload 2个数 = 4</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-3-密码爆破"><a href="#7-3-密码爆破" class="headerlink" title="7-3 密码爆破"></a>7-3 密码爆破</h2><ul>
+<li>密码爆破<ul>
+<li>仍然以本地部署的<a href="https://stitch-top.github.io/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/#1-%E5%AE%89%E8%A3%85PHPStudy">DVWA</a>登录为例 &gt; 继Proxy拦截请求转移后 &gt; 切换到Intruder。</li>
+<li>Intruder &gt; Position &gt; Attack type选Sniper &gt; 点右侧的<code>Clear $</code>清空选中字段。</li>
+<li>根据需要，手动双击密码password字段的参数值 &gt; 点击右侧的<code>Add $</code>选中该字段。</li>
+<li>由于事先知道用户密码，这里只爆破密码选Sniper即可，否则Cluster bomb最贴切。</li>
+<li>Payloads &gt; 负载Payload set默认<code>1</code>，负载类型Payload type默认选择<code>Simple list</code>。</li>
+<li>Payload Options [Simple list] &gt; Load &gt; 载入事先下载的密码字典 &gt; 切到Options。</li>
+<li>Grep - Match &gt; 点<code>Clear</code>清除默认项 &gt; 输入关键词例如<code>Welcome</code> &gt; 再点击<code>Add</code>。</li>
+<li>不勾选<code>Case sensitive match</code>(检查大小写敏感) &gt; Start attcak &gt; 等待爆破结果。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@018.png" srcset="/img/load.gif" lazyload alt="爆破类型攻击-密码爆破"></p>
+<h2 id="7-4-负载类型"><a href="#7-4-负载类型" class="headerlink" title="7-4 负载类型"></a>7-4 负载类型</h2><ul>
+<li>负载类型<ul>
+<li>直接给字典<ul>
+<li>Simple list：手工输入一个列表，每行一个payload。</li>
+<li>Runtime file：从本地文件读取payload。</li>
+</ul>
+</li>
+<li>自动生成<ul>
+<li>Numbers：自动生成数字序列。</li>
+<li>Dates：自动生成日期。</li>
+<li>Brute forcer：按指定的字符集和长度，自动生成所有可能的组合。</li>
+<li>Character blocks：按字符范围或字符块生成内容。</li>
+<li>Username generator：根据已知信息，自动生成一批候选用户名。</li>
+</ul>
+</li>
+<li>基于已有值做变形<ul>
+<li>Custom iterator：把多个小列表按规则拼接起来，生成新的payload。</li>
+<li>Character substitution：对已有字符串做字符替换变形。</li>
+<li>Case modification：改变大小写形式。</li>
+<li>Character frobber：一次修改原始值中的一个字符，观察响应差异。</li>
+<li>Bit flipper：一次翻转某些bit，适合于二进制数据或是异常处理测试。</li>
+</ul>
+</li>
+<li>高级联动或异常测试<ul>
+<li>Recursive grep：从服务器响应中提取内容，将其作为下一轮payload。</li>
+<li>Illegal Unicode：用非法或异常的Unicode编码测试解析器。</li>
+<li>Extension-generated：由Burp Suite的扩展生成payload。</li>
+<li>ECB block shuffler：更偏加密分组测试，不适合普通表单登录。</li>
+<li>Copy other payload：将另一个Payload Set的值直接复制过来。</li>
+<li>Null payloads：每次请求payload实际没变化，但Burp仍会重复发送。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" class="category-chain-item">测试工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F/">#漏洞扫描</a>
+      
+        <a href="/tags/Proxy/">#Proxy</a>
+      
+        <a href="/tags/%E6%89%8B%E5%B7%A5%E9%87%8D%E6%94%BE/">#手工重放</a>
+      
+        <a href="/tags/%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4/">#密码爆破</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Burp Suite(一)</div>
+      <div>https://stitch-top.github.io/2026/02/09/ce-shi-gong-ju/tt09-burp-suite/tt01-burp-suite-yi/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年2月9日 23:57:30</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/" title="SQLMap 的使用">
+                        <span class="hidden-mobile">SQLMap 的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div class="giscus"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('.giscus', function() {
+      // 获取当前页面的协议和域名，拼接 CSS 的绝对路径
+      var baseUrl = 'https://stitch-top.github.io'.replace(/\/$/, '');
+      var lightTheme = baseUrl + '/css/giscus-light.css';
+      var darkTheme = baseUrl + '/css/giscus-dark.css';
+
+      // 判断当前 Fluid 主题状态
+      var currentMode = document.documentElement.getAttribute('data-user-color-scheme');
+      var giscusTheme = currentMode === 'dark' ? darkTheme : lightTheme;
+
+      var options = {
+        'src': 'https://giscus.app/client.js',
+        'data-repo': 'stitch-top/stitch-top.github.io',
+        'data-repo-id': 'R_kgDOHJ03lw',
+        'data-category': 'General',
+        'data-category-id': 'DIC_kwDOHJ03l84C3tTM',
+        'data-mapping': 'pathname',
+        'data-strict': '0',
+        'data-reactions-enabled': '1',
+        'data-emit-metadata': '0',
+        'data-input-position': 'bottom',
+        'data-theme': giscusTheme,
+        'data-lang': 'zh-CN',
+        'crossorigin': 'anonymous',
+        'async': true
+      };
+
+      // 动态创建脚本
+      var s = document.createElement('script');
+      for (var key in options) {
+        s.setAttribute(key, options[key]);
+      }
+      var container = document.querySelector('.giscus');
+      container.appendChild(s);
+
+      // 监听 Fluid 主题切换事件，同步更新 Giscus
+      window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://giscus.app') return;
+        // 这里的逻辑通常由 Giscus 内部处理，
+        // 但我们需要手动告诉 Giscus 切换主题，通过 postMessage 发送新配置
+      });
+
+      // 重点：当 Fluid 切换主题时，通知 Giscus
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === "data-user-color-scheme") {
+            var themeMode = document.documentElement.getAttribute('data-user-color-scheme');
+            var updatedTheme = themeMode === 'dark' ? darkTheme : lightTheme;
+            var sendMessage = {
+              giscus: {
+                setConfig: {
+                  theme: updatedTheme
+                }
+              }
+            };
+            var iframe = document.querySelector('iframe.giscus-frame');
+            if (iframe && iframe.contentWindow) {
+              iframe.contentWindow.postMessage(sendMessage, 'https://giscus.app');
+            }
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="测试工具"
+        id="heading-7e2f62602068bab6246b886d7866dc56" role="tab" data-toggle="collapse" href="#collapse-7e2f62602068bab6246b886d7866dc56"
+        aria-expanded="true"
+      >
+        测试工具
+        <span class="list-group-count">(11)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-7e2f62602068bab6246b886d7866dc56"
+           role="tabpanel" aria-labelledby="heading-7e2f62602068bab6246b886d7866dc56">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/01/05/ce-shi-gong-ju/tt01-jmeter/tt01-jmeter-zu-jian/" title="JMeter 组件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JMeter 组件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/27/ce-shi-gong-ju/tt01-jmeter/tt02-jmeter-jiao-ben/" title="JMeter 脚本"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JMeter 脚本</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/03/02/ce-shi-gong-ju/tt02-fiddler/tt01-fiddler-mian-ban/" title="Fiddler 面板"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Fiddler 面板</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/05/10/ce-shi-gong-ju/tt03-charles/tt01-charles-gong-neng/" title="Charles 功能"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Charles 功能</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/07/21/ce-shi-gong-ju/tt04-postman/tt01-postman-jie-shao/" title="Postman 介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Postman 介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/09/02/ce-shi-gong-ju/tt05-adb/tt01-adb-shi-yong-ming-ling/" title="ADB 实用命令"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">ADB 实用命令</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/11/10/ce-shi-gong-ju/tt06-f12/tt01-f12-gong-neng-shuo-ming/" title="F12 功能说明"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">F12 功能说明</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/04/15/ce-shi-gong-ju/tt06-f12/tt02-f12-console-mian-ban/" title="F12 Console 面板"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">F12 Console 面板</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/11/ce-shi-gong-ju/tt07-ffmpeg/tt01-ffmpeg-ming-ling-xiang-jie/" title="FFmpeg 命令详解"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">FFmpeg 命令详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/" title="SQLMap 的使用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">SQLMap 的使用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/02/09/ce-shi-gong-ju/tt09-burp-suite/tt01-burp-suite-yi/" title="Burp Suite(一)"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">Burp Suite(一)</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <!--  <a><span>Copyright © 2021 - {current_year}</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a>  -->
+       <a><span>Copyright © 2021 - 2026</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    <!-- GoatCounter 逻辑 -->
+    
+      <span id="goatcounter-site-pv-container">
+        📈 总访问量 
+        <span id="goatcounter-site-pv">...</span>
+         次
+      </span>
+    
+    
+    <script data-goatcounter="https://stitch.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+    
+    <script>
+      window.addEventListener('load', function() {
+        var id = 'stitch';
+        // 尝试使用 TOTAL.json 获取全站总计
+        var url = 'https://' + id + '.goatcounter.com/counter/TOTAL.json';
+        
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.onload = function() {
+          if (this.status >= 200 && this.status < 400) {
+            try {
+              var data = JSON.parse(this.response);
+              // GoatCounter 返回的可能是 "1,234" 这种字符串
+              var count = data.count.replace(/[^0-9]/g, ''); 
+              var el = document.getElementById('goatcounter-site-pv');
+              if (el) {
+                el.innerText = count;
+              }
+            } catch (e) {
+              console.error("GoatCounter 数据解析失败:", e);
+            }
+          } else {
+            console.error("GoatCounter 请求失败，状态码:", this.status);
+          }
+        };
+        request.onerror = function() {
+          console.error("GoatCounter 请求连接错误");
+        };
+        request.send();
+      });
+    </script>
+    
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
