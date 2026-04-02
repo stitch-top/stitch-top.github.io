@@ -27,12 +27,12 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/9314065461.jpg">
 <meta property="article:published_time" content="2026-02-09T15:57:30.000Z">
-<meta property="article:modified_time" content="2026-03-18T06:12:07.176Z">
+<meta property="article:modified_time" content="2026-03-24T01:41:21.339Z">
 <meta property="article:author" content="Dr.626">
 <meta property="article:tag" content="漏洞扫描">
-<meta property="article:tag" content="Proxy">
-<meta property="article:tag" content="手工重放">
-<meta property="article:tag" content="密码爆破">
+<meta property="article:tag" content="Target">
+<meta property="article:tag" content="代理">
+<meta property="article:tag" content="Repeater">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/9314065461.jpg">
   
@@ -282,7 +282,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6k 字
+          3.2k 字
         
       </span>
     
@@ -294,7 +294,7 @@
         
         
         
-          50 分钟
+          27 分钟
         
       </span>
     
@@ -448,8 +448,8 @@
 </li>
 </ul>
 <p><img src="/../../img/BurpSuite/BurpSuite@008.png" srcset="/img/load.gif" lazyload alt="测试目标"></p>
-<h1 id="5-Proxy模块"><a href="#5-Proxy模块" class="headerlink" title="5 Proxy模块"></a>5 Proxy模块</h1><ul>
-<li>Proxy模块<ul>
+<h1 id="5-代理模块"><a href="#5-代理模块" class="headerlink" title="5 代理模块"></a>5 代理模块</h1><ul>
+<li>代理模块<ul>
 <li>Intercept：核心功能之一，允许拦截应用请求，查看并修改请求，然后转发到目标服务器上。</li>
 <li>HTTP history：记录了所有被拦截的数据包，使用户能够查看和分析之前的请求或响应数据。</li>
 <li>Filter可筛选想要的数据包，点击标题栏则可进行排序查看。</li>
@@ -472,7 +472,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@009.png" srcset="/img/load.gif" lazyload alt="Proxy模块-安装插件"></p>
+<p><img src="/../../img/BurpSuite/BurpSuite@009.png" srcset="/img/load.gif" lazyload alt="代理模块-安装插件"></p>
 <h2 id="5-2-配置证书"><a href="#5-2-配置证书" class="headerlink" title="5-2 配置证书"></a>5-2 配置证书</h2><ul>
 <li>配置证书<ul>
 <li>配置证书(Burp CA Certificate)是全局通用的，针对HTTPS网站确保抓取到网站数据包。</li>
@@ -485,15 +485,15 @@
 <li>Burp Suite &gt; Proxy &gt; Options &gt; Proxy Listeners &gt; 点击Import &#x2F; export CA certification。</li>
 <li>Certificate in DER format &gt; Next &gt; Select file &gt; 保存为BurpSuite.cer &gt; Next &gt; Close。</li>
 </ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@010.png" srcset="/img/load.gif" lazyload alt="Proxy模块-配置证书-获取证书"></p>
+<p><img src="/../../img/BurpSuite/BurpSuite@010.png" srcset="/img/load.gif" lazyload alt="代理模块-配置证书-获取证书"></p>
 <h3 id="2-导入证书"><a href="#2-导入证书" class="headerlink" title="(2) 导入证书"></a>(2) 导入证书</h3><ul>
 <li>Edge &gt; 设置 &gt; 隐私、搜索和服务 &gt; 安全性 &gt; 管理证书 &gt; 本地证书 &gt; 自定义 &gt; 导入受信任的证书。</li>
 </ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@011.png" srcset="/img/load.gif" lazyload alt="Proxy模块-配置证书-导入证书"></p>
+<p><img src="/../../img/BurpSuite/BurpSuite@011.png" srcset="/img/load.gif" lazyload alt="代理模块-配置证书-导入证书"></p>
 <h3 id="3-证书验证"><a href="#3-证书验证" class="headerlink" title="(3) 证书验证"></a>(3) 证书验证</h3><ul>
 <li>在Edge地址栏输入地址<code>127.0.0.1:8080</code>回车进行访问 &gt; 显示Welcome说明证书配置成功。</li>
 </ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@012.png" srcset="/img/load.gif" lazyload alt="Proxy模块-配置证书-证书验证"></p>
+<p><img src="/../../img/BurpSuite/BurpSuite@012.png" srcset="/img/load.gif" lazyload alt="代理模块-配置证书-证书验证"></p>
 <h2 id="5-3-拦截请求"><a href="#5-3-拦截请求" class="headerlink" title="5-3 拦截请求"></a>5-3 拦截请求</h2><ul>
 <li>拦截请求<ul>
 <li>Edge &gt; 点击插件 &gt; 选中proxy &gt; 切回到Buip Suite &gt; Proxy &gt; Intercept &gt; 点击Intercept is off。</li>
@@ -505,12 +505,12 @@
 </ul>
 </li>
 </ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@013.png" srcset="/img/load.gif" lazyload alt="Proxy模块-拦截请求"></p>
+<p><img src="/../../img/BurpSuite/BurpSuite@013.png" srcset="/img/load.gif" lazyload alt="代理模块-拦截请求"></p>
 <h2 id="5-4-拦截响应"><a href="#5-4-拦截响应" class="headerlink" title="5-4 拦截响应"></a>5-4 拦截响应</h2><ul>
 <li>Buip Suite抓取到请求包后 &gt; 在Raw中右键 &gt; Do intercept &gt; Response to this request &gt; Forward。</li>
 </ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@014.png" srcset="/img/load.gif" lazyload alt="Proxy模块-拦截响应"></p>
-<h1 id="6-手工重放请求"><a href="#6-手工重放请求" class="headerlink" title="6 手工重放请求"></a>6 手工重放请求</h1><ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@014.png" srcset="/img/load.gif" lazyload alt="代理模块-拦截响应"></p>
+<h1 id="6-Repeater"><a href="#6-Repeater" class="headerlink" title="6 Repeater"></a>6 Repeater</h1><ul>
 <li>以本地部署的<a href="https://stitch-top.github.io/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/#1-%E5%AE%89%E8%A3%85PHPStudy">DVWA</a>登录为例，设置<code>\WWW\DVWA\config\config.inc.php</code>安全等级为<code>low</code>。</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs PHP"><span class="hljs-comment"># Default security level</span><br><span class="hljs-comment">#   Default value for the security level with each session.</span><br><span class="hljs-comment">#   The default is &#x27;impossible&#x27;.</span><br><span class="hljs-comment">#   You may wish to set this to either &#x27;low&#x27;, &#x27;medium&#x27;, &#x27;high&#x27; or impossible&#x27;.</span><br><span class="hljs-variable">$_DVWA</span>[ <span class="hljs-string">&#x27;default_security_level&#x27;</span> ] = <span class="hljs-string">&#x27;low&#x27;</span>;<br><br><span class="hljs-comment"># 若修改完配置文件，登录时发现账号密码登录失败，则访问http://localhost:81/setup.php</span><br><span class="hljs-comment"># 点击Create / Reset Database，强制重置数据库</span><br><span class="hljs-comment"># 手动修改配置文件，容易出现由于数据库未初始化或Session冲突导致的登录失败</span><br></code></pre></td></tr></table></figure>
@@ -524,7 +524,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@015.png" srcset="/img/load.gif" lazyload alt="手工重放请求-取消回环忽略"></p>
+<p><img src="/../../img/BurpSuite/BurpSuite@015.png" srcset="/img/load.gif" lazyload alt="Repeater-取消回环忽略"></p>
 <h2 id="6-2-拦截请求转移"><a href="#6-2-拦截请求转移" class="headerlink" title="6-2 拦截请求转移"></a>6-2 拦截请求转移</h2><ul>
 <li>拦截请求转移<ul>
 <li>Edge &gt; 登录DVWA &gt; Brute Force &gt; 插件选proxy &gt; 输入账号admin密码password。</li>
@@ -533,89 +533,11 @@
 </ul>
 </li>
 </ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@016.png" srcset="/img/load.gif" lazyload alt="手工重放请求-拦截请求转移"></p>
+<p><img src="/../../img/BurpSuite/BurpSuite@016.png" srcset="/img/load.gif" lazyload alt="Repeater-拦截请求转移"></p>
 <h2 id="6-3-请求手工重放"><a href="#6-3-请求手工重放" class="headerlink" title="6-3 请求手工重放"></a>6-3 请求手工重放</h2><ul>
 <li>继<a href="https://stitch-top.github.io/2026/02/09/ce-shi-gong-ju/tt09-burp-suite/tt01-burp-suite-yi/#6-2-%E6%8B%A6%E6%88%AA%E8%AF%B7%E6%B1%82%E8%BD%AC%E7%A7%BB">拦截请求转移</a>后 &gt; 切到Repeater &gt; 此时Request是转移后的请求内容 &gt; Send &gt; 查看Response。</li>
 </ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@017.png" srcset="/img/load.gif" lazyload alt="手工重放请求-请求手工重放"></p>
-<h1 id="7-爆破类型攻击"><a href="#7-爆破类型攻击" class="headerlink" title="7 爆破类型攻击"></a>7 爆破类型攻击</h1><ul>
-<li>爆破类型攻击<ul>
-<li>Intruder：可执行SQL注入、暴力破解等不同类型的攻击，用来测试Web应用程序的安全性。</li>
-<li>Intruder是通过<code>$</code>符号进行参数指定的，例如：<code>user=$admin$</code>，<code>admin</code>则是需要替换的值。</li>
-</ul>
-</li>
-</ul>
-<h2 id="7-1-密码字典"><a href="#7-1-密码字典" class="headerlink" title="7-1 密码字典"></a>7-1 密码字典</h2><ul>
-<li>密码字典<ul>
-<li>Weakpass提供了非常庞大的字典集合：<a target="_blank" rel="noopener" href="https://weakpass.com/">https://weakpass.com/</a>。</li>
-<li>基于统计学概率生成的字典：<a target="_blank" rel="noopener" href="https://github.com/berzerk0/Probable-Wordlists">https://github.com/berzerk0/Probable-Wordlists</a>。</li>
-<li>安全从业者和学生最常用的资源库：<a target="_blank" rel="noopener" href="https://github.com/danielmiessler/SecLists">https://github.com/danielmiessler/SecLists</a>。</li>
-<li>这里提供所使用的字典链接：<a target="_blank" rel="noopener" href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/100k-most-used-passwords-NCSC.txt">密码字典</a>。</li>
-</ul>
-</li>
-</ul>
-<h2 id="7-2-攻击类型"><a href="#7-2-攻击类型" class="headerlink" title="7-2 攻击类型"></a>7-2 攻击类型</h2><ul>
-<li>攻击类型<ul>
-<li>Sniper：一次只修改一个位置，其他位置保持原值。</li>
-<li>Battering ram：所有位置同时使用同一个payload。</li>
-<li>Pitchfork：多个位置，各自一组payload，按顺序一一对应。</li>
-<li>Cluster bomb：多个位置做笛卡尔积，全部组合后完整爆破。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs MarkDown">GET /vulnerabilities/brute/?username=§admin§&amp;password=§password§&amp;Login=Login HTTP/1.1<br>同时标记了username、password<br><br>【Sniper】<br>payload：root、guest、123456<br>第一轮：改username、password保持不变<br>username=root&amp;password=password<br>username=guest&amp;password=password<br>username=123456&amp;password=password<br>第二轮：username保持不变，改password<br>username=admin&amp;password=root<br>username=admin&amp;password=guest<br>username=admin&amp;password=123456<br>考虑：哪个参数更敏感、单点fuzz、看是用户名还是密码问题、探测参数是否存在过滤差异<br><br>【Battering ram】<br>payload：root、guest、123456<br>username=root&amp;password=root<br>username=guest&amp;password=guest<br>username=123456&amp;password=123456<br>考虑：多个参数要填同个值时、测试用户名=密码这类弱口令、同个token或同个输入被多个位置复用时<br><br>【Pitchfork】<br>payload 1：admin、guest、test<br>payload 2：password、12345、123456<br>username=admin&amp;password=password<br>username=guest&amp;password=12345<br>username=test&amp;password=123456<br>考虑：已知账号密码是成对关系时、从泄露清单中已有账号密码配对、测试固定映射的数据<br>请求总数取决于最短列表，例如Payload 1有100个，Payload 2只有20个，则只会跑前20个<br><br>【Cluster bomb】<br>payload 1：admin、guest<br>payload 2：password、12345<br>username=admin&amp;password=password<br>username=admin&amp;password=12345<br>username=guest&amp;password=password<br>username=guest&amp;password=12345<br>考虑：用户名和密码都不确定、要做全组合尝试、登录爆破、表单枚举等<br>请求总数 = Payload 1个数 <span class="hljs-emphasis">* Payload 2个数 = 4</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="7-3-密码爆破"><a href="#7-3-密码爆破" class="headerlink" title="7-3 密码爆破"></a>7-3 密码爆破</h2><ul>
-<li>密码爆破<ul>
-<li>仍然以本地部署的<a href="https://stitch-top.github.io/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/#1-%E5%AE%89%E8%A3%85PHPStudy">DVWA</a>登录为例 &gt; 继Proxy的<a href="https://stitch-top.github.io/2026/02/09/ce-shi-gong-ju/tt09-burp-suite/tt01-burp-suite-yi/#6-2-%E6%8B%A6%E6%88%AA%E8%AF%B7%E6%B1%82%E8%BD%AC%E7%A7%BB">拦截请求转移</a> &gt; 切换到Intruder。</li>
-<li>Intruder &gt; Position &gt; Attack type选Sniper &gt; 点右侧的<code>Clear $</code>清空选中字段。</li>
-<li>根据需要，手动双击密码password字段的参数值 &gt; 点击右侧的<code>Add $</code>选中该字段。</li>
-<li>由于事先知道用户密码，这里只爆破密码选Sniper即可，否则Cluster bomb最贴切。</li>
-<li>Payloads &gt; 负载Payload set默认<code>1</code>，负载类型Payload type默认选择<code>Simple list</code>。</li>
-<li>Payload Options [Simple list] &gt; Load &gt; 载入事先下载的密码字典 &gt; 切到Options。</li>
-<li>Grep - Match &gt; 点<code>Clear</code>清除默认项 &gt; 输入关键词例如<code>Welcome</code> &gt; 再点击<code>Add</code>。</li>
-<li>不勾选<code>Case sensitive match</code>(检查大小写敏感) &gt; Start attcak &gt; 等待爆破结果。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../../img/BurpSuite/BurpSuite@018.png" srcset="/img/load.gif" lazyload alt="爆破类型攻击-密码爆破"></p>
-<h2 id="7-4-负载类型"><a href="#7-4-负载类型" class="headerlink" title="7-4 负载类型"></a>7-4 负载类型</h2><ul>
-<li>负载类型<ul>
-<li>直接给字典<ul>
-<li>Simple list：手工输入一个列表，每行一个payload。</li>
-<li>Runtime file：从本地文件读取payload。</li>
-</ul>
-</li>
-<li>自动生成<ul>
-<li>Numbers：自动生成数字序列。</li>
-<li>Dates：自动生成日期。</li>
-<li>Brute forcer：按指定的字符集和长度，自动生成所有可能的组合。</li>
-<li>Character blocks：按字符范围或字符块生成内容。</li>
-<li>Username generator：根据已知信息，自动生成一批候选用户名。</li>
-</ul>
-</li>
-<li>基于已有值做变形<ul>
-<li>Custom iterator：把多个小列表按规则拼接起来，生成新的payload。</li>
-<li>Character substitution：对已有字符串做字符替换变形。</li>
-<li>Case modification：改变大小写形式。</li>
-<li>Character frobber：一次修改原始值中的一个字符，观察响应差异。</li>
-<li>Bit flipper：一次翻转某些bit，适合于二进制数据或是异常处理测试。</li>
-</ul>
-</li>
-<li>高级联动或异常测试<ul>
-<li>Recursive grep：从服务器响应中提取内容，将其作为下一轮payload。</li>
-<li>Illegal Unicode：用非法或异常的Unicode编码测试解析器。</li>
-<li>Extension-generated：由Burp Suite的扩展生成payload。</li>
-<li>ECB block shuffler：更偏加密分组测试，不适合普通表单登录。</li>
-<li>Copy other payload：将另一个Payload Set的值直接复制过来。</li>
-<li>Null payloads：每次请求payload实际没变化，但Burp仍会重复发送。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p><img src="/../../img/BurpSuite/BurpSuite@017.png" srcset="/img/load.gif" lazyload alt="Repeater-请求手工重放"></p>
 
               
             </div>
@@ -650,11 +572,11 @@
       
         <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F/">#漏洞扫描</a>
       
-        <a href="/tags/Proxy/">#Proxy</a>
+        <a href="/tags/Target/">#Target</a>
       
-        <a href="/tags/%E6%89%8B%E5%B7%A5%E9%87%8D%E6%94%BE/">#手工重放</a>
+        <a href="/tags/%E4%BB%A3%E7%90%86/">#代理</a>
       
-        <a href="/tags/%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4/">#密码爆破</a>
+        <a href="/tags/Repeater/">#Repeater</a>
       
     </div>
   
@@ -720,6 +642,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2026/04/01/ce-shi-gong-ju/tt09-burp-suite/tt02-burp-suite-er/" title="Burp Suite(二)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Burp Suite(二)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -839,7 +767,7 @@
         aria-expanded="true"
       >
         测试工具
-        <span class="list-group-count">(11)</span>
+        <span class="list-group-count">(12)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -947,6 +875,15 @@
            class="list-group-item list-group-item-action
            active">
           <span class="category-post">Burp Suite(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/04/01/ce-shi-gong-ju/tt09-burp-suite/tt02-burp-suite-er/" title="Burp Suite(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Burp Suite(二)</span>
         </a>
       
     
