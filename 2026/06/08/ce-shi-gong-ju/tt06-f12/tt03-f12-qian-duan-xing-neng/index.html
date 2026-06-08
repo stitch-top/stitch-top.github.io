@@ -1,0 +1,1246 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/logo.png">
+  <link rel="icon" href="/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Dr.626">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🍕 Performance核心是找出卡顿、白屏、掉帧、交互慢、内存涨等，Memory三步堆快照取证则可排除GC波动误判，快速定位问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="F12 前端性能">
+<meta property="og:url" content="https://stitch-top.github.io/2026/06/08/ce-shi-gong-ju/tt06-f12/tt03-f12-qian-duan-xing-neng/index.html">
+<meta property="og:site_name" content="Dr.626">
+<meta property="og:description" content="🍕 Performance核心是找出卡顿、白屏、掉帧、交互慢、内存涨等，Memory三步堆快照取证则可排除GC波动误判，快速定位问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stitch-top.github.io/img/ThemeMap/7871970939.jpg">
+<meta property="article:published_time" content="2026-06-08T12:30:30.000Z">
+<meta property="article:modified_time" content="2026-06-08T09:04:12.024Z">
+<meta property="article:author" content="Dr.626">
+<meta property="article:tag" content="内存">
+<meta property="article:tag" content="主线程">
+<meta property="article:tag" content="DOM节点">
+<meta property="article:tag" content="堆快照">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stitch-top.github.io/img/ThemeMap/7871970939.jpg">
+  
+  
+  
+  <title>F12 前端性能 - Dr.626</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/my.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"stitch-top.github.io","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"✍"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"left","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/load.gif","onlypost":true,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"Jg3BjUa3RtnEFSREy3wsmUR5-MdYXbMMI","app_key":"DwsEb5BeMxwdz0CEJ6MUBdu3","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Dr.626</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-code"></i>
+                实验室
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tagsnet">
+                    <i class="iconfont icon-bookmark"></i>
+                    文章关系网
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/laboratory/plugin">
+                    <i class="iconfont icon-bug"></i>
+                    Hexo小组件
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/back-1.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="F12 前端性能"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    <!-- 作者 -->
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Dr.626
+      </span>
+    
+    <!-- 日期 -->
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-06-08 20:30" pubdate>
+          2026年6月8日 20:30:30
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    <!-- 字数统计 -->
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    <!-- 阅读时长 -->
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    <!-- 阅读量 -->
+    
+    
+      
+        <span id="goatcounter-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="goatcounter-value"></span> 次
+        </span>
+
+        <script>
+          (function () {
+            // 确保这里的变量名与配置文件一致（这里用 goatcounter_id）
+            var gcCode = 'stitch';
+            if (!gcCode || gcCode === 'undefined') {
+              console.warn('GoatCounter Error: gcCode is missing. Check your _config.fluid.yml');
+              return;
+            }
+            function fetchViews() {
+              var path = window.location.pathname.replace(/\/$/, "");
+              if (path === "") { path = "/"; }
+              var url = 'https://' + gcCode + '.goatcounter.com/counter/' + encodeURIComponent(path) + '.json';
+              console.log('Fetching GoatCounter views from:', url); // 调试日志
+              fetch(url)
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                  console.log('GoatCounter Data:', data);           // 调试日志
+                  var count = (data && data.count) ? data.count.replace(/\s/g, "") : "0";
+                  var el = document.getElementById('goatcounter-value');
+                  var container = document.getElementById('goatcounter-container');
+                  if (el && container) {
+                    el.innerText = count;
+                    container.style.display = 'inline';
+                  }
+                })
+                .catch(function(err) { 
+                  console.warn('GoatCounter Fetch Error:', err); 
+                });
+            }
+            // 立即执行
+            fetchViews();
+          })();
+        </script>
+  
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+  
+  <!-- 动态线条背景
+  <script type="text/javascript"
+  color="0 0 255" opacity='1' zIndex="-2" count="200" src="../js/canvas-nest.js">
+  </script> -->
+  
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="padding-left: 2rem; margin-right: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">F12 前端性能</h1>
+            
+            <div class="markdown-body">
+              
+              <p>🍕 Performance核心是找出卡顿、白屏、掉帧、交互慢、内存涨等，Memory三步堆快照取证则可排除GC波动误判，快速定位问题。</p>
+<span id="more"></span>
+
+
+
+<h1 id="1-录制控制区"><a href="#1-录制控制区" class="headerlink" title="1 录制控制区"></a>1 录制控制区</h1><ul>
+<li>录制控制区<ul>
+<li>Record(录制)、Record and reload(刷新后录制整段加载过程)：分析白屏、初始化慢问题。<ul>
+<li>Screenshots(录制过程中抓取页面截图)：看画面是否会出现白屏，是否会闪跳等问题。</li>
+<li>Memory(记录JS Heap、DOM、监听器、CPU内存趋势)：内存上涨、泄露、频繁回收。</li>
+<li>点击右侧设置打开，CPU、Network(模拟低端CPU或慢网络)：验证低端设备、弱网体验。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../../img/F12/F12-03/F12-03@001.png" srcset="/img/load.gif" lazyload alt="录制控制区"></p>
+<h1 id="2-Overview总览"><a href="#2-Overview总览" class="headerlink" title="2 Overview总览"></a>2 Overview总览</h1><ul>
+<li>Overview总览<ul>
+<li>看CPU、FPS、网络、截图、内存的整体走势，判断是不是主线程忙、请求慢、掉帧率等。</li>
+<li>Network(资源请求时间线)：看关键资源是否阻塞首屏、是否重复请求。</li>
+<li>Frames(每一帧的耗时和掉帧情况)：看是否动画卡、滚动卡、帧率不稳。</li>
+<li>Animations(动画播放与关键时间点)：动画是否顺滑、是否被长任务打断。</li>
+<li>Layout shifts(记录布局偏移)：观察页面元素是否跳动、页面是否会CLS偏高等。</li>
+<li>Main(主线程执行的JS、样式、布局、绘制)：JS重、重排重绘多、事件处理慢。</li>
+<li>Worker、Thread pool、Font thread、MemoryInfra、GPU：指非主线程的工作。</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-侧栏与底部区"><a href="#3-侧栏与底部区" class="headerlink" title="3 侧栏与底部区"></a>3 侧栏与底部区</h1><ul>
+<li>侧栏与底部区<ul>
+<li>Insights(Chrome自动给出的性能洞察)：速看LCP、INP、CLS、强制回流、三方脚本问题。</li>
+<li>Summary(当前选中时间段的耗时分类)：直接查看Scripting、Rendering、Painting的占比。</li>
+<li>Bottom-up(从最耗时函数往上汇总)：找真正吃CPU的函数。</li>
+<li>Call tree(从调用链看耗时分布)：看谁调用了重的逻辑。</li>
+<li>Event log(按时间顺序列出事件)：还原问题的发生顺序。</li>
+<li>1st&#x2F;3rd party(区分一三方、未归因脚本耗时)：找三方包、匿名脚本、缺少source map的代码。</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-图表指标泄露判定"><a href="#4-图表指标泄露判定" class="headerlink" title="4 图表指标泄露判定"></a>4 图表指标泄露判定</h1><ul>
+<li>图表指标泄露判定<ul>
+<li>蓝线JS heap(JS堆内存)<ul>
+<li>锯齿阶梯爬升：GC后仅小幅跌落，但内存底线持续上移，无法回落至初始28.8MB基准。</li>
+<li>正常无泄漏：GC后内存会跌回初始低位。</li>
+<li>当前GC回收不完全闲置内存，堆内存稳步累积泄漏。</li>
+</ul>
+</li>
+<li>红线Documents(文档)<ul>
+<li>数值固定3，全程持平即全程在同一页面，无页面刷新或路由重载。</li>
+<li>排除页面切换导致的正常内存上涨，所有内存增量都是泄漏造成的。</li>
+</ul>
+</li>
+<li>绿线Nodes(DOM节点)<ul>
+<li>呈阶梯式持续抬升，每次业务执行(大屏轮询、刷新)，节点只新增、无法回落清理。</li>
+<li>游离DOM被JS变量、闭包、事件引用，无法被GC回收，DOM泄漏是核心元凶之一。</li>
+</ul>
+</li>
+<li>橙线Listeners(事件监听器)<ul>
+<li>监听数量单边稳步上涨，新增addEventListener后没有配对removeEventListener进行解绑。</li>
+<li>大概率是定时器、resize、图表事件、自定义事件只绑不解，监听器持有DOM引用锁住内存。</li>
+</ul>
+</li>
+<li>总结<ul>
+<li>四线同步阶梯抬升是前端内存泄漏的标准特征，DOM&gt;事件&gt;JS对象层层互相引用，GC无法回收。</li>
+<li>正常健康页面：JS heap等在GC后会回落至初始基线，整体在固定区间震荡，不会阶梯爬坡上涨。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../../img/F12/F12-03/F12-03@002.png" srcset="/img/load.gif" lazyload alt="图表指标泄露判定"></p>
+<h1 id="5-Memory堆快照取证"><a href="#5-Memory堆快照取证" class="headerlink" title="5 Memory堆快照取证"></a>5 Memory堆快照取证</h1><ul>
+<li>Memory堆快照取证<ul>
+<li>Chrome无痕模式打开页面&gt;F12&gt;Memory，快照取证&gt;定位泄漏源&gt;分场景修复&gt;复测验证。</li>
+<li>基准快照(初始干净态)：页面加载完毕，点击图标Collect garbage手动强制执行GC，等待3s。</li>
+<li>点击图标Take heap snapshot，生成Snapshot1(基准快照)，该快照代表了页面的初始内存基线。</li>
+<li>业务快照：切换到专题模块，加载完毕后再切换回基准页，等待加载完毕，手动GC，拍摄快照。</li>
+<li>再次重复业务快照的操作，选中Snapshot2或者3&gt;顶部下拉从Summary改成Comparison，比对1。<ul>
+<li>筛选框输入：Detached。</li>
+<li>只看游离DOM节点，Detached HTMLDivElement或Detached DOM tree。</li>
+<li>右侧的“#New”一列持续+、数量只增不减，说明DOM泄漏实锤。</li>
+<li>额外搜索：echarts、Chart或Map，看ECharts实例对象持续新增不销毁。</li>
+<li>或者搜索：EventListener，监听器对象Delta持续上涨，事件只绑不解绑。</li>
+</ul>
+</li>
+<li>结论<ul>
+<li>Detached HTMLCollection的Delta数值为+1004只增不减，说明严重内存泄漏。</li>
+<li>HTMLCollection内部强引用页面DOM，DOM从页面移除后被集合锁死无法GC。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../../img/F12/F12-03/F12-03@003.png" srcset="/img/load.gif" lazyload alt="Memory堆快照取证"></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" class="category-chain-item">测试工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%86%85%E5%AD%98/">#内存</a>
+      
+        <a href="/tags/%E4%B8%BB%E7%BA%BF%E7%A8%8B/">#主线程</a>
+      
+        <a href="/tags/DOM%E8%8A%82%E7%82%B9/">#DOM节点</a>
+      
+        <a href="/tags/%E5%A0%86%E5%BF%AB%E7%85%A7/">#堆快照</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>F12 前端性能</div>
+      <div>https://stitch-top.github.io/2026/06/08/ce-shi-gong-ju/tt06-f12/tt03-f12-qian-duan-xing-neng/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Dr.626</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年6月8日 20:30:30</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                <i class="iconfont icon-nc"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/01/ce-shi-gong-ju/tt09-burp-suite/tt02-burp-suite-er/" title="Burp Suite(二)">
+                        <span class="hidden-mobile">Burp Suite(二)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments">
+    
+  <div class="giscus"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('.giscus', function() {
+      // 获取当前页面的协议和域名，拼接 CSS 的绝对路径
+      var baseUrl = 'https://stitch-top.github.io'.replace(/\/$/, '');
+      var lightTheme = baseUrl + '/css/giscus-light.css';
+      var darkTheme = baseUrl + '/css/giscus-dark.css';
+
+      // 判断当前 Fluid 主题状态
+      var currentMode = document.documentElement.getAttribute('data-user-color-scheme');
+      var giscusTheme = currentMode === 'dark' ? darkTheme : lightTheme;
+
+      var options = {
+        'src': 'https://giscus.app/client.js',
+        'data-repo': 'stitch-top/stitch-top.github.io',
+        'data-repo-id': 'R_kgDOHJ03lw',
+        'data-category': 'General',
+        'data-category-id': 'DIC_kwDOHJ03l84C3tTM',
+        'data-mapping': 'pathname',
+        'data-strict': '0',
+        'data-reactions-enabled': '1',
+        'data-emit-metadata': '0',
+        'data-input-position': 'bottom',
+        'data-theme': giscusTheme,
+        'data-lang': 'zh-CN',
+        'crossorigin': 'anonymous',
+        'async': true
+      };
+
+      // 动态创建脚本
+      var s = document.createElement('script');
+      for (var key in options) {
+        s.setAttribute(key, options[key]);
+      }
+      var container = document.querySelector('.giscus');
+      container.appendChild(s);
+
+      // 监听 Fluid 主题切换事件，同步更新 Giscus
+      window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://giscus.app') return;
+        // 这里的逻辑通常由 Giscus 内部处理，
+        // 但我们需要手动告诉 Giscus 切换主题，通过 postMessage 发送新配置
+      });
+
+      // 重点：当 Fluid 切换主题时，通知 Giscus
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === "data-user-color-scheme") {
+            var themeMode = document.documentElement.getAttribute('data-user-color-scheme');
+            var updatedTheme = themeMode === 'dark' ? darkTheme : lightTheme;
+            var sendMessage = {
+              giscus: {
+                setConfig: {
+                  theme: updatedTheme
+                }
+              }
+            };
+            var iframe = document.querySelector('iframe.giscus-frame');
+            if (iframe && iframe.contentWindow) {
+              iframe.contentWindow.postMessage(sendMessage, 'https://giscus.app');
+            }
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-left: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="测试工具"
+        id="heading-7e2f62602068bab6246b886d7866dc56" role="tab" data-toggle="collapse" href="#collapse-7e2f62602068bab6246b886d7866dc56"
+        aria-expanded="true"
+      >
+        测试工具
+        <span class="list-group-count">(13)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-7e2f62602068bab6246b886d7866dc56"
+           role="tabpanel" aria-labelledby="heading-7e2f62602068bab6246b886d7866dc56">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/01/05/ce-shi-gong-ju/tt01-jmeter/tt01-jmeter-zu-jian/" title="JMeter 组件"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JMeter 组件</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/27/ce-shi-gong-ju/tt01-jmeter/tt02-jmeter-jiao-ben/" title="JMeter 脚本"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">JMeter 脚本</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/03/02/ce-shi-gong-ju/tt02-fiddler/tt01-fiddler-mian-ban/" title="Fiddler 面板"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Fiddler 面板</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/05/10/ce-shi-gong-ju/tt03-charles/tt01-charles-gong-neng/" title="Charles 功能"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Charles 功能</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/07/21/ce-shi-gong-ju/tt04-postman/tt01-postman-jie-shao/" title="Postman 介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Postman 介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/09/02/ce-shi-gong-ju/tt05-adb/tt01-adb-shi-yong-ming-ling/" title="ADB 实用命令"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">ADB 实用命令</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/11/10/ce-shi-gong-ju/tt06-f12/tt01-f12-gong-neng-shuo-ming/" title="F12 功能说明"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">F12 功能说明</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/04/15/ce-shi-gong-ju/tt06-f12/tt02-f12-console-mian-ban/" title="F12 Console 面板"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">F12 Console 面板</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/06/08/ce-shi-gong-ju/tt06-f12/tt03-f12-qian-duan-xing-neng/" title="F12 前端性能"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">F12 前端性能</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/11/ce-shi-gong-ju/tt07-ffmpeg/tt01-ffmpeg-ming-ling-xiang-jie/" title="FFmpeg 命令详解"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">FFmpeg 命令详解</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/12/22/ce-shi-gong-ju/tt08-sqlmap/tt01-sqlmap-de-shi-yong/" title="SQLMap 的使用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">SQLMap 的使用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/02/09/ce-shi-gong-ju/tt09-burp-suite/tt01-burp-suite-yi/" title="Burp Suite(一)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Burp Suite(一)</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/04/01/ce-shi-gong-ju/tt09-burp-suite/tt02-burp-suite-er/" title="Burp Suite(二)"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Burp Suite(二)</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <!--  <a><span>Copyright © 2021 - {current_year}</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a>  -->
+       <a><span>Copyright © 2021 - 2026</span></a> <i class="iconfont icon-love"></i> <a href="https://stitch-top.github.io" target="_blank" rel="nofollow noopener"><span>Dr.626</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    <!-- GoatCounter 逻辑 -->
+    
+      <span id="goatcounter-site-pv-container">
+        📈 总访问量 
+        <span id="goatcounter-site-pv">...</span>
+         次
+      </span>
+    
+    
+    <script data-goatcounter="https://stitch.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+    
+    <script>
+      window.addEventListener('load', function() {
+        var id = 'stitch';
+        // 尝试使用 TOTAL.json 获取全站总计
+        var url = 'https://' + id + '.goatcounter.com/counter/TOTAL.json';
+        
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.onload = function() {
+          if (this.status >= 200 && this.status < 400) {
+            try {
+              var data = JSON.parse(this.response);
+              // GoatCounter 返回的可能是 "1,234" 这种字符串
+              var count = data.count.replace(/[^0-9]/g, ''); 
+              var el = document.getElementById('goatcounter-site-pv');
+              if (el) {
+                el.innerText = count;
+              }
+            } catch (e) {
+              console.error("GoatCounter 数据解析失败:", e);
+            }
+          } else {
+            console.error("GoatCounter 请求失败，状态码:", this.status);
+          }
+        };
+        request.onerror = function() {
+          console.error("GoatCounter 请求连接错误");
+        };
+        request.send();
+      });
+    </script>
+    
+  
+</div>
+
+  
+  
+  
+  
+  <!-- 添加网站运行时间 -->
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/01/2021 00:00:00");   //此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "本站已安全运行&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()", 250);
+      </script>
+    </div>
+  </div>
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.7.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+
+  
+    
+      <script  src="/js/img-lazyload.js" ></script>
+    
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/tocbot/4.21.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://cdn.staticfile.org/clipboard.js/2.0.11/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
