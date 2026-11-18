@@ -34,15 +34,28 @@
 
 站点共 7 个分类，点击分类名可直接跳转到对应归档页。
 
-| 分类 | 篇数 | 主要内容 |
+| 分类 | 篇数 | 主要方向 |
 | :--- | :---: | :--- |
-| [Python](https://stitch-top.github.io/categories/Python/) | 17 | 基础语法、文件处理、NumPy / Pandas / SciPy / Matplotlib、机器学习、Flask、Tkinter、Streamlit |
-| [测试工具](https://stitch-top.github.io/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/) | 13 | JMeter、Fiddler、Charles、Postman、ADB、F12、FFmpeg、SQLMap、Burp Suite |
-| [自动化](https://stitch-top.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96/) | 10 | Selenium、Pytest、Allure、UnitTest、Mock、Playwright、Robot Framework、Locust、Cypress |
-| [Java](https://stitch-top.github.io/categories/Java/) | 7 | Java 基础系列、Servlet 系列（容器、注解、Session、Filter、Listener） |
-| [Web](https://stitch-top.github.io/categories/Web/) | 7 | JavaScript 基础与进阶、DOM / BOM、ES6 特性 |
-| [数据库](https://stitch-top.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/) | 2 | SQL 与 MQL 查询笔记 |
-| [逸文](https://stitch-top.github.io/categories/%E9%80%B8%E6%96%87/) | 2 | 多数据库问题、MongoDB 连接等实践随笔 |
+| [Python](https://stitch-top.github.io/categories/Python/) | 17 | 基础 · 数据 · 可视化 · ML · Web |
+| [测试工具](https://stitch-top.github.io/categories/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/) | 13 | JMeter · Burp · F12 · Postman · SQLMap |
+| [自动化](https://stitch-top.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96/) | 10 | Selenium · Pytest · Playwright · Locust |
+| [Java](https://stitch-top.github.io/categories/Java/) | 7 | 基础 · Servlet |
+| [Web](https://stitch-top.github.io/categories/Web/) | 7 | JavaScript · DOM · ES6 |
+| [数据库](https://stitch-top.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/) | 2 | SQL · MQL |
+| [逸文](https://stitch-top.github.io/categories/%E9%80%B8%E6%96%87/) | 2 | 随笔 |
+
+<details>
+<summary>展开查看各分类完整主题</summary>
+
+- **Python**：基础语法、文件处理、NumPy、Pandas、SciPy、Matplotlib、机器学习、MySQL、MongoDB、Flask、Tkinter、Streamlit
+- **测试工具**：JMeter、Fiddler、Charles、Postman、ADB、F12、FFmpeg、SQLMap、Burp Suite
+- **自动化**：Selenium、Pytest、Allure、UnitTest、Mock、Playwright、Robot Framework、Locust、Cypress
+- **Java**：Java 基础系列、Servlet 系列（容器、注解、Session、Filter、Listener）
+- **Web**：JavaScript 基础与进阶、DOM、BOM、ES6 特性
+- **数据库**：SQL、MQL
+- **逸文**：多数据库问题、MongoDB 连接
+
+</details>
 
 ---
 
@@ -81,11 +94,11 @@
 | 组件 | 说明 |
 | :--- | :--- |
 | Hexo 6.2.0 | 静态博客框架 |
-| hexo-theme-fluid | 站点主题 |
+| Fluid | 站点主题 |
 | GitHub Pages | 站点托管 |
-| hexo-generator-archive / category / tag / tagsnet | 归档、分类、标签与关系网 |
-| hexo-permalink-pinyin | 中文标题转拼音永久链接 |
-| 本地搜索 + ECharts / Chart 标签插件 | 检索与图表能力 |
+| 归档 / 分类 / 标签 / tagsnet | 页面生成 |
+| pinyin 永久链接 | 中文标题转拼音 |
+| 本地搜索 / ECharts | 检索与图表 |
 
 本地预览与部署（在 Hexo 源码工程根目录执行）：
 
