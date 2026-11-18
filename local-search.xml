@@ -1613,11 +1613,11 @@
     
     <tags>
       
-      <tag>Matplotlib</tag>
-      
       <tag>Pandas</tag>
       
       <tag>数据分析</tag>
+      
+      <tag>Matplotlib</tag>
       
     </tags>
     
@@ -1673,9 +1673,9 @@
       
       <tag>NumPy</tag>
       
-      <tag>Seaborn</tag>
-      
       <tag>Matplotlib</tag>
+      
+      <tag>Seaborn</tag>
       
     </tags>
     

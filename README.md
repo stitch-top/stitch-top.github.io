@@ -87,6 +87,8 @@
 
 `README.md` 以原始 Markdown 形式随站点一同发布，**不会被主题渲染成文章或页面，也不会出现在导航中**，因此新增或修改它不会影响博客的页面结构与正常访问。文章的增删改请在 Hexo 源码工程中完成，再重新生成并部署。
 
+注意：`hexo d` 每次会清空并重建 `.deploy_git`，所以 README 必须以 `source/README.md` 为准。
+
 ---
 
 ## 🔧 技术栈
@@ -103,10 +105,8 @@
 本地预览与部署（在 Hexo 源码工程根目录执行）：
 
 ```bash
-npm install
-npm run server     # 本地预览
-npm run build      # 生成静态文件
-npm run deploy     # 部署到 GitHub Pages
+hexo clean && hexo generate && hexo net && hexo server
+hexo clean && hexo generate && hexo net && hexo deploy
 ```
 
 ---
